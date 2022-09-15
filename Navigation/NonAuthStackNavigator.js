@@ -3,6 +3,7 @@ import {CommonActions, useNavigation} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {useSelector} from "react-redux";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import LoginStackScreen from "./LoginStackScreen";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -34,14 +35,6 @@ function NonAuthStackNavigator() {
         }),
       );
   }, [auth.clientToken]);
-
-  const LoginStackScreen = ()=>{
-    return (
-      <Stack.Navigator>
-        <
-      </Stack.Navigator>
-    )
-  }
 
   return (
     <Tab.Navigator
