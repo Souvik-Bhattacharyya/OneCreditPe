@@ -3,18 +3,19 @@ import React from 'react';
 import {
   Login, 
   OtpScreen,
-  Home,
+  Welcome,
   Loading,
   Cashbook,
   CashEntries,
-  ViewReport
+  ViewReport,
+  CustomerHome
 } from './Screens/Pages/index' 
 
 
 const App = () => {
   return (
     <>
-      <ViewReport/>
+      <CustomerHome/>
     </>
   );
 };

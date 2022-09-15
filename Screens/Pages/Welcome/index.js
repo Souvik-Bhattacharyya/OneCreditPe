@@ -13,7 +13,7 @@ const windowHeight = Dimensions.get('window').height;
 import Icon from 'react-native-vector-icons/AntDesign';
 
 
-const Home = () => {
+const Welcome = () => {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('../../../Assets/Loading-Screen.png')} resizeMode="cover" style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -27,7 +27,7 @@ const Home = () => {
   )
 }
 
-export default Home;
+export default Welcome;
 
 const styles = StyleSheet.create({
   container: {
