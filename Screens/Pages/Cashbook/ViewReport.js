@@ -1,14 +1,18 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, Modal} from 'react-native'
 import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import metrics from '../../../Constants/metrics';
 import { Calendar, CalendarList } from 'react-native-calendars';
 import CashIn from '../../../Components/Cash/CashIn';
 import CashOut from '../../../Components/Cash/CashOut';
+import moment from 'moment';
+
 
 const ViewReport = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [selectDate, setSelectDate] = useState("Hii");
+    const [showModal1, setShowModal1] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
+    const [showDate1, setShowDate1] = useState("");
+    const [showDate2, setShowDate2] = useState("");
     return (
         <>
             <View style={styles.container}>
@@ -43,21 +47,23 @@ const ViewReport = () => {
                     </View>
                     <View style={{ marginBottom: metrics.verticalScale(20), borderBottomWidth: 1.5, borderBottomColor: "#828282", paddingVertical: metrics.verticalScale(20), flexDirection: 'row', justifyContent: 'space-between' }} >
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center', width: '50%', borderRightColor: '#828282', borderRightWidth: 1 }}>
-                            <TouchableOpacity onPress={() => setShowModal(true)}>
+                            <TouchableOpacity onPress={() => setShowModal1(true)}>
                                 <Icon name='calendar' size={22} color={'#20409A'} />
                             </TouchableOpacity>
                             <View>
                                 <Text style={{ color: '#20409A', }}>From Date</Text>
-                                <Text style={{ color: '#20409A', fontSize: 16, fontWeight: '700' }}>{selectDate}</Text>
+                                <Text style={{ color: '#20409A', fontSize: 16, fontWeight: '700' }}>
+                                    {moment(showDate1).format('ll')}
+                                </Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '50%', alignItems: 'center' }}>
-                            <TouchableOpacity onPress={() => setShowModal(true)}>
+                            <TouchableOpacity onPress={() => setShowModal2(true)}>
                                 <Icon name='calendar' size={22} color={'#349EFF'} />
                             </TouchableOpacity>
                             <View>
                                 <Text style={{ color: '#349EFF' }}>To Date</Text>
-                                <Text style={{ color: '#349EFF', fontSize: 16, fontWeight: '700' }}>01 Apr 2022</Text>
+                                <Text style={{ color: '#349EFF', fontSize: 16, fontWeight: '700' }}>{moment(showDate2).format('ll')}</Text>
                             </View>
                         </View>
                     </View>
@@ -68,7 +74,7 @@ const ViewReport = () => {
                     <Text style={{ color: '#fff', textAlign: 'center', fontSize: 18, fontWeight: '600', }}>Back</Text>
                 </TouchableOpacity>
 
-                <Modal visible={showModal} transparent
+                <Modal visible={showModal1} transparent
                     animationType="fade" >
                     <View style={{
                         justifyContent: 'center',
@@ -78,9 +84,25 @@ const ViewReport = () => {
                     }}>
                         <Calendar style={{ borderRadius: 10, width: '100%'}}
                             onDayPress={(date) => {
-                                console.log(date)
-                                setSelectDate()
-                                setShowModal(false)
+                                setShowDate1(date)
+                                setShowModal1(false)
+                            }}
+                            enableSwipeMonths={true}
+                        />
+                    </View>
+                </Modal>
+                <Modal visible={showModal2} transparent
+                    animationType="fade" >
+                    <View style={{
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        flex: 1,
+                        backgroundColor: '#000000aa',
+                    }}>
+                        <Calendar style={{ borderRadius: 10, width: '100%'}}
+                            onDayPress={(date) => {
+                                setShowDate2(date)
+                                setShowModal2(false)
                             }}
                             enableSwipeMonths={true}
                         />
