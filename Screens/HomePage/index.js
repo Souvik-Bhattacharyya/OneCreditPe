@@ -14,11 +14,11 @@ import Icon from "react-native-vector-icons/AntDesign";
 const CustomerHome = () => {
   const images = [
     {
-      banner: require("./ images / banner1.png"),
+      // banner: require("./ images / banner1.png"),
       desc: "Silent Waters in the mountains in midst of Himilayas",
     },
     {
-      banner: require("./ images / banner2.png"),
+      // banner: require("./ images / banner2.png"),
       desc: "Red fort in India New Delhi is a magnificient masterpeiece of humans",
     },
   ];
@@ -147,7 +147,7 @@ const CustomerHome = () => {
               justifyContent: "center",
               alignItems: "center",
             }}>
-            <Image source={require("../../../Assets/loanSec.png")} />
+            <Image source={require("../../Assets/loanSec.png")} />
           </View>
           <View style={{width: "70%", paddingHorizontal: 20}}>
             <Text style={{color: "#000", fontSize: 18, fontWeight: "700"}}>
@@ -174,11 +174,11 @@ const CustomerHome = () => {
             backgroundColor: "#fff",
             borderRadius: 6,
           }}>
-          <FlatList
+          {/* <FlatList
             data={images}
             renderItem={renderItem}
             keyExtractor={item => item.id}
-          />
+          /> */}
         </View>
       </View>
     </>

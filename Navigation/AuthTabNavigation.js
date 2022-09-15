@@ -1,31 +1,20 @@
 import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import {} from "../Screens"
+import {CustomerHome, Cashbook, CashEntries, ViewReport} from "../Screens";
 
 const Tab = createBottomTabNavigator();
+const AuthTabNavigation = () => {
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-      />
-      <Tab.Screen
-        name="Customer"
-        component={DrawerNavigator}
-      />
-      <Tab.Screen
-        name="CashBook"
-        component={DrawerNavigator}
-      />
-      <Tab.Screen
-        name="More"
-        component={}
-      />
+      <Tab.Screen name="Home" component={CustomerHome} />
+      <Tab.Screen name="Customer" component={Cashbook} />
+      <Tab.Screen name="CashBook" component={CashEntries} />
+      <Tab.Screen name="More" component={ViewReport} />
     </Tab.Navigator>
   );
-}
+};
 
 export default AuthTabNavigation;

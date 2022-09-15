@@ -20,7 +20,7 @@ const OtpScreen = () => {
     <>
       <View style={styles.container}>
         <View>
-          <Image source={require("../../../Assets/Logos/Logo.png")} />
+          <Image source={require("../../Assets/Logos/Logo.png")} />
         </View>
 
         <TouchableOpacity
@@ -91,7 +91,7 @@ const OtpScreen = () => {
         </View> */}
 
         <View style={{marginTop: 30}}>
-          <Image source={require("../../../Assets/Images/enter-otp.png")} />
+          <Image source={require("../../Assets/Images/enter-otp.png")} />
         </View>
 
         <TouchableOpacity
