@@ -1,21 +1,12 @@
-import {Text, View} from 'react-native';
-import React from 'react';
-import {
-  Login, 
-  OtpScreen,
-  Home,
-  Loading,
-  Cashbook,
-  CashEntries,
-  ViewReport
-} from './Screens/Pages/index' 
-
+import React from "react";
+import {NavigationContainer} from "@react-navigation/native";
+import {NonAuthStackNavigator} from "./Navigation";
 
 const App = () => {
   return (
-    <>
-      <ViewReport/>
-    </>
+    <NavigationContainer>
+      <NonAuthStackNavigator />
+    </NavigationContainer>
   );
 };
 

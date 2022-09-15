@@ -1,22 +1,12 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-
-} from 'react-native';
-import React,{useEffect} from 'react';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import AntDesign from 'react-native-vector-icons/AntDesign';
-import OTPTextView from "../../../Constants/AppOtpInput"
+import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
+import React, {useEffect} from "react";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import OTPTextView from "../../Constants/AppOtpInput";
 
 const OtpScreen = () => {
-
   const [otp, setOtp] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
-
-
 
   const onSubmitOtp = async () => {
     setLoading(true);
@@ -24,10 +14,7 @@ const OtpScreen = () => {
     setLoading(false);
   };
 
-useEffect(()=>{
-  
-})
-
+  useEffect(() => {});
 
   return (
     <>
@@ -36,14 +23,29 @@ useEffect(()=>{
           <Image source={require("../../../Assets/Logos/Logo.png")} />
         </View>
 
-        <TouchableOpacity style={{ display: 'flex', justifyContent: 'center', alignItems:"center",flexDirection: 'row', marginVertical: 20, width: '100%', height: 'auto' }}>
+        <TouchableOpacity
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+            marginVertical: 20,
+            width: "100%",
+            height: "auto",
+          }}>
           <Text style={styles.text}>Otp send to </Text>
-          <Text style={[styles.text, { fontWeight: '800', fontSize: 20 }]}>0000000000</Text>
-          <FontAwesome name='pencil-square-o' color="#333" size={20} style={{ marginLeft: 10, alignSelf: 'center' }} />
+          <Text style={[styles.text, {fontWeight: "800", fontSize: 20}]}>
+            0000000000
+          </Text>
+          <FontAwesome
+            name="pencil-square-o"
+            color="#333"
+            size={20}
+            style={{marginLeft: 10, alignSelf: "center"}}
+          />
         </TouchableOpacity>
 
-        <OTPTextView inputCount={4} handleTextChange={(e) => setOtp(e)} />
-
+        <OTPTextView inputCount={4} handleTextChange={e => setOtp(e)} />
 
         <View
           style={{
@@ -51,17 +53,16 @@ useEffect(()=>{
             justifyContent: "space-between",
             marginTop: 20,
             width: "100%",
-          }}
-        >
+          }}>
           {isLoading && (
             <>
               <ActivityIndicator animating={true} color={"red"} />
-              <Text style={{ fontSize: 14, fontWeight: "500" }}>
+              <Text style={{fontSize: 14, fontWeight: "500"}}>
                 Auto verifying
               </Text>
             </>
           )}
-          <Text style={{ fontSize: 14, fontWeight: "500", textAlign: "right" }}>
+          <Text style={{fontSize: 14, fontWeight: "500", textAlign: "right"}}>
             Resend OTP in 10s
           </Text>
         </View>
@@ -89,42 +90,38 @@ useEffect(()=>{
           />
         </View> */}
 
-
-        <View style={{ marginTop: 30 }}>
+        <View style={{marginTop: 30}}>
           <Image source={require("../../../Assets/Images/enter-otp.png")} />
         </View>
 
-        <TouchableOpacity onPress={onSubmitOtp}
+        <TouchableOpacity
+          onPress={onSubmitOtp}
           style={{
-            backgroundColor: '#349EFF',
+            backgroundColor: "#349EFF",
             paddingVertical: 5,
-            width: '100%',
-            justifyContent: 'center',
-            alignItems: 'center',
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
             borderRadius: 50,
-            flexDirection: 'row',
-            marginTop: 'auto'
+            flexDirection: "row",
+            marginTop: "auto",
           }}>
           <Text
             style={{
-              fontFamily: 'Poppins-Regular',
+              fontFamily: "Poppins-Regular",
               fontSize: 20,
-              fontWeight: 'bold',
-              color: '#FFFFFF',
-              margin: 10
+              fontWeight: "bold",
+              color: "#FFFFFF",
+              margin: 10,
             }}>
             Verify OTP
           </Text>
-          <AntDesign
-            name="arrowright"
-            color="white"
-            size={30}
-          />
+          <AntDesign name="arrowright" color="white" size={30} />
         </TouchableOpacity>
       </View>
     </>
-  )
-}
+  );
+};
 
 export default OtpScreen;
 
@@ -133,10 +130,10 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     width: "100%",
-    alignItems: 'center'
-  }
+    alignItems: "center",
+  },
   // , textInp: {
   //   fontWeight: '600',
   //   textAlign: 'center',
@@ -161,11 +158,10 @@ const styles = StyleSheet.create({
   //   shadowOpacity: 0.2,
   //   shadowRadius: 3,
   // },
-  ,
   text: {
-    fontFamily: 'Poppins-Regular',
+    fontFamily: "Poppins-Regular",
     color: "#828282",
     fontSize: 16,
-    textAlign: 'center'
-  }
+    textAlign: "center",
+  },
 });
