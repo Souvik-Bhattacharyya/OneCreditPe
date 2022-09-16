@@ -10,8 +10,8 @@ const AuthTabNavigation = () => {
         headerShown: false,
       }}>
       <Tab.Screen name="Home" component={CustomerHome} />
-      <Tab.Screen name="Customer" component={Cashbook} />
-      <Tab.Screen name="CashBook" component={CashEntries} />
+      <Tab.Screen name="Customer" component={CashEntries} />
+      <Tab.Screen name="CashBook" component={Cashbook} />
       <Tab.Screen name="More" component={ViewReport} />
     </Tab.Navigator>
   );
