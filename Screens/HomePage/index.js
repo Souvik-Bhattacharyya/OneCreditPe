@@ -1,4 +1,5 @@
 import {
+  ScrollView,
   View,
   Text,
   TextInput,
@@ -10,27 +11,14 @@ import {
 import React from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
+import Carousel from '../../Components/Carousel/Carousel';
 
 const CustomerHome = () => {
-  const images = [
-    {
-      // banner: require("./ images / banner1.png"),
-      desc: "Silent Waters in the mountains in midst of Himilayas",
-    },
-    {
-      // banner: require("./ images / banner2.png"),
-      desc: "Red fort in India New Delhi is a magnificient masterpeiece of humans",
-    },
-  ];
-
-  const sliderWindow = ({item}) => {
-    <View></View>;
-  };
 
   return (
-    <>
+    <ScrollView style={{ flex: 1, backgroundColor: '#E8EEFF' }}>
       <View style={styles.container}>
-        <View style={[styles.card, {paddingBottom: 10}]}>
+        <View style={[styles.card, { paddingBottom: 10 }]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
@@ -134,12 +122,26 @@ const CustomerHome = () => {
         <View
           style={{
             flexDirection: "row",
+            height: 130,
+            alignItems: 'center',
+            backgroundColor: "#fff",
+            borderRadius: 6,
+            marginVertical: metrics.verticalScale(10),
+            paddingHorizontal: metrics.horizontalScale(10)
+          }}>
+          <Carousel />
+        </View>
+
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
             paddingHorizontal: 20,
             height: 130,
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "#fff",
             borderRadius: 6,
+            marginVertical: metrics.verticalScale(10)
           }}>
           <View
             style={{
@@ -149,45 +151,29 @@ const CustomerHome = () => {
             }}>
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
-          <View style={{width: "70%", paddingHorizontal: 20}}>
-            <Text style={{color: "#000", fontSize: 18, fontWeight: "700"}}>
+          <View style={{ width: "70%", paddingHorizontal: 20 }}>
+            <Text style={{ color: "#000", fontSize: 18, fontWeight: "700" }}>
               Easy Loan
             </Text>
-            <Text style={{color: "#828282"}}>
+            <Text style={{ color: "#828282" }}>
               Get easy loan without any paperwork
             </Text>
-            <TouchableOpacity style={{marginTop: 10, justifyContent: "center"}}>
-              <Text style={{color: "#20409a", fontSize: 16}}>
-                Apply Now{" "}
+            <View style={{ marginTop: 10, justifyContent: "center" }}>
+              <Text style={{ color: "#20409a", fontSize: 16, fontWeight: '600' }}>
+                Apply Now
                 <Icon name="doubleright" color={"#20409a"} size={16} />
               </Text>
-            </TouchableOpacity>
+            </View>
           </View>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: 20,
-            height: 130,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#fff",
-            borderRadius: 6,
-          }}>
-          {/* <FlatList
-            data={images}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          /> */}
-        </View>
+        </TouchableOpacity>
       </View>
-    </>
+    </ScrollView >
   );
 };
 
 export default CustomerHome;
 
-const color = {color: "#20409a"};
+const color = { color: "#20409a" };
 
 const styles = StyleSheet.create({
   container: {
@@ -202,7 +188,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: metrics.verticalScale(10),
     borderRadius: 6,
-    marginBottom: 20,
+    marginVertical: metrics.verticalScale(10)
   },
   cardBody: {
     display: "flex",
@@ -239,6 +225,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    marginTop: 10,
+    marginTop: metrics.verticalScale(10)
   },
 });
