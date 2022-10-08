@@ -6,6 +6,8 @@ import Cashbook from "./Cashbook/index";
 import CashEntries from "./Cashbook/CashEntries";
 import ViewReport from "./Cashbook/ViewReport";
 import CustomerHome from "./HomePage";
+import CustomerModal from "../Components/CustomerModal";
+import NewCustomer from "../Screens/CustomerPage/NewCustomer";
 
 export {
   Login,
@@ -16,4 +18,6 @@ export {
   CashEntries,
   ViewReport,
   CustomerHome,
+  CustomerModal,
+  NewCustomer
 };
