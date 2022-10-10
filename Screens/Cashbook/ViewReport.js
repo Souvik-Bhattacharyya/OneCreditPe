@@ -5,17 +5,23 @@ import {
   StyleSheet,
   TouchableOpacity,
   Modal,
+  Dimensions
 } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
-import {Calendar, CalendarList} from "react-native-calendars";
+import { Calendar, CalendarList } from "react-native-calendars";
 import CashIn from "../../Components/Cash/CashIn";
 import CashOut from "../../Components/Cash/CashOut";
+import moment from "moment";
 
-const ViewReport = () => {
-  const [showModal, setShowModal] = useState(false);
-  const [selectDate, setSelectDate] = useState("Hii");
+const width = Dimensions.get('window').width;
+
+const ViewReport = ({navigation}) => {
+  const [showModal1, setShowModal1] = useState(false);
+  const [showModal2, setShowModal2] = useState(false);
+  const [showDate1, setShowDate1] = useState(new Date());
+  const [showDate2, setShowDate2] = useState(new Date());
   return (
     <>
       <View style={styles.container}>
@@ -67,39 +73,7 @@ const ViewReport = () => {
         <View>
           <View
             style={{
-              flexDirection: "row",
-              width: "100%",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingVertical: 10,
-              marginBottom: 10,
-            }}>
-            <Text style={{color: "#20409A", fontSize: 20, fontWeight: "600"}}>
-              Transaction History
-            </Text>
-            <View
-              style={{
-                flexDirection: "row",
-                width: "50%",
-              }}>
-              <TextInput
-                placeholder="Search"
-                placeholderTextColor={"#333"}
-                style={{
-                  width: "100%",
-                  position: "relative",
-                  paddingLeft: metrics.horizontalScale(20),
-                  paddingVertical: metrics.verticalScale(10),
-                }}
-              />
-              <TouchableOpacity
-                style={{position: "absolute", right: 10, alignSelf: "center"}}>
-                <Icon name="search" color={"#333"} size={24} />
-              </TouchableOpacity>
-            </View>
-          </View>
-          <View
-            style={{
+              marginTop: metrics.verticalScale(30),
               marginBottom: metrics.verticalScale(20),
               borderBottomWidth: 1.5,
               borderBottomColor: "#828282",
@@ -107,7 +81,7 @@ const ViewReport = () => {
               flexDirection: "row",
               justifyContent: "space-between",
             }}>
-            <View
+            <TouchableOpacity onPress={() => setShowModal1(true)}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-evenly",
@@ -116,63 +90,63 @@ const ViewReport = () => {
                 borderRightColor: "#828282",
                 borderRightWidth: 1,
               }}>
-              <TouchableOpacity onPress={() => setShowModal(true)}>
-                <Icon name="calendar" size={22} color={"#20409A"} />
-              </TouchableOpacity>
               <View>
-                <Text style={{color: "#20409A"}}>From Date</Text>
+                <Icon name="calendar" size={22} color={"#20409A"} />
+              </View>
+              <View>
+                <Text style={{ color: "#20409A" }}>From Date</Text>
                 <Text
-                  style={{color: "#20409A", fontSize: 16, fontWeight: "700"}}>
-                  {selectDate}
+                  style={{ color: "#20409A", fontSize: 16, fontWeight: "700" }}>
+                  {moment(showDate1).format("ll")}
                 </Text>
               </View>
-            </View>
-            <View
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setShowModal2(true)}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-evenly",
                 width: "50%",
                 alignItems: "center",
               }}>
-              <TouchableOpacity onPress={() => setShowModal(true)}>
+              <TouchableOpacity>
                 <Icon name="calendar" size={22} color={"#349EFF"} />
               </TouchableOpacity>
               <View>
-                <Text style={{color: "#349EFF"}}>To Date</Text>
+                <Text style={{ color: "#349EFF" }}>To Date</Text>
                 <Text
-                  style={{color: "#349EFF", fontSize: 16, fontWeight: "700"}}>
-                  01 Apr 2022
+                  style={{ color: "#349EFF", fontSize: 16, fontWeight: "700" }}>
+                  {moment(showDate2).format("ll")}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           </View>
           <CashOut />
           <CashIn />
         </View>
-        <TouchableOpacity
+        <View
           style={{
-            width: "100%",
-            paddingVertical: 15,
-            borderRadius: 50,
-            borderWidth: 2,
-            borderColor: "#349EFF",
-            backgroundColor: "#349EFF",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width,
             position: "absolute",
             bottom: 20,
-            marginHorizontal: metrics.horizontalScale(20),
+            paddingHorizontal: metrics.horizontalScale(10),
           }}>
-          <Text
-            style={{
-              color: "#fff",
-              textAlign: "center",
-              fontSize: 18,
-              fontWeight: "600",
-            }}>
-            Back
-          </Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CashEntries')}
+            style={[styles.cashBtn, { backgroundColor: "#EB707C" }]}>
+            <Text style={styles.btnTxt}>Cash Out</Text>
+          </TouchableOpacity>
 
-        <Modal visible={showModal} transparent animationType="fade">
+          <TouchableOpacity
+            onPress={() => navigation.navigate('CashEntries')}
+            style={[styles.cashBtn, { backgroundColor: "#85D098" }]}>
+            <Text style={styles.btnTxt}>Cash In</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Modal visible={showModal1} transparent animationType="fade">
           <View
             style={{
               justifyContent: "center",
@@ -181,17 +155,33 @@ const ViewReport = () => {
               backgroundColor: "#000000aa",
             }}>
             <Calendar
-              style={{borderRadius: 10, width: "100%"}}
+              style={{ borderRadius: 10, width: "100%" }}
               onDayPress={date => {
-                console.log(date);
-                setSelectDate();
-                setShowModal(false);
+                setShowDate1(date);
+                setShowModal1(false);
               }}
               enableSwipeMonths={true}
             />
           </View>
         </Modal>
-        {/* <Text style={{color:"#333"}}>Hii</Text> */}
+        <Modal visible={showModal2} transparent animationType="fade">
+          <View
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              flex: 1,
+              backgroundColor: "#000000aa",
+            }}>
+            <Calendar
+              style={{ borderRadius: 10, width: "100%" }}
+              onDayPress={date => {
+                setShowDate2(date);
+                setShowModal2(false);
+              }}
+              enableSwipeMonths={true}
+            />
+          </View>
+        </Modal>
       </View>
     </>
   );
@@ -249,5 +239,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
+    marginTop: metrics.verticalScale(10)
+  },
+  cashBtn: {
+    paddingVertical: 10,
+    borderRadius: 50,
+    width: '48%',
+  },
+  btnTxt: {
+    fontSize: 22,
+    fontWeight: "800",
+    color: "#fff",
+    textAlign: 'center'
   },
 });

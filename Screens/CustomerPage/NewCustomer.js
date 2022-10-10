@@ -61,6 +61,19 @@ const CustomerHome = () => {
                                 <MatIcon name="chevron-right" color={'#fff'} size={18} />
                             </View>
                         </TouchableOpacity>
+                        
+                        <TouchableOpacity style={styles.contactBox}>
+                            <View style={{ width: 42, height: 42, backgroundColor: '#c3e2ff', justifyContent: 'center', alignItems: 'center', borderRadius: 4 }}>
+                                <Text style={{ fontSize: 28, fontWeight: '700', color: '#20409a' }}>S</Text>
+                            </View>
+                            <View style={{ paddingHorizontal: metrics.horizontalScale(20) }}>
+                                <Text style={{ fontSize: 18, fontWeight: '600', color: '#333' }}>Suraj Da</Text>
+                                <Text style={{ fontSize: 14, fontWeight: '400', color: '#828282' }}>+91-2145052022</Text>
+                            </View>
+                            <View style={{ width: 32, height: 32, borderRadius: 20, backgroundColor: '#20409a', justifyContent: 'center', alignItems: 'center', position: 'absolute', right: 20 }}>
+                                <MatIcon name="chevron-right" color={'#fff'} size={18} />
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
                 <View style={{
