@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationAction } from "@react-navigation/native";
-import { CustomerHome, Cashbook, CashEntries, ViewReport, CustomerModal, NewCustomer, LoanSection, Settings } from "../Screens";
+import { CustomerHome, Customer,Cashbook, CashEntries, ViewReport, CustomerModal, NewCustomer, LoanSection, Settings } from "../Screens";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -44,7 +44,7 @@ const CustomerStack = ({ navigation }) => {
     <Stack.Navigator screenOptions={{ headerShown: true }}>
       <Stack.Screen component={CustomerModal} name="Modal" />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
-      <Stack.Screen component={CustomerHome} name="CustomerHome" />
+      <Stack.Screen component={Customer} name="CustomerHistory" />
     </Stack.Navigator>
   )
 }
@@ -61,7 +61,7 @@ const CashBookStack = () => {
 const HomeScreenStack = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }}>
-      <Stack.Screen component={CustomerHome} name="Home"
+      <Stack.Screen component={CustomerHome} name="CustomerHome"
         options={{
           headerStyle: {
             backgroundColor: '#fff',

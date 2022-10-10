@@ -3,7 +3,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
 import metrics from '../../Constants/metrics';
 
-const CashIn = () => {
+const CashOut = () => {
     return (
         <View style={{
             marginHorizontal: metrics.horizontalScale(10),
@@ -28,4 +28,4 @@ const CashIn = () => {
     )
 }
 
-export default CashIn;
+export default CashOut;
