@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   Text,
@@ -6,7 +6,9 @@ import {
   Image,
   TouchableOpacity,
   Dimensions,
-  FlatList
+  FlatList,
+  Animated,
+  useWindowDimensions
 } from "react-native";
 import CaroItem from "./CaroItem";
 
@@ -39,16 +41,18 @@ const data = [
 ];
 
 const Welcome = () => {
-
   return (
-    <FlatList
-      data={data} renderItem={({ item }) => <CaroItem item={item} />}
-      horizontal
-      showsHorizontalScrollIndicator
-      bounces={false}
-      pagingEnabled
-      keyExtractor={(item) => item.id}
-    />
+    <View style={{ flexDirection: 'column' }}>
+      <FlatList
+        data={data} renderItem={({ item }) => <CaroItem item={item} />}
+        horizontal
+        showsHorizontalScrollIndicator
+        bounces={false}
+        pagingEnabled
+        keyExtractor={(item) => item.id}
+        on
+      />
+    </View>
   );
 };
 
