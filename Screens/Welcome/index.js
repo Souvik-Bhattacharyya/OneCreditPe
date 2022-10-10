@@ -6,13 +6,17 @@ import {
   ImageBackground,
   TouchableOpacity,
   Dimensions,
+  Button,
 } from "react-native";
 import React from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import Icon from "react-native-vector-icons/AntDesign";
-
+import {increase} from "../../Redux/Action/increse.action";
+import {useSelector, useDispatch} from "react-redux";
 const Welcome = () => {
+  const dispatch = useDispatch();
+  const count = useSelector(state => state.increment.count);
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -33,8 +37,15 @@ const Welcome = () => {
             }}>
             Get Started
           </Text>
-          <Icon name="arrowright" olor={"#fff"} size={20} />
+          <Icon name="arrowright" color={"#fff"} size={20} />
         </TouchableOpacity>
+        {/* <Button
+          title="ok"
+          onPress={() => {
+            dispatch(increase());
+          }}
+        />
+        <Text>{count}</Text> */}
       </ImageBackground>
     </View>
   );

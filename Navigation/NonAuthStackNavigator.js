@@ -42,15 +42,15 @@ function NonAuthStackNavigator() {
         headerShown: false,
       }}>
       <Tab.Screen
-        name="HomeScreens"
-        component={AuthTabNavigation}
+        name="LoginScreens"
+        component={LoginStackScreen}
         options={{
           tabBarStyle: {display: "none"},
         }}
       />
       <Tab.Screen
-        name="LoginScreens"
-        component={LoginStackScreen}
+        name="HomeScreens"
+        component={AuthTabNavigation}
         options={{
           tabBarStyle: {display: "none"},
         }}
