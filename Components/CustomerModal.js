@@ -5,23 +5,23 @@ import ActionSheet from "react-native-actions-sheet";
 
 const CustomerModal = ({ navigation }) => {
   const ActionSheetRef = useRef(null);
+  useState(() => {
+    navigation.addListener("focus", () => {
+      ActionSheetRef.current.show()
+    });
+  }, [navigation]);
 
-//   useEffect(()=>{
-// if(ActionSheetRef.current) ActionSheetRef.current.show()
-// return ()=>{}
-//   },[ActionSheetRef])
 
- 
 
   return (
     <View style={[styles.centeredView, { backgroundColor: '#E8EEFF' }]}>
       <ActionSheet ref={ActionSheetRef} closeOnTouchBackdrop={false} closable={false}>
         <View style={styles.modalView}>
-          <TouchableOpacity style={styles.box} onPress={()=>navigation.navigate('NewCustomer')}>
+          <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('CustomerHistory')}>
             <Image source={require('../Assets/add-user.png')} />
             <Text style={styles.text}>Manage Customer</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.box}>
+          <TouchableOpacity style={styles.box} onPress={() => navigation.navigate('CustomerHistory')}>
             <Image source={require('../Assets/manage-supplier.png')} />
             <Text style={styles.text}>Manage Supplier</Text>
           </TouchableOpacity>

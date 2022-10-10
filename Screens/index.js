@@ -8,6 +8,7 @@ import ViewReport from "./Cashbook/ViewReport";
 import CustomerHome from "./HomePage";
 import CustomerModal from "../Components/CustomerModal";
 import NewCustomer from "../Screens/CustomerPage/NewCustomer";
+import Customer from "../Screens/CustomerPage/index";
 import Settings from "../Screens/Settings/Settings";
 // import LoanSection from "../Screens/loanSection/Loan"
 
@@ -24,5 +25,6 @@ export {
   CustomerModal,
   NewCustomer,
   // LoanSection,
-  Settings
+  Settings,
+  Customer
 };
