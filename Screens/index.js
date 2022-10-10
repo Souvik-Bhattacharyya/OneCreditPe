@@ -1,6 +1,6 @@
-import Login from "./Pages/Login/Login";
-import Loading from "./Pages/Login/Loading";
-import OtpScreen from "./Pages/Login/OtpScreen";
+import Login from "./Login/Login";
+import Loading from "./Login/Loading";
+import OtpScreen from "./Login/OtpScreen";
 import Welcome from "./Welcome/index";
 import Cashbook from "./Cashbook/index";
 import CashEntries from "./Cashbook/CashEntries";
@@ -8,6 +8,9 @@ import ViewReport from "./Cashbook/ViewReport";
 import CustomerHome from "./HomePage";
 import CustomerModal from "../Components/CustomerModal";
 import NewCustomer from "../Screens/CustomerPage/NewCustomer";
+import Settings from "../Screens/Settings/Settings";
+// import LoanSection from "../Screens/loanSection/Loan"
+
 
 export {
   Login,
@@ -19,5 +22,7 @@ export {
   ViewReport,
   CustomerHome,
   CustomerModal,
-  NewCustomer
+  NewCustomer,
+  // LoanSection,
+  Settings
 };

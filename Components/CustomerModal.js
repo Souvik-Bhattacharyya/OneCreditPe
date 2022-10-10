@@ -5,14 +5,17 @@ import ActionSheet from "react-native-actions-sheet";
 
 const CustomerModal = ({ navigation }) => {
   const ActionSheetRef = useRef(null);
-  useState(() => {
-    navigation.addListener("focus", () => {
-      ActionSheetRef.current.show()
-    });
-  }, [navigation]);
+
+//   useEffect(()=>{
+// if(ActionSheetRef.current) ActionSheetRef.current.show()
+// return ()=>{}
+//   },[ActionSheetRef])
+
+ 
+
   return (
     <View style={[styles.centeredView, { backgroundColor: '#E8EEFF' }]}>
-      <ActionSheet ref={ActionSheetRef} closeOnTouchBackdrop={false}>
+      <ActionSheet ref={ActionSheetRef} closeOnTouchBackdrop={false} closable={false}>
         <View style={styles.modalView}>
           <TouchableOpacity style={styles.box} onPress={()=>navigation.navigate('NewCustomer')}>
             <Image source={require('../Assets/add-user.png')} />

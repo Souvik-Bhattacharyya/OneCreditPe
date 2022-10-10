@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 import TransactionFull from "../../Components/TransactionFull";
 import metrics from "../../Constants/metrics";
+
+const width = Dimensions.get('window').width;
 
 const Cashbook = ({ navigation }) => {
   const styles = StyleSheet.create({
@@ -12,6 +14,7 @@ const Cashbook = ({ navigation }) => {
       backgroundColor: "#E8EEFF",
       paddingVertical: metrics.verticalScale(15),
       position: "relative",
+      flex: 1
     },
     card: {
       width: "100%",
@@ -58,14 +61,15 @@ const Cashbook = ({ navigation }) => {
       marginTop: metrics.verticalScale(10)
     },
     cashBtn: {
-      paddingHorizontal: 40,
       paddingVertical: 10,
       borderRadius: 50,
+      width: '48%',
     },
     btnTxt: {
       fontSize: 22,
       fontWeight: "800",
       color: "#fff",
+      textAlign: 'center'
     },
   });
   return (
@@ -75,21 +79,10 @@ const Cashbook = ({ navigation }) => {
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
-                style={{
-                  fontSize: 24,
-                  color: "#1790FF",
-                  fontWeight: "bold",
-                  fontFamily: "Roboto",
-                }}>
+                style={{ fontSize: 24, color: "#1790FF", fontWeight: "bold", fontFamily: "Roboto" }}>
                 ₹ 0
               </Text>
-              <Text
-                style={{
-                  color: "#828282",
-                  fontSize: 14,
-                  fontWeight: "700",
-                  fontFamily: "Roboto",
-                }}>
+              <Text style={{ color: "#828282", fontSize: 14, fontWeight: "700", fontFamily: "Roboto" }}>
                 Cash In Hand
               </Text>
             </View>
@@ -130,27 +123,28 @@ const Cashbook = ({ navigation }) => {
             <Icon name="doubleright" color={"#fff"} size={16} />
           </TouchableOpacity>
         </View>
-      </View>
 
-      <TransactionFull />
+        <TransactionFull />
 
-      <View style={styles.container}>
         <View
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
-            width: "100%",
+            width,
             position: "absolute",
             bottom: 20,
-            marginHorizontal: 20,
+            paddingHorizontal: metrics.horizontalScale(10),
           }}>
           <TouchableOpacity
+            onPress={() => navigation.navigate('CashEntries')}
             style={[styles.cashBtn, { backgroundColor: "#EB707C" }]}>
             <Text style={styles.btnTxt}>Cash Out</Text>
           </TouchableOpacity>
+
           <TouchableOpacity
+            onPress={() => navigation.navigate('CashEntries')}
             style={[styles.cashBtn, { backgroundColor: "#85D098" }]}>
-            <Text style={styles.btnTxt}>Cash Out</Text>
+            <Text style={styles.btnTxt}>Cash In</Text>
           </TouchableOpacity>
         </View>
       </View>

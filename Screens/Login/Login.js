@@ -17,7 +17,7 @@ const Login = () => {
   return (
     <View style={styles.container}>
       <View style={{alignItems: "center"}}>
-        <Image source={require("../../../Assets/Logos/Logo.png")} />
+        <Image source={require("../../Assets/Logos/Logo.png")} />
       </View>
       <View style={{alignItems: "center", marginTop: 50}}>
         <Text

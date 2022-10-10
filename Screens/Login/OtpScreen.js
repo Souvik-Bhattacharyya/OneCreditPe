@@ -2,7 +2,7 @@ import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
 import React, {useEffect} from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
-import OTPTextView from "../../../Constants/AppOtpInput";
+import OTPTextView from "../../Constants/AppOtpInput";
 
 const OtpScreen = () => {
   const [otp, setOtp] = React.useState("");
@@ -20,7 +20,7 @@ const OtpScreen = () => {
     <>
       <View style={styles.container}>
         <View>
-          <Image source={require("../../../Assets/Logos/Logo.png")} />
+          <Image source={require("../../Assets/Logos/Logo.png")} />
         </View>
 
         <TouchableOpacity
@@ -91,7 +91,7 @@ const OtpScreen = () => {
           </View> */}
 
         <View style={{marginTop: 30}}>
-          <Image source={require("../../../Assets/Images/enter-otp.png")} />
+          <Image source={require("../../Assets/Images/enter-otp.png")} />
         </View>
 
         <TouchableOpacity

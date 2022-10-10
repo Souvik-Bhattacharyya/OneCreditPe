@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from 'react'
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 
@@ -20,6 +20,7 @@ const CashEntries = () => {
         />
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
+
       <View
         style={{
           flexDirection: "row",
@@ -45,13 +46,16 @@ const CashEntries = () => {
           </Text>
         </TouchableOpacity>
       </View>
+
+
+
       <View>
         <TextInput
           placeholder="Enter Amount"
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            {height: 200, textAlignVertical: "top", paddingHorizontal: 20},
+            { height: 200, textAlignVertical: "top", paddingHorizontal: 20 },
           ]}
           multiline={true}
           numberOfLines={10}
@@ -71,7 +75,7 @@ const CashEntries = () => {
             backgroundColor: "#EB707C",
             borderRadius: 50,
           }}>
-          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>

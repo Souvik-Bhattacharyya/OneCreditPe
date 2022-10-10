@@ -5,10 +5,10 @@ const Loading = () => {
   return (
     <View style={styles.container}>
       <View>
-        <Image source={require("../../../Assets/Logos/Logo.png")} />
+        <Image source={require("../../Assets/Logos/Logo.png")} />
       </View>
       <View>
-        <Image source={require("../../../Assets/cuate.png")} />
+        <Image source={require("../../Assets/cuate.png")} />
       </View>
       <View style={{marginBottom: 40}}>
         <ActivityIndicator size="large" color="#349EFF" />
