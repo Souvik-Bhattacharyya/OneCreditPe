@@ -1,16 +1,23 @@
-import {StyleSheet, Text, View, Image, TouchableOpacity} from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import React, {useEffect} from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import OTPTextView from "../../Constants/AppOtpInput";
 
-const OtpScreen = () => {
+const OtpScreen = ({navigation}) => {
   const [otp, setOtp] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
 
   const onSubmitOtp = async () => {
     setLoading(true);
-
+    navigation.navigate("HomeScreens");
     setLoading(false);
   };
 

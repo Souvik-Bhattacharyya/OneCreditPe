@@ -14,7 +14,7 @@ const windowHeight = Dimensions.get("window").height;
 import Icon from "react-native-vector-icons/AntDesign";
 import {increase} from "../../Redux/Action/increse.action";
 import {useSelector, useDispatch} from "react-redux";
-const Welcome = () => {
+const Welcome = ({navigation}) => {
   const dispatch = useDispatch();
   const count = useSelector(state => state.increment.count);
   return (
@@ -27,7 +27,9 @@ const Welcome = () => {
           style={styles.logo}
           source={require("../../Assets/Logos/Logo.png")}
         />
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate("login")}>
           <Text
             style={{
               color: "#fff",

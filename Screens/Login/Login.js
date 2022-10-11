@@ -13,7 +13,7 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-const Login = () => {
+const Login = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={{alignItems: "center"}}>
@@ -57,7 +57,7 @@ const Login = () => {
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableWithoutFeedback onPress={() => alert("Pressed!")}>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("otp")}>
           <View
             style={{
               backgroundColor: "#349EFF",

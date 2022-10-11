@@ -10,8 +10,8 @@ import CustomerModal from "../Components/CustomerModal";
 import NewCustomer from "../Screens/CustomerPage/NewCustomer";
 import Customer from "../Screens/CustomerPage/index";
 import Settings from "../Screens/Settings/Settings";
+import CustomerModalPage from "./CustomerPage/CustomerModalPage";
 // import LoanSection from "../Screens/loanSection/Loan"
-
 
 export {
   Login,
@@ -26,5 +26,6 @@ export {
   NewCustomer,
   // LoanSection,
   Settings,
-  Customer
+  Customer,
+  CustomerModalPage,
 };
