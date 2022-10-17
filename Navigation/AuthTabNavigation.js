@@ -16,6 +16,7 @@ import {
   LoanSection,
   Settings,
   CustomerModalPage,
+  AddContact,
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -49,6 +50,7 @@ const CustomerStack = ({navigation}) => {
       <Stack.Screen component={CustomerModalPage} name="Modal" />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
       <Stack.Screen component={Customer} name="CustomerHistory" />
+      <Stack.Screen component={AddContact} name="AddContact" />
     </Stack.Navigator>
   );
 };
