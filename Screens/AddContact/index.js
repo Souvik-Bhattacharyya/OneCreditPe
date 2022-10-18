@@ -1,4 +1,10 @@
-import {View, Text, StyleSheet, FlatList} from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  PermissionsAndroid,
+} from "react-native";
 import React, {useEffect, useState} from "react";
 import Contacts from "react-native-contacts";
 
@@ -25,11 +31,31 @@ const AddContact = () => {
       </View>
     );
   };
+  const getContacts = async () => {
+    PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
+      title: "Contacts",
+      message: "This app would like to view your contacts.",
+      buttonPositive: "Please accept bare mortal",
+    })
+      .then(res => {
+        console.log("Permission: ", res);
+        Contacts.getAll()
+          .then(contacts => {
+            // console.log(contacts);
+            contacts.sort((a, b) => a.displayName.localeCompare(b.displayName));
+            setContacts(contacts);
+          })
+          .catch(e => {
+            console.log(e);
+          });
+      })
+      .catch(error => {
+        console.error("Permission error: ", error);
+      });
+  };
 
   useEffect(() => {
-    Contacts.getAll().then(contacts => {
-      setContacts(contacts);
-    });
+    getContacts();
   }, []);
   return (
     <View>
