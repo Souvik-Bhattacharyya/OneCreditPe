@@ -6,12 +6,12 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import OTPTextView from "../../Constants/AppOtpInput";
 
-const OtpScreen = ({navigation}) => {
+const OtpScreen = ({ navigation }) => {
   const [otp, setOtp] = React.useState("");
   const [isLoading, setLoading] = React.useState(false);
 
@@ -21,7 +21,7 @@ const OtpScreen = ({navigation}) => {
     setLoading(false);
   };
 
-  useEffect(() => {});
+  useEffect(() => { });
 
   return (
     <>
@@ -34,22 +34,24 @@ const OtpScreen = ({navigation}) => {
           style={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
+            alignItems: 'baseline',
             flexDirection: "row",
             marginVertical: 20,
             width: "100%",
             height: "auto",
           }}>
           <Text style={styles.text}>Otp send to </Text>
-          <Text style={[styles.text, {fontWeight: "800", fontSize: 20}]}>
-            0000000000
-          </Text>
-          <FontAwesome
-            name="pencil-square-o"
-            color="#333"
-            size={20}
-            style={{marginLeft: 10, alignSelf: "center"}}
-          />
+          <View style={{display:'flex', flexDirection:'row'}}>
+            <Text style={[styles.text, { fontWeight: "800", fontSize: 20 }]}>
+              0000000000
+            </Text>
+            <FontAwesome
+              name="pencil-square-o"
+              color="#333"
+              size={20}
+              style={{ marginLeft: 10, alignSelf: "center" }}
+            />
+          </View>
         </TouchableOpacity>
 
         <OTPTextView inputCount={4} handleTextChange={e => setOtp(e)} />
@@ -64,12 +66,12 @@ const OtpScreen = ({navigation}) => {
           {isLoading && (
             <>
               <ActivityIndicator animating={true} color={"red"} />
-              <Text style={{fontSize: 14, fontWeight: "500"}}>
+              <Text style={{ fontSize: 14, fontWeight: "500" }}>
                 Auto verifying
               </Text>
             </>
           )}
-          <Text style={{fontSize: 14, fontWeight: "500", textAlign: "right"}}>
+          <Text style={{ fontSize: 14, fontWeight: "500", textAlign: "right" }}>
             Resend OTP in 10s
           </Text>
         </View>
@@ -97,7 +99,7 @@ const OtpScreen = ({navigation}) => {
             />
           </View> */}
 
-        <View style={{marginTop: 30}}>
+        <View style={{ marginTop: 30 }}>
           <Image source={require("../../Assets/Images/enter-otp.png")} />
         </View>
 

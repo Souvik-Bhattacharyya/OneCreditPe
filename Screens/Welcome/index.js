@@ -33,9 +33,12 @@ const Welcome = ({navigation}) => {
           <Text
             style={{
               color: "#fff",
-              textDecorationLine: "underline",
               fontSize: 26,
               marginRight: 20,
+              borderBottomWidth: 1,
+              borderBottomColor: '#fff',
+              paddingBottom: 2
+
             }}>
             Get Started
           </Text>

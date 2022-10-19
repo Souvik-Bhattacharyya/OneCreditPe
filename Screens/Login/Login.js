@@ -33,21 +33,25 @@ const Login = ({navigation}) => {
         </Text>
         <Text
           style={{
-            fontFamily: "Poppins-Regular",
-            color: "#828282",
-            fontWeight: "600",
+            color: "#737373",
+            fontWeight: "700",
           }}>
-          Please enter your Mobile Number to Login
+          Please enter your Mobile Number
         </Text>
       </View>
 
       <View>
         <SafeAreaView style={{alignItems: "center", marginTop: 20}}>
           <TextInput
+            style={styles.name}
+            placeholder="Your Name"
+            placeholderTextColor="#6f6f6f"
+          />
+          <TextInput
             style={styles.input}
             placeholder="Mobile Number"
             keyboardType="numeric"
-            placeholderTextColor="#938ea6"
+            placeholderTextColor="#6f6f6f"
           />
         </SafeAreaView>
       </View>
@@ -95,15 +99,30 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: "#fff",
   },
-  input: {
+  name: {
     paddingVertical: 15,
-    backgroundColor: "#E8EEFF",
+    backgroundColor: "#f6f6f6",
     width: "100%",
     borderRadius: 6,
     paddingHorizontal: 20,
     marginTop: "20%",
-    fontSize: 16,
-    color: "#938ea6",
-    fontWeight: "500",
+    fontSize: 18,
+    color: "#000",
+    fontWeight: "800",
+    borderWidth: 1,
+    borderColor: '#C6C6C6'
+  },
+  input: {
+    paddingVertical: 15,
+    backgroundColor: "#f6f6f6",
+    width: "100%",
+    borderRadius: 6,
+    paddingHorizontal: 20,
+    marginTop: 20,
+    fontSize: 18,
+    color: "#000",
+    fontWeight: "800",
+    borderWidth: 1,
+    borderColor: '#C6C6C6'
   },
 });

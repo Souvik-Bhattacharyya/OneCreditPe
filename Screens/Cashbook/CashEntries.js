@@ -51,7 +51,7 @@ const CashEntries = () => {
 
       <View>
         <TextInput
-          placeholder="Enter Amount"
+          placeholder="Enter Payment Details"
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
