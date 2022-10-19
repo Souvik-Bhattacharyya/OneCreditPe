@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
         <SafeAreaView style={{alignItems: "center", marginTop: 20}}>
           <TextInput
             style={styles.name}
-            placeholder="Your Name"
+            placeholder="Your Business Name"
             placeholderTextColor="#6f6f6f"
           />
           <TextInput
