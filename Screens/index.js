@@ -14,6 +14,8 @@ import CustomerModalPage from "./CustomerPage/CustomerModalPage";
 import AddContact from "./AddContact";
 import SetCollectionDateModal from "./SetCollectionDateModal";
 import CommonHeader from "./CommonHeader";
+import PrivacyAndPolicy from "./PrivacyAndPolicy";
+import TermsAndConditions from "./TermsAndConditions";
 // import LoanSection from "../Screens/loanSection/Loan"
 
 export {
@@ -34,4 +36,6 @@ export {
   AddContact,
   SetCollectionDateModal,
   CommonHeader,
+  PrivacyAndPolicy,
+  TermsAndConditions,
 };
