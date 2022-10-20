@@ -6,14 +6,17 @@ import {NonAuthStackNavigator} from "./Navigation";
 import {Provider} from "react-redux";
 import {PersistGate} from "redux-persist/es/integration/react";
 import {store, persistor} from "./Redux/store";
+import {Provider as PaperProvider} from "react-native-paper";
 
 const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <NavigationContainer>
-          <NonAuthStackNavigator />
-        </NavigationContainer>
+        <PaperProvider>
+          <NavigationContainer>
+            <NonAuthStackNavigator />
+          </NavigationContainer>
+        </PaperProvider>
       </PersistGate>
     </Provider>
   );

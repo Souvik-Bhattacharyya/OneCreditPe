@@ -12,6 +12,8 @@ import Customer from "../Screens/CustomerPage/index";
 import Settings from "../Screens/Settings/Settings";
 import CustomerModalPage from "./CustomerPage/CustomerModalPage";
 import AddContact from "./AddContact";
+import SetCollectionDateModal from "./SetCollectionDateModal";
+import CommonHeader from "./CommonHeader";
 // import LoanSection from "../Screens/loanSection/Loan"
 
 export {
@@ -30,4 +32,6 @@ export {
   Customer,
   CustomerModalPage,
   AddContact,
+  SetCollectionDateModal,
+  CommonHeader,
 };

@@ -17,6 +17,7 @@ import {
   Settings,
   CustomerModalPage,
   AddContact,
+  SetCollectionDateModal,
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -66,21 +67,21 @@ const CashBookStack = () => {
 
 const HomeScreenStack = () => {
   return (
-    <Stack.Navigator screenOptions={{headerShown: true}}>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
         component={CustomerHome}
         name="CustomerHome"
-        options={{
-          headerStyle: {
-            backgroundColor: "#fff",
-            height: 100,
-          },
-          headerTintColor: "#333",
-          headerTitleStyle: {
-            fontWeight: "bold",
-          },
-          headerTitle: props => <LogoTitle {...props} />,
-        }}
+        // options={{
+        //   headerStyle: {
+        //     backgroundColor: "#fff",
+        //     height: 100,
+        //   },
+        //   headerTintColor: "#333",
+        //   headerTitleStyle: {
+        //     fontWeight: "bold",
+        //   },
+        //   headerTitle: props => <LogoTitle {...props} />,
+        // }}
       />
     </Stack.Navigator>
   );
@@ -97,7 +98,7 @@ const AuthTabNavigation = ({navigation}) => {
       }}>
       <Tab.Screen
         name="Home"
-        component={HomeScreenStack}
+        component={SetCollectionDateModal}
         options={{
           tabBarIcon: ({color}) => (
             <FontAwesome name="home" size={24} color={color} />

@@ -11,16 +11,18 @@ import {
 import React from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
-import Carousel from '../../Components/Carousel/Carousel';
+import Carousel from "../../Components/Carousel/Carousel";
 import Cashbook from "../Cashbook";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
+import CommonHeader from "../CommonHeader";
 
 const CustomerHome = () => {
   const navigation = useNavigation();
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#E8EEFF' }}>
+    <ScrollView style={{flex: 1, backgroundColor: "#E8EEFF"}}>
+      <CommonHeader />
       <View style={styles.container}>
-        <View style={[styles.card, styles.shadow, { paddingBottom: 10 }]}>
+        <View style={[styles.card, styles.shadow, {paddingBottom: 10}]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
@@ -107,9 +109,9 @@ const CustomerHome = () => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.cardBtn}
-            onPress={() => navigation.navigate('CashBook')}
-          >
+          <TouchableOpacity
+            style={styles.cardBtn}
+            onPress={() => navigation.navigate("CashBook")}>
             <Text
               style={{
                 fontSize: 16,
@@ -124,32 +126,38 @@ const CustomerHome = () => {
           </TouchableOpacity>
         </View>
         <View
-          style={[styles.shadow, {
-            flexDirection: "row",
-            justifyContent: 'space-around',
-            alignItems: 'center',
-            height: 130,
-            alignItems: 'center',
-            backgroundColor: "#fff",
-            borderRadius: 6,
-            marginVertical: metrics.verticalScale(10),
-            paddingVertical: metrics.verticalScale(10),
-            paddingHorizontal: metrics.horizontalScale(10),
-          }]}>
+          style={[
+            styles.shadow,
+            {
+              flexDirection: "row",
+              justifyContent: "space-around",
+              alignItems: "center",
+              height: 130,
+              alignItems: "center",
+              backgroundColor: "#fff",
+              borderRadius: 6,
+              marginVertical: metrics.verticalScale(10),
+              paddingVertical: metrics.verticalScale(10),
+              paddingHorizontal: metrics.horizontalScale(10),
+            },
+          ]}>
           <Carousel />
         </View>
 
         <TouchableOpacity
-          style={[styles.shadow, {
-            flexDirection: "row",
-            paddingHorizontal: 20,
-            height: 130,
-            justifyContent: "center",
-            alignItems: "center",
-            backgroundColor: "#fff",
-            borderRadius: 6,
-            marginVertical: metrics.verticalScale(10)
-          }]}>
+          style={[
+            styles.shadow,
+            {
+              flexDirection: "row",
+              paddingHorizontal: 20,
+              height: 130,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: "#fff",
+              borderRadius: 6,
+              marginVertical: metrics.verticalScale(10),
+            },
+          ]}>
           <View
             style={{
               width: "30%",
@@ -158,15 +166,15 @@ const CustomerHome = () => {
             }}>
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
-          <View style={{ width: "70%", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "700" }}>
+          <View style={{width: "70%", paddingHorizontal: 20}}>
+            <Text style={{color: "#464555", fontSize: 18, fontWeight: "700"}}>
               Easy Loan
             </Text>
-            <Text style={{ color: "#828282" }}>
+            <Text style={{color: "#828282"}}>
               Get easy loan without any paperwork
             </Text>
-            <View style={{ marginTop: 10, justifyContent: "center" }}>
-              <Text style={{ color: "#20409a", fontSize: 16, fontWeight: '600' }}>
+            <View style={{marginTop: 10, justifyContent: "center"}}>
+              <Text style={{color: "#20409a", fontSize: 16, fontWeight: "600"}}>
                 Apply Now
                 <Icon name="doubleright" color={"#20409a"} size={16} />
               </Text>
@@ -174,7 +182,7 @@ const CustomerHome = () => {
           </View>
         </TouchableOpacity>
       </View>
-    </ScrollView >
+    </ScrollView>
   );
 };
 
@@ -200,7 +208,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    width: '100%'
+    width: "100%",
   },
   boxOne: {
     display: "flex",
@@ -210,7 +218,7 @@ const styles = StyleSheet.create({
     paddingVertical: metrics.verticalScale(15),
     borderRightWidth: 1,
     borderColor: "#A6B3D7",
-    width: '50%'
+    width: "50%",
   },
   box: {
     display: "flex",
@@ -218,7 +226,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     paddingVertical: metrics.verticalScale(15),
-    width: '50%'
+    width: "50%",
   },
   cardBtn: {
     display: "flex",
@@ -231,16 +239,16 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    marginTop: metrics.verticalScale(10)
+    marginTop: metrics.verticalScale(10),
   },
   shadow: {
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: {
       width: 10,
-      height: 10
+      height: 10,
     },
-    shadowOpacity: .25,
+    shadowOpacity: 0.25,
     shadowRadius: 3.5,
-    elevation: 3
-  }
+    elevation: 3,
+  },
 });
