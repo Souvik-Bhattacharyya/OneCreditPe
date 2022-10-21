@@ -6,7 +6,7 @@ import registerReducer from "./registerReducer";
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
-  whitelist: ["auth"],
+  // whitelist: [],
 };
 
 const Reducer = {

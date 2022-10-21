@@ -1,14 +1,14 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
 import React, {useEffect} from "react";
 
-const Loading = ({ navigation }) => {
+const Loading = ({navigation}) => {
 
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("HomeScreens");
     }, 5000);
   }, []);
-
+  
   return (
     <View style={styles.container}>
       <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flex: .8 }}>
