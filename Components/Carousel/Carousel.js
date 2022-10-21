@@ -1,14 +1,7 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import {
   View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Dimensions,
   FlatList,
-  Animated,
-  useWindowDimensions
 } from "react-native";
 import CaroItem from "./CaroItem";
 
@@ -42,7 +35,7 @@ const data = [
 
 const Welcome = () => {
   return (
-    <View style={{ flexDirection: 'column' }}>
+    <View style={{ flexDirection: 'column',height: 100}}>
       <FlatList
         data={data} renderItem={({ item }) => <CaroItem item={item} />}
         horizontal

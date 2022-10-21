@@ -97,8 +97,10 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 16,
+    color: '#000',
+    fontWeight: '700'
   },
   phoneNumber: {
-    color: "#888",
+    color: "#828282",
   },
 });

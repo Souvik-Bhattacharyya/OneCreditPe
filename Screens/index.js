@@ -12,7 +12,7 @@ import NewCustomer from "../Screens/CustomerPage/NewCustomer";
 import Customer from "../Screens/CustomerPage/index";
 import Settings from "../Screens/Settings/Settings";
 import CustomerModalPage from "./CustomerPage/CustomerModalPage";
-import AddContact from "./AddContact";
+import AddContact from "./../Components/AddContact";
 import SetCollectionDateModal from "./SetCollectionDateModal";
 import CommonHeader from "./CommonHeader";
 import PrivacyAndPolicy from "./PrivacyAndPolicy";
