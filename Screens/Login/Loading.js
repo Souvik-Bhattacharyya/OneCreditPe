@@ -1,38 +1,16 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 
 const Loading = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <View>
-        <Image source={require("../../Assets/Logos/Logo.png")} />
+      <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flex: .8 }}>
+        <Image source={require("../../Assets/Logos/Logo.png")} style={styles.logo} />
       </View>
-      <View style={{ marginTop: '45%' }}>
-        <Image source={require("../../Assets/cuate.png")} />
+      <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', position:'absolute', bottom: 40}}>
+        <Image source={require("../../Assets/secure.png")} style={{ width: 146, height: 146 }} />
+        <Text style={{fontSize: 18, fontWeight: '600', color: '#828282'}}>100% Safe And Secure</Text>
       </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("HomeScreens")}
-        style={{
-          backgroundColor: "#349EFF",
-          paddingVertical: 5,
-          width: "100%",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 50,
-          flexDirection: "row",
-          marginTop: "auto",
-        }}>
-        <Text
-          style={{
-            fontFamily: "Poppins-Regular",
-            fontSize: 20,
-            fontWeight: "bold",
-            color: "#FFFFFF",
-            margin: 10,
-          }}>
-          Let's Started
-        </Text>
-      </TouchableOpacity>
     </View >
   );
 };
@@ -46,5 +24,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  logo: {
+    height: 100,
+    width: 300,
+    top: "-20%",
   },
 });

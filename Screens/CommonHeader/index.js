@@ -1,4 +1,4 @@
-import {View, Text, Image} from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 const CommonHeader = () => {
@@ -6,44 +6,50 @@ const CommonHeader = () => {
     <View
       style={{
         flexDirection: "row",
-        backgroundColor: "white",
-        justifyContent: "space-around",
-        paddingVertical: 20,
+        backgroundColor: "#fff",
+        justifyContent: "space-between",
+        width: '100%',
+        paddingVertical: 10,
+        paddingHorizontal: 20
       }}>
       <View
         style={{
           flexDirection: "row",
+          // backgroundColor:'#fff',
+          // justifyContent:'center',
+          alignItems:'center',
+          width: '75%'
         }}>
         <Image
           source={require("../../Assets/profile.png")}
           style={{
-            height: 40,
-            width: 40,
+            height: 50,
+            width: 50,
             resizeMode: "contain",
-            marginVertical: 9,
+            marginRight: 10
+            // backgroundColor:'#fff'
           }}
         />
         <View
           style={{
             flexDirection: "column",
-            marginVertical: 12,
-            marginHorizontal: 15,
           }}>
-          <Text style={{fontWeight: "400", fontSize: 17, color: "black"}}>
+          <Text style={{ fontWeight: "800", fontSize: 17, color: "black" }}>
             Business Name
           </Text>
-          <Text style={{fontSize: 13, marginTop: -4}}>9192939495</Text>
+          <Text style={{ fontSize: 14, color: '#828282' }}>9192939495</Text>
         </View>
       </View>
-      <Image
-        source={require("../../Assets/calender.png")}
-        style={{
-          marginVertical: 15,
-          height: 25,
-          width: 25,
-          resizeMode: "contain",
-        }}
-      />
+      <TouchableOpacity style={{width:'25%', justifyContent:'center', alignItems:'center'}}>
+        <Image
+          source={require("../../Assets/calender.png")}
+          style={{
+            height: 38,
+            width: 38,
+            resizeMode: "contain",
+          }}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
