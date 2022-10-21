@@ -98,7 +98,7 @@ const AuthTabNavigation = ({navigation}) => {
       }}>
       <Tab.Screen
         name="Home"
-        component={SetCollectionDateModal}
+        component={HomeScreenStack}
         options={{
           tabBarIcon: ({color}) => (
             <FontAwesome name="home" size={24} color={color} />

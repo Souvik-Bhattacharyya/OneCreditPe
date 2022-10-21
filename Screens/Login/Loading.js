@@ -1,13 +1,18 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
+import React, {useEffect} from "react";
 
-const Loading = ({ navigation }) => {
+const Loading = ({navigation}) => {
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate("HomeScreens");
+    }, 5000);
+  }, []);
   return (
     <View style={styles.container}>
       <View>
         <Image source={require("../../Assets/Logos/Logo.png")} />
       </View>
-      <View style={{ marginTop: '45%' }}>
+      <View style={{marginTop: "45%"}}>
         <Image source={require("../../Assets/cuate.png")} />
       </View>
       <TouchableOpacity
@@ -33,7 +38,7 @@ const Loading = ({ navigation }) => {
           Let's Started
         </Text>
       </TouchableOpacity>
-    </View >
+    </View>
   );
 };
 

@@ -1,6 +1,7 @@
 import Login from "./Login/Login";
 import Loading from "./Login/Loading";
 import OtpScreen from "./Login/OtpScreen";
+import HomePage from "./HomePage";
 import Welcome from "./Welcome/index";
 import Cashbook from "./Cashbook/index";
 import CashEntries from "./Cashbook/CashEntries";
@@ -16,11 +17,12 @@ import SetCollectionDateModal from "./SetCollectionDateModal";
 import CommonHeader from "./CommonHeader";
 import PrivacyAndPolicy from "./PrivacyAndPolicy";
 import TermsAndConditions from "./TermsAndConditions";
-// import LoanSection from "../Screens/loanSection/Loan"
+// import LoanSection from "../Screens/loanSection/Loan";
 
 export {
   Login,
   OtpScreen,
+  HomePage,
   Welcome,
   Loading,
   Cashbook,
