@@ -27,7 +27,7 @@ const OtpScreen = ({navigation}) => {
       });
       if (response.status == 200) {
         setLoading(true);
-        navigation.navigate("HomeScreens");
+        navigation.navigate("Loading");
         setLoading(false);
       }
     } catch (error) {

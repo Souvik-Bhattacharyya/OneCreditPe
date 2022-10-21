@@ -1,19 +1,39 @@
-import {View, Text, StyleSheet, Image, ActivityIndicator} from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const Loading = () => {
+const Loading = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View>
         <Image source={require("../../Assets/Logos/Logo.png")} />
       </View>
-      <View>
+      <View style={{ marginTop: '45%' }}>
         <Image source={require("../../Assets/cuate.png")} />
       </View>
-      <View style={{marginBottom: 40}}>
-        <ActivityIndicator size="large" color="#349EFF" />
-      </View>
-    </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("HomeScreens")}
+        style={{
+          backgroundColor: "#349EFF",
+          paddingVertical: 5,
+          width: "100%",
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 50,
+          flexDirection: "row",
+          marginTop: "auto",
+        }}>
+        <Text
+          style={{
+            fontFamily: "Poppins-Regular",
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "#FFFFFF",
+            margin: 10,
+          }}>
+          Let's Started
+        </Text>
+      </TouchableOpacity>
+    </View >
   );
 };
 
