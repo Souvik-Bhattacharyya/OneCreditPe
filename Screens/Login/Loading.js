@@ -1,15 +1,22 @@
 import { View, Text, StyleSheet, Image } from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 
 const Loading = ({ navigation }) => {
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate("HomeScreens");
+    }, 5000);
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', flex: .8 }}>
         <Image source={require("../../Assets/Logos/Logo.png")} style={styles.logo} />
       </View>
-      <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', position:'absolute', bottom: 40}}>
+      <View style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', position: 'absolute', bottom: 40 }}>
         <Image source={require("../../Assets/secure.png")} style={{ width: 146, height: 146 }} />
-        <Text style={{fontSize: 18, fontWeight: '600', color: '#828282'}}>100% Safe And Secure</Text>
+        <Text style={{ fontSize: 18, fontWeight: '600', color: '#828282' }}>100% Safe And Secure</Text>
       </View>
     </View >
   );
