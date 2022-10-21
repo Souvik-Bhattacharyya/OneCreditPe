@@ -1,5 +1,6 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const CommonHeader = () => {
   return (
@@ -10,14 +11,17 @@ const CommonHeader = () => {
         justifyContent: "space-between",
         width: '100%',
         paddingVertical: 10,
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        paddingBottom: 50,
+        borderBottomWidth: 1,
+        borderBottomColor: '#C6C6C6'
       }}>
       <View
         style={{
           flexDirection: "row",
           // backgroundColor:'#fff',
           // justifyContent:'center',
-          alignItems:'center',
+          alignItems: 'center',
           width: '75%'
         }}>
         <Image
@@ -34,13 +38,22 @@ const CommonHeader = () => {
           style={{
             flexDirection: "column",
           }}>
-          <Text style={{ fontWeight: "800", fontSize: 17, color: "black" }}>
-            Business Name
-          </Text>
-          <Text style={{ fontSize: 14, color: '#828282' }}>9192939495</Text>
+          <TouchableOpacity 
+          
+          style={{
+            flexDirection: "row",
+            justifyContent:'center',
+            alignItems:'center'
+          }}>
+            <Text style={{ fontWeight: "800", fontSize: 17, color: "black" }}>
+              Business Name
+            </Text>
+            <Icon name="caretdown" color={"#000"} size={14}/>
+          </TouchableOpacity>
+          <Text style={{ fontSize: 14, color: '#828282', fontWeight: '800' }}>9192939495</Text>
         </View>
       </View>
-      <TouchableOpacity style={{width:'25%', justifyContent:'center', alignItems:'center'}}>
+      <TouchableOpacity style={{ width: '25%', justifyContent: 'center', alignItems: 'center' }}>
         <Image
           source={require("../../Assets/calender.png")}
           style={{

@@ -12,25 +12,23 @@ import React from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
 import Carousel from "../../Components/Carousel/Carousel";
-import Cashbook from "../Cashbook";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import CommonHeader from "../CommonHeader";
 
 const CustomerHome = () => {
   const navigation = useNavigation();
   return (
-    <ScrollView style={{flex: 1, backgroundColor: "#E8EEFF"}}>
+    <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={[styles.card, styles.shadow, {paddingBottom: 10}]}>
+        <View style={[styles.card, styles.shadow, { marginTop: -45 }]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
                 style={{
                   fontSize: 24,
                   color: "#12CE12",
-                  fontWeight: "700",
-                  fontFamily: "Roboto",
+                  fontWeight: '900',
                 }}>
                 ₹ 0
               </Text>
@@ -38,19 +36,18 @@ const CustomerHome = () => {
                 style={{
                   color: "#828282",
                   fontSize: 14,
-                  fontWeight: "600",
+                  fontWeight: "900",
                   fontFamily: "Roboto",
                 }}>
-                To Collect
+                Cash In Hand
               </Text>
             </View>
             <View style={styles.box}>
               <Text
                 style={{
                   fontSize: 24,
-                  color: "#ed1c24",
-                  fontWeight: "700",
-                  fontFamily: "Roboto",
+                  color: "#ED1C24",
+                  fontWeight: "900",
                 }}>
                 ₹ 0
               </Text>
@@ -58,13 +55,28 @@ const CustomerHome = () => {
                 style={{
                   color: "#828282",
                   fontSize: 14,
-                  fontWeight: "600",
+                  fontWeight: "900",
                   fontFamily: "Roboto",
                 }}>
-                To Pay
+                Today's Income
               </Text>
             </View>
           </View>
+          <TouchableOpacity
+            style={styles.cardBtn}
+            onPress={() => navigation.navigate("ViewReport")}>
+            <Text
+              style={{
+                fontSize: 16,
+                color: "#20409a",
+                fontWeight: "700",
+                marginRight: 12,
+                fontFamily: "Poppins",
+              }}>
+              View Report
+            </Text>
+            <Icon name="doubleright" color={"#20409a"} size={16} />
+          </TouchableOpacity>
         </View>
         <View style={[styles.card, styles.shadow]}>
           <View style={styles.cardBody}>
@@ -115,14 +127,14 @@ const CustomerHome = () => {
             <Text
               style={{
                 fontSize: 16,
-                color: "#fff",
+                color: "#20409a",
                 fontWeight: "700",
                 marginRight: 12,
                 fontFamily: "Poppins",
               }}>
               Cashbook
             </Text>
-            <Icon name="doubleright" color={"#fff"} size={16} />
+            <Icon name="doubleright" color={"#20409a"} size={16} />
           </TouchableOpacity>
         </View>
         <View
@@ -132,7 +144,6 @@ const CustomerHome = () => {
               flexDirection: "row",
               justifyContent: "space-around",
               alignItems: "center",
-              height: 130,
               alignItems: "center",
               backgroundColor: "#fff",
               borderRadius: 6,
@@ -149,13 +160,14 @@ const CustomerHome = () => {
             styles.shadow,
             {
               flexDirection: "row",
-              paddingHorizontal: 20,
-              height: 130,
+              paddingHorizontal: metrics.horizontalScale(20),
+              paddingVertical: metrics.verticalScale(15),
               justifyContent: "center",
               alignItems: "center",
               backgroundColor: "#fff",
               borderRadius: 6,
               marginVertical: metrics.verticalScale(10),
+              borderColor: '#c6c6c6',
             },
           ]}>
           <View
@@ -166,15 +178,15 @@ const CustomerHome = () => {
             }}>
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
-          <View style={{width: "70%", paddingHorizontal: 20}}>
-            <Text style={{color: "#464555", fontSize: 18, fontWeight: "700"}}>
+          <View style={{ width: "70%", paddingHorizontal: 20 }}>
+            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "900" }}>
               Easy Loan
             </Text>
-            <Text style={{color: "#828282"}}>
+            <Text style={{ color: "#828282", fontWeight: '400'}}>
               Get easy loan without any paperwork
             </Text>
-            <View style={{marginTop: 10, justifyContent: "center"}}>
-              <Text style={{color: "#20409a", fontSize: 16, fontWeight: "600"}}>
+            <View style={{ marginTop: 10, justifyContent: "center" }}>
+              <Text style={{ color: "#20409a", fontSize: 16, fontWeight: "600" }}>
                 Apply Now
                 <Icon name="doubleright" color={"#20409a"} size={16} />
               </Text>
@@ -182,7 +194,7 @@ const CustomerHome = () => {
           </View>
         </TouchableOpacity>
       </View>
-    </ScrollView>
+    </>
   );
 };
 
@@ -199,7 +211,6 @@ const styles = StyleSheet.create({
   card: {
     width: "100%",
     backgroundColor: "#fff",
-    paddingTop: metrics.verticalScale(10),
     borderRadius: 6,
     marginVertical: metrics.verticalScale(10),
   },
@@ -209,13 +220,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+
   },
   boxOne: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: metrics.verticalScale(15),
+    paddingVertical: metrics.verticalScale(10),
     borderRightWidth: 1,
     borderColor: "#A6B3D7",
     width: "50%",
@@ -234,12 +246,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     width: "100%",
-    backgroundColor: "#20409a",
-    paddingVertical: metrics.verticalScale(6),
+    backgroundColor: "#fff",
+    borderTopWidth: 1,
+    borderColor: '#c6c6c6',
+    paddingVertical: metrics.verticalScale(7),
     borderRadius: 6,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    marginTop: metrics.verticalScale(10),
   },
   shadow: {
     shadowColor: "#000",

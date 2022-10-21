@@ -3,10 +3,10 @@ import {
   Text,
   View,
   Image,
-  TouchableWithoutFeedback,
   Dimensions,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import React, { useState } from "react";
 const windowWidth = Dimensions.get("window").width;
@@ -86,7 +86,7 @@ const Login = ({ navigation }) => {
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableWithoutFeedback onPress={login}>
+        <TouchableOpacity onPress={login} style={{width:'100%'}} >
           <View
             style={{
               backgroundColor: "#349EFF",
@@ -109,7 +109,7 @@ const Login = ({ navigation }) => {
             </Text>
             <AntDesign name="arrowright" color="white" size={30} />
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     </View>
   );
