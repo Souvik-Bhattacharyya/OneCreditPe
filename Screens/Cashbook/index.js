@@ -19,33 +19,34 @@ const Cashbook = ({ navigation }) => {
     card: {
       width: "100%",
       backgroundColor: "#fff",
-      paddingTop: metrics.verticalScale(10),
       borderRadius: 6,
+      marginVertical: metrics.verticalScale(10),
     },
     cardBody: {
       display: "flex",
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
+      width: "100%",
+
     },
     boxOne: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      width: '50%',
-      paddingVertical: metrics.verticalScale(15),
-      borderRightWidth: 2,
-      borderColor: "#ccc",
+      paddingVertical: metrics.verticalScale(10),
+      borderRightWidth: 1,
+      borderColor: "#A6B3D7",
+      width: "50%",
     },
     box: {
       display: "flex",
       flexDirection: "column",
       justifyContent: "center",
       alignItems: "center",
-      width: '50%',
       paddingVertical: metrics.verticalScale(15),
-      // backgroundColor: '#ccc'
+      width: "50%",
     },
     cardBtn: {
       display: "flex",
@@ -53,12 +54,13 @@ const Cashbook = ({ navigation }) => {
       alignItems: "center",
       flexDirection: "row",
       width: "100%",
-      backgroundColor: "dodgerblue",
-      paddingVertical: metrics.verticalScale(6),
-      borderRadius: 10,
+      backgroundColor: "#fff",
+      borderTopWidth: 1,
+      borderColor: '#c6c6c6',
+      paddingVertical: metrics.verticalScale(7),
+      borderRadius: 6,
       borderTopLeftRadius: 0,
       borderTopRightRadius: 0,
-      marginTop: metrics.verticalScale(10)
     },
     cashBtn: {
       paddingVertical: 10,
@@ -113,14 +115,14 @@ const Cashbook = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 14,
-                color: "#fff",
+                color: "#20409a",
                 fontWeight: "700",
                 marginRight: 12,
                 fontFamily: "Poppins",
               }}>
               View Report
             </Text>
-            <Icon name="doubleright" color={"#fff"} size={16} />
+            <Icon name="doubleright" color={"#20409a"} size={16} />
           </TouchableOpacity>
         </View>
 
