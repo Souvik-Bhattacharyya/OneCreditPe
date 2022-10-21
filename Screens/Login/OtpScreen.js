@@ -92,10 +92,6 @@ const OtpScreen = ({ navigation }) => {
           </Text>
         </View>
 
-        <View>
-          <Image style={{ width: 300, height: 280, resizeMode: 'cover' }} source={require("../../Assets/Images/enter-otp.png")} />
-        </View>
-
         <TouchableOpacity
           onPress={onSubmitOtp}
           style={{
