@@ -10,13 +10,13 @@ const width = Dimensions.get('window').width;
 const TransactionFull = () => {
     const styles = StyleSheet.create({
         container: {
-            height: metrics.verticalScale(400),
+            height: metrics.verticalScale(450),
             // width,
             // flex:1,
             backgroundColor: '#E8EEFF',
             alignItems: 'center',
             justifyContent:'center',
-            marginTop: metrics.verticalScale(30)
+            marginTop: metrics.verticalScale(10)
         },
         search: {
             flexDirection: 'row',

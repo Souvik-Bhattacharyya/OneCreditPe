@@ -126,7 +126,7 @@ const Cashbook = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <TransactionFull />
+        <TransactionEmpty />
 
         <View
           style={{

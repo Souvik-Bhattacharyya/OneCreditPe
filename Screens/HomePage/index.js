@@ -13,7 +13,7 @@ import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
 import Carousel from "../../Components/Carousel/Carousel";
 import { useNavigation } from "@react-navigation/native";
-import CommonHeader from "../CommonHeader";
+import CommonHeader from "../../Components/CommonHeader";
 
 const CustomerHome = () => {
   const navigation = useNavigation();

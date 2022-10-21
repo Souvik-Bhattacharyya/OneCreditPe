@@ -1,6 +1,7 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native'
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import metrics from '../Constants/metrics';
 
 const TransactionEmpty = () => {
     return (
@@ -10,24 +11,42 @@ const TransactionEmpty = () => {
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginTop: '10%',
-                    backgroundColor: '#fff',
-                    paddingVertical: 0,
-                    paddingHorizontal: 20,
-                    paddingBottom: 40,
-                    borderRadius: 30,
-                    height: 480
+                    marginTop: metrics.verticalScale(20)
                 }}>
-                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: 'center', paddingVertical: 20, marginBottom: 30, borderBottomWidth: 1, borderBottomColor: '#ccc' }}>
-                        <Text style={{ color: '#20409A', fontSize: 22, fontWeight: '600' }}>Today Transaction</Text>
-                        <TouchableOpacity>
-                            <Icon name="search1" color={'#ccc'}  size={24} />
+                    <View style={{
+                        flexDirection: 'row',
+                        width: '100%',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        paddingVertical: metrics.verticalScale(5),
+                        paddingHorizontal: metrics.horizontalScale(5),
+                        marginBottom: 15,
+                        borderColor: '#828282',
+                        borderWidth: 1,
+                        borderRadius: 6,
+                        backgroundColor: '#fff'
+                    }}>
+                        <TextInput
+                            placeholder='Search'
+                            placeholderTextColor={"#828282"}
+                            style={{
+                                width:'100%',
+                                fontSize: 16,
+                                color: '#000',
+                                fontWeight: '500',
+                                position: 'relative',
+                                paddingLeft: metrics.horizontalScale(20),
+                                paddingVertical: metrics.verticalScale(5)
+                            }}
+                        />
+                        <TouchableOpacity style={{ position: 'absolute', right: 20, alignSelf: 'center'}}>
+                            <Icon name="search1" color={'#333'} size={28} />
                         </TouchableOpacity>
                     </View>
                     <View>
-                        <Image source={require('../Assets/Images/add-notes.png')} />
-                        <View style={{ alignItems: 'center', marginTop: 50 }}>
-                            <Text style={{ color: '#333', fontSize: 22, fontWeight: '600' }}>No Items Found</Text>
+                        <Image source={require('../Assets/Images/add-notes.png')} style={{width:220,height:220,resizeMode:'contain'}} />
+                        <View style={{ alignItems: 'center', marginTop: 30 }}>
+                            <Text style={{ color: '#333', fontSize: 22, fontWeight: '600', marginBottom: 5}}>No Items Found</Text>
                             <Text style={{ color: '#aaa', fontSize: 18, fontWeight: '500' }}>Click Below to add some</Text>
                         </View>
                     </View>
