@@ -12,11 +12,9 @@ import React from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import Icon from "react-native-vector-icons/AntDesign";
-import {increase} from "../../Redux/Action/increse.action";
 import {useSelector, useDispatch} from "react-redux";
+
 const Welcome = ({navigation}) => {
-  const dispatch = useDispatch();
-  const count = useSelector(state => state.increment.count);
   return (
     <View style={styles.container}>
       <ImageBackground
@@ -36,9 +34,8 @@ const Welcome = ({navigation}) => {
               fontSize: 26,
               marginRight: 20,
               borderBottomWidth: 1,
-              borderBottomColor: '#fff',
-              paddingBottom: 2
-
+              borderBottomColor: "#fff",
+              paddingBottom: 2,
             }}>
             Get Started
           </Text>

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {store} from "../Redux/store";
 export default class API {
   constructor(object) {
     this.instance = axios.create({baseURL: object.baseUrl});
@@ -16,7 +16,9 @@ export default class API {
     return this.httpRequest("PUT", endpoint, params, header);
   }
 
-  async httpRequest(method, url, data, header) {
+  async httpRequest(method, url, data, header = null) {
+    // let state = store.getState();
+    // let clientToken = state.auth.clientToken;
     return new Promise((resolve, reject) => {
       let body = {};
       if (method === "GET") {
@@ -38,7 +40,6 @@ export default class API {
           headers: header
             ? header
             : {
-                // authorization: clientToken ? `Bearer ${clientToken}` : null,
                 "Content-Type": "application/json",
               },
         };
@@ -48,10 +49,12 @@ export default class API {
         .request(body)
         .then(response => {
           // resolve
+          console.log(response);
           return resolve(response);
         })
         .catch(error => {
           // reject
+          console.log(error);
           return reject(error);
         });
     });

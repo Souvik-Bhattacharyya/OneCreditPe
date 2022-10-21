@@ -8,12 +8,35 @@ import {
   SafeAreaView,
   TextInput,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
+import Api from "../../Services";
+
+//Redux
+import {useDispatch, useSelector} from "react-redux";
+import {editName, editMobile} from "../../Redux/Action/registerActions";
 
 const Login = ({navigation}) => {
+  const dispatch = useDispatch();
+  const {name, mobileNumber} = useSelector(state => state.register);
+
+  const login = async () => {
+    console.log("--------->", name, mobileNumber);
+    try {
+      const response = await Api.post("/send-otp", {
+        name: name,
+        mobile: mobileNumber,
+      });
+      console.log("==>", response.data);
+      if (response.status == 200) {
+        navigation.navigate("otp");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.container}>
       <View style={{alignItems: "center"}}>
@@ -43,15 +66,19 @@ const Login = ({navigation}) => {
       <View>
         <SafeAreaView style={{alignItems: "center", marginTop: 20}}>
           <TextInput
+            value={name}
             style={styles.name}
             placeholder="Your Business Name"
             placeholderTextColor="#6f6f6f"
+            onChangeText={val => dispatch(editName({name: val}))}
           />
           <TextInput
+            value={mobileNumber}
             style={styles.input}
             placeholder="Mobile Number"
             keyboardType="numeric"
             placeholderTextColor="#6f6f6f"
+            onChangeText={val => dispatch(editMobile({mobile: val}))}
           />
         </SafeAreaView>
       </View>
@@ -61,7 +88,7 @@ const Login = ({navigation}) => {
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate("otp")}>
+        <TouchableWithoutFeedback onPress={login}>
           <View
             style={{
               backgroundColor: "#349EFF",
@@ -110,7 +137,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "800",
     borderWidth: 1,
-    borderColor: '#C6C6C6'
+    borderColor: "#C6C6C6",
   },
   input: {
     paddingVertical: 15,
@@ -123,6 +150,6 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "800",
     borderWidth: 1,
-    borderColor: '#C6C6C6'
+    borderColor: "#C6C6C6",
   },
 });
