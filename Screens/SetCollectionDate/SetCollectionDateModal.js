@@ -61,7 +61,7 @@ const SetCollectionDateModal = () => {
 
             <TouchableOpacity
               style={{
-                backgroundColor: "#20409A",
+                backgroundColor: "#0A5AC9",
                 padding: 8,
               }}>
               <Text style={{textAlign: "center", color: "white"}}>

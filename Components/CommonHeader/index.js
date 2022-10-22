@@ -1,17 +1,19 @@
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
 
 const CommonHeader = () => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
         flexDirection: "row",
-        backgroundColor: "#fff",
+        backgroundColor: "#0A5AC9",
         justifyContent: "space-between",
         width: '100%',
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingHorizontal: 20, 
         paddingBottom: 50,
         borderBottomWidth: 1,
         borderBottomColor: '#C6C6C6'
@@ -38,22 +40,24 @@ const CommonHeader = () => {
           style={{
             flexDirection: "column",
           }}>
-          <TouchableOpacity 
-          
-          style={{
-            flexDirection: "row",
-            justifyContent:'center',
-            alignItems:'center'
-          }}>
-            <Text style={{ fontWeight: "800", fontSize: 17, color: "black" }}>
+          <TouchableOpacity
+
+            style={{
+              flexDirection: "row",
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}>
+            <Text style={{ fontWeight: "800", fontSize: 17, color: "#fff" }}>
               Business Name
             </Text>
-            <Icon name="caretdown" color={"#000"} size={14}/>
+            <Icon name="caretdown" color={"#fff"} size={14} />
           </TouchableOpacity>
-          <Text style={{ fontSize: 14, color: '#828282', fontWeight: '800' }}>9192939495</Text>
+          <Text style={{ fontSize: 14, color: '#ddd', fontWeight: '800' }}>9192939495</Text>
         </View>
       </View>
-      <TouchableOpacity style={{ width: '25%', justifyContent: 'center', alignItems: 'center' }}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Set Collection Date")}
+        style={{ width: '25%', justifyContent: 'center', alignItems: 'center' }}>
         <Image
           source={require("../../Assets/calender.png")}
           style={{

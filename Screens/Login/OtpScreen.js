@@ -62,7 +62,7 @@ const OtpScreen = ({ navigation }) => {
               </Text>
               <FontAwesome
                 name="pencil"
-                color="#20409a"
+                color="#0A5AC9"
                 size={20}
                 style={{ marginLeft: 10, alignSelf: "center" }}
               />
