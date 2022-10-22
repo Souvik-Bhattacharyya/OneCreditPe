@@ -10,7 +10,7 @@ const width = Dimensions.get('window').width;
 const Cashbook = ({ navigation }) => {
   const styles = StyleSheet.create({
     container: {
-      paddingHorizontal: metrics.horizontalScale(20),
+      paddingHorizontal: metrics.horizontalScale(10),
       backgroundColor: "#E8EEFF",
       paddingVertical: metrics.verticalScale(15),
       position: "relative",
@@ -21,6 +21,8 @@ const Cashbook = ({ navigation }) => {
       backgroundColor: "#fff",
       borderRadius: 6,
       marginVertical: metrics.verticalScale(10),
+      borderWidth: 1,
+      borderColor: '#c6c6c6',
     },
     cardBody: {
       display: "flex",
@@ -28,7 +30,6 @@ const Cashbook = ({ navigation }) => {
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
-
     },
     boxOne: {
       display: "flex",
@@ -37,7 +38,7 @@ const Cashbook = ({ navigation }) => {
       alignItems: "center",
       paddingVertical: metrics.verticalScale(10),
       borderRightWidth: 1,
-      borderColor: "#A6B3D7",
+      borderColor: "#c6c6c6",
       width: "50%",
     },
     box: {
@@ -64,14 +65,18 @@ const Cashbook = ({ navigation }) => {
     },
     cashBtn: {
       paddingVertical: 10,
-      borderRadius: 50,
-      width: '48%',
+      borderRadius: 6,
+      width: '100%',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     btnTxt: {
       fontSize: 22,
       fontWeight: "800",
       color: "#fff",
-      textAlign: 'center'
+      textAlign: 'center',
+      marginLeft:10
     },
   });
   return (
@@ -115,14 +120,14 @@ const Cashbook = ({ navigation }) => {
             <Text
               style={{
                 fontSize: 14,
-                color: "#20409a",
+                color: "#0A5AC9",
                 fontWeight: "700",
                 marginRight: 12,
                 fontFamily: "Poppins",
               }}>
               View Report
             </Text>
-            <Icon name="doubleright" color={"#20409a"} size={16} />
+            <Icon name="doubleright" color={"#0A5AC9"} size={16} />
           </TouchableOpacity>
         </View>
 
@@ -137,16 +142,10 @@ const Cashbook = ({ navigation }) => {
             bottom: 20,
             paddingHorizontal: metrics.horizontalScale(10),
           }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('CashEntries')}
-            style={[styles.cashBtn, { backgroundColor: "#EB707C" }]}>
-            <Text style={styles.btnTxt}>Cash Out</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate('CashEntries')}
-            style={[styles.cashBtn, { backgroundColor: "#85D098" }]}>
-            <Text style={styles.btnTxt}>Cash In</Text>
+          <TouchableOpacity onPress={() => navigation.navigate('CashEntries')}
+            style={[styles.cashBtn, { backgroundColor: "#0a5ac9" }]}>
+            <Icon name="pluscircle" color={"#fff"} size={24} />
+            <Text style={styles.btnTxt}>New Entries</Text>
           </TouchableOpacity>
         </View>
       </View>

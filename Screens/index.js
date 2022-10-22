@@ -13,7 +13,7 @@ import Customer from "./CustomerPage/AfterCustomerAddHome";
 import Settings from "../Screens/Settings/Settings";
 import CustomerModalPage from "./CustomerPage/CustomerModalPage";
 import AddContact from "./../Components/AddContact";
-import SetCollectionDateModal from "./SetCollectionDateModal";
+import SetCollectionDate from "./SetCollectionDate/index";
 import CommonHeader from "../Components/CommonHeader";
 import PrivacyAndPolicy from "./PrivacyAndPolicy";
 import TermsAndConditions from "./TermsAndConditions";
@@ -36,7 +36,7 @@ export {
   Customer,
   CustomerModalPage,
   AddContact,
-  SetCollectionDateModal,
+  SetCollectionDate,
   CommonHeader,
   PrivacyAndPolicy,
   TermsAndConditions,

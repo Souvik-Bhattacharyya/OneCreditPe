@@ -21,15 +21,15 @@ const Customer = () => {
     return (
         <>
             <View style={styles.container}>
-                <View style={[styles.card, { borderColor: "#12CE12", backgroundColor: '#D4FFD4' }]}>
+                <View style={[styles.card, { borderColor: "#c6c6c6", backgroundColor: '#fff' }]}>
                     <View style={styles.box}>
                         <Text
-                            style={{ fontSize: 18, color: "#12CE12", fontWeight: "900", }}>
+                            style={{ fontSize: 20, color: "#12CE12", fontWeight: "900", }}>
                             ₹ 4,242.00
                         </Text>
                     </View>
                     <View style={styles.box}>
-                        <Text style={{ color: "#000", fontSize: 12, fontWeight: "700", }}>
+                        <Text style={{ color: "#000", fontSize: 14, fontWeight: "700", }}>
                             Total amount purchase for June
                         </Text>
                     </View>
@@ -37,15 +37,15 @@ const Customer = () => {
                         <Icon name="account-arrow-left" color={'#12CE12'} size={32} />
                     </View>
                 </View>
-                <View style={[styles.card, { borderColor: "#F31B24", backgroundColor: '#FFEEEE' }]}>
+                <View style={[styles.card, { borderColor: "#c6c6c6", backgroundColor: '#fff' }]}>
                     <View style={styles.box}>
                         <Text
-                            style={{ fontSize: 18, color: "#F31B24", fontWeight: "900", }}>
+                            style={{ fontSize: 20, color: "#F31B24", fontWeight: "900", }}>
                             ₹ 3,560.00
                         </Text>
                     </View>
                     <View style={styles.box}>
-                        <Text style={{ color: "#000", fontSize: 12, fontWeight: "700", }}>
+                        <Text style={{ color: "#000", fontSize: 14, fontWeight: "700", }}>
                             Total amount you have to pay
                         </Text>
                     </View>
@@ -66,7 +66,7 @@ const Customer = () => {
                     }}>
                     <TouchableOpacity
                         onPress={() => navigation.navigate('NewCustomer')}>
-                        <Icon name="plus-circle" color={'#20409A'} size={64} />
+                        <Icon name="plus-circle" color={'#0A5AC9'} size={64} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -78,7 +78,6 @@ export default Customer;
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: metrics.horizontalScale(20),
         backgroundColor: "#E8EEFF",
         paddingVertical: metrics.verticalScale(15),
         position: "relative",
@@ -91,14 +90,15 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#fff',
         paddingHorizontal: metrics.horizontalScale(20),
-        paddingVertical: metrics.verticalScale(15),
+        paddingVertical: metrics.verticalScale(20),
         borderRadius: 6,
-        borderWidth: 2,
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
         marginBottom: 15
     },
     box: {
         width: '38%',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 });
