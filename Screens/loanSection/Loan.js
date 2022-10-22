@@ -43,7 +43,7 @@ const Loan = () => {
         </View>
 
         <View style={styles.docs}>
-          <Text style={{ color: '#20409A', fontFamily: 'Poppins', fontSize: 20, fontWeight: '700' }}>Loan details</Text>
+          <Text style={{ color: '#0A5AC9', fontFamily: 'Poppins', fontSize: 20, fontWeight: '700' }}>Loan details</Text>
           <View style={{ width: '100%', justifyContent: 'space-between', marginTop: metrics.verticalScale(14), flexDirection: 'row' }}>
             <View>
               <Text style={styles.cost}>Ammount</Text>

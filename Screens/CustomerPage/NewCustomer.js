@@ -57,7 +57,7 @@ const CustomerHome = () => {
             <View style={{flexDirection: "row"}}>
               <Text
                 style={{
-                  color: "#20409a",
+                  color: "#0A5AC9",
                   fontSize: 20,
                   fontWeight: "700",
                   paddingTop: 20,
@@ -77,7 +77,7 @@ const CustomerHome = () => {
                   borderRadius: 4,
                 }}>
                 <Text
-                  style={{fontSize: 28, fontWeight: "700", color: "#20409a"}}>
+                  style={{fontSize: 28, fontWeight: "700", color: "#0A5AC9"}}>
                   A
                 </Text>
               </View>
@@ -95,7 +95,7 @@ const CustomerHome = () => {
                   width: 32,
                   height: 32,
                   borderRadius: 20,
-                  backgroundColor: "#20409a",
+                  backgroundColor: "#0A5AC9",
                   justifyContent: "center",
                   alignItems: "center",
                   position: "absolute",
@@ -116,7 +116,7 @@ const CustomerHome = () => {
                   borderRadius: 4,
                 }}>
                 <Text
-                  style={{fontSize: 28, fontWeight: "700", color: "#20409a"}}>
+                  style={{fontSize: 28, fontWeight: "700", color: "#0A5AC9"}}>
                   S
                 </Text>
               </View>
@@ -134,7 +134,7 @@ const CustomerHome = () => {
                   width: 32,
                   height: 32,
                   borderRadius: 20,
-                  backgroundColor: "#20409a",
+                  backgroundColor: "#0A5AC9",
                   justifyContent: "center",
                   alignItems: "center",
                   position: "absolute",
@@ -156,7 +156,7 @@ const CustomerHome = () => {
           }}>
           <TouchableOpacity
             style={{
-              backgroundColor: "#20409a",
+              backgroundColor: "#0A5AC9",
               flexDirection: "row",
               alignItems: "center",
               paddingVertical: 10,
@@ -176,7 +176,7 @@ const CustomerHome = () => {
                 alignItems: "center",
                 marginHorizontal: 10,
               }}>
-              <AntDesign name="plus" color={"#20409a"} size={22} />
+              <AntDesign name="plus" color={"#0A5AC9"} size={22} />
             </View>
             <Text style={{fontSize: 18, fontWeight: "600", color: "#fff"}}>
               Add From Contact
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     height: 32,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#20409a",
+    backgroundColor: "#0A5AC9",
     borderRadius: 20,
     position: "absolute",
     left: 10,

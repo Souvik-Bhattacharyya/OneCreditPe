@@ -46,7 +46,7 @@ const Login = ({ navigation }) => {
         <Text
           style={{
             fontSize: 20,
-            color: "#20409A",
+            color: "#0A5AC9",
             marginBottom: 10,
             fontWeight: "bold",
           }}>

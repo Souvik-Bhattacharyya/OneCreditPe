@@ -31,7 +31,7 @@ const CashEntries = () => {
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: "#20409A",
+            backgroundColor: "#0A5AC9",
           }}>
           <Text style={styles.btnTxt}>Online Payment</Text>
         </TouchableOpacity>
@@ -41,7 +41,7 @@ const CashEntries = () => {
             paddingVertical: metrics.verticalScale(10),
             backgroundColor: "#fff",
           }}>
-          <Text style={[styles.btnTxt, {color: "#20409A"}]}>
+          <Text style={[styles.btnTxt, {color: "#0A5AC9"}]}>
             Offline Payment
           </Text>
         </TouchableOpacity>

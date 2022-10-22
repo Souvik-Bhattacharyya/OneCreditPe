@@ -10,54 +10,55 @@ const width = Dimensions.get('window').width;
 const CustomerTransaction = () => {
     const styles = StyleSheet.create({
         container: {
-            height: metrics.verticalScale(450),
-            backgroundColor: '#E8EEFF',
+            height: '100%',
+            backgroundColor: '#fff',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: metrics.verticalScale(10)
+            paddingVertical: metrics.verticalScale(20)
         },
         search: {
             flexDirection: 'row',
-            width: '75%',
+            width: '80%',
             justifyContent: 'space-between',
             alignItems: 'center',
-            paddingVertical: metrics.verticalScale(5),
             paddingHorizontal: metrics.horizontalScale(5),
             borderColor: '#828282',
             borderWidth: 1,
-            borderRadius: 50,
-            backgroundColor: '#fff'
+            borderRadius: 6,
+            backgroundColor: '#f6f6f6'
         }
     });
 
     return (
         <>
             <View style={styles.container}>
-                <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: "center", marginBottom: 15 }}>
-                    <View style={styles.search}>
-                        <TextInput
-                            placeholder='Search'
-                            placeholderTextColor={"#828282"}
-                            style={{
-                                width,
-                                fontSize: 16,
-                                color: '#000',
-                                fontWeight: '500',
-                                position: 'relative',
-                                paddingLeft: metrics.horizontalScale(20),
-                                paddingVertical: metrics.verticalScale(5)
-                            }}
-                        />
-                        <TouchableOpacity style={{ position: 'absolute', right: 20, alignSelf: 'center' }}>
-                            <Icon name="search" color={'#333'} size={18} />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{width: '25%', justifyContent: 'flex-end', alignItems: 'flex-end', paddingVertical: metrics.verticalScale(5), paddingHorizontal: metrics.horizontalScale(5),
-                    }}>
-                        <TouchableOpacity style={{flexDirection:'row', justifyContent:'space-evenly', width:'100%'}}>
-                            <Icon name="file-pdf-o" color={'#333'} size={22} />
-                            <Text style={{ color: '#333', fontSize: 18 }}>PDF</Text>
-                        </TouchableOpacity>
+                <View style={{ borderBottomColor: '#c6c6c6', borderBottomWidth: 1}}>
+                    <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: "center", paddingBottom: 20, paddingHorizontal: metrics.horizontalScale(20)}}>
+                        <View style={styles.search}>
+                            <TextInput
+                                placeholder='Search'
+                                placeholderTextColor={"#828282"}
+                                style={{
+                                    width,
+                                    fontSize: 16,
+                                    color: '#000',
+                                    fontWeight: '500',
+                                    position: 'relative',
+                                    paddingLeft: metrics.horizontalScale(20),
+                                }}
+                            />
+                            <TouchableOpacity style={{ position: 'absolute', right: 20, alignSelf: 'center' }}>
+                                <Icon name="search" color={'#828282'} size={18} />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={{
+                            width: '20%', justifyContent: 'flex-end', alignItems: 'flex-end', paddingVertical: metrics.verticalScale(5), paddingHorizontal: metrics.horizontalScale(5),
+                        }}>
+                            <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '80%', borderWidth: 2, paddingVertical: 5, borderColor: '#0A5AC9', borderRadius: 6 }}>
+                                {/* <Icon name="file-pdf-o" color={'#333'} size={22} /> */}
+                                <Text style={{ color: '#333', fontSize: 14, fontWeight: '900', color: '#0a5ac9' }}>PDF</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
                 <ScrollView style={{ width }}>
