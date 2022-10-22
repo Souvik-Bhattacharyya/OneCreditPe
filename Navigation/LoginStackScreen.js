@@ -10,7 +10,7 @@ const LoginStackScreen = () => {
       <Stack.Screen component={Welcome} name="welcome" />
       <Stack.Screen component={Login} name="login" />
       <Stack.Screen component={OtpScreen} name="otp" />
-      <Stack.Screen component={Loading} name="Loading" />
+      <Stack.Screen component={Loading} name="loading" />
     </Stack.Navigator>
   );
 };

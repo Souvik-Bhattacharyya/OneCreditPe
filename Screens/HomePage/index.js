@@ -12,23 +12,25 @@ import React from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
 import Carousel from "../../Components/Carousel/Carousel";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
-
+// import {useDispatch} from "react-redux";
+// import {logout} from "../../Redux/Action/authActions";
 const CustomerHome = () => {
   const navigation = useNavigation();
+  // const dispatch = useDispatch();
   return (
     <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={[styles.card, styles.shadow, { marginTop: -45 }]}>
+        <View style={[styles.card, styles.shadow, {marginTop: -45}]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
                 style={{
                   fontSize: 24,
                   color: "#12CE12",
-                  fontWeight: '900',
+                  fontWeight: "900",
                 }}>
                 ₹ 0
               </Text>
@@ -167,7 +169,7 @@ const CustomerHome = () => {
               backgroundColor: "#fff",
               borderRadius: 6,
               marginVertical: metrics.verticalScale(10),
-              borderColor: '#c6c6c6',
+              borderColor: "#c6c6c6",
             },
           ]}>
           <View
@@ -178,15 +180,15 @@ const CustomerHome = () => {
             }}>
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
-          <View style={{ width: "70%", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "900" }}>
+          <View style={{width: "70%", paddingHorizontal: 20}}>
+            <Text style={{color: "#464555", fontSize: 18, fontWeight: "900"}}>
               Easy Loan
             </Text>
-            <Text style={{ color: "#828282", fontWeight: '400'}}>
+            <Text style={{color: "#828282", fontWeight: "400"}}>
               Get easy loan without any paperwork
             </Text>
-            <View style={{ marginTop: 10, justifyContent: "center" }}>
-              <Text style={{ color: "#20409a", fontSize: 16, fontWeight: "600" }}>
+            <View style={{marginTop: 10, justifyContent: "center"}}>
+              <Text style={{color: "#20409a", fontSize: 16, fontWeight: "600"}}>
                 Apply Now
                 <Icon name="doubleright" color={"#20409a"} size={16} />
               </Text>
@@ -220,7 +222,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-
   },
   boxOne: {
     display: "flex",
@@ -248,7 +249,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     borderTopWidth: 1,
-    borderColor: '#c6c6c6',
+    borderColor: "#c6c6c6",
     paddingVertical: metrics.verticalScale(7),
     borderRadius: 6,
     borderTopLeftRadius: 0,
