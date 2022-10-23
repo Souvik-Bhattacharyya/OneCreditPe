@@ -10,7 +10,8 @@ const Tab = createBottomTabNavigator();
 
 function NonAuthStackNavigator() {
   const navigation = useNavigation();
-
+  const auth = useSelector(state => state.auth);
+  
   return (
     <Tab.Navigator
       screenOptions={{

@@ -12,23 +12,25 @@ import React from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
 import Carousel from "../../Components/Carousel/Carousel";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
-
+// import {useDispatch} from "react-redux";
+// import {logout} from "../../Redux/Action/authActions";
 const CustomerHome = () => {
   const navigation = useNavigation();
+  // const dispatch = useDispatch();
   return (
     <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={[styles.card, styles.shadow, { marginTop: -45 }]}>
+        <View style={[styles.card, styles.shadow, {marginTop: -45}]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
                 style={{
                   fontSize: 24,
                   color: "#12CE12",
-                  fontWeight: '900',
+                  fontWeight: "900",
                 }}>
                 ₹ 0
               </Text>
@@ -167,7 +169,7 @@ const CustomerHome = () => {
               backgroundColor: "#fff",
               borderRadius: 6,
               marginVertical: metrics.verticalScale(10),
-              borderColor: '#c6c6c6',
+              borderColor: "#c6c6c6",
             },
           ]}>
           <View
@@ -256,7 +258,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-
   },
   boxOne: {
     display: "flex",
@@ -284,7 +285,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     borderTopWidth: 1,
-    borderColor: '#c6c6c6',
+    borderColor: "#c6c6c6",
     paddingVertical: metrics.verticalScale(7),
     borderRadius: 6,
     borderTopLeftRadius: 0,
