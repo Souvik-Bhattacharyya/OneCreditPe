@@ -208,7 +208,7 @@ const CustomerHome = () => {
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(12),
             backgroundColor: "#BA0000",
-            borderRadius: 6,
+            borderRadius: 6, 
             width: '48%',
             flexDirection:'row',
             justifyContent:'space-around'
