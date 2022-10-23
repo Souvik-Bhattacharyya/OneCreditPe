@@ -11,7 +11,7 @@ const TransactionEmpty = () => {
                 <View style={{
                     justifyContent: 'center',
                     alignItems: 'center',
-                    marginTop: "20%",
+                    marginTop: metrics.verticalScale(20)
                     // backgroundColor:'#ddd',
                 }}>
                     <View>
