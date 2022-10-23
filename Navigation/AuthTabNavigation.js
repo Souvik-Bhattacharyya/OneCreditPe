@@ -11,11 +11,9 @@ import {
   Cashbook,
   CashEntries,
   ViewReport,
-  CustomerModal,
   NewCustomer,
   LoanSection,
   Settings,
-  CustomerModalPage,
   AddContact,
   SetCollectionDate,
   CommonHeader,
@@ -44,25 +42,25 @@ const CustomerStack = () => {
         fontWeight: 'bold',
       },
     }}>
-      <Stack.Screen component={CustomerModalPage} name="Modal" />
+      <Stack.Screen component={Customer} name="CustomerHistory" options={{ headerShown: false }}/>
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
-      <Stack.Screen component={Customer} name="CustomerHistory" />
       <Stack.Screen component={AddContact} name="AddContact" />
+      <Stack.Screen component={CommonHeader} name="CommonHeader" />
     </Stack.Navigator>
   );
 };
 const CashBookStack = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: true, headerTitleAlign: 'center', headerStyle: {
-        backgroundColor: '#0A5AC9',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }}
-    headerMode="float"
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true, headerTitleAlign: 'center', headerStyle: {
+          backgroundColor: '#0A5AC9',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
     >
       <Stack.Screen component={Cashbook} name="CashBook" />
       <Stack.Screen component={ViewReport} name="ViewReport" />
@@ -117,7 +115,7 @@ const AuthTabNavigation = ({ navigation }) => {
         component={CustomerStack}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="user-plus" size={24} color={color} style={{ marginTop: 2 }} />
+            <FontAwesome name="user" size={24} color={color} style={{ marginTop: 2 }} />
           ),
           tabBarLabelStyle: { fontSize: 12, fontWeight: '700', paddingBottom: 5 }
         }}

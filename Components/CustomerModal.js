@@ -27,7 +27,7 @@ const CustomerModal = ({ActionSheetRef, navigation}) => {
         <TouchableOpacity
           style={styles.box}
           onPress={() => navigation.navigate("CustomerHistory")}>
-          <Image source={require("../Assets/manage-supplier.png")} />
+          {/* <Image source={require("../Assets/manage-supplier.png")} /> */}
           <Text style={styles.text}>Manage Supplier</Text>
         </TouchableOpacity>
       </View>

@@ -10,7 +10,7 @@ import {
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
-import { Calendar, CalendarList } from "react-native-calendars";
+import { Calendar} from "react-native-calendars";
 import CashIn from "../../Components/Cash/CashIn";
 import CashOut from "../../Components/Cash/CashOut";
 import moment from "moment";
