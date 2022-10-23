@@ -91,12 +91,12 @@ const ViewReport = ({navigation}) => {
                 borderRightWidth: 1,
               }}>
               <View>
-                <Icon name="calendar" size={22} color={"#20409A"} />
+                <Icon name="calendar" size={22} color={"#0A5AC9"} />
               </View>
               <View>
-                <Text style={{ color: "#20409A" }}>From Date</Text>
+                <Text style={{ color: "#0A5AC9" }}>From Date</Text>
                 <Text
-                  style={{ color: "#20409A", fontSize: 16, fontWeight: "700" }}>
+                  style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "700" }}>
                   {moment(showDate1).format("ll")}
                 </Text>
               </View>

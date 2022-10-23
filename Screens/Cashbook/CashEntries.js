@@ -5,11 +5,17 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from 'react'
+import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
+import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
+import DatePicker from "react-native-date-picker";
 
 const CashEntries = () => {
+  const [isActive, setIsActive] = useState("cash in");
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
+
   return (
     <View style={styles.container}>
       <View>
@@ -19,6 +25,41 @@ const CashEntries = () => {
           style={styles.textInput}
         />
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
+      </View>
+      <View style={{marginVertical: 15}}>
+        <TouchableOpacity onPress={() => setOpen(true)}>
+          <Text
+            style={{
+              borderWidth: 1,
+              borderColor: "#ccc",
+              borderRadius: 6,
+              paddingHorizontal: 50,
+              paddingVertical: 7,
+              color: "#828282",
+              fontSize: 18,
+              backgroundColor: "#fff",
+            }}>
+            Select Date & Time
+          </Text>
+          <DatePicker
+            modal
+            open={open}
+            date={date}
+            onConfirm={date => {
+              setOpen(false);
+              setDate(date);
+            }}
+            onCancel={() => {
+              setOpen(false);
+            }}
+          />
+          <DatePickerIcon
+            name="date-range"
+            color={"black"}
+            style={{position: "absolute", top: "18%", left: 15}}
+            size={24}
+          />
+        </TouchableOpacity>
       </View>
 
       <View
@@ -31,31 +72,41 @@ const CashEntries = () => {
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: "#20409A",
-          }}>
-          <Text style={styles.btnTxt}>Online Payment</Text>
+            backgroundColor: isActive === "cash in" ? "#20409A" : "white",
+          }}
+          onPress={() => setIsActive("cash in")}>
+          <Text
+            style={[
+              styles.btnTxt,
+              {color: isActive === "cash in" ? "#fff" : "#20409A"},
+            ]}>
+            Cash In
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: "#fff",
-          }}>
-          <Text style={[styles.btnTxt, {color: "#20409A"}]}>
-            Offline Payment
+            backgroundColor: isActive === "cash out" ? "#20409A" : "white",
+          }}
+          onPress={() => setIsActive("cash out")}>
+          <Text
+            style={[
+              styles.btnTxt,
+              {color: isActive === "cash out" ? "#fff" : "#20409A"},
+            ]}>
+            Cash Out
           </Text>
         </TouchableOpacity>
       </View>
 
-
-
       <View>
         <TextInput
-          placeholder="Enter Payment Details"
+          placeholder="Enter Amount"
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            { height: 200, textAlignVertical: "top", paddingHorizontal: 20 },
+            {height: 200, textAlignVertical: "top", paddingHorizontal: 20},
           ]}
           multiline={true}
           numberOfLines={10}
@@ -75,7 +126,7 @@ const CashEntries = () => {
             backgroundColor: "#EB707C",
             borderRadius: 50,
           }}>
-          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -109,7 +160,7 @@ const styles = StyleSheet.create({
   btnTxt: {
     fontSize: 18,
     fontWeight: "500",
-    color: "#fff",
+    // color: "#fff",
     textAlign: "center",
   },
 });

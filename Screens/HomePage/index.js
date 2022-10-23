@@ -41,7 +41,7 @@ const CustomerHome = () => {
                   fontWeight: "900",
                   fontFamily: "Roboto",
                 }}>
-                Cash In Hand
+                To Collect
               </Text>
             </View>
             <View style={styles.box}>
@@ -60,7 +60,7 @@ const CustomerHome = () => {
                   fontWeight: "900",
                   fontFamily: "Roboto",
                 }}>
-                Today's Income
+                To Pay
               </Text>
             </View>
           </View>
@@ -70,14 +70,14 @@ const CustomerHome = () => {
             <Text
               style={{
                 fontSize: 16,
-                color: "#20409a",
+                color: "#0A5AC9",
                 fontWeight: "700",
                 marginRight: 12,
                 fontFamily: "Poppins",
               }}>
               View Report
             </Text>
-            <Icon name="doubleright" color={"#20409a"} size={16} />
+            <Icon name="doubleright" color={"#0A5AC9"} size={16} />
           </TouchableOpacity>
         </View>
         <View style={[styles.card, styles.shadow]}>
@@ -86,7 +86,7 @@ const CustomerHome = () => {
               <Text
                 style={{
                   fontSize: 24,
-                  color: "#20409a",
+                  color: "#0A5AC9",
                   fontWeight: "700",
                   fontFamily: "Roboto",
                 }}>
@@ -106,7 +106,7 @@ const CustomerHome = () => {
               <Text
                 style={{
                   fontSize: 24,
-                  color: "#20409a",
+                  color: "#0A5AC9",
                   fontWeight: "700",
                   fontFamily: "Roboto",
                 }}>
@@ -129,14 +129,14 @@ const CustomerHome = () => {
             <Text
               style={{
                 fontSize: 16,
-                color: "#20409a",
+                color: "#0A5AC9",
                 fontWeight: "700",
                 marginRight: 12,
                 fontFamily: "Poppins",
               }}>
               Cashbook
             </Text>
-            <Icon name="doubleright" color={"#20409a"} size={16} />
+            <Icon name="doubleright" color={"#0A5AC9"} size={16} />
           </TouchableOpacity>
         </View>
         <View
@@ -190,7 +190,7 @@ const CustomerHome = () => {
             <View style={{marginTop: 10, justifyContent: "center"}}>
               <Text style={{color: "#20409a", fontSize: 16, fontWeight: "600"}}>
                 Apply Now
-                <Icon name="doubleright" color={"#20409a"} size={16} />
+                <Icon name="doubleright" color={"#0A5AC9"} size={16} />
               </Text>
             </View>
           </View>
@@ -204,7 +204,7 @@ export default CustomerHome;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: metrics.horizontalScale(20),
+    paddingHorizontal: metrics.horizontalScale(15),
     backgroundColor: "#E8EEFF",
     paddingVertical: metrics.verticalScale(15),
     position: "relative",
