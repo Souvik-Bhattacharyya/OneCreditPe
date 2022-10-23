@@ -13,9 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import CustomerTransaction from "../../Components/CustomerTransaction"
 import CommonHeader from "../../Components/CommonHeader";
 
-const width = Dimensions.get('window').width;
-
-const Customer = () => {
+const Supplier = () => {
     const navigation = useNavigation();
     return (
         <>
@@ -37,6 +35,20 @@ const Customer = () => {
                         onPress={() => navigation.navigate('CustomerStack')}
                         style={{
                             paddingHorizontal: metrics.horizontalScale(20),
+                            paddingVertical: metrics.verticalScale(15),
+                            backgroundColor: "#fff",
+                            width: '50%',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+
+                        }}>
+                        <Image source={require('../../Assets/add-user(Theme).png')} style={styles.btnIcon} />
+                        <Text style={[styles.btnTxt, { color: '#0a5ac9' }]}>Customer</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('SupplierStack')}
+                        style={{
+                            paddingHorizontal: metrics.horizontalScale(20),
                             paddingVertical: metrics.verticalScale(10),
                             backgroundColor: "#0a5ac9",
                             width: '50%',
@@ -45,20 +57,7 @@ const Customer = () => {
                             borderColor: '#fff',
                             borderWidth: 4,
                         }}>
-                        <Image source={require('../../Assets/add-user.png')} style={styles.btnIcon} />
-                        <Text style={[styles.btnTxt, { color: '#fff' }]}>Customer</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => navigation.navigate('SupplierStack')}
-                        style={{
-                            paddingHorizontal: metrics.horizontalScale(20),
-                            paddingVertical: metrics.verticalScale(15),
-                            backgroundColor: "#fff",
-                            width: '50%',
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                        }}>
-                        <Image source={require('../../Assets/manage-supplier(Theme).png')} style={styles.btnIcon} />
+                        <Image source={require('../../Assets/manage-supplier(Light).png')} style={styles.btnIcon} />
                         <Text style={styles.btnTxt}>Supplier</Text>
                     </TouchableOpacity>
                 </View>
@@ -117,7 +116,7 @@ const Customer = () => {
     );
 };
 
-export default Customer;
+export default Supplier;
 
 const styles = StyleSheet.create({
     container: {
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
     btnTxt: {
         fontSize: 18,
         fontWeight: "700",
-        color: "#0a5ac9",
+        color: "#fff",
         textAlign: "center",
     },
     btnIcon: {

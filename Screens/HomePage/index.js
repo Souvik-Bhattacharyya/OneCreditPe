@@ -12,10 +12,11 @@ import React from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
 import Carousel from "../../Components/Carousel/Carousel";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
 // import {useDispatch} from "react-redux";
 // import {logout} from "../../Redux/Action/authActions";
+
 const CustomerHome = () => {
   const navigation = useNavigation();
   // const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const CustomerHome = () => {
     <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={[styles.card, styles.shadow, {marginTop: -45}]}>
+        <View style={[styles.card, styles.shadow, { marginTop: -45 }]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
@@ -201,32 +202,34 @@ const CustomerHome = () => {
           bottom: metrics.verticalScale(20),
           alignSelf: "center",
           width: "100%",
-          flexDirection:'row',
-          justifyContent:"space-between"
+          flexDirection: 'row',
+          justifyContent: "space-between"
         }}>
-          <TouchableOpacity 
-          onPress={()=> navigation.navigate('CustomerHistory')}
-          style={{
-            paddingHorizontal: metrics.horizontalScale(20),
-            paddingVertical: metrics.verticalScale(12),
-            backgroundColor: "#BA0000",
-            borderRadius: 6, 
-            width: '48%',
-            flexDirection:'row',
-            justifyContent:'space-around'
-          }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Customer')}
+            style={{
+              paddingHorizontal: metrics.horizontalScale(20),
+              paddingVertical: metrics.verticalScale(12),
+              backgroundColor: "#BA0000",
+              borderRadius: 6,
+              width: '48%',
+              flexDirection: 'row',
+              justifyContent: 'space-around'
+            }}>
             <Image source={require('../../Assets/add-user.png')} style={styles.btnIcon} />
             <Text style={styles.btnTxt}>Customer</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{
-            paddingHorizontal: metrics.horizontalScale(20),
-            paddingVertical: metrics.verticalScale(12),
-            backgroundColor: "#0a5ac9",
-            borderRadius: 6,
-            width: '48%',
-            flexDirection:'row',
-            justifyContent:'space-evenly'
-          }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Supplier')}
+            style={{
+              paddingHorizontal: metrics.horizontalScale(20),
+              paddingVertical: metrics.verticalScale(12),
+              backgroundColor: "#0a5ac9",
+              borderRadius: 6,
+              width: '48%',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly'
+            }}>
             <Image source={require('../../Assets/manage-supplier(Light).png')} style={styles.btnIcon} />
             <Text style={styles.btnTxt}>Supplier</Text>
           </TouchableOpacity>
