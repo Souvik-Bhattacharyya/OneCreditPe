@@ -11,42 +11,56 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import OTPTextView from "../../Constants/AppOtpInput";
 import Api from "../../Services";
-//Redux
-import { useSelector } from "react-redux";
 
-const OtpScreen = ({ navigation }) => {
-  const { mobileNumber } = useSelector(state => state.register);
-  const [otp, setOtp] = React.useState("");
+//Redux
+import { useDispatch, useSelector } from "react-redux";
+import { addToken } from "../../Redux/Action/authActions";
+
+const OtpScreen = ({ navigation, route }) => {
+  const dispatch = useDispatch();
+
+  const { mobileNumber } = route.params;
+
+  const [otp, setOtp] = React.useState(null);
   const [isLoading, setLoading] = React.useState(false);
 
   const onSubmitOtp = async () => {
+    setLoading(true);
     try {
-      const response = await Api.post("/check-otp", {
-        mobile: mobileNumber,
-        otp: 1000,
-      });
-      if (response.status == 200) {
-        setLoading(true);
-        navigation.navigate("Loading");
-        setLoading(false);
+      if (otp == 1000) {
+        const response = await Api.post("/check-otp", {
+          mobile: mobileNumber,
+          otp: otp,
+        });
+        if (response.status == 200) {
+          const payload = {
+            user: response.data[0].user,
+            clientToken: response.data.token,
+          };
+          dispatch(addToken(payload));
+          navigation.navigate("loading");
+          setLoading(false);
+        }
       }
     } catch (error) {
       console.log(error);
     }
+    setOtp(null);
   };
-
-  useEffect(() => { });
 
   return (
     <>
       <View style={styles.container}>
-        <View style={{ flex: .4 }}>
-          <Image source={require("../../Assets/Logos/Logo.png")} style={styles.logo} />
+        <View style={{ flex: 0.4 }}>
+          <Image
+            source={require("../../Assets/Logos/Logo.png")}
+            style={styles.logo}
+          />
         </View>
 
         <View>
           <TouchableOpacity
-            onPress={() => navigation.navigate('login')}
+            onPress={() => navigation.navigate("login")}
             style={{
               display: "flex",
               justifyContent: "center",
@@ -58,7 +72,7 @@ const OtpScreen = ({ navigation }) => {
             <Text style={styles.text}>Otp send to </Text>
             <View style={{ display: "flex", flexDirection: "row" }}>
               <Text style={[styles.text, { fontWeight: "800", fontSize: 20 }]}>
-                0000000000
+                {mobileNumber || ""}
               </Text>
               <FontAwesome
                 name="pencil"
@@ -74,22 +88,25 @@ const OtpScreen = ({ navigation }) => {
 
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: "space-around",
             marginTop: 20,
             width: "100%",
           }}>
           {isLoading && (
-            <>
-              <ActivityIndicator animating={true} color={"red"} />
-              <Text style={{ fontSize: 14, fontWeight: "500" }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems:'center', width:'100%'}}>
+              <ActivityIndicator animating={true} color={"red"} size={'large'} />
+              <Text style={{ fontSize: 18, fontWeight: "500", color: '#000', marginLeft: 30 }}>
                 Auto verifying
               </Text>
-            </>
+            </View>
           )}
-          <Text style={{ fontSize: 14, fontWeight: "500", textAlign: "right" }}>
-            Resend OTP in 10s
-          </Text>
+          <View style={{width:'100%'}}>
+            <Text style={{ fontSize: 14, fontWeight: "500", textAlign: "left", color: '#0a5ac9', marginTop: 30 }}>
+              Resend OTP in 10s
+            </Text>
+          </View>
         </View>
 
         <TouchableOpacity
@@ -130,7 +147,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     backgroundColor: "#fff",
     width: "100%",
-    alignItems: "center"
+    alignItems: "center",
   },
   text: {
     fontFamily: "Poppins-Regular",
@@ -142,6 +159,6 @@ const styles = StyleSheet.create({
     height: 60,
     width: 200,
     top: "20%",
-    resizeMode: 'contain'
+    resizeMode: "contain",
   },
 });

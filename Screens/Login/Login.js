@@ -8,49 +8,61 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
 
 //Redux
-import { useDispatch, useSelector } from "react-redux";
-import { editName, editMobile } from "../../Redux/Action/registerActions";
+// import {useDispatch, useSelector} from "react-redux";
+// import {editName, editMobile} from "../../Redux/Action/registerActions";
 
-const Login = ({ navigation }) => {
-  const dispatch = useDispatch();
-  const { name, mobileNumber } = useSelector(state => state.register);
+const Login = ({navigation}) => {
+  const [credentials, setCredentials] = useState({
+    businessName: "",
+    mobileNumber: "",
+  });
+  // const dispatch = useDispatch();
+  // const {name, mobileNumber} = useSelector(state => state.register);
 
   const login = async () => {
-    console.log("--------->", name, mobileNumber);
+    console.log(
+      "--------->",
+      credentials.businessName,
+      credentials.mobileNumber,
+    );
     try {
       const response = await Api.post("/send-otp", {
-        name: name,
-        mobile: mobileNumber,
+        name: credentials.businessName,
+        mobile: credentials.mobileNumber,
       });
       console.log("==>", response.data);
       if (response.status == 200) {
-        navigation.navigate("otp");
+        navigation.navigate("otp", {mobileNumber: credentials.mobileNumber});
       }
     } catch (error) {
       console.log(error);
     }
+    setCredentials({businessName: "", mobileNumber: ""});
   };
   return (
     <View style={styles.container}>
-      <View style={{ alignItems: "center" }}>
-        <Image source={require("../../Assets/Logos/Logo.png")} style={styles.logo} />
+      <View style={{alignItems: "center"}}>
+        <Image
+          source={require("../../Assets/Logos/Logo.png")}
+          style={styles.logo}
+        />
       </View>
-      <View style={{ alignItems: "center", marginTop: 50 }}>
+      <View style={{alignItems: "center", marginTop: 50}}>
         <Text
           style={{
-            fontSize: 20,
+            fontSize: 24,
             color: "#0A5AC9",
-            marginBottom: 10,
-            fontWeight: "bold",
+            marginBottom: 5,
+            fontWeight: "900",
           }}>
-          Create an account,
+          Create An Account
         </Text>
         <Text
           style={{
@@ -62,21 +74,25 @@ const Login = ({ navigation }) => {
       </View>
 
       <View>
-        <SafeAreaView style={{ alignItems: "center", marginTop: 20 }}>
+        <SafeAreaView style={{alignItems: "center", marginTop: 20}}>
           <TextInput
-            value={name}
+            value={credentials.businessName}
             style={styles.name}
             placeholder="Your Business Name"
             placeholderTextColor="#B4B4B4"
-            onChangeText={val => dispatch(editName({ name: val }))}
+            onChangeText={val =>
+              setCredentials({...credentials, businessName: val})
+            }
           />
           <TextInput
-            value={mobileNumber}
+            value={credentials.mobileNumber}
             style={styles.input}
             placeholder="Mobile Number"
             keyboardType="numeric"
             placeholderTextColor="#B4B4B4"
-            onChangeText={val => dispatch(editMobile({ mobile: val }))}
+            onChangeText={val =>
+              setCredentials({...credentials, mobileNumber: val})
+            }
           />
         </SafeAreaView>
       </View>
@@ -86,7 +102,7 @@ const Login = ({ navigation }) => {
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableOpacity onPress={login} style={{width:'100%'}} >
+        <TouchableOpacity onPress={login} style={{width: "100%"}}>
           <View
             style={{
               backgroundColor: "#349EFF",
@@ -126,34 +142,33 @@ const styles = StyleSheet.create({
   },
   name: {
     paddingVertical: 15,
-    backgroundColor: "#f6f6f6",
+    // backgroundColor: "#f6f6f6",
     width: "100%",
     borderRadius: 6,
-    paddingHorizontal: 20,
+    marginHorizontal: 20,
     marginTop: "20%",
     fontSize: 18,
     color: "#6f6f6f",
-    fontWeight: "800",
-    borderWidth: 1,
+    fontWeight: "700",
+    borderBottomWidth: 2,
     borderColor: "#C6C6C6",
   },
   input: {
     paddingVertical: 15,
-    backgroundColor: "#f6f6f6",
+    // backgroundColor: "#f6f6f6",
     width: "100%",
-    borderRadius: 6,
-    paddingHorizontal: 20,
-    marginTop: 20,
+    marginHorizontal: 20,
+    marginTop: 10,
     fontSize: 18,
     color: "#6f6f6f",
-    fontWeight: "800",
-    borderWidth: 1,
+    fontWeight: "700",
+    borderBottomWidth: 2,
     borderColor: "#C6C6C6",
   },
   logo: {
     height: 60,
     width: 200,
     top: "20%",
-    resizeMode:'contain'
+    resizeMode: "contain",
   },
 });

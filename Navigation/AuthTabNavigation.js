@@ -6,18 +6,17 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationAction } from "@react-navigation/native";
 import {
-  CustomerHome,
+  HomePage,
   Customer,
   Cashbook,
   CashEntries,
   ViewReport,
-  CustomerModal,
   NewCustomer,
   LoanSection,
   Settings,
-  CustomerModalPage,
   AddContact,
   SetCollectionDate,
+  Supplier,
   CommonHeader,
 } from "../Screens";
 
@@ -44,14 +43,17 @@ const CustomerStack = () => {
         fontWeight: 'bold',
       },
     }}>
-      <Stack.Screen component={CustomerModalPage} name="Modal" />
+      <Stack.Screen component={Customer} name="Customer" options={{ headerShown: false }} />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
-      <Stack.Screen component={Customer} name="CustomerHistory" />
       <Stack.Screen component={AddContact} name="AddContact" />
+      <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen component={SupplierStack} name="SupplierStack" options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
-const CashBookStack = () => {
+
+
+const SupplierStack = () => {
   return (
     <Stack.Navigator screenOptions={{
       headerShown: true, headerTitleAlign: 'center', headerStyle: {
@@ -61,8 +63,29 @@ const CashBookStack = () => {
       headerTitleStyle: {
         fontWeight: 'bold',
       },
-    }}
-    headerMode="float"
+    }}>
+      <Stack.Screen component={Supplier} name="Supplier" options={{ headerShown: false }} />
+      <Stack.Screen component={NewCustomer} name="NewCustomer" />
+      <Stack.Screen component={AddContact} name="AddContact" />
+      <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen component={CustomerStack} name="CustomerStack" options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+};
+
+
+const CashBookStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: true, headerTitleAlign: 'center', headerStyle: {
+          backgroundColor: '#0A5AC9',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
     >
       <Stack.Screen component={Cashbook} name="CashBook" />
       <Stack.Screen component={ViewReport} name="ViewReport" />
@@ -84,7 +107,7 @@ const HomeScreenStack = () => {
       },
     }}
     >
-      <Stack.Screen options={{ headerShown: false }} component={CustomerHome} name="CustomerHome" />
+      <Stack.Screen options={{ headerShown: false }} component={HomePage} name="CustomerHome" />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
     </Stack.Navigator>
