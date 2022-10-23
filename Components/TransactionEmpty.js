@@ -12,7 +12,7 @@ const TransactionEmpty = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginTop: metrics.verticalScale(20)
-                }}>
+                }}> 
                     <View>
                         <Image source={require('../Assets/Images/add-notes.png')} style={{ width: 220, height: 220, resizeMode: 'contain' }} />
                         <View style={{ alignItems: 'center', marginTop: 30 }}>
