@@ -96,12 +96,12 @@ const OtpScreen = ({navigation, route}) => {
           {isLoading && (
             <>
               <ActivityIndicator animating={true} color={"red"} />
-              <Text style={{fontSize: 14, fontWeight: "500"}}>
+              <Text style={{fontSize: 14, fontWeight: "500", color: '#000'}}>
                 Auto verifying
               </Text>
             </>
           )}
-          <Text style={{fontSize: 14, fontWeight: "500", textAlign: "right"}}>
+          <Text style={{fontSize: 14, fontWeight: "500", textAlign: "right", color:'#000'}}>
             Resend OTP in 10s
           </Text>
         </View>
