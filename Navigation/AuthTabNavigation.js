@@ -85,7 +85,6 @@ const HomeScreenStack = () => {
       <Stack.Screen options={{ headerShown: false }} component={CustomerHome} name="CustomerHome" />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      {/* <Stack.Screen component={Customer} name="CustomerHistory" /> */}
     </Stack.Navigator>
   );
 };
