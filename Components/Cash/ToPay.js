@@ -15,7 +15,7 @@ const ToPay = () => {
                     <Text style={{ fontSize: 14, fontWeight: '400', color: '#828282' }}>+91-6502545585</Text>
                 </View>
                 <View style={{ paddingHorizontal: metrics.horizontalScale(20) }}>
-                    <Text style={{ fontSize: 18, fontWeight: '600', color: '#12CE12' }}>₹100</Text>
+                    <Text style={{ fontSize: 18, fontWeight: '800', color: '#ED1C24' }}>₹100</Text>
                     <Text style={{ fontSize: 12, fontWeight: '400', color: '#828282' }}>To Pay</Text>
                 </View>
                 <TouchableOpacity style={{ position: 'absolute', right: 15 }} >
