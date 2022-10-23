@@ -206,7 +206,7 @@ const CustomerHome = () => {
           justifyContent: "space-between"
         }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Customer')}
+            onPress={() => navigation.navigate('CustomerStack')}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(12),
@@ -220,7 +220,7 @@ const CustomerHome = () => {
             <Text style={styles.btnTxt}>Customer</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Supplier')}
+            onPress={() => navigation.navigate('SupplierStack')}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(12),

@@ -53,6 +53,7 @@ const CustomerStack = () => {
 };
 
 
+
 const SupplierStack = () => {
   return (
     <Stack.Navigator screenOptions={{
@@ -122,7 +123,7 @@ const AuthTabNavigation = ({ navigation }) => {
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: true,
         headerShown: false,
-        tabBarInactiveTintColor: '#c6c6c6',
+        tabBarInactiveTintColor: '#828282',
         tabBarStyle: { padding: 10, height: 60 },
       }}>
       <Tab.Screen
@@ -136,7 +137,7 @@ const AuthTabNavigation = ({ navigation }) => {
         }}
       />
       <Tab.Screen
-        name="Customer"
+        name="Parties"
         component={CustomerStack}
         options={{
           tabBarIcon: ({ color }) => (
