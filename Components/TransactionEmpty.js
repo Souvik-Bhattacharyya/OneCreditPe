@@ -12,7 +12,7 @@ const TransactionEmpty = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     marginTop: "20%",
-                    backgroundColor:'#ddd',
+                    // backgroundColor:'#ddd',
                 }}>
                     <View>
                         <Image source={require('../Assets/Images/add-notes.png')} style={{ width: 220, height: 220, resizeMode: 'contain' }} />
