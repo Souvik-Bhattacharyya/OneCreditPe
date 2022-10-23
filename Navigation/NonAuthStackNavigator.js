@@ -11,43 +11,18 @@ const Tab = createBottomTabNavigator();
 function NonAuthStackNavigator() {
   const navigation = useNavigation();
 
-  // React.useEffect(() => {
-  //   if (auth.clientToken)
-  //     navigation.dispatch(
-  //       CommonActions.reset({
-  //         index: 0,
-  //         routes: [
-  //           {
-  //             name: "HomeScreens",
-  //           },
-  //         ],
-  //       }),
-  //     );
-  //   else
-  //     navigation.dispatch(
-  //       CommonActions.reset({
-  //         index: 0,
-  //         routes: [
-  //           {
-  //             name: "LoginScreens",
-  //           },
-  //         ],
-  //       }),
-  //     );
-  // }, [auth.clientToken]);
-
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
       }}>
-      <Tab.Screen
+      {/* <Tab.Screen
         name="LoginScreens"
         component={LoginStackScreen}
         options={{
           tabBarStyle: {display: "none"},
         }}
-      />
+      /> */}
       <Tab.Screen
         name="HomeScreens"
         component={AuthTabNavigation}

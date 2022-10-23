@@ -155,7 +155,7 @@ const CustomerHome = () => {
           <Carousel />
         </View>
 
-        <TouchableOpacity
+        <View
           style={[
             styles.shadow,
             {
@@ -179,20 +179,56 @@ const CustomerHome = () => {
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
           <View style={{ width: "70%", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "900" }}>
+            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "800" }}>
               Easy Loan
             </Text>
-            <Text style={{ color: "#828282", fontWeight: '400'}}>
+            <Text style={{ color: "#828282", fontWeight: '400' }}>
               Get easy loan without any paperwork
             </Text>
-            <View style={{ marginTop: 10, justifyContent: "center" }}>
-              <Text style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "600" }}>
+            <TouchableOpacity style={{ marginTop: 10, justifyContent: "center" }}>
+              <Text style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "800" }}>
                 Apply Now
                 <Icon name="doubleright" color={"#0A5AC9"} size={16} />
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
-        </TouchableOpacity>
+        </View>
+
+        <View style={{
+          position: "absolute",
+          bottom: metrics.verticalScale(20),
+          alignSelf: "center",
+          width: "100%",
+          flexDirection:'row',
+          justifyContent:"space-between"
+        }}>
+          <TouchableOpacity 
+          onPress={()=> navigation.navigate('CustomerHistory')}
+          style={{
+            paddingHorizontal: metrics.horizontalScale(20),
+            paddingVertical: metrics.verticalScale(12),
+            backgroundColor: "#BA0000",
+            borderRadius: 6,
+            width: '48%',
+            flexDirection:'row',
+            justifyContent:'space-around'
+          }}>
+            <Image source={require('../../Assets/add-user.png')} style={styles.btnIcon} />
+            <Text style={styles.btnTxt}>Customer</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{
+            paddingHorizontal: metrics.horizontalScale(20),
+            paddingVertical: metrics.verticalScale(12),
+            backgroundColor: "#0a5ac9",
+            borderRadius: 6,
+            width: '48%',
+            flexDirection:'row',
+            justifyContent:'space-evenly'
+          }}>
+            <Image source={require('../../Assets/manage-supplier(Light).png')} style={styles.btnIcon} />
+            <Text style={styles.btnTxt}>Supplier</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
@@ -263,5 +299,15 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 3,
+  },
+  btnTxt: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#fff",
+    textAlign: "center",
+  },
+  btnIcon: {
+    width: 24,
+    height: 24
   },
 });

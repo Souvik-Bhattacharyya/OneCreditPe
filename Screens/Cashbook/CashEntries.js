@@ -75,7 +75,7 @@ const CashEntries = () => {
             backgroundColor: "#EB707C",
             borderRadius: 50,
           }}>
-          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
+          <Text style={styles.btnTxt}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -11,7 +11,6 @@ import CustomerModal from "../Components/CustomerModal";
 import NewCustomer from "../Screens/CustomerPage/NewCustomer";
 import Customer from "./CustomerPage/AfterCustomerAddHome";
 import Settings from "../Screens/Settings/Settings";
-import CustomerModalPage from "./CustomerPage/CustomerModalPage";
 import AddContact from "./../Components/AddContact";
 import SetCollectionDate from "./SetCollectionDate/index";
 import CommonHeader from "../Components/CommonHeader";
@@ -34,7 +33,6 @@ export {
   // LoanSection,
   Settings,
   Customer,
-  CustomerModalPage,
   AddContact,
   SetCollectionDate,
   CommonHeader,
