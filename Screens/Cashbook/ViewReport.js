@@ -10,14 +10,13 @@ import {
 import React, { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
-import { Calendar} from "react-native-calendars";
-import CashIn from "../../Components/Cash/CashIn";
-import CashOut from "../../Components/Cash/CashOut";
+import { Calendar } from "react-native-calendars";
+import TransactionFull from "../../Components/TransactionFull";
 import moment from "moment";
 
 const width = Dimensions.get('window').width;
 
-const ViewReport = ({navigation}) => {
+const ViewReport = ({ navigation }) => {
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showDate1, setShowDate1] = useState(new Date());
@@ -70,13 +69,12 @@ const ViewReport = ({navigation}) => {
           </View>
         </View>
 
-        <View>
+        <View style={{ backgroundColor: '#fff', marginTop: 15 }}>
           <View
             style={{
-              marginTop: metrics.verticalScale(30),
-              marginBottom: metrics.verticalScale(20),
+              marginTop: metrics.verticalScale(20),
               borderBottomWidth: 1.5,
-              borderBottomColor: "#828282",
+              borderBottomColor: "#c6c6c6",
               paddingVertical: metrics.verticalScale(20),
               flexDirection: "row",
               justifyContent: "space-between",
@@ -87,7 +85,7 @@ const ViewReport = ({navigation}) => {
                 justifyContent: "space-evenly",
                 alignItems: "center",
                 width: "50%",
-                borderRightColor: "#828282",
+                borderRightColor: "#c6c6c6",
                 borderRightWidth: 1,
               }}>
               <View>
@@ -121,30 +119,8 @@ const ViewReport = ({navigation}) => {
               </View>
             </TouchableOpacity>
           </View>
-          <CashOut />
-          <CashIn />
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            width,
-            position: "absolute",
-            bottom: 20,
-            paddingHorizontal: metrics.horizontalScale(10),
-          }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('CashEntries')}
-            style={[styles.cashBtn, { backgroundColor: "#EB707C" }]}>
-            <Text style={styles.btnTxt}>Cash Out</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            onPress={() => navigation.navigate('CashEntries')}
-            style={[styles.cashBtn, { backgroundColor: "#85D098" }]}>
-            <Text style={styles.btnTxt}>Cash In</Text>
-          </TouchableOpacity>
-        </View>
+        <TransactionFull />
 
         <Modal visible={showModal1} transparent animationType="fade">
           <View
@@ -191,16 +167,16 @@ export default ViewReport;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: metrics.horizontalScale(20),
     backgroundColor: "#E8EEFF",
-    paddingVertical: metrics.verticalScale(15),
+    paddingTop: metrics.verticalScale(15),
     position: "relative",
     flex: 1,
   },
   card: {
-    width: "100%",
+    width: "95%",
     backgroundColor: "#fff",
     paddingVertical: metrics.verticalScale(10),
+    marginHorizontal: metrics.horizontalScale(10),
     borderRadius: 6,
   },
   cardBody: {
@@ -216,8 +192,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 40,
     paddingVertical: metrics.verticalScale(15),
-    borderRightWidth: 2,
-    borderColor: "#ccc",
+    borderRightWidth: 1,
+    borderColor: "#c6c6c6",
   },
   box: {
     display: "flex",

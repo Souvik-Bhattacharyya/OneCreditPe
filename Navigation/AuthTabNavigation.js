@@ -52,8 +52,6 @@ const CustomerStack = () => {
   );
 };
 
-
-
 const SupplierStack = () => {
   return (
     <Stack.Navigator screenOptions={{
@@ -91,10 +89,6 @@ const PartiesStack = () => {
   );
 };
 
-
-
-
-
 const CashBookStack = () => {
   return (
     <Stack.Navigator
@@ -108,30 +102,34 @@ const CashBookStack = () => {
         },
       }}
     >
-      <Stack.Screen component={Cashbook} name="CashBook" />
-      <Stack.Screen component={ViewReport} name="ViewReport" />
-      <Stack.Screen component={CashEntries} name="CashEntries" />
+      <Stack.Screen component={Cashbook} name="Cash Book" />
+      <Stack.Screen component={ViewReport} name="View Report" />
+      <Stack.Screen component={CashEntries} name="CashEntries" options={({ route }) => ({
+        title: route.params.name
+      })
+      } />
     </Stack.Navigator>
   );
 };
 
 const HomeScreenStack = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerTitleAlign: 'center',
-      headerStyle: {
-        backgroundColor: '#0A5AC9',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }}
+    <Stack.Navigator
+      cardShadowEnabled
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#0A5AC9',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
     >
       <Stack.Screen options={{ headerShown: false }} component={HomePage} name="CustomerHome" />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      <Stack.Screen component={PartiesStack} name="PartiesStack" options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };

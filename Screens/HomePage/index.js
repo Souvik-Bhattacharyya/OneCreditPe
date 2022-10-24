@@ -75,7 +75,9 @@ const CustomerHome = () => {
           </View>
           <TouchableOpacity
             style={styles.cardBtn}
-            onPress={() => navigation.navigate("ViewReport")}>
+            onPress={() => navigation.navigate("Cashbook", {
+              screen: 'View Report'
+            })}>
             <Text
               style={{
                 fontSize: 16,
@@ -134,7 +136,9 @@ const CustomerHome = () => {
           </View>
           <TouchableOpacity
             style={styles.cardBtn}
-            onPress={() => navigation.navigate("CashBook")}>
+            onPress={() => navigation.navigate("Cashbook", {
+              screen: 'Cash Book'
+            })}>
             <Text
               style={{
                 fontSize: 16,

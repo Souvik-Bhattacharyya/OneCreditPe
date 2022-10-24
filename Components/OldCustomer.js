@@ -66,9 +66,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         paddingHorizontal: metrics.horizontalScale(20),
         paddingVertical: metrics.verticalScale(15),
-        marginVertical: metrics.verticalScale(10),
+        // marginVertical: metrics.verticalScale(10),
         alignItems: "center",
-        backgroundColor: "#fff",
-        borderRadius: 6,
+        // borderRadius: 6,
+        borderColor: '#c6c6c6',
+        borderBottomWidth: 1
     },
 });

@@ -52,7 +52,7 @@ const CashEntries = () => {
               color: "#828282",
               fontSize: 18,
               paddingHorizontal: 10,
-              fontWeight:'800',
+              fontWeight: '800',
             }}>
             Select Date & Time
           </Text>
@@ -76,7 +76,7 @@ const CashEntries = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           marginBottom: metrics.verticalScale(15),
-          width:'100%'
+          width: '100%'
         }}>
         <TouchableOpacity
           style={{
@@ -84,8 +84,8 @@ const CashEntries = () => {
             paddingVertical: metrics.verticalScale(10),
             backgroundColor: isActive === "cash in" ? "#20409A" : "white",
             borderColor: isActive === "cash in" ? "#20409A" : "#c6c6c6",
-            borderWidth:1,
-            width:'48%',
+            borderWidth: 1,
+            width: '48%',
             borderRadius: 4,
           }}
           onPress={() => setIsActive("cash in")}>
@@ -103,8 +103,8 @@ const CashEntries = () => {
             paddingVertical: metrics.verticalScale(10),
             backgroundColor: isActive === "cash out" ? "#20409A" : "white",
             borderColor: isActive === "cash out" ? "#20409A" : "#c6c6c6",
-            borderWidth:1,
-            width:'48%',
+            borderWidth: 1,
+            width: '48%',
             borderRadius: 4
           }}
           onPress={() => setIsActive("cash out")}>
@@ -120,7 +120,7 @@ const CashEntries = () => {
 
       <View>
         <TextInput
-          placeholder="Enter Amount"
+          placeholder="Enter Payment Details"
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
@@ -136,13 +136,35 @@ const CashEntries = () => {
           bottom: metrics.verticalScale(20),
           alignSelf: "center",
           width: "100%",
+          flexDirection: 'row',
+          justifyContent: 'space-between'
         }}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(12),
-            backgroundColor: "#EB707C",
+            backgroundColor: "#fff",
             borderRadius: 50,
+            width: '48%',
+            borderColor: '#c9c9c9',
+            borderWidth: 1,
+            flexDirection: 'row'
+          }}>
+          <DatePickerIcon
+            name="camera-alt"
+            color={"#0a5ac9"}
+            style={{ marginRight: 5 }}
+            size={24}
+          />
+          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Attach Bill</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            paddingHorizontal: metrics.horizontalScale(20),
+            paddingVertical: metrics.verticalScale(12),
+            backgroundColor: "#0a5ac9",
+            borderRadius: 50,
+            width: '48%'
           }}>
           <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>
@@ -155,7 +177,7 @@ export default CashEntries;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: metrics.horizontalScale(20),
+    paddingHorizontal: metrics.horizontalScale(15),
     paddingVertical: metrics.verticalScale(20),
     backgroundColor: "#E8EEFF",
     flex: 1,
@@ -169,7 +191,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 18,
     backgroundColor: "#fff",
-    fontWeight:'800'
+    fontWeight: '800'
   },
   icon: {
     position: "absolute",
@@ -178,7 +200,7 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: "600",
     // color: "#fff",
     textAlign: "center",
   },

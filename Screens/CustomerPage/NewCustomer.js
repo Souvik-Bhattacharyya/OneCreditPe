@@ -56,46 +56,100 @@ const CustomerHome = () => {
 
         {/* Old Customer */}
         <View style={styles.Row}>
-          <View style={{borderRadius: 10 }}>
-            <View style={{ flexDirection: "row" }}>
-              <Text
-                style={{
-                  color: "#0A5AC9",
-                  fontSize: 20,
-                  fontWeight: "700",
-                }}>
-                Old Customers
+          <View style={{
+            flexDirection: "row",
+            alignItems:'center',justifyContent:'space-between',
+            paddingVertical: metrics.verticalScale(15),
+            paddingHorizontal: metrics.horizontalScale(20),
+            backgroundColor: '#0a5ac9',
+            borderTopLeftRadius: 6,
+            borderTopRightRadius: 6,
+          }}>
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 18,
+                fontWeight: "700",
+              }}>
+              Old Customers
+            </Text>
+
+            <TouchableOpacity
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent:'flex-end',
+                backgroundColor:'#fff', 
+                borderRadius: 6,
+                paddingVertical: 5,
+                paddingHorizontal: 10
+              }}
+              onPress={() => navigation.navigate("AddContact")}>
+              <Text style={{ fontSize: 18, fontWeight: "600", color: "#0a5ac9", marginLeft: 5}}>
+                Add Contact
               </Text>
-            </View>
+            </TouchableOpacity>
+          </View>
+          <ScrollView style={{
+            paddingHorizontal: metrics.horizontalScale(10),
+          }}>
             <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+            <OldCustomer />
+          </ScrollView>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              position: "absolute",
+              bottom: 40,
+              right: 0,
+              marginHorizontal: 10,
+              borderColor: '#c9c9c9',
+              borderWidth: 1,
+              borderRadius: 50,
+              backgroundColor: "#fff",
+            }}>
+
           </View>
         </View>
 
-        {/* Add From Contact */}
+        {/* Continue */}
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            position: "absolute",
-            bottom: 20,
-            right: 0,
-            marginHorizontal: 20,
+            alignItems: "center",
+            flex: 1,
+            justifyContent: "flex-end",
           }}>
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#0A5AC9",
-              flexDirection: "row",
-              alignItems: "center",
-              paddingVertical: 10,
-              paddingHorizontal: 15,
-              borderRadius: 50,
-              justifyContent: "flex-end",
-            }}
-            onPress={() => navigation.navigate("AddContact")}>
-            <AntDesign name="pluscircle" color={"#fff"} size={32} />
-            <Text style={{ fontSize: 18, fontWeight: "600", color: "#fff", marginHorizontal: 10 }}>
-              Add Contact
-            </Text>
+          <TouchableOpacity style={{ width: "100%" }}>
+            <View
+              style={{
+                backgroundColor: "#0a5ac9",
+                paddingVertical: 5,
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 50,
+                flexDirection: "row",
+              }}>
+              <Text
+                style={{
+                  fontFamily: "Poppins-Regular",
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: "#FFFFFF",
+                  margin: 10,
+                }}>
+                Continue
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </View>
@@ -144,8 +198,11 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   Row: {
-    backgroundColor:'#ddd',
+    backgroundColor: '#fff',
     marginVertical: metrics.verticalScale(15),
-    paddingVertical: metrics.verticalScale(10)
+    borderColor: '#c6c6c6',
+    borderWidth: 1,
+    borderRadius: 6,
+    height: "50%"
   }
 });

@@ -56,7 +56,7 @@ const CommonHeader = () => {
         </View>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Set Collection Date")}
+        onPress={() => navigation.push("Set Collection Date")}
         style={{ width: '25%', justifyContent: 'center', alignItems: 'center' }}>
         <Image
           source={require("../../Assets/calender.png")}
