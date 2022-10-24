@@ -10,17 +10,17 @@ const width = Dimensions.get('window').width;
 const Cashbook = ({ navigation }) => {
   const styles = StyleSheet.create({
     container: {
-      paddingHorizontal: metrics.horizontalScale(10),
       backgroundColor: "#E8EEFF",
-      paddingVertical: metrics.verticalScale(15),
+      paddingTop: metrics.verticalScale(15),
       position: "relative",
       flex: 1
     },
     card: {
-      width: "100%",
+      width: '95%',
       backgroundColor: "#fff",
       borderRadius: 6,
       marginVertical: metrics.verticalScale(10),
+      marginHorizontal: metrics.horizontalScale(10),
       borderWidth: 1,
       borderColor: '#c6c6c6',
     },
@@ -65,8 +65,8 @@ const Cashbook = ({ navigation }) => {
     },
     cashBtn: {
       paddingVertical: 10,
-      borderRadius: 6,
-      width: '100%',
+      borderRadius: 50,
+      width: '55%',
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center'
@@ -131,12 +131,12 @@ const Cashbook = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <TransactionEmpty />
+        <TransactionFull />
 
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: 'flex-end',
             width,
             position: "absolute",
             bottom: 20,

@@ -5,12 +5,18 @@ import metrics from '../../Constants/metrics';
 
 const CashIn = () => {
     return (
-        <View style={{
-            marginHorizontal: metrics.horizontalScale(10),
-            // justifySelf: 'center',
-            // alignSelf: 'center'
-        }}>
-            <View style={{ flexDirection: 'row', backgroundColor: '#fff', justifyContent: 'space-around', width: '100%', alignItems: 'center', marginVertical: metrics.verticalScale(5), paddingVertical: metrics.verticalScale(5), borderRadius: 6 }}>
+        <View>
+            <View style={{
+                justifyContent: 'space-around',
+                flexDirection: 'row',
+                paddingHorizontal: metrics.horizontalScale(5),
+                paddingVertical: metrics.verticalScale(10),
+                alignItems: 'center',
+                backgroundColor: '#fff',
+                borderBottomWidth: 1,
+                borderColor: '#c6c6c6',
+                width: '100%'
+            }}>
                 <Image source={require('../../Assets/Images/green.png')} style={{ zIndex: 2, width: 14, height: 14 }} />
                 <View>
                     <Text style={{ color: '#12ce12', fontSize: 18, fontWeight: '800', marginBottom: metrics.verticalScale(5) }}>₹ 22.00</Text>

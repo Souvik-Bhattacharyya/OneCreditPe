@@ -5,10 +5,10 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
+  Alert,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
 import Carousel from "../../Components/Carousel/Carousel";
@@ -20,6 +20,14 @@ import CommonHeader from "../../Components/CommonHeader";
 const CustomerHome = () => {
   const navigation = useNavigation();
   // const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    const focusHandler = navigation.addListener('focus', () => {
+      // Alert.alert('Refreshed');
+    });
+    return focusHandler;
+  }, [navigation]);
+
   return (
     <>
       <CommonHeader />
@@ -196,44 +204,6 @@ const CustomerHome = () => {
             </TouchableOpacity>
           </View>
         </View>
-
-        <View style={{
-          position: "absolute",
-          bottom: metrics.verticalScale(20),
-          alignSelf: "center",
-          width: "100%",
-          flexDirection: 'row',
-          justifyContent: "space-between"
-        }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('CustomerStack')}
-            style={{
-              paddingHorizontal: metrics.horizontalScale(20),
-              paddingVertical: metrics.verticalScale(12),
-              backgroundColor: "#BA0000",
-              borderRadius: 6,
-              width: '48%',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}>
-            <Image source={require('../../Assets/add-user.png')} style={styles.btnIcon} />
-            <Text style={styles.btnTxt}>Customer</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('SupplierStack')}
-            style={{
-              paddingHorizontal: metrics.horizontalScale(20),
-              paddingVertical: metrics.verticalScale(12),
-              backgroundColor: "#0a5ac9",
-              borderRadius: 6,
-              width: '48%',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly'
-            }}>
-            <Image source={require('../../Assets/manage-supplier(Light).png')} style={styles.btnIcon} />
-            <Text style={styles.btnTxt}>Supplier</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </>
   );
@@ -303,15 +273,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
     elevation: 3,
-  },
-  btnTxt: {
-    fontSize: 18,
-    fontWeight: "500",
-    color: "#fff",
-    textAlign: "center",
-  },
-  btnIcon: {
-    width: 24,
-    height: 24
   },
 });

@@ -44,10 +44,10 @@ const CustomerStack = () => {
       },
     }}>
       <Stack.Screen component={Customer} name="Customer" options={{ headerShown: false }} />
+      <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      <Stack.Screen component={SupplierStack} name="SupplierStack" options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
@@ -66,13 +66,32 @@ const SupplierStack = () => {
       },
     }}>
       <Stack.Screen component={Supplier} name="Supplier" options={{ headerShown: false }} />
+      <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      <Stack.Screen component={CustomerStack} name="CustomerStack" options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
+
+const PartiesStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: true, headerTitleAlign: 'center', headerStyle: {
+        backgroundColor: '#0A5AC9',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
+      <Stack.Screen component={CustomerStack} name="CustomerStack" options={{ headerShown: false }} />
+      <Stack.Screen component={SupplierStack} name="SupplierStack" options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+};
+
+
 
 
 
@@ -112,8 +131,7 @@ const HomeScreenStack = () => {
       <Stack.Screen options={{ headerShown: false }} component={HomePage} name="CustomerHome" />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      <Stack.Screen component={CustomerStack} name="CustomerStack" options={{ headerShown: false }} />
-      <Stack.Screen component={SupplierStack} name="SupplierStack" options={{ headerShown: false }} />
+      <Stack.Screen component={PartiesStack} name="PartiesStack" options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
@@ -141,7 +159,7 @@ const AuthTabNavigation = ({ navigation }) => {
       />
       <Tab.Screen
         name="Parties"
-        component={CustomerStack}
+        component={PartiesStack}
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome name="user-plus" size={24} color={color} style={{ marginTop: 2 }} />
