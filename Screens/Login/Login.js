@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -18,7 +18,7 @@ import Api from "../../Services";
 // import {useDispatch, useSelector} from "react-redux";
 // import {editName, editMobile} from "../../Redux/Action/registerActions";
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [credentials, setCredentials] = useState({
     businessName: "",
     mobileNumber: "",
@@ -39,49 +39,44 @@ const Login = ({navigation}) => {
       });
       console.log("==>", response.data);
       if (response.status == 200) {
-        navigation.navigate("otp", {mobileNumber: credentials.mobileNumber});
+        navigation.navigate("otp", { mobileNumber: credentials.mobileNumber });
       }
     } catch (error) {
       console.log(error);
     }
-    setCredentials({businessName: "", mobileNumber: ""});
+    setCredentials({ businessName: "", mobileNumber: "" });
   };
   return (
     <View style={styles.container}>
-      <View style={{alignItems: "center"}}>
-        <Image
-          source={require("../../Assets/Logos/Logo.png")}
-          style={styles.logo}
-        />
-      </View>
-      <View style={{alignItems: "center", marginTop: 50}}>
+      <View style={{ alignItems: 'flex-start', marginTop: 20 }}>
         <Text
           style={{
-            fontSize: 24,
+            fontSize: 28,
             color: "#0A5AC9",
             marginBottom: 5,
             fontWeight: "900",
           }}>
-          Create An Account
+          Login Account
         </Text>
         <Text
           style={{
             color: "#828282",
-            fontWeight: "700",
+            fontWeight: "500",
+            fontSize: 18
           }}>
-          Please enter your Mobile Number
+          Create an account
         </Text>
       </View>
 
       <View>
-        <SafeAreaView style={{alignItems: "center", marginTop: 20}}>
+        <SafeAreaView style={{ alignItems: "center", marginTop: 0 }}>
           <TextInput
             value={credentials.businessName}
             style={styles.name}
             placeholder="Your Business Name"
             placeholderTextColor="#B4B4B4"
             onChangeText={val =>
-              setCredentials({...credentials, businessName: val})
+              setCredentials({ ...credentials, businessName: val })
             }
           />
           <TextInput
@@ -91,18 +86,30 @@ const Login = ({navigation}) => {
             keyboardType="numeric"
             placeholderTextColor="#B4B4B4"
             onChangeText={val =>
-              setCredentials({...credentials, mobileNumber: val})
+              setCredentials({ ...credentials, mobileNumber: val })
             }
           />
         </SafeAreaView>
       </View>
+
+      <View style={{
+        alignItems: "center",
+        marginTop: 50,
+        flex: 1
+      }}>
+        <Image
+          source={require("../../Assets/loginGif.png")}
+          style={styles.logo}
+        />
+      </View>
+
       <View
         style={{
           alignItems: "center",
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableOpacity onPress={login} style={{width: "100%"}}>
+        <TouchableOpacity onPress={login} style={{ width: "100%" }}>
           <View
             style={{
               backgroundColor: "#349EFF",
@@ -123,10 +130,11 @@ const Login = ({navigation}) => {
               }}>
               Login Now
             </Text>
-            <AntDesign name="arrowright" color="white" size={30} />
           </View>
         </TouchableOpacity>
       </View>
+
+
     </View>
   );
 };
@@ -146,29 +154,31 @@ const styles = StyleSheet.create({
     width: "100%",
     borderRadius: 6,
     marginHorizontal: 20,
-    marginTop: "20%",
+    marginTop: 50,
     fontSize: 18,
-    color: "#6f6f6f",
+    color: "#000",
     fontWeight: "700",
-    borderBottomWidth: 2,
+    borderWidth: 1,
     borderColor: "#C6C6C6",
+    paddingHorizontal: 20
   },
   input: {
     paddingVertical: 15,
     // backgroundColor: "#f6f6f6",
     width: "100%",
     marginHorizontal: 20,
-    marginTop: 10,
+    marginTop: 20,
     fontSize: 18,
-    color: "#6f6f6f",
+    color: "#000",
     fontWeight: "700",
-    borderBottomWidth: 2,
+    borderWidth: 1,
     borderColor: "#C6C6C6",
+    paddingHorizontal: 20,
+    borderRadius: 6
   },
   logo: {
-    height: 60,
-    width: 200,
-    top: "20%",
+    height: 350,
+    width: 400,
     resizeMode: "contain",
   },
 });
