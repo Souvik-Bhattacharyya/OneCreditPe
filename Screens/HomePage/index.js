@@ -180,15 +180,15 @@ const CustomerHome = () => {
             }}>
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
-          <View style={{ width: "70%", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "800" }}>
+          <View style={{width: "70%", paddingHorizontal: 20}}>
+            <Text style={{color: "#464555", fontSize: 18, fontWeight: "800"}}>
               Easy Loan
             </Text>
-            <Text style={{ color: "#828282", fontWeight: '400' }}>
+            <Text style={{color: "#828282", fontWeight: "400"}}>
               Get easy loan without any paperwork
             </Text>
-            <TouchableOpacity style={{ marginTop: 10, justifyContent: "center" }}>
-              <Text style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "800" }}>
+            <TouchableOpacity style={{marginTop: 10, justifyContent: "center"}}>
+              <Text style={{color: "#0A5AC9", fontSize: 16, fontWeight: "800"}}>
                 Apply Now
                 <Icon name="doubleright" color={"#0A5AC9"} size={16} />
               </Text>
@@ -196,38 +196,46 @@ const CustomerHome = () => {
           </View>
         </View>
 
-        <View style={{
-          position: "absolute",
-          bottom: metrics.verticalScale(20),
-          alignSelf: "center",
-          width: "100%",
-          flexDirection:'row',
-          justifyContent:"space-between"
-        }}>
-          <TouchableOpacity 
-          onPress={()=> navigation.navigate('CustomerHistory')}
+        <View
           style={{
-            paddingHorizontal: metrics.horizontalScale(20),
-            paddingVertical: metrics.verticalScale(12),
-            backgroundColor: "#BA0000",
-            borderRadius: 6, 
-            width: '48%',
-            flexDirection:'row',
-            justifyContent:'space-around'
+            position: "absolute",
+            bottom: metrics.verticalScale(20),
+            alignSelf: "center",
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}>
-            <Image source={require('../../Assets/add-user.png')} style={styles.btnIcon} />
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CustomerHistory")}
+            style={{
+              paddingHorizontal: metrics.horizontalScale(20),
+              paddingVertical: metrics.verticalScale(12),
+              backgroundColor: "#BA0000",
+              borderRadius: 6,
+              width: "48%",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}>
+            <Image
+              source={require("../../Assets/add-user.png")}
+              style={styles.btnIcon}
+            />
             <Text style={styles.btnTxt}>Customer</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{
-            paddingHorizontal: metrics.horizontalScale(20),
-            paddingVertical: metrics.verticalScale(12),
-            backgroundColor: "#0a5ac9",
-            borderRadius: 6,
-            width: '48%',
-            flexDirection:'row',
-            justifyContent:'space-evenly'
-          }}>
-            <Image source={require('../../Assets/manage-supplier(Light).png')} style={styles.btnIcon} />
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: metrics.horizontalScale(20),
+              paddingVertical: metrics.verticalScale(12),
+              backgroundColor: "#0a5ac9",
+              borderRadius: 6,
+              width: "48%",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+            }}>
+            <Image
+              source={require("../../Assets/manage-supplier(Light).png")}
+              style={styles.btnIcon}
+            />
             <Text style={styles.btnTxt}>Supplier</Text>
           </TouchableOpacity>
         </View>
@@ -309,6 +317,6 @@ const styles = StyleSheet.create({
   },
   btnIcon: {
     width: 24,
-    height: 24
+    height: 24,
   },
 });

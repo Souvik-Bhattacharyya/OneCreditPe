@@ -1,20 +1,28 @@
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 import TransactionFull from "../../Components/TransactionFull";
 import metrics from "../../Constants/metrics";
+import {useDispatch, useSelector} from "react-redux";
+const width = Dimensions.get("window").width;
 
-const width = Dimensions.get('window').width;
-
-const Cashbook = ({ navigation }) => {
+const Cashbook = ({navigation}) => {
+  const dispatch = useDispatch();
+  const clientToken = useSelector(sttae => state.auth.clientToken);
   const styles = StyleSheet.create({
     container: {
       paddingHorizontal: metrics.horizontalScale(10),
       backgroundColor: "#E8EEFF",
       paddingVertical: metrics.verticalScale(15),
       position: "relative",
-      flex: 1
+      flex: 1,
     },
     card: {
       width: "100%",
@@ -22,7 +30,7 @@ const Cashbook = ({ navigation }) => {
       borderRadius: 6,
       marginVertical: metrics.verticalScale(10),
       borderWidth: 1,
-      borderColor: '#c6c6c6',
+      borderColor: "#c6c6c6",
     },
     cardBody: {
       display: "flex",
@@ -57,7 +65,7 @@ const Cashbook = ({ navigation }) => {
       width: "100%",
       backgroundColor: "#fff",
       borderTopWidth: 1,
-      borderColor: '#c6c6c6',
+      borderColor: "#c6c6c6",
       paddingVertical: metrics.verticalScale(7),
       borderRadius: 6,
       borderTopLeftRadius: 0,
@@ -66,17 +74,17 @@ const Cashbook = ({ navigation }) => {
     cashBtn: {
       paddingVertical: 10,
       borderRadius: 6,
-      width: '100%',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
     },
     btnTxt: {
       fontSize: 22,
       fontWeight: "800",
       color: "#fff",
-      textAlign: 'center',
-      marginLeft:10
+      textAlign: "center",
+      marginLeft: 10,
     },
   });
   return (
@@ -86,10 +94,21 @@ const Cashbook = ({ navigation }) => {
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
-                style={{ fontSize: 24, color: "#1790FF", fontWeight: "bold", fontFamily: "Roboto" }}>
+                style={{
+                  fontSize: 24,
+                  color: "#1790FF",
+                  fontWeight: "bold",
+                  fontFamily: "Roboto",
+                }}>
                 ₹ 0
               </Text>
-              <Text style={{ color: "#828282", fontSize: 14, fontWeight: "700", fontFamily: "Roboto" }}>
+              <Text
+                style={{
+                  color: "#828282",
+                  fontSize: 14,
+                  fontWeight: "700",
+                  fontFamily: "Roboto",
+                }}>
                 Cash In Hand
               </Text>
             </View>
@@ -114,9 +133,9 @@ const Cashbook = ({ navigation }) => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.cardBtn}
-            onPress={() => navigation.navigate('ViewReport')}
-          >
+          <TouchableOpacity
+            style={styles.cardBtn}
+            onPress={() => navigation.navigate("ViewReport")}>
             <Text
               style={{
                 fontSize: 14,
@@ -142,8 +161,9 @@ const Cashbook = ({ navigation }) => {
             bottom: 20,
             paddingHorizontal: metrics.horizontalScale(10),
           }}>
-          <TouchableOpacity onPress={() => navigation.navigate('CashEntries')}
-            style={[styles.cashBtn, { backgroundColor: "#0a5ac9" }]}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CashEntries")}
+            style={[styles.cashBtn, {backgroundColor: "#0a5ac9"}]}>
             <Icon name="pluscircle" color={"#fff"} size={24} />
             <Text style={styles.btnTxt}>New Entries</Text>
           </TouchableOpacity>

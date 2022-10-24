@@ -17,8 +17,8 @@ export default class API {
   }
 
   async httpRequest(method, url, data, header = null) {
-    // let state = store.getState();
-    // let clientToken = state.auth.clientToken;
+    let state = store.getState();
+    let clientToken = state.auth.clientToken;
     return new Promise((resolve, reject) => {
       let body = {};
       if (method === "GET") {
@@ -28,7 +28,7 @@ export default class API {
           headers: header
             ? header
             : {
-                // authorization: clientToken ? `Bearer ${clientToken}` : null,
+                authorization: clientToken ? `Bearer ${clientToken}` : null,
                 "Content-Type": "application/json",
               },
         };
@@ -40,6 +40,7 @@ export default class API {
           headers: header
             ? header
             : {
+                authorization: clientToken ? `Bearer ${clientToken}` : null,
                 "Content-Type": "application/json",
               },
         };
