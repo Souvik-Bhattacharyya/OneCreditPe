@@ -75,6 +75,7 @@ const SupplierStack = () => {
 };
 
 
+
 const CashBookStack = () => {
   return (
     <Stack.Navigator
@@ -111,6 +112,8 @@ const HomeScreenStack = () => {
       <Stack.Screen options={{ headerShown: false }} component={HomePage} name="CustomerHome" />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen component={CustomerStack} name="CustomerStack" options={{ headerShown: false }} />
+      <Stack.Screen component={SupplierStack} name="SupplierStack" options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
