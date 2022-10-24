@@ -57,12 +57,12 @@ const Login = ({navigation}) => {
       <View style={{alignItems: "center", marginTop: 50}}>
         <Text
           style={{
-            fontSize: 20,
+            fontSize: 24,
             color: "#0A5AC9",
-            marginBottom: 10,
-            fontWeight: "bold",
+            marginBottom: 5,
+            fontWeight: "900",
           }}>
-          Create an account,
+          Create An Account
         </Text>
         <Text
           style={{
@@ -142,28 +142,27 @@ const styles = StyleSheet.create({
   },
   name: {
     paddingVertical: 15,
-    backgroundColor: "#f6f6f6",
+    // backgroundColor: "#f6f6f6",
     width: "100%",
     borderRadius: 6,
-    paddingHorizontal: 20,
+    marginHorizontal: 20,
     marginTop: "20%",
     fontSize: 18,
     color: "#6f6f6f",
-    fontWeight: "800",
-    borderWidth: 1,
+    fontWeight: "700",
+    borderBottomWidth: 2,
     borderColor: "#C6C6C6",
   },
   input: {
     paddingVertical: 15,
-    backgroundColor: "#f6f6f6",
+    // backgroundColor: "#f6f6f6",
     width: "100%",
-    borderRadius: 6,
-    paddingHorizontal: 20,
-    marginTop: 20,
+    marginHorizontal: 20,
+    marginTop: 10,
     fontSize: 18,
     color: "#6f6f6f",
-    fontWeight: "800",
-    borderWidth: 1,
+    fontWeight: "700",
+    borderBottomWidth: 2,
     borderColor: "#C6C6C6",
   },
   logo: {

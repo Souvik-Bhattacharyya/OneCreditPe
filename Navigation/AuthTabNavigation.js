@@ -6,7 +6,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationAction } from "@react-navigation/native";
 import {
-  CustomerHome,
+  HomePage,
   Customer,
   Cashbook,
   CashEntries,
@@ -16,6 +16,7 @@ import {
   Settings,
   AddContact,
   SetCollectionDate,
+  Supplier,
   CommonHeader,
 } from "../Screens";
 
@@ -42,13 +43,38 @@ const CustomerStack = () => {
         fontWeight: 'bold',
       },
     }}>
-      <Stack.Screen component={Customer} name="CustomerHistory" options={{ headerShown: false }}/>
+      <Stack.Screen component={Customer} name="Customer" options={{ headerShown: false }} />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen component={SupplierStack} name="SupplierStack" options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 };
+
+
+
+const SupplierStack = () => {
+  return (
+    <Stack.Navigator screenOptions={{
+      headerShown: true, headerTitleAlign: 'center', headerStyle: {
+        backgroundColor: '#0A5AC9',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    }}>
+      <Stack.Screen component={Supplier} name="Supplier" options={{ headerShown: false }} />
+      <Stack.Screen component={NewCustomer} name="NewCustomer" />
+      <Stack.Screen component={AddContact} name="AddContact" />
+      <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen component={CustomerStack} name="CustomerStack" options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+};
+
+
 const CashBookStack = () => {
   return (
     <Stack.Navigator
@@ -82,7 +108,7 @@ const HomeScreenStack = () => {
       },
     }}
     >
-      <Stack.Screen options={{ headerShown: false }} component={CustomerHome} name="CustomerHome" />
+      <Stack.Screen options={{ headerShown: false }} component={HomePage} name="CustomerHome" />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
     </Stack.Navigator>
@@ -97,7 +123,7 @@ const AuthTabNavigation = ({ navigation }) => {
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: true,
         headerShown: false,
-        tabBarInactiveTintColor: '#c6c6c6',
+        tabBarInactiveTintColor: '#828282',
         tabBarStyle: { padding: 10, height: 60 },
       }}>
       <Tab.Screen
@@ -111,11 +137,11 @@ const AuthTabNavigation = ({ navigation }) => {
         }}
       />
       <Tab.Screen
-        name="Customer"
+        name="Parties"
         component={CustomerStack}
         options={{
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="user" size={24} color={color} style={{ marginTop: 2 }} />
+            <FontAwesome name="user-plus" size={24} color={color} style={{ marginTop: 2 }} />
           ),
           tabBarLabelStyle: { fontSize: 12, fontWeight: '700', paddingBottom: 5 }
         }}

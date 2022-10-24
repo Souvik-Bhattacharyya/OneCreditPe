@@ -6,7 +6,6 @@ import Welcome from "./Welcome/index";
 import Cashbook from "./Cashbook/index";
 import CashEntries from "./Cashbook/CashEntries";
 import ViewReport from "./Cashbook/ViewReport";
-import CustomerHome from "./HomePage";
 import CustomerModal from "../Components/CustomerModal";
 import NewCustomer from "../Screens/CustomerPage/NewCustomer";
 import Customer from "./CustomerPage/AfterCustomerAddHome";
@@ -16,6 +15,7 @@ import SetCollectionDate from "./SetCollectionDate/index";
 import CommonHeader from "../Components/CommonHeader";
 import PrivacyAndPolicy from "./PrivacyAndPolicy";
 import TermsAndConditions from "./TermsAndConditions";
+import Supplier from "./Supplier/AfterSupplierAddHome";
 // import LoanSection from "../Screens/loanSection/Loan";
 
 export {
@@ -27,7 +27,6 @@ export {
   Cashbook,
   CashEntries,
   ViewReport,
-  CustomerHome,
   CustomerModal,
   NewCustomer,
   // LoanSection,
@@ -38,4 +37,5 @@ export {
   CommonHeader,
   PrivacyAndPolicy,
   TermsAndConditions,
+  Supplier,
 };
