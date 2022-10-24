@@ -66,7 +66,8 @@ const Cashbook = ({ navigation }) => {
     cashBtn: {
       paddingVertical: 10,
       borderRadius: 50,
-      width: '55%',
+      width: 50,
+      height: 50,
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center'
@@ -142,7 +143,7 @@ const Cashbook = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, marginTop: 20}}>
+        <View style={{ flex: 1, marginTop: 20 }}>
           <View style={{
             flexDirection: 'row',
             width: '100%', justifyContent: 'space-between',
@@ -179,15 +180,15 @@ const Cashbook = ({ navigation }) => {
           style={{
             flexDirection: "row",
             justifyContent: 'flex-end',
-            width,
+            // width,
             position: "absolute",
-            bottom: 20,
+            bottom: 20, right: 0,
             paddingHorizontal: metrics.horizontalScale(10),
           }}>
-          <TouchableOpacity onPress={() => navigation.navigate('CashEntries', { name: 'Cash Entries'})}
+          <TouchableOpacity onPress={() => navigation.navigate('CashEntries', { name: 'Cash Entries' })}
             style={[styles.cashBtn, { backgroundColor: "#0a5ac9" }]}>
-            <Icon name="pluscircle" color={"#fff"} size={24} />
-            <Text style={styles.btnTxt}>New Entries</Text>
+            <Icon name="plus" color={"#fff"} size={28} />
+            {/* <Text style={styles.btnTxt}>New Entries</Text> */}
           </TouchableOpacity>
         </View>
       </View>
