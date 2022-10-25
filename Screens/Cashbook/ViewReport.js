@@ -72,7 +72,6 @@ const ViewReport = ({ navigation }) => {
         <View style={{ backgroundColor: '#fff', marginTop: 15 }}>
           <View
             style={{
-              marginTop: metrics.verticalScale(20),
               borderBottomWidth: 1.5,
               borderBottomColor: "#c6c6c6",
               paddingVertical: metrics.verticalScale(20),
