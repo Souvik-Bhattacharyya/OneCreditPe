@@ -4,10 +4,14 @@ import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {useNavigation} from "@react-navigation/native";
 import CustomerTransaction from "../../Components/CustomerTransaction";
+import SetCollectionDateModal from "./SetCollectionDateModal";
 
 const width = Dimensions.get("window").width;
 
 export default function SetCollectionDate() {
+  const [visible, setVisible] = useState(true);
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
   return (
     <View style={styles.container}>
       <View
@@ -39,7 +43,12 @@ export default function SetCollectionDate() {
           />
         </View>
       </View>
-      <CustomerTransaction />
+      <SetCollectionDateModal
+        visible={visible}
+        showModal={showModal}
+        hideModal={hideModal}
+      />
+      {/* <CustomerTransaction /> */}
     </View>
   );
 }
