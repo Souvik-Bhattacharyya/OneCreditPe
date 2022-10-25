@@ -16,6 +16,7 @@ import CommonHeader from "../Components/CommonHeader";
 import PrivacyAndPolicy from "./PrivacyAndPolicy";
 import TermsAndConditions from "./TermsAndConditions";
 import Supplier from "./Supplier/AfterSupplierAddHome";
+import SetDateModal from "./SetDateModal";
 // import LoanSection from "../Screens/loanSection/Loan";
 
 export {
@@ -38,4 +39,5 @@ export {
   PrivacyAndPolicy,
   TermsAndConditions,
   Supplier,
+  SetDateModal,
 };

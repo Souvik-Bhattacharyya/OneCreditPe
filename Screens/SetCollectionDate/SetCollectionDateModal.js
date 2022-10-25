@@ -1,11 +1,7 @@
 import {View, Image, TouchableOpacity} from "react-native";
 import React from "react";
 import {Modal, Portal, Text, Button, Provider} from "react-native-paper";
-const SetCollectionDateModal = () => {
-  const [visible, setVisible] = React.useState(false);
-
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
+const SetCollectionDateModal = ({visible, showModal, hideModal}) => {
   const containerStyle = {
     backgroundColor: "white",
     padding: 20,
@@ -71,9 +67,6 @@ const SetCollectionDateModal = () => {
           </View>
         </Modal>
       </Portal>
-      <Button style={{marginTop: 30}} onPress={showModal}>
-        Show
-      </Button>
     </Provider>
   );
 };
