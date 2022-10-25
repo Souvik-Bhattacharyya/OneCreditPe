@@ -12,8 +12,7 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import ToPay from "./Cash/ToPay";
 import ToGet from "./Cash/ToGet";
-import {SetDateModal} from "../Screens";
-
+import SetDateModal from "../Screens/SetDateModal";
 const width = Dimensions.get("window").width;
 
 const CustomerTransaction = () => {

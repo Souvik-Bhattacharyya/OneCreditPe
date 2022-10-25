@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import {useNavigation} from "@react-navigation/native";
-import {SetDateModal} from "../../Screens";
+
 const ToPay = ({showModal}) => {
   const navigation = useNavigation();
   return (
@@ -44,7 +44,6 @@ const ToPay = ({showModal}) => {
           <Icon name="account-cash" color={"#0A5AC9"} size={28} />
         </TouchableOpacity>
       </View>
-      {/* <SetDateModal visible={visible} hideModal={hideModal} /> */}
     </View>
   );
 };

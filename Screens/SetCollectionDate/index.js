@@ -1,9 +1,6 @@
 import {View, Text, StyleSheet, Dimensions, Image} from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import metrics from "../../Constants/metrics";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {useNavigation} from "@react-navigation/native";
-import CustomerTransaction from "../../Components/CustomerTransaction";
 import SetCollectionDateModal from "./SetCollectionDateModal";
 
 const width = Dimensions.get("window").width;
