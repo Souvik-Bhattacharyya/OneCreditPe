@@ -23,8 +23,6 @@ const Login = ({navigation}) => {
     businessName: "",
     mobileNumber: "",
   });
-  // const dispatch = useDispatch();
-  // const {name, mobileNumber} = useSelector(state => state.register);
 
   const login = async () => {
     console.log(
@@ -37,7 +35,6 @@ const Login = ({navigation}) => {
         name: credentials.businessName,
         mobile: credentials.mobileNumber,
       });
-      console.log("==>", response.data);
       if (response.status == 200) {
         navigation.navigate("otp", {mobileNumber: credentials.mobileNumber});
       }
