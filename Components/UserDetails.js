@@ -18,8 +18,8 @@ const CustomerHome = () => {
   const width = Dimensions.get('window').width;
 
   return (
-    <View style={{ flex: 1, backgroundColor:'#E8EEFF'}}>
-      <ScrollView>
+    <View style={{ flex: 1, backgroundColor:'#E8EEFF',}}>
+      <ScrollView style={{marginBottom: 60}}>
         <UserTransaction />
         <UserTransaction />
         <UserTransaction />
@@ -41,7 +41,7 @@ const CustomerHome = () => {
         paddingVertical: 10,
         left: 0,
         borderTopWidth: 1,
-        borderColor: '#c9c9c9'
+        borderColor: '#c9c9c9',
       }}>
         <TouchableOpacity
           onPress={() => navigation.navigate('CustomerStack', {
