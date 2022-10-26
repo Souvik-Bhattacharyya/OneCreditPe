@@ -3,17 +3,20 @@ import {
   Text,
   StyleSheet,
   FlatList,
+  TouchableOpacity,
   PermissionsAndroid,
 } from "react-native";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Contacts from "react-native-contacts";
 
 const AddContact = () => {
   const [contacts, setContacts] = useState([]);
 
-  const ListItem = ({item}) => {
+  const ListItem = ({ item }) => {
     return (
-      <View style={styles.contactCon}>
+      <TouchableOpacity
+      // onClick={()=> {''}}
+      style={styles.contactCon}>
         <View style={styles.imgCon}>
           <View style={styles.placeholder}>
             <Text style={styles.txt}>{item?.givenName[0]}</Text>
@@ -28,7 +31,7 @@ const AddContact = () => {
             {item?.phoneNumbers[0]?.number}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
   const getContacts = async () => {
@@ -73,17 +76,20 @@ const styles = StyleSheet.create({
   contactCon: {
     flex: 1,
     flexDirection: "row",
-    padding: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 10,
     borderBottomWidth: 0.5,
     borderBottomColor: "#d9d9d9",
   },
-  imgCon: {},
+  imgCon: {
+    paddingRight: 10
+  },
   placeholder: {
-    width: 55,
-    height: 55,
+    width: 45,
+    height: 45,
     borderRadius: 30,
     overflow: "hidden",
-    backgroundColor: "#d9d9d9",
+    backgroundColor: "#7CC0FF",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -93,7 +99,9 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   txt: {
-    fontSize: 18,
+    fontSize: 22,
+    fontWeight: '900',
+    color: '#fff',
   },
   name: {
     fontSize: 16,

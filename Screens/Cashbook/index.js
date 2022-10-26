@@ -11,7 +11,7 @@ const Cashbook = ({ navigation }) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#E8EEFF",
-      paddingTop: metrics.verticalScale(15),
+      paddingTop: metrics.verticalScale(10),
       position: "relative",
       flex: 1
     },
@@ -19,7 +19,6 @@ const Cashbook = ({ navigation }) => {
       width: '95%',
       backgroundColor: "#fff",
       borderRadius: 6,
-      marginVertical: metrics.verticalScale(10),
       marginHorizontal: metrics.horizontalScale(10),
       borderWidth: 1,
       borderColor: '#c6c6c6',
@@ -143,7 +142,7 @@ const Cashbook = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, marginTop: 20 }}>
+        <View style={{ flex: 1, marginTop: 10 }}>
           <View style={{
             flexDirection: 'row',
             width: '100%', justifyContent: 'space-between',

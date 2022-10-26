@@ -16,6 +16,9 @@ import CommonHeader from "../Components/CommonHeader";
 import PrivacyAndPolicy from "./PrivacyAndPolicy";
 import TermsAndConditions from "./TermsAndConditions";
 import Supplier from "./Supplier/AfterSupplierAddHome";
+import UserDetails from "../Components/UserDetails";
+import ToGet from "../Components/Cash/ToGet";
+import ToPay from "../Components/Cash/ToPay";
 // import LoanSection from "../Screens/loanSection/Loan";
 
 export {
@@ -38,4 +41,7 @@ export {
   PrivacyAndPolicy,
   TermsAndConditions,
   Supplier,
+  UserDetails,
+  ToPay,
+  ToGet
 };

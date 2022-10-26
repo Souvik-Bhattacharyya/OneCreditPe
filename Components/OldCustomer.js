@@ -39,7 +39,7 @@ export default function OldCustomer() {
                     </Text>
                     <Text
                         style={{ fontSize: 14, fontWeight: "400", color: "#828282" }}>
-                        +91-6502545585
+                        Add Date Here
                     </Text>
                 </View>
                 <TouchableOpacity
