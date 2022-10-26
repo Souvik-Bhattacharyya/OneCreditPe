@@ -6,7 +6,7 @@ const UserTransaction = () => {
     return (
         <View style={styles.container}>
             <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', marginBottom: 10 }}>
-                <Text style={{ fontSize: 18, color: "#808282", fontWeight: "900", }}>Date / Time</Text>
+                <Text style={{ fontSize: 14, color: "#aaa", fontWeight: "900", }}>02 July 22</Text>
             </View>
             <View>
                 <ToGet />

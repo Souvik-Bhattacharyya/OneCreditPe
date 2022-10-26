@@ -94,7 +94,7 @@ import {
                 styles.btnTxt,
                 { color: isActive === "cash in" ? "#fff" : "#20409A" },
               ]}>
-              Cash In
+              To Get
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -113,7 +113,7 @@ import {
                 styles.btnTxt,
                 { color: isActive === "cash out" ? "#fff" : "#20409A" },
               ]}>
-              Cash Out
+              To Pay
             </Text>
           </TouchableOpacity>
         </View>

@@ -15,7 +15,9 @@ const CustomerTransaction = () => {
             justifyContent: 'center',
             paddingTop: metrics.verticalScale(15),
             flex: 1,
-            position: 'relative'
+            position: 'relative',
+            borderColor: '#c6c6c6',
+            borderWidth: .8,
         },
         search: {
             flexDirection: 'row',
@@ -24,15 +26,15 @@ const CustomerTransaction = () => {
             alignItems: 'center',
             paddingHorizontal: metrics.horizontalScale(10),
             borderColor: '#c6c6c6',
-            borderWidth: 1,
+            borderWidth: .8,
             borderRadius: 46,
-            backgroundColor: '#f6f6f6',
+            backgroundColor: '#f3f3f3',
         }
     });
 
     return (
         <View style={styles.container}>
-            <View style={{ borderBottomColor: '#c6c6c6', borderBottomWidth: 1 }}>
+            <View style={{ borderBottomColor: '#c6c6c6', borderBottomWidth: .6 }}>
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: "center", paddingBottom: 20, paddingHorizontal: metrics.horizontalScale(20) }}>
                     <View style={styles.search}>
                         <TextInput
@@ -63,9 +65,19 @@ const CustomerTransaction = () => {
                 </View>
             </View>
             <ScrollView>
-                <View style={{ width }}>
+                <View style={{width}}>
                     <ToGetUser />
+                    <ToPayUser />
                     <ToGetUser />
+                    <ToPayUser />
+                    <ToGetUser />
+                    <ToPayUser />
+                    <ToGetUser />
+                    <ToPayUser />
+                    <ToGetUser />
+                    <ToPayUser />
+                    <ToGetUser />
+                    <ToPayUser />
                 </View>
             </ScrollView >
         </View>

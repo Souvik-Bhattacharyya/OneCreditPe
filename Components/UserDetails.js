@@ -18,8 +18,13 @@ const CustomerHome = () => {
   const width = Dimensions.get('window').width;
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor:'#E8EEFF'}}>
       <ScrollView>
+        <UserTransaction />
+        <UserTransaction />
+        <UserTransaction />
+        <UserTransaction />
+        <UserTransaction />
         <UserTransaction />
         <UserTransaction />
       </ScrollView>
