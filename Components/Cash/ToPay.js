@@ -1,42 +1,40 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/AntDesign';
+import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from '../../Constants/metrics';
 
-const ToPay = () => {
+const CashOut = () => {
     return (
         <View>
-            <TouchableOpacity style={styles.contactBox}>
-                <View style={{ width: 42, height: 42, backgroundColor: '#c3e2ff', justifyContent: 'center', alignItems: 'center', borderRadius: 4 }}>
-                    <Text style={{ fontSize: 24, fontWeight: '900', color: '#0A5AC9' }}>A</Text>
+            <View style={{
+                justifyContent: 'space-around',
+                flexDirection: 'row',
+                paddingHorizontal: metrics.horizontalScale(5),
+                paddingVertical: metrics.verticalScale(10),
+                alignItems: 'center',
+                backgroundColor: '#fff',
+                borderBottomWidth: 1,
+                borderColor: '#c6c6c6',
+                width: '100%'
+            }}>
+                <View>
+                    <IconMat name="account-arrow-right" color={'#ED1C24'} size={32} />
                 </View>
-                <View style={{ paddingHorizontal: metrics.horizontalScale(20) }}>
-                    <Text style={{ fontSize: 18, fontWeight: '700', color: '#333' }}>Some One</Text>
-                    <Text style={{ fontSize: 14, fontWeight: '400', color: '#828282' }}>Date Time</Text>
+                <View>
+                    <Text style={{ color: '#ED1C24', fontSize: 18, fontWeight: '800', marginBottom: metrics.verticalScale(5) }}>₹ 22.00</Text>
+                    <Text style={{ color: '#000', fontSize: 12, fontWeight: '800' }}>To Pay</Text>
                 </View>
-                <View style={{ paddingHorizontal: metrics.horizontalScale(20) }}>
-                    <Text style={{ fontSize: 18, fontWeight: '800', color: '#ED1C24' }}>₹100</Text>
-                    <Text style={{ fontSize: 12, fontWeight: '400', color: '#828282' }}>To Pay</Text>
+                <View>
+                    <Text style={{ color: '#000', fontSize: 14, fontWeight: '600', marginBottom: metrics.verticalScale(5) }}>02 July 22 - 12:53 PM </Text>
+                    <Text style={{ color: '#000', fontSize: 12, fontWeight: '500' }}>Balance- Rs. 4,220</Text>
                 </View>
-                <TouchableOpacity style={{ position: 'absolute', right: 15 }} >
-                    <Icon name="account-cash" color={'#0A5AC9'} size={28} />
+                <TouchableOpacity>
+                    <Icon name="delete" color={'#ED1C24'} size={18} />
                 </TouchableOpacity>
-            </TouchableOpacity>
+            </View>
         </View>
     )
 }
 
-export default ToPay;
-
-const styles = StyleSheet.create({
-    contactBox: {
-        flexDirection: 'row',
-        paddingHorizontal: metrics.horizontalScale(20),
-        paddingVertical: metrics.verticalScale(15),
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderBottomWidth: 1, 
-        borderColor: '#c6c6c6',
-        width:'100%'
-    }
-});
+export default CashOut;

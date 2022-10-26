@@ -19,8 +19,9 @@ import {
   Supplier,
   CommonHeader,
   UserDetails,
-  ToPay,
-  ToGet
+  ToPayUser,
+  ToGetUser,
+  CustomerEntries
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -50,10 +51,11 @@ const CustomerStack = () => {
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
       <Stack.Screen component={AddContact} name="AddContact" />
-      <Stack.Screen component={ToPay} name="ToPay" />
-      <Stack.Screen component={ToGet} name="ToGet" />
-      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: true }} />
+      <Stack.Screen component={ToPayUser} name="ToPayUser" />
+      <Stack.Screen component={ToGetUser} name="ToGetUser" />
+      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: true,}} />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
   );
 };

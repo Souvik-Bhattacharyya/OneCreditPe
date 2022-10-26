@@ -2,8 +2,8 @@ import { View, ScrollView, TouchableOpacity, StyleSheet, TextInput, Dimensions, 
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import metrics from '../Constants/metrics';
-import ToPay from './Cash/ToPay'
-import ToGet from './Cash/ToGet'
+import ToPayUser from './Cash/ToPayUser'
+import ToGetUser from './Cash/ToGetUser'
 
 const width = Dimensions.get('window').width;
 
@@ -64,8 +64,8 @@ const CustomerTransaction = () => {
             </View>
             <ScrollView>
                 <View style={{ width }}>
-                    <ToGet />
-                    <ToGet />
+                    <ToGetUser />
+                    <ToGetUser />
                 </View>
             </ScrollView >
         </View>

@@ -96,7 +96,7 @@ const Supplier = () => {
                     </View>
                 </View>
 
-                <CustomerTransaction toGet={'Advance'}/>
+                <CustomerTransaction ToGetUser={'Advance'}/>
 
                 <View
                     style={{

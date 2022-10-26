@@ -1,9 +1,7 @@
 import { View, Text, StyleSheet} from 'react-native'
 import React from 'react';
-import CashIn from './Cash/CashIn';
-import CashOut from './Cash/CashOut';
 import metrics from '../Constants/metrics';
-
+import { ToGet, ToPay} from '../Screens';
 const UserTransaction = () => {
     return (
         <View style={styles.container}>
@@ -11,19 +9,8 @@ const UserTransaction = () => {
                 <Text style={{ fontSize: 18, color: "#808282", fontWeight: "900", }}>Date / Time</Text>
             </View>
             <View>
-                <CashIn />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
-                <CashOut />
+                <ToGet />
+                <ToPay />
             </View>
         </View>
     )

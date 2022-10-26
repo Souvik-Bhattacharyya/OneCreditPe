@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react';
 import Icon from 'react-native-vector-icons/AntDesign';
+import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from '../../Constants/metrics';
 
 const CashOut = () => {
@@ -17,7 +18,9 @@ const CashOut = () => {
                 borderColor: '#c6c6c6',
                 width: '100%'
             }}>
-                <Image source={require('../../Assets/Images/red.png')} style={{ zIndex: 2, width: 14, height: 14 }} />
+                <View>
+                    <IconMat name="account-arrow-right" color={'#ED1C24'} size={32} />
+                </View>
                 <View>
                     <Text style={{ color: '#ED1C24', fontSize: 18, fontWeight: '800', marginBottom: metrics.verticalScale(5) }}>₹ 22.00</Text>
                     <Text style={{ color: '#000', fontSize: 12, fontWeight: '800' }}>Cash Out</Text>
