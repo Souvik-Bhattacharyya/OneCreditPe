@@ -16,7 +16,7 @@ export default class API {
     return this.httpRequest("PUT", endpoint, params, header);
   }
 
-  async httpRequest(method, url, data, header = null) {
+  async httpRequest(method, url, data = null, header = null) {
     let state = store.getState();
     let clientToken = state.auth.clientToken;
     return new Promise((resolve, reject) => {
