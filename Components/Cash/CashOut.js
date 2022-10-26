@@ -1,7 +1,9 @@
+
 import {View, Text, Image, TouchableOpacity} from "react-native";
 import React, {useEffect} from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import metrics from "../../Constants/metrics";
+
 
 const CashOut = () => {
   return (
@@ -30,11 +32,13 @@ const CashOut = () => {
               fontWeight: "800",
               marginBottom: metrics.verticalScale(5),
             }}>
+
             ₹ 22.00
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
             Cash Out
           </Text>
+
         </View>
         <View>
           <Text

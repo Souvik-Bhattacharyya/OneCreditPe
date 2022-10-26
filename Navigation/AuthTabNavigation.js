@@ -18,6 +18,10 @@ import {
   SetCollectionDate,
   Supplier,
   CommonHeader,
+  UserDetails,
+  ToPayUser,
+  ToGetUser,
+  CustomerEntries
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -47,7 +51,11 @@ const CustomerStack = () => {
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={NewCustomer} name="NewCustomer" />
       <Stack.Screen component={AddContact} name="AddContact" />
+      <Stack.Screen component={ToPayUser} name="ToPayUser" />
+      <Stack.Screen component={ToGetUser} name="ToGetUser" />
+      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: true,}} />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
   );
 };
@@ -74,15 +82,7 @@ const SupplierStack = () => {
 
 const PartiesStack = () => {
   return (
-    <Stack.Navigator screenOptions={{
-      headerShown: true, headerTitleAlign: 'center', headerStyle: {
-        backgroundColor: '#0A5AC9',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    }}>
+    <Stack.Navigator>
       <Stack.Screen component={CustomerStack} name="CustomerStack" options={{ headerShown: false }} />
       <Stack.Screen component={SupplierStack} name="SupplierStack" options={{ headerShown: false }} />
     </Stack.Navigator>
@@ -143,7 +143,16 @@ const AuthTabNavigation = ({ navigation }) => {
         tabBarShowLabel: true,
         headerShown: false,
         tabBarInactiveTintColor: '#828282',
-        tabBarStyle: { padding: 10, height: 60 },
+        tabBarStyle: {
+          paddingVertical: 10,
+          height: 60,
+          backgroundColor: '#fff'
+        },
+        tabBarLabelStyle: {
+          fontWeight: '700',
+          fontSize: 12,
+          paddingBottom: 5
+        }
       }}>
       <Tab.Screen
         name="Home"
@@ -152,7 +161,6 @@ const AuthTabNavigation = ({ navigation }) => {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="home" size={24} color={color} style={{ marginTop: 2 }} />
           ),
-          tabBarLabelStyle: { fontSize: 12, fontWeight: '700', paddingBottom: 5 }
         }}
       />
       <Tab.Screen
@@ -162,7 +170,6 @@ const AuthTabNavigation = ({ navigation }) => {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="user-plus" size={24} color={color} style={{ marginTop: 2 }} />
           ),
-          tabBarLabelStyle: { fontSize: 12, fontWeight: '700', paddingBottom: 5 }
         }}
       />
       <Tab.Screen
@@ -172,7 +179,6 @@ const AuthTabNavigation = ({ navigation }) => {
           tabBarIcon: ({ color }) => (
             <FontAwesome name="book" size={24} color={color} style={{ marginTop: 2 }} />
           ),
-          tabBarLabelStyle: { fontSize: 12, fontWeight: '700', paddingBottom: 5 }
         }}
       />
       <Tab.Screen
@@ -182,7 +188,6 @@ const AuthTabNavigation = ({ navigation }) => {
           tabBarIcon: ({ color }) => (
             <Icon name="menu-fold" size={24} color={color} style={{ marginTop: 2 }} />
           ),
-          tabBarLabelStyle: { fontSize: 12, fontWeight: '700', paddingBottom: 5 }
         }}
       />
     </Tab.Navigator>

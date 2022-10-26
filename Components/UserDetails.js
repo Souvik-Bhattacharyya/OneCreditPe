@@ -1,0 +1,71 @@
+import {
+  ScrollView,
+  View,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+  Text,
+  Image
+} from "react-native";
+import React from "react";
+import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation } from "@react-navigation/native";
+import metrics from "../Constants/metrics";
+import UserTransaction from "./UserTransaction";
+
+const CustomerHome = () => {
+  const navigation = useNavigation();
+  const width = Dimensions.get('window').width;
+
+  return (
+    <View style={{ flex: 1 }}>
+      <ScrollView>
+        <UserTransaction />
+        <UserTransaction />
+      </ScrollView>
+
+      <View style={{
+        position: "absolute",
+        bottom: metrics.verticalScale(0),
+        alignSelf: "center",
+        width,
+        flexDirection: 'row',
+        justifyContent: "space-between",
+        backgroundColor: '#f6f6f6',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        left: 0,
+        borderTopWidth: 1,
+        borderColor: '#c9c9c9'
+      }}>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('CustomerStack', {
+            screen: 'CustomerEntries'
+          })}
+          style={{
+            paddingHorizontal: metrics.horizontalScale(20),
+            paddingVertical: metrics.verticalScale(10),
+            backgroundColor: "#0a5ac9",
+            borderRadius: 6,
+            width: '100%',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}>
+          <IconMat name="cash-plus" color={'#fff'} size={24} />
+          <Text style={[styles.btnTxt, { color: '#fff',marginLeft: 5}]}>Cash Entries</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+export default CustomerHome;
+
+const styles = StyleSheet.create({
+  btnTxt: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#fff",
+    textAlign: "center",
+  },
+});

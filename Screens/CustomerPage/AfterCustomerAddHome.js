@@ -96,7 +96,7 @@ const Customer = () => {
                         <Icon name="account-arrow-right" color={'#F31B24'} size={32} />
                     </View>
                 </View>
-                <CustomerTransaction />
+                <CustomerTransaction  />
 
                 <View
                     style={{

@@ -2,8 +2,8 @@ import { View, ScrollView, TouchableOpacity, StyleSheet, TextInput, Dimensions, 
 import React from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import metrics from '../Constants/metrics';
-import ToPay from './Cash/ToPay'
-import ToGet from './Cash/ToGet'
+import ToPayUser from './Cash/ToPayUser'
+import ToGetUser from './Cash/ToGetUser'
 
 const width = Dimensions.get('window').width;
 
@@ -23,7 +23,7 @@ const CustomerTransaction = () => {
             justifyContent: 'space-between',
             alignItems: 'center',
             paddingHorizontal: metrics.horizontalScale(10),
-            borderColor: '#828282',
+            borderColor: '#c6c6c6',
             borderWidth: 1,
             borderRadius: 46,
             backgroundColor: '#f6f6f6',
@@ -32,7 +32,7 @@ const CustomerTransaction = () => {
 
     return (
         <View style={styles.container}>
-            <View style={{ borderBottomColor: '#c6c6c6', borderBottomWidth: 1}}>
+            <View style={{ borderBottomColor: '#c6c6c6', borderBottomWidth: 1 }}>
                 <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: "center", paddingBottom: 20, paddingHorizontal: metrics.horizontalScale(20) }}>
                     <View style={styles.search}>
                         <TextInput
@@ -56,25 +56,16 @@ const CustomerTransaction = () => {
                     <View style={{
                         width: '20%', justifyContent: 'flex-end', alignItems: 'flex-end', paddingVertical: metrics.verticalScale(5), paddingHorizontal: metrics.horizontalScale(5),
                     }}>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '80%', borderWidth: 2, paddingVertical: 5, borderColor: '#0A5AC9', borderRadius: 6 }}>
-                            <Text style={{ color: '#333', fontSize: 14, fontWeight: '900', color: '#0a5ac9' }}>PDF</Text>
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '80%', paddingVertical: 8,borderRadius: 6, backgroundColor:'#0A5AC9'}}>
+                            <Text style={{ color: '#333', fontSize: 14, fontWeight: '900', color: '#fff' }}>PDF</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
             <ScrollView>
-                <View style={{ width}}>
-                    <ToGet />
-                    <ToGet />
-                    <ToGet />
-                    <ToGet />
-                    <ToGet />
-                    <ToGet />
-                    <ToPay />
-                    <ToPay />
-                    <ToPay />
-                    <ToPay />
-                    <ToPay />
+                <View style={{ width }}>
+                    <ToGetUser />
+                    <ToGetUser />
                 </View>
             </ScrollView >
         </View>
