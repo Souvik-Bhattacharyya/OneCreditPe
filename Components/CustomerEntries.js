@@ -82,8 +82,8 @@ import {
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(10),
-              backgroundColor: isActive === "cash in" ? "#20409A" : "white",
-              borderColor: isActive === "cash in" ? "#20409A" : "#c6c6c6",
+              backgroundColor: isActive === "cash in" ? "#12ce12" : "white",
+              borderColor: isActive === "cash in" ? "#12ce12" : "#c9c9c9",
               borderWidth: 1,
               width: '48%',
               borderRadius: 4,
@@ -92,7 +92,7 @@ import {
             <Text
               style={[
                 styles.btnTxt,
-                { color: isActive === "cash in" ? "#fff" : "#20409A" },
+                { color: isActive === "cash in" ? "#fff" : "#0a5ac9" },
               ]}>
               To Get
             </Text>
@@ -101,8 +101,8 @@ import {
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(10),
-              backgroundColor: isActive === "cash out" ? "#20409A" : "white",
-              borderColor: isActive === "cash out" ? "#20409A" : "#c6c6c6",
+              backgroundColor: isActive === "cash out" ? "#ED1C24" : "white",
+              borderColor: isActive === "cash out" ? "#ED1C24" : "#c6c6c6",
               borderWidth: 1,
               width: '48%',
               borderRadius: 4

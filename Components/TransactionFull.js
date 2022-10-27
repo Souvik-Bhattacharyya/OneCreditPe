@@ -63,12 +63,6 @@ const TransactionFull = () => {
     <View style={styles.container}>
       <ScrollView>
         <View style={{width}}>
-          {/* {cashOutDetails.map(obj => {
-            <CashOut />;
-          })}
-          {cashInDetails.map(obj => {
-            <CashIn />;
-          })} */}
           <CashOut />
           <CashOut />
           <CashOut />

@@ -119,7 +119,37 @@ const ViewReport = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
+        
         <TransactionFull />
+
+        <View style={{
+          // position: "absolute",
+          // bottom: metrics.verticalScale(0),
+          alignSelf: "center",
+          width,
+          flexDirection: 'row',
+          justifyContent: "space-between",
+          backgroundColor: '#f6f6f6',
+          paddingHorizontal: 20,
+          paddingVertical: 10,
+          left: 0,
+          borderTopWidth: 1,
+          borderColor: '#c9c9c9',
+        }}>
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: metrics.horizontalScale(20),
+              paddingVertical: metrics.verticalScale(15),
+              backgroundColor: "#0a5ac9",
+              borderRadius: 6,
+              width: '100%',
+              flexDirection: 'row',
+              justifyContent: 'center',
+            }}>
+            <Text style={{ color: '#333', fontSize: 16, fontWeight: '900', color: '#fff' }}>Download PDF</Text>
+          </TouchableOpacity>
+        </View>
+
 
         <Modal visible={showModal1} transparent animationType="fade">
           <View

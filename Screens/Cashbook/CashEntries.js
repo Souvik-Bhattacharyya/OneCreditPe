@@ -200,8 +200,7 @@ const styles = StyleSheet.create({
   },
   btnTxt: {
     fontSize: 18,
-    fontWeight: "600",
-    // color: "#fff",
+    fontWeight: "800",
     textAlign: "center",
   },
 });
