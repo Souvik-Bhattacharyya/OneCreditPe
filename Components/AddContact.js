@@ -8,14 +8,16 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Contacts from "react-native-contacts";
+import { useNavigation } from "@react-navigation/native";
 
 const AddContact = () => {
   const [contacts, setContacts] = useState([]);
+  const navigation = useNavigation();
 
   const ListItem = ({ item }) => {
     return (
       <TouchableOpacity
-      // onClick={()=> {''}}
+      onPress={() => navigation.navigate("UserDetails")}
       style={styles.contactCon}>
         <View style={styles.imgCon}>
           <View style={styles.placeholder}>
