@@ -68,16 +68,6 @@ const CustomerTransaction = () => {
                 <View style={{width}}>
                     <ToGetUser />
                     <ToPayUser />
-                    <ToGetUser />
-                    <ToPayUser />
-                    <ToGetUser />
-                    <ToPayUser />
-                    <ToGetUser />
-                    <ToPayUser />
-                    <ToGetUser />
-                    <ToPayUser />
-                    <ToGetUser />
-                    <ToPayUser />
                 </View>
             </ScrollView >
         </View>

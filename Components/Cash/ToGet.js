@@ -1,6 +1,5 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react';
-import Icon from 'react-native-vector-icons/AntDesign';
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from '../../Constants/metrics';
 
@@ -18,20 +17,23 @@ const CashIn = () => {
                 borderColor: '#c6c6c6',
                 width: '100%'
             }}>
-                <View>
+                <View style={{ width: '10%', justifyContent: 'center', alignItems: 'center' }}>
                     <IconMat name="account-arrow-left" color={'#12ce12'} size={32} />
                 </View>
-                <View>
-                    <Text style={{ color: '#12ce12', fontSize: 18, fontWeight: '800', marginBottom: metrics.verticalScale(5) }}>₹ 22.00</Text>
+                <View style={{ width: '20%' }}>
+                    <Text style={{ color: '#12ce12', fontSize: 18, fontWeight: '800', marginBottom: metrics.verticalScale(5) }}>₹ 10k</Text>
                     <Text style={{ color: '#000', fontSize: 12, fontWeight: '800' }}>To Get</Text>
                 </View>
-                <View>
+                <View style={{ width: '45%' }}>
                     <Text style={{ color: '#000', fontSize: 14, fontWeight: '600', marginBottom: metrics.verticalScale(5) }}>02 July 22 - 12:53 PM </Text>
-                    <Text style={{ color: '#000', fontSize: 12, fontWeight: '500' }}>Balance- Rs. 4,220</Text>
+                    <Text style={{ color: '#828282', fontSize: 12, fontWeight: '800' }}>Balance- Rs. 4,220</Text>
+                    <Text style={{ color: '#111', fontSize: 12, fontWeight: '600' }}>Details he/she has entried here this is a long long details</Text>
                 </View>
-                <TouchableOpacity>
-                    <Icon name="delete" color={'#ED1C24'} size={18} />
-                </TouchableOpacity>
+                <View style={{width: '10%'}}>
+                    <TouchableOpacity>
+                        <IconMat name="image" color={'#0a5ac9'} size={24} style={{}}/>
+                    </TouchableOpacity>
+                </View>
             </View>
         </View>
     )

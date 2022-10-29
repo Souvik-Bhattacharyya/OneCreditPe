@@ -12,14 +12,17 @@ import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from "@react-navigation/native";
 import metrics from "../Constants/metrics";
 import UserTransaction from "./UserTransaction";
+import PartiesHeader from "./PartiesHeader";
+
 
 const CustomerHome = () => {
-  const navigation = useNavigation();
-  const width = Dimensions.get('window').width;
+const navigation = useNavigation();
+const width = Dimensions.get('window').width;
 
   return (
-    <View style={{ flex: 1, backgroundColor:'#E8EEFF',}}>
-      <ScrollView style={{marginBottom: 60}}>
+    <View style={{ flex: 1, backgroundColor: '#E8EEFF', }}>
+      <PartiesHeader />
+      <ScrollView style={{ marginBottom: 60 }}>
         <UserTransaction />
         <UserTransaction />
         <UserTransaction />
@@ -57,7 +60,7 @@ const CustomerHome = () => {
             justifyContent: 'center',
           }}>
           <IconMat name="cash-plus" color={'#fff'} size={24} />
-          <Text style={[styles.btnTxt, { color: '#fff',marginLeft: 5}]}>Cash Entries</Text>
+          <Text style={[styles.btnTxt, { color: '#fff', marginLeft: 5 }]}>Cash Entries</Text>
         </TouchableOpacity>
       </View>
     </View>

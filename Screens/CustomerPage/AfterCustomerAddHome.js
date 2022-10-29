@@ -24,7 +24,7 @@ const Customer = () => {
                 {/*Tab Button */}
                 <View style={{
                     marginBottom: 15,
-                    marginTop: metrics.verticalScale(-45),
+                    marginTop: metrics.verticalScale(-15),
                     alignSelf: "center",
                     width: "100%",
                     flexDirection: 'row',
@@ -44,6 +44,7 @@ const Customer = () => {
                             justifyContent: 'center',
                             borderColor: '#fff',
                             borderWidth: 4,
+                            alignItems:'center',
                         }}>
                         <Image source={require('../../Assets/add-user.png')} style={styles.btnIcon} />
                         <Text style={[styles.btnTxt, { color: '#fff' }]}>Customer</Text>
@@ -57,6 +58,7 @@ const Customer = () => {
                             width: '50%',
                             flexDirection: 'row',
                             justifyContent: 'center',
+                            alignItems:'center',
                         }}>
                         <Image source={require('../../Assets/manage-supplier(Theme).png')} style={styles.btnIcon} />
                         <Text style={styles.btnTxt}>Supplier</Text>
@@ -97,20 +99,37 @@ const Customer = () => {
                     </View>
                 </View>
 
-                
-                <CustomerTransaction  />
 
-                <View
-                    style={{
-                        width: '100%',
-                        position: "absolute",
-                        bottom: 20,
-                        right: 20,
-                        alignItems: 'flex-end'
-                    }}>
+                <CustomerTransaction />
+
+                <View style={{
+                    position: "absolute",
+                    bottom: metrics.verticalScale(0),
+                    alignSelf: "center",
+                    width,
+                    flexDirection: 'row',
+                    justifyContent: "space-between",
+                    backgroundColor: '#f6f6f6',
+                    paddingHorizontal: 20,
+                    paddingVertical: 10,
+                    left: 0,
+                    borderTopWidth: 1,
+                    borderColor: '#c9c9c9',
+                }}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('NewCustomer')}>
-                        <Icon name="plus-circle" color={'#0A5AC9'} size={64} />
+                        onPress={() => navigation.navigate('NewCustomer')}
+                        style={{
+                            paddingHorizontal: metrics.horizontalScale(20),
+                            paddingVertical: metrics.verticalScale(10),
+                            backgroundColor: "#0a5ac9",
+                            borderRadius: 6,
+                            width: '100%',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                            alignItems:'center'
+                        }}>
+                        <Icon name="plus-circle" color={'#fff'} size={20} />
+                        <Text style={[styles.btnTxt, { color: '#fff', marginLeft: 5 }]}>Add New Customer</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -146,7 +165,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     btnTxt: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: "700",
         color: "#0a5ac9",
         textAlign: "center",

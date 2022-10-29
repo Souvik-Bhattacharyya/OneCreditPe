@@ -28,7 +28,7 @@ const CustomerHome = () => {
     <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={[styles.card, styles.shadow, { marginTop: -45 }]}>
+        <View style={[styles.card, styles.shadow]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text

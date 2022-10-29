@@ -53,7 +53,7 @@ const CustomerStack = () => {
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
-      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: true, }} />
+      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false}} />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
@@ -78,7 +78,7 @@ const SupplierStack = () => {
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
-      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: true, }} />
+      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false}}/>
       <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
   );

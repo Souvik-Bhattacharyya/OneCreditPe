@@ -22,7 +22,7 @@ const ToGetUser = () => {
                 </View>
                 <View style={{width:'40%', alignItems:'flex-end', backgroundColor:'#fff'}}>
                     <Text style={{ fontSize: 18, fontWeight: '800', color: '#12CE12' }}>₹100</Text>
-                    <Text style={{ fontSize: 12, fontWeight: '400', color: '#828282' }}>To Pay</Text>
+                    <Text style={{ fontSize: 12, fontWeight: '400', color: '#828282' }}>To Get</Text>
                 </View>
             </TouchableOpacity>
         </>
