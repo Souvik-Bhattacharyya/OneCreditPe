@@ -14,6 +14,7 @@ import CashIn from "./Cash/CashIn";
 import CashOut from "./Cash/CashOut";
 import Api from "../Services";
 import {useSelector} from "react-redux";
+import {Cashbook} from "../Screens";
 const width = Dimensions.get("window").width;
 
 const TransactionFull = () => {
@@ -63,17 +64,13 @@ const TransactionFull = () => {
     <View style={styles.container}>
       <ScrollView>
         <View style={{width}}>
-          <CashOut />
-          <CashOut />
-          <CashOut />
-          <CashOut />
-          <CashOut />
-          <CashOut />
-          <CashIn />
-          <CashIn />
-          <CashIn />
-          <CashIn />
-          <CashIn />
+          {cashOutDetails.map(obj => (
+            <CashOut object={obj} />
+          ))}
+
+          {cashInDetails.map(obj => (
+            <CashIn object={obj} />
+          ))}
         </View>
       </ScrollView>
     </View>

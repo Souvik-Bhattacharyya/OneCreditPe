@@ -7,19 +7,22 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import AddContact from "../../Components/AddContact";
 
 const CustomerHome = () => {
   const navigation = useNavigation();
-
+  const [customer, setCustomer] = useState({
+    name: "",
+    mobile: null,
+  });
   return (
     <>
       <View style={styles.container}>
-        <View style={{ paddingHorizontal: metrics.horizontalScale(15) }}>
+        <View style={{paddingHorizontal: metrics.horizontalScale(15)}}>
           <View
             style={{
               flexDirection: "row",
@@ -30,9 +33,15 @@ const CustomerHome = () => {
               placeholder="Customer Name"
               placeholderTextColor={"#828282"}
               style={styles.Input}
+              onChangeText={val => setCustomer({...customer, name: val})}
             />
             <View style={styles.circle}>
-              <Icon name="user-alt" size={16} color={"#fff"} style={styles.Icon} />
+              <Icon
+                name="user-alt"
+                size={16}
+                color={"#fff"}
+                style={styles.Icon}
+              />
             </View>
           </View>
           <View
@@ -46,7 +55,8 @@ const CustomerHome = () => {
               placeholder="Customer Mobile"
               placeholderTextColor={"#828282"}
               style={styles.Input}
-              keyboardType={'numeric'}
+              keyboardType={"numeric"}
+              onChangeText={val => setCustomer({...customer, mobile: val})}
             />
             <View style={styles.circle}>
               <Icon name="phone" size={16} color={"#fff"} style={styles.Icon} />
@@ -57,10 +67,12 @@ const CustomerHome = () => {
             style={{
               alignItems: "center",
               justifyContent: "flex-end",
-              width: '100%',
-              marginTop: 15
+              width: "100%",
+              marginTop: 15,
             }}>
-            <TouchableOpacity style={{ width: "100%" }}>
+            <TouchableOpacity
+              style={{width: "100%"}}
+              onPress={() => console.log(customer)}>
               <View
                 style={{
                   backgroundColor: "#0a5ac9",
@@ -85,17 +97,18 @@ const CustomerHome = () => {
           </View>
         </View>
 
-        <View style={{
-          width: '100%',
-          justifyContent: 'flex-end',
-          backgroundColor: '#fff',
-          paddingVertical: 5,
-          paddingHorizontal: 10,
-          marginTop: 15,
-          // borderWidth: 1,
-          // borderColor: '#c9c9c9',
-          flex: 1
-        }}>
+        <View
+          style={{
+            width: "100%",
+            justifyContent: "flex-end",
+            backgroundColor: "#fff",
+            paddingVertical: 5,
+            paddingHorizontal: 10,
+            marginTop: 15,
+            // borderWidth: 1,
+            // borderColor: '#c9c9c9',
+            flex: 1,
+          }}>
           <AddContact />
         </View>
       </View>
