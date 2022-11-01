@@ -5,12 +5,12 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
 import DatePicker from "react-native-date-picker";
-import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import moment from "moment/moment";
 const CashEntries = () => {
   const [isActive, setIsActive] = useState("cash in");
@@ -28,7 +28,7 @@ const CashEntries = () => {
   };
   const showMode = currentMode => {
     let maximumDate = new Date();
-    maximumDate.setFullYear(maximumDate.getFullYear() - 18);
+    maximumDate.setFullYear(maximumDate.getFullYear());
 
     DateTimePickerAndroid.open({
       value: date || new Date(),
@@ -51,7 +51,7 @@ const CashEntries = () => {
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
 
-      <View style={{marginVertical: 15}}>
+      <View style={{ marginVertical: 15 }}>
         <TouchableOpacity
           style={{
             backgroundColor: "#fff",
@@ -93,13 +93,14 @@ const CashEntries = () => {
             }}
           /> */}
           <Text
+            placeholder="Select Date & Time"
             style={{
-              color: "#828282",
               fontSize: 18,
-              paddingHorizontal: 10,
-              fontWeight: "800",
+              fontWeight:'600',
+              color:'#000',
+              paddingHorizontal:10
             }}>
-            {date ? moment(date).format("L") : "Select Date & Time"}
+            {date ? moment(date).format("MMMM Do YYYY, h:mm:ss") : "Select Date & Time"}
           </Text>
         </TouchableOpacity>
       </View>
@@ -125,7 +126,7 @@ const CashEntries = () => {
           <Text
             style={[
               styles.btnTxt,
-              {color: isActive === "cash in" ? "#fff" : "#20409A"},
+              { color: isActive === "cash in" ? "#fff" : "#20409A" },
             ]}>
             Cash In
           </Text>
@@ -144,7 +145,7 @@ const CashEntries = () => {
           <Text
             style={[
               styles.btnTxt,
-              {color: isActive === "cash out" ? "#fff" : "#20409A"},
+              { color: isActive === "cash out" ? "#fff" : "#20409A" },
             ]}>
             Cash Out
           </Text>
@@ -157,7 +158,7 @@ const CashEntries = () => {
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            {height: 200, textAlignVertical: "top", paddingHorizontal: 20},
+            { height: 200, textAlignVertical: "top", paddingHorizontal: 20 },
           ]}
           multiline={true}
           numberOfLines={10}
@@ -186,10 +187,10 @@ const CashEntries = () => {
           <DatePickerIcon
             name="camera-alt"
             color={"#0a5ac9"}
-            style={{marginRight: 5}}
+            style={{ marginRight: 5 }}
             size={24}
           />
-          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Attach Bill</Text>
+          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Attach Bill</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -199,7 +200,7 @@ const CashEntries = () => {
             borderRadius: 50,
             width: "48%",
           }}>
-          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
