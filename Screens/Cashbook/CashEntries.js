@@ -5,14 +5,15 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
 import DatePicker from "react-native-date-picker";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
-import moment from "moment/moment";
-const CashEntries = () => {
+import moment from "moment";
+import Api from "../../Services";
+
+const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   // const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -22,6 +23,42 @@ const CashEntries = () => {
     const currentDate = selectedDate;
     setDate(currentDate);
   };
+
+  const [cashDetails, setCashDetails] = useState({
+    amount: null,
+    entryDate: "2022-11-01 07:08:29",
+    cb_tns_type: "in",
+    paymentType: "online",
+    paymentDetails: "",
+    attachments: null,
+  });
+
+  const cashEntry = async () => {
+    try {
+      const response = await Api.post("/auth/cashbook", {
+        amount: cashDetails.amount,
+        date_time: cashDetails.entryDate,
+        cb_tns_type: cashDetails.cb_tns_type,
+        payment_type: cashDetails.paymentType,
+        payment_details: cashDetails.paymentDetails,
+        // attachments: cashDetails.attachments,
+      });
+      if (response.status == 200) {
+        console.log("====>", response.data);
+        setCashDetails({
+          ...cashDetails,
+          amount: null,
+          entryDate: "2022-11-01 07:08:29",
+          cb_tns_type: "in",
+          paymentType: "online",
+          paymentDetails: "",
+          attachments: null,
+        });
+        navigation.navigate("Cashbook", {screen: "Cash Book"});
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
   const showDatepicker = () => {
     showMode("date");
@@ -38,20 +75,23 @@ const CashEntries = () => {
       minimumDate: new Date(1950, 0, 1),
       maximumDate: maximumDate,
     });
+
   };
   return (
     <View style={styles.container}>
       <View>
         <TextInput
+          value={cashDetails.amount}
           placeholder="Enter Amount"
           placeholderTextColor={"#828282"}
           style={styles.textInput}
           keyboardType="numeric"
+          onChangeText={val => setCashDetails({...cashDetails, amount: val})}
         />
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
-
-      <View style={{ marginVertical: 15 }}>
+      
+      <View style={{marginVertical: 15}}>
         <TouchableOpacity
           style={{
             backgroundColor: "#fff",
@@ -122,11 +162,14 @@ const CashEntries = () => {
             width: "48%",
             borderRadius: 4,
           }}
-          onPress={() => setIsActive("cash in")}>
+          onPress={() => {
+            setIsActive("cash in");
+            setCashDetails({...cashDetails, cb_tns_type: "in"});
+          }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash in" ? "#fff" : "#20409A" },
+              {color: isActive === "cash in" ? "#fff" : "#20409A"},
             ]}>
             Cash In
           </Text>
@@ -141,11 +184,14 @@ const CashEntries = () => {
             width: "48%",
             borderRadius: 4,
           }}
-          onPress={() => setIsActive("cash out")}>
+          onPress={() => {
+            setIsActive("cash out");
+            setCashDetails({...cashDetails, cb_tns_type: "out"});
+          }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash out" ? "#fff" : "#20409A" },
+              {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
             Cash Out
           </Text>
@@ -154,14 +200,18 @@ const CashEntries = () => {
 
       <View>
         <TextInput
+          value={cashDetails.paymentDetails}
           placeholder="Enter Payment Details"
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            { height: 200, textAlignVertical: "top", paddingHorizontal: 20 },
+            {height: 200, textAlignVertical: "top", paddingHorizontal: 20},
           ]}
           multiline={true}
           numberOfLines={10}
+          onChangeText={val =>
+            setCashDetails({...cashDetails, paymentDetails: val})
+          }
         />
       </View>
       <View
@@ -187,10 +237,10 @@ const CashEntries = () => {
           <DatePickerIcon
             name="camera-alt"
             color={"#0a5ac9"}
-            style={{ marginRight: 5 }}
+            style={{marginRight: 5}}
             size={24}
           />
-          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Attach Bill</Text>
+          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Attach Bill</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -199,8 +249,9 @@ const CashEntries = () => {
             backgroundColor: "#0a5ac9",
             borderRadius: 50,
             width: "48%",
-          }}>
-          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
+          }}
+          onPress={cashEntry}>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>

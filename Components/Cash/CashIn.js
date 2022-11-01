@@ -6,8 +6,8 @@ import metrics from "../../Constants/metrics";
 import moment from "moment";
 
 const CashIn = ({object}) => {
-  const {amount, created_at, detais} = object;
-  const date = moment(created_at).format("Do MMM YY, h:mm a");
+  const {amount, date_time, payment_details} = object;
+  const date = moment(date_time).format("Do MMM YY, h:mm a");
   return (
     <View>
       <View
@@ -58,7 +58,7 @@ const CashIn = ({object}) => {
             Balance- Rs. 4,220
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
-            Details...
+            {payment_details}
           </Text>
         </View>
         <View style={{width: "10%"}}>
