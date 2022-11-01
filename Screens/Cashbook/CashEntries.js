@@ -5,17 +5,40 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
 import DatePicker from "react-native-date-picker";
-
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import moment from "moment/moment";
 const CashEntries = () => {
   const [isActive, setIsActive] = useState("cash in");
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [date, setDate] = useState(null);
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+  const showMode = currentMode => {
+    let maximumDate = new Date();
+    maximumDate.setFullYear(maximumDate.getFullYear() - 18);
+
+    DateTimePickerAndroid.open({
+      value: date || new Date(),
+      onChange,
+      mode: currentMode,
+      is24Hour: true,
+      minimumDate: new Date(1950, 0, 1),
+      maximumDate: maximumDate,
+    });
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -28,35 +51,36 @@ const CashEntries = () => {
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
 
-      <View style={{ marginVertical: 15, }}>
+      <View style={{marginVertical: 15}}>
         <TouchableOpacity
           style={{
             backgroundColor: "#fff",
-            flexDirection: 'row',
-            alignItems: 'center',
+            flexDirection: "row",
+            alignItems: "center",
             borderColor: "#ccc",
             borderWidth: 1,
             borderRadius: 6,
             paddingVertical: 15,
             paddingHorizontal: 20,
           }}
-          onPress={() => setOpen(true)}>
+          // onPress={() => setOpen(true)}
+          onPress={showDatepicker}>
           <DatePickerIcon
             name="date-range"
             color={"#828282"}
             style={{}}
             size={24}
           />
-          <Text
+          {/* <Text
             style={{
               color: "#828282",
               fontSize: 18,
               paddingHorizontal: 10,
-              fontWeight: '800',
+              fontWeight: "800",
             }}>
             Select Date & Time
-          </Text>
-          <DatePicker
+          </Text> */}
+          {/* <DatePicker
             modal
             open={open}
             date={date}
@@ -67,7 +91,16 @@ const CashEntries = () => {
             onCancel={() => {
               setOpen(false);
             }}
-          />
+          /> */}
+          <Text
+            style={{
+              color: "#828282",
+              fontSize: 18,
+              paddingHorizontal: 10,
+              fontWeight: "800",
+            }}>
+            {date ? moment(date).format("L") : "Select Date & Time"}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -76,7 +109,7 @@ const CashEntries = () => {
           flexDirection: "row",
           justifyContent: "space-between",
           marginBottom: metrics.verticalScale(15),
-          width: '100%'
+          width: "100%",
         }}>
         <TouchableOpacity
           style={{
@@ -85,14 +118,14 @@ const CashEntries = () => {
             backgroundColor: isActive === "cash in" ? "#20409A" : "white",
             borderColor: isActive === "cash in" ? "#20409A" : "#c6c6c6",
             borderWidth: 1,
-            width: '48%',
+            width: "48%",
             borderRadius: 4,
           }}
           onPress={() => setIsActive("cash in")}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash in" ? "#fff" : "#20409A" },
+              {color: isActive === "cash in" ? "#fff" : "#20409A"},
             ]}>
             Cash In
           </Text>
@@ -104,14 +137,14 @@ const CashEntries = () => {
             backgroundColor: isActive === "cash out" ? "#20409A" : "white",
             borderColor: isActive === "cash out" ? "#20409A" : "#c6c6c6",
             borderWidth: 1,
-            width: '48%',
-            borderRadius: 4
+            width: "48%",
+            borderRadius: 4,
           }}
           onPress={() => setIsActive("cash out")}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash out" ? "#fff" : "#20409A" },
+              {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
             Cash Out
           </Text>
@@ -124,7 +157,7 @@ const CashEntries = () => {
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            { height: 200, textAlignVertical: "top", paddingHorizontal: 20 },
+            {height: 200, textAlignVertical: "top", paddingHorizontal: 20},
           ]}
           multiline={true}
           numberOfLines={10}
@@ -136,8 +169,8 @@ const CashEntries = () => {
           bottom: metrics.verticalScale(20),
           alignSelf: "center",
           width: "100%",
-          flexDirection: 'row',
-          justifyContent: 'space-between'
+          flexDirection: "row",
+          justifyContent: "space-between",
         }}>
         <TouchableOpacity
           style={{
@@ -145,18 +178,18 @@ const CashEntries = () => {
             paddingVertical: metrics.verticalScale(12),
             backgroundColor: "#fff",
             borderRadius: 50,
-            width: '48%',
-            borderColor: '#c9c9c9',
+            width: "48%",
+            borderColor: "#c9c9c9",
             borderWidth: 1,
-            flexDirection: 'row'
+            flexDirection: "row",
           }}>
           <DatePickerIcon
             name="camera-alt"
             color={"#0a5ac9"}
-            style={{ marginRight: 5 }}
+            style={{marginRight: 5}}
             size={24}
           />
-          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Attach Bill</Text>
+          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Attach Bill</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
@@ -164,9 +197,9 @@ const CashEntries = () => {
             paddingVertical: metrics.verticalScale(12),
             backgroundColor: "#0a5ac9",
             borderRadius: 50,
-            width: '48%'
+            width: "48%",
           }}>
-          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -191,7 +224,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 18,
     backgroundColor: "#fff",
-    fontWeight: '800'
+    fontWeight: "800",
   },
   icon: {
     position: "absolute",
