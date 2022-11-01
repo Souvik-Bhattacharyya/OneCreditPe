@@ -15,8 +15,14 @@ import Api from "../../Services";
 
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
+  const [date, setDate] = useState(null);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
+  };
 
   const [cashDetails, setCashDetails] = useState({
     amount: null,
@@ -53,6 +59,23 @@ const CashEntries = ({navigation}) => {
     } catch (error) {
       console.log(error);
     }
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+  const showMode = currentMode => {
+    let maximumDate = new Date();
+    maximumDate.setFullYear(maximumDate.getFullYear());
+
+    DateTimePickerAndroid.open({
+      value: date || new Date(),
+      onChange,
+      mode: currentMode,
+      is24Hour: true,
+      minimumDate: new Date(1950, 0, 1),
+      maximumDate: maximumDate,
+    });
+
   };
   return (
     <View style={styles.container}>
@@ -67,7 +90,7 @@ const CashEntries = ({navigation}) => {
         />
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
-
+      
       <View style={{marginVertical: 15}}>
         <TouchableOpacity
           style={{
@@ -80,14 +103,15 @@ const CashEntries = ({navigation}) => {
             paddingVertical: 15,
             paddingHorizontal: 20,
           }}
-          onPress={() => setOpen(true)}>
+          // onPress={() => setOpen(true)}
+          onPress={showDatepicker}>
           <DatePickerIcon
             name="date-range"
             color={"#828282"}
             style={{}}
             size={24}
           />
-          <Text
+          {/* <Text
             style={{
               color: "#828282",
               fontSize: 18,
@@ -95,8 +119,8 @@ const CashEntries = ({navigation}) => {
               fontWeight: "800",
             }}>
             Select Date & Time
-          </Text>
-          <DatePicker
+          </Text> */}
+          {/* <DatePicker
             modal
             open={open}
             date={date}
@@ -107,7 +131,17 @@ const CashEntries = ({navigation}) => {
             onCancel={() => {
               setOpen(false);
             }}
-          />
+          /> */}
+          <Text
+            placeholder="Select Date & Time"
+            style={{
+              fontSize: 18,
+              fontWeight:'600',
+              color:'#000',
+              paddingHorizontal:10
+            }}>
+            {date ? moment(date).format("MMMM Do YYYY, h:mm:ss") : "Select Date & Time"}
+          </Text>
         </TouchableOpacity>
       </View>
 
