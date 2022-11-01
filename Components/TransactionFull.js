@@ -31,7 +31,6 @@ const TransactionFull = () => {
     try {
       const response = await Api.get("/auth/today-cashbook-out");
       if (response.data.status == 200) {
-        console.log("cash out data :", response.data.data);
         setCashOutDetails(response.data.data);
       }
     } catch (error) {
@@ -43,7 +42,6 @@ const TransactionFull = () => {
     try {
       const response = await Api.get("/auth/today-cashbook-in");
       if (response.data.status == 200) {
-        console.log("cash in data :", response.data.data);
         setCashInDetails(response.data.data);
       }
     } catch (error) {
