@@ -59,6 +59,7 @@ const CashEntries = ({navigation}) => {
     } catch (error) {
       console.log(error);
     }
+  }
 
   const showDatepicker = () => {
     showMode("date");
