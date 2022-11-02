@@ -5,22 +5,44 @@ import {
   StyleSheet,
   TouchableOpacity,
   Modal,
-  Dimensions
+  Dimensions,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
-import { Calendar } from "react-native-calendars";
+import {Calendar} from "react-native-calendars";
 import TransactionFull from "../../Components/TransactionFull";
 import moment from "moment";
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+const width = Dimensions.get("window").width;
 
-const width = Dimensions.get('window').width;
-
-const ViewReport = ({ navigation }) => {
+const ViewReport = ({navigation}) => {
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showDate1, setShowDate1] = useState(new Date());
   const [showDate2, setShowDate2] = useState(new Date());
+  const [date, setDate] = useState(null);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
+  };
+  const showDatepicker = () => {
+    showMode("date");
+  };
+  const showMode = currentMode => {
+    let maximumDate = new Date();
+    maximumDate.setFullYear(maximumDate.getFullYear());
+
+    DateTimePickerAndroid.open({
+      value: date || new Date(),
+      onChange,
+      mode: currentMode,
+      is24Hour: true,
+      minimumDate: new Date(1950, 0, 1),
+      maximumDate: maximumDate,
+    });
+  };
   return (
     <>
       <View style={styles.container}>
@@ -69,7 +91,7 @@ const ViewReport = ({ navigation }) => {
           </View>
         </View>
 
-        <View style={{ backgroundColor: '#fff', marginTop: 15 }}>
+        <View style={{backgroundColor: "#fff", marginTop: 15}}>
           <View
             style={{
               borderBottomWidth: 1.5,
@@ -78,7 +100,8 @@ const ViewReport = ({ navigation }) => {
               flexDirection: "row",
               justifyContent: "space-between",
             }}>
-            <TouchableOpacity onPress={() => setShowModal1(true)}
+            <TouchableOpacity
+              onPress={() => setShowModal1(true)}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-evenly",
@@ -91,65 +114,72 @@ const ViewReport = ({ navigation }) => {
                 <Icon name="calendar" size={22} color={"#0A5AC9"} />
               </View>
               <View>
-                <Text style={{ color: "#0A5AC9" }}>From Date</Text>
+                <Text style={{color: "#0A5AC9"}}>From Date</Text>
                 <Text
-                  style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "700" }}>
+                  style={{color: "#0A5AC9", fontSize: 16, fontWeight: "700"}}>
                   {moment(showDate1).format("ll")}
                 </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => setShowModal2(true)}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-evenly",
                 width: "50%",
                 alignItems: "center",
-              }}>
-              <TouchableOpacity>
-                <Icon name="calendar" size={22} color={"#349EFF"} />
-              </TouchableOpacity>
+              }}
+              onPress={showDatepicker}>
+              <Icon name="calendar" size={22} color={"#349EFF"} />
+
               <View>
-                <Text style={{ color: "#349EFF" }}>To Date</Text>
+                <Text style={{color: "#349EFF"}}>To Date</Text>
                 <Text
-                  style={{ color: "#349EFF", fontSize: 16, fontWeight: "700" }}>
-                  {moment(showDate2).format("ll")}
+                  style={{color: "#349EFF", fontSize: 16, fontWeight: "700"}}>
+                  {moment(date).format("ll")}
                 </Text>
               </View>
             </TouchableOpacity>
           </View>
         </View>
-        
+
         <TransactionFull />
 
-        <View style={{
-          // position: "absolute",
-          // bottom: metrics.verticalScale(0),
-          alignSelf: "center",
-          width,
-          flexDirection: 'row',
-          justifyContent: "space-between",
-          backgroundColor: '#f6f6f6',
-          paddingHorizontal: 20,
-          paddingVertical: 10,
-          left: 0,
-          borderTopWidth: 1,
-          borderColor: '#c9c9c9',
-        }}>
+        <View
+          style={{
+            // position: "absolute",
+            // bottom: metrics.verticalScale(0),
+            alignSelf: "center",
+            width,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            backgroundColor: "#f6f6f6",
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+            left: 0,
+            borderTopWidth: 1,
+            borderColor: "#c9c9c9",
+          }}>
           <TouchableOpacity
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(15),
               backgroundColor: "#0a5ac9",
               borderRadius: 6,
-              width: '100%',
-              flexDirection: 'row',
-              justifyContent: 'center',
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "center",
             }}>
-            <Text style={{ color: '#333', fontSize: 16, fontWeight: '900', color: '#fff' }}>Download PDF</Text>
+            <Text
+              style={{
+                color: "#333",
+                fontSize: 16,
+                fontWeight: "900",
+                color: "#fff",
+              }}>
+              Download PDF
+            </Text>
           </TouchableOpacity>
         </View>
-
 
         <Modal visible={showModal1} transparent animationType="fade">
           <View
@@ -160,7 +190,7 @@ const ViewReport = ({ navigation }) => {
               backgroundColor: "#000000aa",
             }}>
             <Calendar
-              style={{ borderRadius: 10, width: "100%" }}
+              style={{borderRadius: 10, width: "100%"}}
               onDayPress={date => {
                 setShowDate1(date);
                 setShowModal1(false);
@@ -178,7 +208,7 @@ const ViewReport = ({ navigation }) => {
               backgroundColor: "#000000aa",
             }}>
             <Calendar
-              style={{ borderRadius: 10, width: "100%" }}
+              style={{borderRadius: 10, width: "100%"}}
               onDayPress={date => {
                 setShowDate2(date);
                 setShowModal2(false);
@@ -244,17 +274,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
-    marginTop: metrics.verticalScale(10)
+    marginTop: metrics.verticalScale(10),
   },
   cashBtn: {
     paddingVertical: 10,
     borderRadius: 50,
-    width: '48%',
+    width: "48%",
   },
   btnTxt: {
     fontSize: 22,
     fontWeight: "800",
     color: "#fff",
-    textAlign: 'center'
+    textAlign: "center",
   },
 });
