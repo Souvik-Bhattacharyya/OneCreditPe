@@ -9,14 +9,12 @@ import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
-import DatePicker from "react-native-date-picker";
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import moment from "moment";
 import Api from "../../Services";
 
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
-  // const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
   const [date, setDate] = useState(null);
 
   const onChange = (event, selectedDate) => {
@@ -59,7 +57,7 @@ const CashEntries = ({navigation}) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const showDatepicker = () => {
     showMode("date");
@@ -76,7 +74,6 @@ const CashEntries = ({navigation}) => {
       minimumDate: new Date(1950, 0, 1),
       maximumDate: maximumDate,
     });
-
   };
   return (
     <View style={styles.container}>
@@ -91,7 +88,7 @@ const CashEntries = ({navigation}) => {
         />
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
-      
+
       <View style={{marginVertical: 15}}>
         <TouchableOpacity
           style={{
@@ -104,7 +101,6 @@ const CashEntries = ({navigation}) => {
             paddingVertical: 15,
             paddingHorizontal: 20,
           }}
-          // onPress={() => setOpen(true)}
           onPress={showDatepicker}>
           <DatePickerIcon
             name="date-range"
@@ -112,36 +108,16 @@ const CashEntries = ({navigation}) => {
             style={{}}
             size={24}
           />
-          {/* <Text
-            style={{
-              color: "#828282",
-              fontSize: 18,
-              paddingHorizontal: 10,
-              fontWeight: "800",
-            }}>
-            Select Date & Time
-          </Text> */}
-          {/* <DatePicker
-            modal
-            open={open}
-            date={date}
-            onConfirm={date => {
-              setOpen(false);
-              setDate(date);
-            }}
-            onCancel={() => {
-              setOpen(false);
-            }}
-          /> */}
+
           <Text
             placeholder="Select Date & Time"
             style={{
               fontSize: 18,
-              fontWeight:'600',
-              color:'#000',
-              paddingHorizontal:10
+              fontWeight: "600",
+              color: "#000",
+              paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("MMMM Do YYYY, h:mm:ss") : "Select Date & Time"}
+            {date ? moment(date).format("L") : "Select Date & Time"}
           </Text>
         </TouchableOpacity>
       </View>
