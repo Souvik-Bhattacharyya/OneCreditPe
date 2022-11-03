@@ -52,8 +52,7 @@ const CashEntries = ({navigation}) => {
           paymentDetails: "",
           attachments: null,
         });
-
-        navigation.navigate("Cash Book");
+        navigation.navigate("Cashbook", {screen: "Cash Book"});
       }
     } catch (error) {
       console.log(error);
