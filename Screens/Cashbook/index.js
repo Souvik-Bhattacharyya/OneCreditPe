@@ -12,7 +12,6 @@ import TransactionEmpty from "../../Components/TransactionEmpty";
 import TransactionFull from "../../Components/TransactionFull";
 import metrics from "../../Constants/metrics";
 import Api from "../../Services";
-
 const width = Dimensions.get("window").width;
 
 const Cashbook = ({navigation}) => {
@@ -99,32 +98,19 @@ const Cashbook = ({navigation}) => {
     },
   });
 
-  const [cashOutDetails, setCashOutDetails] = useState([]);
-  const [cashInDetails, setCashInDetails] = useState([]);
-
+  const [todayEntryDetails, setTodayEntryDetails] = useState([]);
   useEffect(() => {
     navigation.addListener("focus", () => {
-      getCashOut();
-      getCashIn();
+      getTodayCashEntries();
     });
   }, [navigation]);
 
-  const getCashOut = async () => {
+  const getTodayCashEntries = async () => {
     try {
-      const response = await Api.get("/auth/today-cashbook-out");
+      const response = await Api.get("/auth/today-cashbook");
       if (response.data.status == 200) {
-        setCashOutDetails(response.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getCashIn = async () => {
-    try {
-      const response = await Api.get("/auth/today-cashbook-in");
-      if (response.data.status == 200) {
-        setCashInDetails(response.data.data);
+        console.log("===>", response.data.data);
+        setTodayEntryDetails(response.data.data);
       }
     } catch (error) {
       console.log(error);
@@ -227,10 +213,7 @@ const Cashbook = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-          <TransactionFull
-            cashOutDetails={cashOutDetails}
-            cashInDetails={cashInDetails}
-          />
+          <TransactionFull todayEntryDetails={todayEntryDetails} />
         </View>
 
         <View

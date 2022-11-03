@@ -17,7 +17,7 @@ import {Cashbook} from "../Screens";
 
 const width = Dimensions.get("window").width;
 
-const TransactionFull = ({cashOutDetails, cashInDetails}) => {
+const TransactionFull = ({todayEntryDetails}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -32,13 +32,13 @@ const TransactionFull = ({cashOutDetails, cashInDetails}) => {
     <View style={styles.container}>
       <ScrollView>
         <View style={{width}}>
-          {cashOutDetails.map((obj, index) => (
-            <CashOut object={obj} index={index} />
-          ))}
-
-          {cashInDetails.map((obj, index) => (
-            <CashIn object={obj} index={index} />
-          ))}
+          {todayEntryDetails.map((obj, index) =>
+            obj.cb_tns_type == "in" ? (
+              <CashIn object={obj} key={index} />
+            ) : (
+              <CashOut object={obj} key={index} />
+            ),
+          )}
         </View>
       </ScrollView>
     </View>
