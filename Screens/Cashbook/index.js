@@ -109,7 +109,6 @@ const Cashbook = ({navigation}) => {
     try {
       const response = await Api.get("/auth/today-cashbook");
       if (response.data.status == 200) {
-        console.log("===>", response.data.data);
         setTodayEntryDetails(response.data.data);
       }
     } catch (error) {

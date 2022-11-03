@@ -7,7 +7,7 @@ import {
   Dimensions,
   Text,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import ToPayUser from "./Cash/ToPayUser";
@@ -16,7 +16,7 @@ import Api from "../Services";
 
 const width = Dimensions.get("window").width;
 
-const CustomerTransaction = ({ customerType }) => {
+const CustomerTransaction = ({customerType}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -50,6 +50,7 @@ const CustomerTransaction = ({ customerType }) => {
   const customerTransactions = async () => {
     try {
       const responce = await Api.get("/auth/get-transaction/customer");
+      console.log(responce.data);
       setCustomerTransactionData(responce.data.data);
     } catch (error) {
       console.log(error);
@@ -67,7 +68,7 @@ const CustomerTransaction = ({ customerType }) => {
 
   return (
     <View style={styles.container}>
-      <View style={{ borderBottomColor: "#c6c6c6", borderBottomWidth: 0.6 }}>
+      <View style={{borderBottomColor: "#c6c6c6", borderBottomWidth: 0.6}}>
         <View
           style={{
             flexDirection: "row",
@@ -93,7 +94,7 @@ const CustomerTransaction = ({ customerType }) => {
               }}
             />
             <TouchableOpacity
-              style={{ position: "absolute", right: 20, alignSelf: "center" }}>
+              style={{position: "absolute", right: 20, alignSelf: "center"}}>
               <Icon name="search" color={"#333"} size={22} />
             </TouchableOpacity>
           </View>
@@ -128,7 +129,7 @@ const CustomerTransaction = ({ customerType }) => {
         </View>
       </View>
       <ScrollView>
-        <View style={{ width }}>
+        <View style={{width}}>
           {customerTransactionData.map((obj, index) =>
             obj.tns_type == "got" ? (
               <ToGetUser object={obj} key={index} />
