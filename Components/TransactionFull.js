@@ -15,39 +15,39 @@ import CashOut from "./Cash/CashOut";
 import Api from "../Services";
 import {useSelector} from "react-redux";
 import {Cashbook} from "../Screens";
+
 const width = Dimensions.get("window").width;
 
-const TransactionFull = () => {
-  const [cashOutDetails, setCashOutDetails] = useState([]);
-  const [cashInDetails, setCashInDetails] = useState([]);
-  useEffect(() => {
-    getCashOut();
-  }, []);
-  useEffect(() => {
-    getCashIn();
-  }, []);
+const TransactionFull = ({cashOutDetails, cashInDetails}) => {
+  // const [cashOutDetails, setCashOutDetails] = useState([]);
+  // const [cashInDetails, setCashInDetails] = useState([]);
+  // console.log("==>", route.params);
+  // useEffect(() => {
+  //   getCashOut();
+  //   getCashIn();
+  // }, []);
 
-  const getCashOut = async () => {
-    try {
-      const response = await Api.get("/auth/today-cashbook-out");
-      if (response.data.status == 200) {
-        setCashOutDetails(response.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getCashOut = async () => {
+  //   try {
+  //     const response = await Api.get("/auth/today-cashbook-out");
+  //     if (response.data.status == 200) {
+  //       setCashOutDetails(response.data.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const getCashIn = async () => {
-    try {
-      const response = await Api.get("/auth/today-cashbook-in");
-      if (response.data.status == 200) {
-        setCashInDetails(response.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const getCashIn = async () => {
+  //   try {
+  //     const response = await Api.get("/auth/today-cashbook-in");
+  //     if (response.data.status == 200) {
+  //       setCashInDetails(response.data.data);
+  //     }
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",

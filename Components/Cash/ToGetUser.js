@@ -3,9 +3,12 @@ import React from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import {useNavigation} from "@react-navigation/native";
+import moment from "moment/moment";
 
-const ToGetUser = () => {
+const ToGetUser = ({object}) => {
   const navigation = useNavigation();
+  const {customer_id, amount, date_time, attachment} = object;
+  const date = moment(date_time).format("Do MMM YY, hh:mm A");
   return (
     <>
       <TouchableOpacity
@@ -29,15 +32,15 @@ const ToGetUser = () => {
               borderRadius: 4,
             }}>
             <Text style={{fontSize: 24, fontWeight: "900", color: "#0A5AC9"}}>
-              A
+              ...
             </Text>
           </View>
           <View style={{flexDirection: "column", marginLeft: 10}}>
             <Text style={{fontSize: 18, fontWeight: "700", color: "#333"}}>
-              Ankita Santra
+              ...
             </Text>
             <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
-              22 Aug 22 - 01:55PM
+              {date}
             </Text>
           </View>
         </View>
@@ -48,7 +51,7 @@ const ToGetUser = () => {
             backgroundColor: "#fff",
           }}>
           <Text style={{fontSize: 18, fontWeight: "800", color: "#12CE12"}}>
-            ₹100
+            {amount}
           </Text>
           <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
             To Get
