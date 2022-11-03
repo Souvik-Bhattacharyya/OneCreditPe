@@ -12,42 +12,12 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import CashIn from "./Cash/CashIn";
 import CashOut from "./Cash/CashOut";
-import Api from "../Services";
 import {useSelector} from "react-redux";
 import {Cashbook} from "../Screens";
+
 const width = Dimensions.get("window").width;
 
-const TransactionFull = () => {
-  const [cashOutDetails, setCashOutDetails] = useState([]);
-  const [cashInDetails, setCashInDetails] = useState([]);
-  useEffect(() => {
-    getCashOut();
-  }, []);
-  useEffect(() => {
-    getCashIn();
-  }, []);
-
-  const getCashOut = async () => {
-    try {
-      const response = await Api.get("/auth/today-cashbook-out");
-      if (response.data.status == 200) {
-        setCashOutDetails(response.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const getCashIn = async () => {
-    try {
-      const response = await Api.get("/auth/today-cashbook-in");
-      if (response.data.status == 200) {
-        setCashInDetails(response.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const TransactionFull = ({todayEntryDetails}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -62,13 +32,13 @@ const TransactionFull = () => {
     <View style={styles.container}>
       <ScrollView>
         <View style={{width}}>
-          {cashOutDetails.map(obj => (
-            <CashOut object={obj} />
-          ))}
-
-          {cashInDetails.map(obj => (
-            <CashIn object={obj} />
-          ))}
+          {todayEntryDetails.map((obj, index) =>
+            obj.cb_tns_type == "in" ? (
+              <CashIn object={obj} key={index} />
+            ) : (
+              <CashOut object={obj} key={index} />
+            ),
+          )}
         </View>
       </ScrollView>
     </View>
