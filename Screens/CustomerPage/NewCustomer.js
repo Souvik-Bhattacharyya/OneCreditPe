@@ -7,18 +7,50 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import {useNavigation} from "@react-navigation/native";
 import AddContact from "../../Components/AddContact";
+import Api from "../../Services";
 
-const CustomerHome = () => {
+const CustomerHome = ({route}) => {
   const navigation = useNavigation();
+  const {customerType} = route.params;
+  console.log("-------->", customerType);
   const [customer, setCustomer] = useState({
     name: "",
     mobile: null,
   });
+
+  const payload = {
+    cus_name: customer.name,
+    cus_mobile: customer.mobile,
+    customer_type: customerType,
+  };
+  const addCustomer = async () => {
+    try {
+      const responce = await Api.post("/auth/customer", payload);
+      if (responce.data) {
+        setCustomer({...customer, name: "", mobile: null});
+        navigation.navigate("UserDetails", {user: responce.data.data});
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addSupplier = async () => {
+    try {
+      const responce = await Api.post("/auth/customer", payload);
+      if (responce.data) {
+        setCustomer({...customer, name: "", mobile: null});
+        navigation.navigate("UserDetails", {user: responce.data.data});
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <View style={styles.container}>
@@ -30,6 +62,7 @@ const CustomerHome = () => {
               alignItems: "center",
             }}>
             <TextInput
+              value={customer.name}
               placeholder="Customer Name"
               placeholderTextColor={"#828282"}
               style={styles.Input}
@@ -52,6 +85,7 @@ const CustomerHome = () => {
               marginTop: 15,
             }}>
             <TextInput
+              value={customer.mobile}
               placeholder="Customer Mobile"
               placeholderTextColor={"#828282"}
               style={styles.Input}
@@ -72,7 +106,9 @@ const CustomerHome = () => {
             }}>
             <TouchableOpacity
               style={{width: "100%"}}
-              onPress={() => console.log(customer)}>
+              onPress={() =>
+                customerType === "customer" ? addCustomer() : addSupplier()
+              }>
               <View
                 style={{
                   backgroundColor: "#0a5ac9",

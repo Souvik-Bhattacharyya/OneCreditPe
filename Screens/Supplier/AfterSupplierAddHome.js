@@ -35,8 +35,8 @@ const Supplier = () => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("CustomerStack");
               setCustomerType("customer");
+              navigation.navigate("CustomerStack");
             }}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
@@ -55,8 +55,8 @@ const Supplier = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("SupplierStack");
               setCustomerType("supplier");
+              navigation.navigate("SupplierStack");
             }}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
@@ -138,7 +138,9 @@ const Supplier = () => {
             borderColor: "#c9c9c9",
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("NewCustomer")}
+            onPress={() => {
+              navigation.navigate("NewCustomer", {customerType: "supplier"});
+            }}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(10),
