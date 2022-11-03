@@ -40,7 +40,9 @@ const CustomerTransaction = ({customerType}) => {
       backgroundColor: "#f3f3f3",
     },
   });
+  
   const [customerTransactionData, setCustomerTransactionData] = useState([]);
+
   useEffect(() => {
     customerType == "customer"
       ? customerTransactions()
@@ -51,7 +53,7 @@ const CustomerTransaction = ({customerType}) => {
     try {
       const responce = await Api.get("/auth/get-transaction/customer");
       console.log(responce.data);
-      setCustomerTransactionData(responce.data.data);
+      setCustomerTransactionData(responce.data.data || []);
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +62,7 @@ const CustomerTransaction = ({customerType}) => {
   const supplierTransactions = async () => {
     try {
       const responce = await Api.get("/auth/get-transaction/supplier");
-      setCustomerTransactionData(responce.data.data);
+      setCustomerTransactionData(responce.data.data || []);
     } catch (error) {
       console.log(error);
     }

@@ -16,7 +16,7 @@ import PartiesHeader from "./PartiesHeader";
 
 const CustomerHome = ({route}) => {
   const navigation = useNavigation();
-  const {user} = route.params;
+  const user = route.params?.user || {};
   const width = Dimensions.get("window").width;
   console.log("====>", user);
   return (
