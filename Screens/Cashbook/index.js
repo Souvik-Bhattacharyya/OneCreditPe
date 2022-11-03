@@ -1,27 +1,35 @@
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, TextInput } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+  TextInput,
+} from "react-native";
+import React, {useState, useEffect} from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 import TransactionFull from "../../Components/TransactionFull";
 import metrics from "../../Constants/metrics";
+import Api from "../../Services";
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 
-const Cashbook = ({ navigation }) => {
+const Cashbook = ({navigation}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#E8EEFF",
       paddingTop: metrics.verticalScale(10),
       position: "relative",
-      flex: 1
+      flex: 1,
     },
     card: {
-      width: '95%',
+      width: "95%",
       backgroundColor: "#fff",
       borderRadius: 6,
       marginHorizontal: metrics.horizontalScale(10),
       borderWidth: 1,
-      borderColor: '#c6c6c6',
+      borderColor: "#c6c6c6",
     },
     cardBody: {
       display: "flex",
@@ -56,7 +64,7 @@ const Cashbook = ({ navigation }) => {
       width: "100%",
       backgroundColor: "#fff",
       borderTopWidth: 1,
-      borderColor: '#c6c6c6',
+      borderColor: "#c6c6c6",
       paddingVertical: metrics.verticalScale(7),
       borderRadius: 6,
       borderTopLeftRadius: 0,
@@ -67,29 +75,61 @@ const Cashbook = ({ navigation }) => {
       borderRadius: 50,
       width: 50,
       height: 50,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'center'
+      flexDirection: "row",
+      justifyContent: "center",
+      alignItems: "center",
     },
     btnTxt: {
       fontSize: 22,
       fontWeight: "800",
       color: "#fff",
-      textAlign: 'center',
-      marginLeft: 10
+      textAlign: "center",
+      marginLeft: 10,
     },
     search: {
-      flexDirection: 'row',
-      width: '100%',
-      justifyContent: 'space-between',
-      alignItems: 'center',
+      flexDirection: "row",
+      width: "100%",
+      justifyContent: "space-between",
+      alignItems: "center",
       paddingHorizontal: metrics.horizontalScale(10),
-      borderColor: '#c6c6c6',
+      borderColor: "#c6c6c6",
       borderWidth: 1,
       borderRadius: 46,
-      backgroundColor: '#f6f6f6',
-    }
+      backgroundColor: "#f6f6f6",
+    },
   });
+
+  const [cashOutDetails, setCashOutDetails] = useState([]);
+  const [cashInDetails, setCashInDetails] = useState([]);
+
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      getCashOut();
+      getCashIn();
+    });
+  }, [navigation]);
+
+  const getCashOut = async () => {
+    try {
+      const response = await Api.get("/auth/today-cashbook-out");
+      if (response.data.status == 200) {
+        setCashOutDetails(response.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getCashIn = async () => {
+    try {
+      const response = await Api.get("/auth/today-cashbook-in");
+      if (response.data.status == 200) {
+        setCashInDetails(response.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <View style={styles.container}>
@@ -97,10 +137,21 @@ const Cashbook = ({ navigation }) => {
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
-                style={{ fontSize: 24, color: "#1790FF", fontWeight: "bold", fontFamily: "Roboto" }}>
+                style={{
+                  fontSize: 24,
+                  color: "#1790FF",
+                  fontWeight: "bold",
+                  fontFamily: "Roboto",
+                }}>
                 ₹ 0
               </Text>
-              <Text style={{ color: "#828282", fontSize: 14, fontWeight: "700", fontFamily: "Roboto" }}>
+              <Text
+                style={{
+                  color: "#828282",
+                  fontSize: 14,
+                  fontWeight: "700",
+                  fontFamily: "Roboto",
+                }}>
                 Cash In Hand
               </Text>
             </View>
@@ -125,9 +176,9 @@ const Cashbook = ({ navigation }) => {
               </Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.cardBtn}
-            onPress={() => navigation.navigate('View Report')}
-          >
+          <TouchableOpacity
+            style={styles.cardBtn}
+            onPress={() => navigation.navigate("View Report")}>
             <Text
               style={{
                 fontSize: 14,
@@ -142,50 +193,61 @@ const Cashbook = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, marginTop: 10 }}>
-          <View style={{
-            flexDirection: 'row',
-            width: '100%', justifyContent: 'space-between',
-            alignItems: "center", paddingVertical: 20,
-            paddingHorizontal: metrics.horizontalScale(20),
-            backgroundColor: '#fff',
-            borderBottomColor: '#c6c6c6', borderBottomWidth: 1
-          }}>
+        <View style={{flex: 1, marginTop: 10}}>
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              justifyContent: "space-between",
+              alignItems: "center",
+              paddingVertical: 20,
+              paddingHorizontal: metrics.horizontalScale(20),
+              backgroundColor: "#fff",
+              borderBottomColor: "#c6c6c6",
+              borderBottomWidth: 1,
+            }}>
             <View style={styles.search}>
               <TextInput
-                placeholder='Search'
+                placeholder="Search"
                 placeholderTextColor={"#828282"}
                 style={{
-                  width: '100%',
+                  width: "100%",
                   fontSize: 16,
-                  color: '#000',
-                  fontWeight: '500',
-                  position: 'relative',
+                  color: "#000",
+                  fontWeight: "500",
+                  position: "relative",
                   paddingLeft: metrics.horizontalScale(10),
                   // backgroundColor:'#ddd',
-                  paddingVertical: metrics.verticalScale(7)
+                  paddingVertical: metrics.verticalScale(7),
                 }}
               />
-              <TouchableOpacity style={{ position: 'absolute', right: 20, alignSelf: 'center' }}>
+              <TouchableOpacity
+                style={{position: "absolute", right: 20, alignSelf: "center"}}>
                 {/* <Icon name="search" color={'#333'} size={22} /> */}
               </TouchableOpacity>
             </View>
           </View>
-          <TransactionFull />
+          <TransactionFull
+            cashOutDetails={cashOutDetails}
+            cashInDetails={cashInDetails}
+          />
         </View>
-
 
         <View
           style={{
             flexDirection: "row",
-            justifyContent: 'flex-end',
+            justifyContent: "flex-end",
             // width,
             position: "absolute",
-            bottom: 20, right: 0,
+            bottom: 20,
+            right: 0,
             paddingHorizontal: metrics.horizontalScale(10),
           }}>
-          <TouchableOpacity onPress={() => navigation.navigate('CashEntries', { name: 'Cash Entries' })}
-            style={[styles.cashBtn, { backgroundColor: "#0a5ac9" }]}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("CashEntries", {name: "Cash Entries"})
+            }
+            style={[styles.cashBtn, {backgroundColor: "#0a5ac9"}]}>
             <Icon name="plus" color={"#fff"} size={28} />
             {/* <Text style={styles.btnTxt}>New Entries</Text> */}
           </TouchableOpacity>
