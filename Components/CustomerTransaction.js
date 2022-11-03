@@ -1,37 +1,71 @@
-import { View, ScrollView, TouchableOpacity, StyleSheet, TextInput, Dimensions, Text } from 'react-native'
-import React from 'react';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import metrics from '../Constants/metrics';
-import ToPayUser from './Cash/ToPayUser'
-import ToGetUser from './Cash/ToGetUser'
+import {
+  View,
+  ScrollView,
+  TouchableOpacity,
+  StyleSheet,
+  TextInput,
+  Dimensions,
+  Text,
+} from "react-native";
+import React, { useEffect, useState } from "react";
+import Icon from "react-native-vector-icons/FontAwesome";
+import metrics from "../Constants/metrics";
+import ToPayUser from "./Cash/ToPayUser";
+import ToGetUser from "./Cash/ToGetUser";
+import Api from "../Services";
 
-const width = Dimensions.get('window').width;
+const width = Dimensions.get("window").width;
 
-const CustomerTransaction = () => {
-    const styles = StyleSheet.create({
-        container: {
-            backgroundColor: '#fff',
-            alignItems: 'center',
-            justifyContent: 'center',
-            paddingTop: metrics.verticalScale(15),
-            flex: 1,
-            position: 'relative',
-            borderColor: '#c6c6c6',
-            borderWidth: .8,
-        },
-        search: {
-            flexDirection: 'row',
-            width: '80%',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            paddingHorizontal: metrics.horizontalScale(10),
-            borderColor: '#c6c6c6',
-            borderWidth: .8,
-            borderRadius: 46,
-            backgroundColor: '#f3f3f3',
-        }
-    });
+const CustomerTransaction = ({ customerType }) => {
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: "#fff",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: metrics.verticalScale(15),
+      flex: 1,
+      position: "relative",
+      borderColor: "#c6c6c6",
+      borderWidth: 0.8,
+    },
+    search: {
+      flexDirection: "row",
+      width: "80%",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingHorizontal: metrics.horizontalScale(10),
+      borderColor: "#c6c6c6",
+      borderWidth: 0.8,
+      borderRadius: 46,
+      backgroundColor: "#f3f3f3",
+    },
+  });
+  
+  const [customerTransactionData, setCustomerTransactionData] = useState([]);
+  useEffect(() => {
+    customerType == "customer"
+      ? customerTransactions()
+      : supplierTransactions();
+  }, []);
+  
+    const customerTransactions = async () => {
+    try {
+      const responce = await Api.get("/auth/get-transaction/customer");
+      setCustomerTransactionData(responce.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const supplierTransactions = async () => {
+    try {
+      const responce = await Api.get("/auth/get-transaction/supplier");
+      setCustomerTransactionData(responce.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
     return (
         <View style={styles.container}>
             <View style={{ borderBottomColor: '#c6c6c6', borderBottomWidth: .6 }}>
@@ -71,14 +105,19 @@ const CustomerTransaction = () => {
                     </View>
                 </View>
             </View>
-            <ScrollView>
-                <View style={{ width }}>
-                    <ToGetUser />
-                    <ToPayUser />
-                </View>
-            </ScrollView >
+      <ScrollView>
+        <View style={{ width }}>
+          {customerTransactionData.map((obj, index) =>
+            obj.tns_type == "got" ? (
+              <ToGetUser object={obj} key={index} />
+            ) : (
+              <ToPayUser object={obj} key={index} />
+            ),
+          )}
         </View>
-    )
-}
+      </ScrollView>
+    </View>
+  );
+};
 
 export default CustomerTransaction;
