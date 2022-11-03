@@ -35,7 +35,14 @@ const CustomerTransaction = () => {
     return (
         <View style={styles.container}>
             <View style={{ borderBottomColor: '#c6c6c6', borderBottomWidth: .6 }}>
-                <View style={{ flexDirection: 'row', width: '100%', justifyContent: 'space-between', alignItems: "center", paddingBottom: 20, paddingHorizontal: metrics.horizontalScale(20) }}>
+                <View style={{
+                    flexDirection: 'row',
+                    width: '100%',
+                    justifyContent: 'space-between',
+                    alignItems: "center",
+                    paddingBottom: 20,
+                    paddingHorizontal: metrics.horizontalScale(20)
+                }}>
                     <View style={styles.search}>
                         <TextInput
                             placeholder='Search'
@@ -58,14 +65,14 @@ const CustomerTransaction = () => {
                     <View style={{
                         width: '20%', justifyContent: 'flex-end', alignItems: 'flex-end', paddingVertical: metrics.verticalScale(5), paddingHorizontal: metrics.horizontalScale(5),
                     }}>
-                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '80%', paddingVertical: 8,borderRadius: 6, backgroundColor:'#0A5AC9'}}>
+                        <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-evenly', width: '80%', paddingVertical: 8, borderRadius: 6, backgroundColor: '#0A5AC9' }}>
                             <Text style={{ color: '#333', fontSize: 14, fontWeight: '900', color: '#fff' }}>PDF</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </View>
             <ScrollView>
-                <View style={{width}}>
+                <View style={{ width }}>
                     <ToGetUser />
                     <ToPayUser />
                 </View>

@@ -105,7 +105,7 @@ const CashEntries = ({navigation}) => {
           <DatePickerIcon
             name="date-range"
             color={"#828282"}
-            style={{}}
+            // style={{}}
             size={24}
           />
 
@@ -117,7 +117,7 @@ const CashEntries = ({navigation}) => {
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("L") : "Select Date & Time"}
+            {date ? moment(date).format("LL") : "Select Date & Time"}
           </Text>
         </TouchableOpacity>
       </View>

@@ -22,19 +22,12 @@ const width = Dimensions.get('window').width;
   return (
     <View style={{ flex: 1, backgroundColor: '#E8EEFF', }}>
       <PartiesHeader />
-      <ScrollView style={{ marginBottom: 60 }}>
-        <UserTransaction />
-        <UserTransaction />
-        <UserTransaction />
-        <UserTransaction />
-        <UserTransaction />
+      <ScrollView>
         <UserTransaction />
         <UserTransaction />
       </ScrollView>
 
       <View style={{
-        position: "absolute",
-        bottom: metrics.verticalScale(0),
         alignSelf: "center",
         width,
         flexDirection: 'row',

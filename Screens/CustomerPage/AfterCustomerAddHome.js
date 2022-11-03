@@ -103,8 +103,6 @@ const Customer = () => {
                 <CustomerTransaction />
 
                 <View style={{
-                    position: "absolute",
-                    bottom: metrics.verticalScale(0),
                     alignSelf: "center",
                     width,
                     flexDirection: 'row',

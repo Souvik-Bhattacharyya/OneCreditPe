@@ -146,8 +146,6 @@ const ViewReport = ({navigation}) => {
 
         <View
           style={{
-            // position: "absolute",
-            // bottom: metrics.verticalScale(0),
             alignSelf: "center",
             width,
             flexDirection: "row",
