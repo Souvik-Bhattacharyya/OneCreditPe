@@ -50,7 +50,6 @@ const CustomerTransaction = ({customerType}) => {
   const customerTransactions = async () => {
     try {
       const responce = await Api.get("/auth/get-transaction/customer");
-      console.log(responce.data.data.length);
       setCustomerTransactionData(responce.data.data);
     } catch (error) {
       console.log(error);
@@ -130,7 +129,6 @@ const CustomerTransaction = ({customerType}) => {
     //   </View>
     <ScrollView>
       <View style={{width}}>
-        <Text>{customerTransactionData.length}</Text>
         {customerTransactionData.map((obj, index) =>
           obj.tns_type == "got" ? (
             <ToGetUser object={obj} key={index} />

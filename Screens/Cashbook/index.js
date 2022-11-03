@@ -15,7 +15,7 @@ import Api from "../../Services";
 
 const width = Dimensions.get("window").width;
 
-const Cashbook = ({navigation, route}) => {
+const Cashbook = ({navigation}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#E8EEFF",
@@ -103,9 +103,11 @@ const Cashbook = ({navigation, route}) => {
   const [cashInDetails, setCashInDetails] = useState([]);
 
   useEffect(() => {
-    getCashOut();
-    getCashIn();
-  }, [route.params?.getData]);
+    navigation.addListener("focus", () => {
+      getCashOut();
+      getCashIn();
+    });
+  }, [navigation]);
 
   const getCashOut = async () => {
     try {

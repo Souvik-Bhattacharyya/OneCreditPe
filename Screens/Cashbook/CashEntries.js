@@ -53,7 +53,7 @@ const CashEntries = ({navigation}) => {
           attachments: null,
         });
 
-        navigation.navigate("Cashbook", {screen: "Cash Book", getData: true});
+        navigation.navigate("Cash Book");
       }
     } catch (error) {
       console.log(error);
