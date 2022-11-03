@@ -22,6 +22,27 @@ const ViewReport = ({navigation}) => {
   const [showDate1, setShowDate1] = useState(new Date());
   const [showDate2, setShowDate2] = useState(new Date());
   const [date, setDate] = useState(null);
+  const [dateFrom, setDateFrom] = useState(null);
+
+  // const onChange = (event, selectedDate) => {
+  //   const currentDate = selectedDate;
+  //   setDateFrom(currentDate);
+  // };
+  // const showDateFrompicker = () => {
+  //   showModeFrom("dateFrom");
+  // };
+  // const showModeFrom = currentMode => {
+  //   let maximumDate = new Date();
+  //   maximumDate.setFullYear(maximumDate.getFullYear());
+  //   DateTimePickerAndroid.open({
+  //     value: dateFrom || new Date(),
+  //     onChange,
+  //     mode: currentMode,
+  //     is24Hour: true,
+  //     minimumDate: new Date(1950, 0, 1),
+  //     maximumDate: maximumDate,
+  //   });
+  // };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -43,6 +64,7 @@ const ViewReport = ({navigation}) => {
       maximumDate: maximumDate,
     });
   };
+
   return (
     <>
       <View style={styles.container}>
@@ -101,7 +123,6 @@ const ViewReport = ({navigation}) => {
               justifyContent: "space-between",
             }}>
             <TouchableOpacity
-              onPress={() => setShowModal1(true)}
               style={{
                 flexDirection: "row",
                 justifyContent: "space-evenly",
@@ -109,15 +130,15 @@ const ViewReport = ({navigation}) => {
                 width: "50%",
                 borderRightColor: "#c6c6c6",
                 borderRightWidth: 1,
-              }}>
-              <View>
-                <Icon name="calendar" size={22} color={"#0A5AC9"} />
-              </View>
+              }}
+              onPress={showDateFrompicker}>
+              <Icon name="calendar" size={22} color={"#0A5AC9"} />
+
               <View>
                 <Text style={{color: "#0A5AC9"}}>From Date</Text>
                 <Text
                   style={{color: "#0A5AC9", fontSize: 16, fontWeight: "700"}}>
-                  {moment(showDate1).format("ll")}
+                  {moment(dateFrom).format("ll")}
                 </Text>
               </View>
             </TouchableOpacity>
@@ -128,7 +149,8 @@ const ViewReport = ({navigation}) => {
                 width: "50%",
                 alignItems: "center",
               }}
-              onPress={showDatepicker}>
+              // onPress={showDatepicker}
+            >
               <Icon name="calendar" size={22} color={"#349EFF"} />
 
               <View>
