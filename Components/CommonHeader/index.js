@@ -29,8 +29,8 @@ const CommonHeader = () => {
         <Image
           source={require("../../Assets/profile.png")}
           style={{
-            height: 50,
-            width: 50,
+            height: 40,
+            width: 40,
             resizeMode: "contain",
             marginRight: 10
             // backgroundColor:'#fff'
@@ -47,10 +47,10 @@ const CommonHeader = () => {
               justifyContent: 'center',
               alignItems: 'center'
             }}>
-            <Text style={{ fontWeight: "800", fontSize: 17, color: "#fff" }}>
+            <Text style={{ fontWeight: "800", fontSize: 14, color: "#fff" }}>
               Business Name
             </Text>
-            <Icon name="caretdown" color={"#fff"} size={14} />
+            <Icon name="caretdown" color={"#fff"} size={12} />
           </TouchableOpacity>
           <Text style={{ fontSize: 14, color: '#ddd', fontWeight: '800' }}>9192939495</Text>
         </View>
@@ -61,8 +61,8 @@ const CommonHeader = () => {
         <Image
           source={require("../../Assets/calender.png")}
           style={{
-            height: 38,
-            width: 38,
+            height: 34,
+            width: 34,
             resizeMode: "contain",
           }}
         />
