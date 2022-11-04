@@ -130,7 +130,7 @@ const Supplier = () => {
             <Icon name="account-arrow-right" color={"#F31B24"} size={32} />
           </View>
         </View>
-        {customerTransactionData ? (
+        {customerTransactionData !== [] ? (
           <CustomerTransaction
             // ToGetUser={"Advance"}
             customerTransactionData={customerTransactionData}
