@@ -18,7 +18,7 @@ const CustomerHome = ({route}) => {
   const navigation = useNavigation();
   const user = route.params?.user || {};
   const width = Dimensions.get("window").width;
-  console.log("====>", user);
+
   return (
     <View style={{flex: 1, backgroundColor: "#E8EEFF"}}>
       <PartiesHeader user={user} />
@@ -51,6 +51,7 @@ const CustomerHome = ({route}) => {
           onPress={() =>
             navigation.navigate("CustomerStack", {
               screen: "CustomerEntries",
+              params: {user: user},
             })
           }
           style={{

@@ -12,6 +12,10 @@ export default class API {
   post(endpoint, params, header) {
     return this.httpRequest("POST", endpoint, params, header);
   }
+
+  postForm(endpoint, params, header) {
+    return this.httpRequestForFormData("POST", endpoint, params, header);
+  }
   update(endpoint, params, header) {
     return this.httpRequest("PUT", endpoint, params, header);
   }
@@ -48,6 +52,36 @@ export default class API {
 
       this.instance
         .request(body)
+        .then(response => {
+          // resolve
+          console.log(response);
+          return resolve(response);
+        })
+        .catch(error => {
+          // reject
+          console.log(error);
+          return reject(error);
+        });
+    });
+  }
+
+  async httpRequestForFormData(method, url, params) {
+    let state = store.getState();
+    let clientToken = state.auth.clientToken;
+
+    return new Promise((resolve, reject) => {
+      let options = {
+        url: url,
+        headers: {
+          // "Content-Type": "multipart/form-data",
+          Authorization: clientToken ? `Bearer ${clientToken}` : null,
+        },
+        method: method,
+        body: params,
+      };
+      console.log(options);
+      this.instance
+        .request(options)
         .then(response => {
           // resolve
           console.log(response);

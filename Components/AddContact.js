@@ -6,36 +6,19 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Contacts from "react-native-contacts";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
+import CustomerHome from "../Screens/CustomerPage/NewCustomer";
 
 const AddContact = () => {
-  const [contacts, setContacts] = useState([]);
   const navigation = useNavigation();
+  const [contacts, setContacts] = useState([]);
 
-  const ListItem = ({ item }) => {
-    return (
-      <TouchableOpacity
-      onPress={() => navigation.navigate("UserDetails")}
-      style={styles.contactCon}>
-        <View style={styles.imgCon}>
-          <View style={styles.placeholder}>
-            <Text style={styles.txt}>{item?.givenName[0]}</Text>
-          </View>
-        </View>
-        <View style={styles.contactDat}>
-          <Text style={styles.name}>
-            {item?.givenName} {item?.middleName && item.middleName + " "}
-            {item?.familyName}
-          </Text>
-          <Text style={styles.phoneNumber}>
-            {item?.phoneNumbers[0]?.number}
-          </Text>
-        </View>
-      </TouchableOpacity>
-    );
-  };
+  useEffect(() => {
+    getContacts();
+  }, []);
+
   const getContacts = async () => {
     PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_CONTACTS, {
       title: "Contacts",
@@ -59,9 +42,29 @@ const AddContact = () => {
       });
   };
 
-  useEffect(() => {
-    getContacts();
-  }, []);
+  const ListItem = ({item}) => {
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate("UserDetails")}
+        style={styles.contactCon}>
+        <View style={styles.imgCon}>
+          <View style={styles.placeholder}>
+            <Text style={styles.txt}>{item?.givenName[0]}</Text>
+          </View>
+        </View>
+        <View style={styles.contactDat}>
+          <Text style={styles.name}>
+            {item?.givenName} {item?.middleName && item.middleName + " "}
+            {item?.familyName}
+          </Text>
+          <Text style={styles.phoneNumber}>
+            {item?.phoneNumbers[0]?.number}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <View>
       <FlatList
@@ -74,6 +77,7 @@ const AddContact = () => {
 };
 
 export default AddContact;
+
 const styles = StyleSheet.create({
   contactCon: {
     flex: 1,
@@ -84,7 +88,7 @@ const styles = StyleSheet.create({
     borderBottomColor: "#d9d9d9",
   },
   imgCon: {
-    paddingRight: 10
+    paddingRight: 10,
   },
   placeholder: {
     width: 45,
@@ -102,13 +106,13 @@ const styles = StyleSheet.create({
   },
   txt: {
     fontSize: 22,
-    fontWeight: '900',
-    color: '#fff',
+    fontWeight: "900",
+    color: "#fff",
   },
   name: {
     fontSize: 16,
-    color: '#000',
-    fontWeight: '700'
+    color: "#000",
+    fontWeight: "700",
   },
   phoneNumber: {
     color: "#828282",
