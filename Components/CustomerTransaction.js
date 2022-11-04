@@ -16,7 +16,7 @@ import Api from "../Services";
 
 const width = Dimensions.get("window").width;
 
-const CustomerTransaction = ({customerType}) => {
+const CustomerTransaction = ({customerTransactionData}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -40,33 +40,33 @@ const CustomerTransaction = ({customerType}) => {
       backgroundColor: "#f3f3f3",
     },
   });
-  
-  const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
-  useEffect(() => {
-    customerType == "customer"
-      ? customerTransactions()
-      : supplierTransactions();
-  }, []);
+  // const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
-  const customerTransactions = async () => {
-    try {
-      const responce = await Api.get("/auth/get-transaction/customer");
-      console.log(responce.data);
-      setCustomerTransactionData(responce.data.data || []);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // useEffect(() => {
+  //   customerType == "customer"
+  //     ? customerTransactions()
+  //     : supplierTransactions();
+  // }, []);
 
-  const supplierTransactions = async () => {
-    try {
-      const responce = await Api.get("/auth/get-transaction/supplier");
-      setCustomerTransactionData(responce.data.data || []);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const customerTransactions = async () => {
+  //   try {
+  //     const responce = await Api.get("/auth/get-transaction/customer");
+  //     console.log(responce.data);
+  //     setCustomerTransactionData(responce.data.data || []);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // const supplierTransactions = async () => {
+  //   try {
+  //     const responce = await Api.get("/auth/get-transaction/supplier");
+  //     setCustomerTransactionData(responce.data.data || []);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <View style={styles.container}>
