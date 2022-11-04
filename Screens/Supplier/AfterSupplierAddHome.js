@@ -49,7 +49,6 @@ const Supplier = () => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              setCustomerType("customer");
               navigation.navigate("CustomerStack");
             }}
             style={{
@@ -69,7 +68,6 @@ const Supplier = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
-              setCustomerType("supplier");
               navigation.navigate("SupplierStack");
             }}
             style={{
