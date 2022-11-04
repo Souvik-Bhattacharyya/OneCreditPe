@@ -17,7 +17,6 @@ import Api from "../../Services";
 const CustomerHome = ({route}) => {
   const navigation = useNavigation();
   const {customerType} = route.params;
-  console.log("-------->", customerType);
   const [customer, setCustomer] = useState({
     name: "",
     mobile: null,
@@ -30,6 +29,7 @@ const CustomerHome = ({route}) => {
   };
   const addCustomer = async () => {
     try {
+      console.log("--->", customerType);
       const responce = await Api.post("/auth/customer", payload);
       if (responce.data) {
         setCustomer({...customer, name: "", mobile: null});
@@ -42,6 +42,7 @@ const CustomerHome = ({route}) => {
 
   const addSupplier = async () => {
     try {
+      console.log("--->", customerType);
       const responce = await Api.post("/auth/customer", payload);
       if (responce.data) {
         setCustomer({...customer, name: "", mobile: null});
@@ -145,7 +146,13 @@ const CustomerHome = ({route}) => {
             // borderColor: '#c9c9c9',
             flex: 1,
           }}>
-          <AddContact />
+          <AddContact
+          // customer={customer}
+          // setCustomer={setCustomer}
+          // addCustomer={addCustomer}
+          // addSupplier={addSupplier}
+          // customerType={customerType}
+          />
         </View>
       </View>
     </>

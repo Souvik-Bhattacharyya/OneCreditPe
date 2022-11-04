@@ -12,6 +12,7 @@ export default class API {
   post(endpoint, params, header) {
     return this.httpRequest("POST", endpoint, params, header);
   }
+
   update(endpoint, params, header) {
     return this.httpRequest("PUT", endpoint, params, header);
   }
