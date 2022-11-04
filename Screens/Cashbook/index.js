@@ -6,7 +6,7 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 import TransactionFull from "../../Components/TransactionFull";
@@ -14,7 +14,7 @@ import metrics from "../../Constants/metrics";
 import Api from "../../Services";
 const width = Dimensions.get("window").width;
 
-const Cashbook = ({navigation}) => {
+const Cashbook = ({ navigation }) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#E8EEFF",
@@ -178,7 +178,7 @@ const Cashbook = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{flex: 1, marginTop: 10}}>
+        <View style={{ flex: 1, marginTop: 10 }}>
           <View
             style={{
               flexDirection: "row",
@@ -207,7 +207,7 @@ const Cashbook = ({navigation}) => {
                 }}
               />
               <TouchableOpacity
-                style={{position: "absolute", right: 20, alignSelf: "center"}}>
+                style={{ position: "absolute", right: 20, alignSelf: "center" }}>
                 {/* <Icon name="search" color={'#333'} size={22} /> */}
               </TouchableOpacity>
             </View>
@@ -217,21 +217,39 @@ const Cashbook = ({navigation}) => {
 
         <View
           style={{
+            alignSelf: "center",
+            width,
             flexDirection: "row",
-            justifyContent: "flex-end",
-            // width,
-            position: "absolute",
-            bottom: 20,
-            right: 0,
-            paddingHorizontal: metrics.horizontalScale(10),
+            justifyContent: "space-between",
+            backgroundColor: "#f6f6f6",
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+            left: 0,
+            borderTopWidth: 1,
+            borderColor: "#c9c9c9",
           }}>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("CashEntries", {name: "Cash Entries"})
+            onPress={
+              () => navigation.navigate("CashEntries", { name: "Cash Entries" })
             }
-            style={[styles.cashBtn, {backgroundColor: "#0a5ac9"}]}>
-            <Icon name="plus" color={"#fff"} size={28} />
-            {/* <Text style={styles.btnTxt}>New Entries</Text> */}
+            style={{
+              paddingHorizontal: metrics.horizontalScale(20),
+              paddingVertical: metrics.verticalScale(10),
+              backgroundColor: "#0a5ac9",
+              borderRadius: 6,
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}>
+            <Text
+              style={{
+                color: "#333",
+                fontSize: 18,
+                fontWeight: "900",
+                color: "#fff",
+              }}>
+              Create Transaction
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

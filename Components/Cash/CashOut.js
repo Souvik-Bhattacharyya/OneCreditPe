@@ -34,10 +34,10 @@ const CashOut = ({object}) => {
             style={{
               color: "#F31B24",
               fontSize: 18,
-              fontWeight: "800",
+              fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            {amount}
+            ₹{amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
             Cash Out
@@ -54,7 +54,7 @@ const CashOut = ({object}) => {
             {date}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
-            Balance- Rs. 4,220
+            Balance- Rs. {amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
             {payment_details}
@@ -63,7 +63,7 @@ const CashOut = ({object}) => {
         </View>
         <View style={{width: "10%"}}>
           <TouchableOpacity>
-            <IconMat name="image" color={"#0a5ac9"} size={24} />
+            <IconMat name="attachment" color={"#0a5ac9"} size={24} />
           </TouchableOpacity>
         </View>
       </View>
