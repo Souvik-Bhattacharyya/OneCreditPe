@@ -36,7 +36,7 @@ const Cashbook = ({ navigation }) => {
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
-    },
+    }, 
     boxOne: {
       display: "flex",
       flexDirection: "column",
@@ -212,7 +212,7 @@ const Cashbook = ({ navigation }) => {
               </TouchableOpacity>
             </View>
           </View>
-          <TransactionFull todayEntryDetails={todayEntryDetails} />
+          <TransactionEmpty todayEntryDetails={todayEntryDetails} />
         </View>
 
         <View
