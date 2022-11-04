@@ -1,38 +1,122 @@
-import React, {useState} from "react";
-import {View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
-import Icon from "react-native-vector-icons/Feather";
-import {ListItem} from "@rneui/themed";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import Icon from "react-native-vector-icons/FontAwesome5";
+import { ListItem } from "@rneui/themed";
 import setting from "../../Assets/settingIcon.png";
 import question from "../../Assets/question.png";
 import about from "../../Assets/aboutpng.png";
 import RightIcon from "react-native-vector-icons/AntDesign";
+import metrics from "../../Constants/metrics";
+
 const Settings = () => {
   const [expanded, setExpanded] = useState(false);
   const [list, setList] = useState([
     {
       title: "Settings",
       image: setting,
-      name: "name1",
-      name2: "name1",
-      name3: "name1",
+      name: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Language Options</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
+
+      name2:
+        <View style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          backgroundColor: '#ddd',
+          paddingVertical: 15
+        }}>
+          <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>User Profile</Text>
+          <RightIcon name="arrowright" color={'#464555'} size={16} />
+        </View>,
       expanded: false,
       id: 1,
     },
+
     {
       title: "Help & Support",
       image: question,
-      name: "name2",
-      name2: "name2",
-      name3: "name2",
+
+      name: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>FAQ Listing</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
+
+      name2: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>FAQ Answer</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
+
+      name3: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Chat with us (redirect to whatsapp business)</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
+
+      name4: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Call Us</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
       expanded: false,
       id: 2,
     },
+
     {
       title: "About Us",
       image: about,
-      name: "Privacy Policy",
-      name2: "Terms and Condition",
-      name3: "Invite friends",
+      name: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Privacy Policy</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
+
+      name2: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Terms and Condition</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
+
+      name3: <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ddd',
+        paddingVertical: 15
+      }}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Invite friends</Text>
+        <RightIcon name="arrowright" color={'#464555'} size={16} />
+      </View>,
       expanded: false,
       id: 3,
     },
@@ -42,7 +126,7 @@ const Settings = () => {
   const expandMenu = id => {
     const data = list.map(item => {
       if (item.id === id) {
-        item.expanded = true;
+        item.expanded = !item.expanded;
       } else {
         item.expanded = false;
       }
@@ -51,48 +135,71 @@ const Settings = () => {
     setList(data);
   };
   return (
-    <View>
-      <View style={{backgroundColor: "#0A5AC9"}}>
+    <View style={{ backgroundColor: "#fff", flex: 1 }}>
+      <View style={{ marginTop: metrics.verticalScale(20), marginBottom: metrics.verticalScale(50) }}>
+        <View style={{
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginVertical: 16
+        }}>
+          <TouchableOpacity style={{
+            display: 'flex',
+            borderColor: '#464555',
+            borderWidth: 3,
+            borderRadius: 50,
+            borderStyle: 'dashed',
+            width: 110,
+            height: 110,
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'relative'
+          }}>
+            <Image
+              source={require("../../Assets/profile.png")}
+              style={{
+                height: 105,
+                width: 105,
+                resizeMode: "contain",
+                marginVertical: 13,
+                alignSelf: "center",
+              }}
+            />
+            <View style={{
+              width: 36,
+              height: 36,
+              backgroundColor: '#464555',
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'absolute',
+              bottom: -20,
+              borderRadius: 50,
+              borderColor: '#fff',
+              borderWidth: 2
+
+            }}>
+              <Icon
+                name="pen"
+                size={14}
+                color="#fff"
+              />
+            </View>
+          </TouchableOpacity>
+        </View>
+
         <Text
           style={{
-            color: "black",
-            fontSize: 17,
-            marginVertical: 25,
+            color: "#0A5AC9",
+            fontSize: 20,
             textAlign: "center",
-            color: "#fff",
+            marginTop: 5,
+            fontWeight: '700'
           }}>
-          More Options
+          Business Name
         </Text>
+        <Text style={{ textAlign: "center", fontSize: 16, color: '#828282' }}>+91 9192939495</Text>
       </View>
-      <View style={{borderBottomColor: "#C6C6C6", borderBottomWidth: 1}} />
-      <View>
-        <Image
-          source={require("../../Assets/settingLogo.png")}
-          style={{
-            height: 90,
-            width: 90,
-            resizeMode: "contain",
-            marginVertical: 13,
-            alignSelf: "center",
-          }}
-        />
-        <Icon
-          name="edit"
-          size={20}
-          color="black"
-          style={{alignSelf: "center", position: "absolute", bottom: -1}}
-        />
-      </View>
-      <Text
-        style={{
-          color: "#0A5AC9",
-          fontSize: 19,
-          textAlign: "center",
-          marginTop: 5,
-        }}>
-        Business Name
-      </Text>
-      <Text style={{textAlign: "center", fontSize: 13}}>+91 9192939495</Text>
+
       <View>
         {list.map((l, i) => (
           <ListItem.Accordion
@@ -101,9 +208,9 @@ const Settings = () => {
             content={
               <>
                 <ListItem.Content
-                  style={{flexDirection: "row", justifyContent: "flex-start"}}>
+                  style={{ flexDirection: "row", justifyContent: "flex-start" }}>
                   {l.image && <Image source={l.image} />}
-                  <ListItem.Title style={{marginLeft: 10}}>
+                  <ListItem.Title style={{ marginLeft: 10 }}>
                     {l.title}
                   </ListItem.Title>
                 </ListItem.Content>
@@ -115,35 +222,30 @@ const Settings = () => {
             }}>
             <ListItem key={i} onPress={log} bottomDivider>
               <ListItem.Content>
-                <ListItem.Title
-                  style={{
-                    marginVertical: 8,
-                  }}>
-                  {l.name}
-                </ListItem.Title>
-                <View style={{position: "absolute", right: 20, top: 10}}>
-                  <RightIcon name="arrowright" />
-                </View>
-                <ListItem.Title
-                  style={{
-                    marginVertical: 8,
-                  }}>
-                  {l.name2}
-                  <View>
-                    <RightIcon name="arrowright" />
-                  </View>
-                </ListItem.Title>
-                <ListItem.Title
-                  style={{
-                    marginVertical: 8,
-                  }}>
-                  {l.name3}
-                  <View>
-                    <RightIcon name="arrowright" />
-                  </View>
-                </ListItem.Title>
+                <TouchableOpacity>
+                  <ListItem.Title>
+                    {l.name}
+                  </ListItem.Title>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                  <ListItem.Title>
+                    {l.name2}
+                  </ListItem.Title>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                  <ListItem.Title>
+                    {l.name3}
+                  </ListItem.Title>
+                </TouchableOpacity>
+
+                <TouchableOpacity>
+                  <ListItem.Title>
+                    {l.name4}
+                  </ListItem.Title>
+                </TouchableOpacity>
               </ListItem.Content>
-              <ListItem.Chevron />
             </ListItem>
           </ListItem.Accordion>
         ))}
