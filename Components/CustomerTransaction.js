@@ -13,10 +13,12 @@ import metrics from "../Constants/metrics";
 import ToPayUser from "./Cash/ToPayUser";
 import ToGetUser from "./Cash/ToGetUser";
 import Api from "../Services";
+import {useNavigation} from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
 
-const CustomerTransaction = ({customerTransactionData}) => {
+const CustomerTransaction = ({customerType}) => {
+  const navigation = useNavigation();
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -41,13 +43,18 @@ const CustomerTransaction = ({customerTransactionData}) => {
     },
   });
 
+  const [customerTransactionData, setCustomerTransactionData] = useState([]);
+
   // const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
-  // useEffect(() => {
-  //   customerType == "customer"
-  //     ? customerTransactions()
-  //     : supplierTransactions();
-  // }, []);
+  const customerTransactions = async () => {
+    try {
+      const responce = await Api.get("/auth/get-transaction/customer");
+      setCustomerTransactionData(responce.data.data || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // const customerTransactions = async () => {
   //   try {

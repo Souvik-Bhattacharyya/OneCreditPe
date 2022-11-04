@@ -11,7 +11,8 @@ import metrics from "../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
 import DatePicker from "react-native-date-picker";
 import Api from "../Services";
-const CashEntries = ({route}) => {
+import {useNavigation} from "@react-navigation/native";
+const CashEntries = ({navigation, route}) => {
   const {user} = route.params;
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(new Date());
@@ -20,7 +21,7 @@ const CashEntries = ({route}) => {
   const [customerCashEntry, setCustomerCashEntry] = useState({
     amount: null,
     entryDate: "2022-11-01 07:08:29",
-    tns_type: "get",
+    tns_type: "got",
     paymentDetails: "",
     attachments: null,
   });
@@ -34,60 +35,32 @@ const CashEntries = ({route}) => {
   //   attachments: customerCashEntry.attachments,
   // };
   const cashEntry = async () => {
-    var myHeaders = new Headers();
-    // myHeaders.append("Accept", "application/json");
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOTRkYTIwMmVjYTY1NzFhNzdiZGY2YTZiMjJlNDBmZTgzN2Y1MTk2YjlkYTlkOGMxOTM4YjAzMjc5Njg2M2VjNWQ3Nzc5YWZlZThlOTA5MDciLCJpYXQiOjE2NjcwNTUzMDIuNzUwNDgyLCJuYmYiOjE2NjcwNTUzMDIuNzUwNDg4LCJleHAiOjE2OTg1OTEzMDIuNTk2ODgyLCJzdWIiOiI2Iiwic2NvcGVzIjpbXX0.VY3QvEZwFp0Q7a1cNfIemdv369a8vePUOOh9jelJ4u0iseehmX-3zPrlmPesIn8et4g1F0Y803tDz815ZdlIPjTHYQD3JkvHJGK2tILBAX9BaG1Rq7JrhXY03dG0QIDc6vFj5Tsp0NFVrU9tSOxk5tHvvLA0UwpcDnFZl9a15LBSo9kvlTVdch8dureZt4SOz_-sgx-rHW_J_rjMthaUSufU56iOVe-TNKIpbnraBYGY33KBQp7YPLLp01MX-mkcQiwoD44YOcAJbzs1XLFb2fPDAP4c2keZB9_Nyteb0zWgK5nArJUSTLVbCfR5uuNjtgGIO277HMEr1Fqt6M1UyaxgRtQkfBrgWRKYIUybYF0_TFQKgqlD5V-NG_Y7rczW_CIy5HaEvrZxVm1qL2py-cn-bSgYrfdj7NvJVsi8mDoUEuPtq5pLFPhSIE6MULbKb83Eug-uWArMVzna2XcQAcHeRkCdYc3OwnflFOFB5e4NFpmR_SLLSfH2R_qV2HO_Ze5NTqXCbfAkSkDIp0sHPxaNP7aNI6_0cQGL6qkbB7mFzla6LjsdaTzu38LlyTI5EiscV-pShXMediK-JOChZwuMdl6knJQW_-DUYwfEXiKPjHEGzf2EgKvDmQVJyoxOzamBKpVY5UfxUL0sldiqeyv8SKxbkTfhnKChmxRb50U",
-    );
+    try {
+      const response = await Api.post("/auth/transaction", {
+        amount: customerCashEntry.amount,
+        date_time: customerCashEntry.entryDate,
+        tns_type: customerCashEntry.tns_type,
+        payment_details: customerCashEntry.paymentDetails,
+        customer_id: user.id,
+        // attachments: customerCashEntry.attachments,
+      });
 
-    var formdata = new FormData();
-    formdata.append("amount", customerCashEntry.amount);
-    formdata.append("tns_type", customerCashEntry.tns_type);
-    formdata.append("customer_id", user.id);
-    // formdata.append("attachment", fileInput.files[0], "[PROXY]");
-    formdata.append("date_time", customerCashEntry.entryDate);
-    formdata.append("payment_details", customerCashEntry.paymentDetails);
+      if (response.data.status == 200) {
+        console.log("====>", response.data);
+        setCustomerCashEntry({
+          ...customerCashEntry,
+          amount: null,
+          entryDate: "2022-11-01 07:08:29",
+          tns_type: "get",
+          paymentDetails: "",
+          attachments: null,
+        });
 
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: formdata,
-      redirect: "follow",
-    };
-    const response = await Api.postForm("/auth/transaction", formdata);
-    console.log(response);
-    // fetch("https://onepay.alsoltech.in/api/auth/transaction", requestOptions)
-    //   .then(response => response.text())
-    //   .then(result => console.log(result))
-    //   .catch(error => console.log("error", error));
-    // console.log("******", user);
-    // var formdata = new FormData();
-    // formdata.append("amount", customerCashEntry.amount);
-    // formdata.append("tns_type", customerCashEntry.tns_type);
-    // formdata.append("customer_id", user.id);
-    // formdata.append("attachment", fileInput.files[0], "[PROXY]");
-    // formdata.append("date_time", customerCashEntry.entryDate);
-    // formdata.append("payment_details", customerCashEntry.paymentDetails);
-
-    //   try {
-    //     const response = await Api.postForm("/auth/transaction", formdata);
-    //     // if (response.status == 200) {
-    //     console.log("====>", response.data);
-    //     setCashDetails({
-    //       ...cashDetails,
-    //       amount: null,
-    //       entryDate: "2022-11-01 07:08:29",
-    //       tns_type: "get",
-    //       paymentDetails: "",
-    //       attachments: null,
-    //     });
-
-    //     navigation.navigate("userDetails");
-    //     // }
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
+        navigation.navigate("UserDetails");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <View style={styles.container}>
