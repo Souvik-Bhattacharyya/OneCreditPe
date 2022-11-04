@@ -212,7 +212,7 @@ const Cashbook = ({navigation}) => {
               </TouchableOpacity>
             </View>
           </View>
-          {todayEntryDetails !== [] ? (
+          {todayEntryDetails?.length ? (
             <TransactionFull todayEntryDetails={todayEntryDetails} />
           ) : (
             <TransactionEmpty />
