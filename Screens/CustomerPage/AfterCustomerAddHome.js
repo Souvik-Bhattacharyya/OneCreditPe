@@ -11,6 +11,7 @@ import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {useNavigation} from "@react-navigation/native";
 import CustomerTransaction from "../../Components/CustomerTransaction";
+import CustomerTransactionEmpty from "../../Components/CustomerTransactionEmpty";
 import CommonHeader from "../../Components/CommonHeader";
 
 const width = Dimensions.get("window").width;
@@ -119,7 +120,7 @@ const Customer = () => {
           </View>
         </View>
 
-        <CustomerTransaction customerType={customerType} />
+        <CustomerTransactionEmpty customerType={customerType} />
 
         <View
           style={{
