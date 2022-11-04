@@ -6,16 +6,30 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {useNavigation} from "@react-navigation/native";
 import CustomerTransaction from "../../Components/CustomerTransaction";
 import CommonHeader from "../../Components/CommonHeader";
-
+import CustomerTransactionEmpty from "../../Components/CustomerTransactionEmpty";
+import Api from "../../Services";
 const Supplier = () => {
   const navigation = useNavigation();
-  const [customerType, setCustomerType] = useState("supplier");
+  // const [customerType, setCustomerType] = useState("supplier");
+  const [customerTransactionData, setCustomerTransactionData] = useState([]);
+  useEffect(() => {
+    supplierTransactions();
+  }, []);
+
+  const supplierTransactions = async () => {
+    try {
+      const responce = await Api.get("/auth/get-transaction/supplier");
+      setCustomerTransactionData(responce.data.data || []);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <CommonHeader />
@@ -116,11 +130,14 @@ const Supplier = () => {
             <Icon name="account-arrow-right" color={"#F31B24"} size={32} />
           </View>
         </View>
-
-        <CustomerTransaction
-          ToGetUser={"Advance"}
-          customerType={customerType}
-        />
+        {customerTransactionData ? (
+          <CustomerTransaction
+            // ToGetUser={"Advance"}
+            customerTransactionData={customerTransactionData}
+          />
+        ) : (
+          <CustomerTransactionEmpty />
+        )}
 
         <View
           style={{

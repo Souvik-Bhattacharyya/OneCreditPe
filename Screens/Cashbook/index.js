@@ -6,7 +6,7 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 import TransactionFull from "../../Components/TransactionFull";
@@ -14,7 +14,7 @@ import metrics from "../../Constants/metrics";
 import Api from "../../Services";
 const width = Dimensions.get("window").width;
 
-const Cashbook = ({ navigation }) => {
+const Cashbook = ({navigation}) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#E8EEFF",
@@ -36,7 +36,7 @@ const Cashbook = ({ navigation }) => {
       justifyContent: "center",
       alignItems: "center",
       width: "100%",
-    }, 
+    },
     boxOne: {
       display: "flex",
       flexDirection: "column",
@@ -178,7 +178,7 @@ const Cashbook = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{ flex: 1, marginTop: 10 }}>
+        <View style={{flex: 1, marginTop: 10}}>
           <View
             style={{
               flexDirection: "row",
@@ -207,12 +207,16 @@ const Cashbook = ({ navigation }) => {
                 }}
               />
               <TouchableOpacity
-                style={{ position: "absolute", right: 20, alignSelf: "center" }}>
+                style={{position: "absolute", right: 20, alignSelf: "center"}}>
                 {/* <Icon name="search" color={'#333'} size={22} /> */}
               </TouchableOpacity>
             </View>
           </View>
-          <TransactionEmpty todayEntryDetails={todayEntryDetails} />
+          {todayEntryDetails ? (
+            <TransactionFull todayEntryDetails={todayEntryDetails} />
+          ) : (
+            <TransactionEmpty />
+          )}
         </View>
 
         <View
@@ -229,8 +233,8 @@ const Cashbook = ({ navigation }) => {
             borderColor: "#c9c9c9",
           }}>
           <TouchableOpacity
-            onPress={
-              () => navigation.navigate("CashEntries", { name: "Cash Entries" })
+            onPress={() =>
+              navigation.navigate("CashEntries", {name: "Cash Entries"})
             }
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
