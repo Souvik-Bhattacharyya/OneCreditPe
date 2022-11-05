@@ -11,9 +11,9 @@ import metrics from "../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
 import DatePicker from "react-native-date-picker";
 import Api from "../Services";
-import {useNavigation} from "@react-navigation/native";
+
 const CashEntries = ({navigation, route}) => {
-  const {user} = route.params;
+  const {userId} = route.params;
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(new Date());
   const [open, setOpen] = useState(false);
@@ -41,7 +41,7 @@ const CashEntries = ({navigation, route}) => {
         date_time: customerCashEntry.entryDate,
         tns_type: customerCashEntry.tns_type,
         payment_details: customerCashEntry.paymentDetails,
-        customer_id: user.id,
+        customer_id: userId,
         // attachments: customerCashEntry.attachments,
       });
 
