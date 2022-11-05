@@ -43,13 +43,13 @@ const Customer = () => {
         {/*Tab Button */}
         <View
           style={{
-            marginBottom: 15,
+            marginBottom: 10,
             marginTop: metrics.verticalScale(-15),
             alignSelf: "center",
             width: "100%",
             flexDirection: "row",
             justifyContent: "center",
-            backgroundColor: "#0a5ac9",
+            backgroundColor: "#fff",
             borderBottomWidth: 1,
             borderBottomColor: "#c6c6c6",
           }}>
@@ -108,7 +108,7 @@ const Customer = () => {
           </View>
           <View style={styles.box}>
             <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-              Total amount purchase for June
+              Total amount you will get
             </Text>
           </View>
           <View style={styles.box}>

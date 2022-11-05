@@ -37,7 +37,7 @@ const Supplier = () => {
         {/*Tab Button */}
         <View
           style={{
-            marginBottom: 15,
+            marginBottom: 10,
             marginTop: metrics.verticalScale(-15),
             alignSelf: "center",
             width: "100%",
@@ -102,7 +102,7 @@ const Supplier = () => {
           </View>
           <View style={styles.box}>
             <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-              Total amount purchase for June
+              Total amount purchase for Month
             </Text>
           </View>
           <View style={styles.box}>
@@ -121,7 +121,7 @@ const Supplier = () => {
           </View>
           <View style={styles.box}>
             <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-              Total amount you have to pay
+              Total amount paid in advance
             </Text>
           </View>
           <View style={styles.box}>

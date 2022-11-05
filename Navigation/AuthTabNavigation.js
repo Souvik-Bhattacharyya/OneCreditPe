@@ -21,7 +21,9 @@ import {
   UserDetails,
   ToPayUser,
   ToGetUser,
-  CustomerEntries
+  CustomerEntries,
+  PrivacyAndPolicy,
+  TermsAndConditions
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -53,7 +55,7 @@ const CustomerStack = () => {
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
-      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false}} />
+      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false }} />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
@@ -78,7 +80,7 @@ const SupplierStack = () => {
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
-      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false}}/>
+      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false }} />
       <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
   );
@@ -97,7 +99,8 @@ const CashBookStack = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: true, headerTitleAlign: 'center', headerStyle: {
+        headerShown: true,
+        headerTitleAlign: 'center', headerStyle: {
           backgroundColor: '#0A5AC9',
         },
         headerTintColor: '#fff',
@@ -106,7 +109,9 @@ const CashBookStack = () => {
         },
       }}
     >
-      <Stack.Screen component={Cashbook} name="Cash Book" />
+      <Stack.Screen options={{
+        headerShown: false,
+      }} component={Cashbook} name="Cash Book" />
       <Stack.Screen component={ViewReport} name="View Report" />
       <Stack.Screen component={CashEntries} name="CashEntries" options={({ route }) => ({
         title: route.params.name
@@ -134,6 +139,28 @@ const HomeScreenStack = () => {
       <Stack.Screen options={{ headerShown: false }} component={HomePage} name="CustomerHome" />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
+    </Stack.Navigator>
+  );
+};
+
+const SettingsStack = () => {
+  return (
+    <Stack.Navigator
+      cardShadowEnabled
+      screenOptions={{
+        headerTitleAlign: 'center',
+        headerStyle: {
+          backgroundColor: '#0A5AC9',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    >
+      <Stack.Screen options={{ headerShown: false }} component={Settings} name="Settings" />
+      <Stack.Screen component={PrivacyAndPolicy} name="Privacy And Policy" />
+      <Stack.Screen component={TermsAndConditions} name="Terms And Conditions" />
     </Stack.Navigator>
   );
 };
@@ -187,7 +214,7 @@ const AuthTabNavigation = ({ navigation }) => {
       />
       <Tab.Screen
         name="More"
-        component={Settings}
+        component={SettingsStack}
         options={{
           tabBarIcon: ({ color }) => (
             <Icon name="menu-fold" size={24} color={color} style={{ marginTop: 2 }} />
