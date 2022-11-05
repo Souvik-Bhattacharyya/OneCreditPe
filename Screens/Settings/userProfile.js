@@ -17,13 +17,14 @@ import metrics from "../../Constants/metrics";
 const width = Dimensions.get("window").width;
 const UserProfile = () => {
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: '#fff', paddingTop: 20, paddingHorizontal: 15 }}>
       <View
         style={{
           width: "100%",
           justifyContent: "center",
           alignItems: "center",
           marginVertical: 16,
+          flex: .2
         }}>
         <TouchableOpacity
           style={{
@@ -65,147 +66,176 @@ const UserProfile = () => {
           </View>
         </TouchableOpacity>
       </View>
-      <View
-        style={{
-          backgroundColor: "#c9c9c9",
-          marginTop: 30,
-          marginBottom: 1,
-          width: "100%",
-          paddingVertical: 10,
-        }}>
-        <Text style={{paddingLeft: 15}}>Personal Info</Text>
-      </View>
-      <View style={{paddingHorizontal: 15}}>
+
+      <View style={{ flex: 1 }}>
         <View
           style={{
             flexDirection: "row",
             width: "100%",
-            // backgroundColor: "#ddd",
             alignItems: "center",
             borderColor: "#c9c9c9",
             borderBottomWidth: 1,
+            paddingHorizontal: 10,
+            paddingVertical: 10,
           }}>
-          <ProfileIcon name="user-alt" size={20} style={{marginRight: 10}} />
+          <ProfileIcon name="user-alt" color={"#464555"} size={20} style={{ marginRight: 10, marginRight: 20 }} />
           <TextInput
-            placeholder="Enter Your Name"
-            placeholderTextColor={"#333"}
-            style={{color: "black", fontSize: 18}}
+            placeholder="Your Name"
+            placeholderTextColor={"#aaa"}
+            style={{
+              color: "#464555", fontSize: 18,
+              fontWeight: '500', width: '100%'
+            }}
           />
 
-          {/* <View style={{marginRight: 15, marginTop: -5}}>
-            <TouchableOpacity
-              style={{
-                borderColor: "blue",
-                borderWidth: 1,
-                paddingHorizontal: 13,
-                paddingVertical: 8,
-                borderRadius: 40,
-              }}>
-              <Text style={{color: "blue"}}>Add Details</Text>
-            </TouchableOpacity>
-          </View> */}
-        </View>
-      </View>
-      <View
-        style={{
-          marginTop: 20,
-        }}>
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-          <CallIcon name="call-outline" size={20} style={{marginLeft: 20}} />
-          <View style={{position: "absolute", left: 50, top: 5}}>
-            <View style={{marginVertical: -10}}>
-              <Text style={{fontSize: 13}}>Registered number</Text>
-              <Text style={{color: "black", fontSize: 18}}>8420198760</Text>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View style={{marginTop: 20}}>
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-          <BusinessIcon name="business" size={20} style={{marginLeft: 20}} />
-          <View style={{position: "absolute", left: 50}}>
-            <View
-              style={
-                {
-                  // backgroundColor: "pink",
-                  // marginVertical: -14,
-                  // paddingRight: 19,
-                }
-              }>
-              <Text style={{fontSize: 13}}>Business name</Text>
-              <TextInput
-                value="My Business"
-                style={{
-                  color: "black",
-                  fontSize: 18,
-                }}
-              />
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        style={{
-          backgroundColor: "#c9c9c9",
-          marginVertical: 30,
-          width: "100%",
-          paddingVertical: 10,
-        }}>
-        <Text style={{paddingLeft: 15}}>Personal Info</Text>
-      </View>
-      <View>
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-          <ProfileIcon name="user" size={25} style={{marginLeft: 20}} />
-          <View style={{position: "absolute", left: 65, top: 5}}>
-            <View style={{marginVertical: -10}}>
-              <Text style={{fontSize: 13}}>Details</Text>
-              <Text style={{color: "black", fontSize: 18}}>3 staff</Text>
-            </View>
-          </View>
-          <View style={{marginTop: 10, marginRight: 20}}>
-            <TouchableOpacity>
-              <RightIcon name="arrow-right" color="blue" />
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-      <View
-        style={{
-          alignSelf: "center",
-          width,
-          flexDirection: "row",
-          justifyContent: "space-between",
-          backgroundColor: "#f6f6f6",
-          paddingHorizontal: 20,
-          paddingVertical: 10,
-          left: 0,
-          marginTop: 10,
-          // borderTopWidth: 1,
-          borderColor: "#c9c9c9",
-        }}>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("CashEntries", {name: "Cash Entries"})
-          }
-          style={{
-            paddingHorizontal: metrics.horizontalScale(20),
-            paddingVertical: metrics.verticalScale(10),
-            backgroundColor: "#0a5ac9",
-            borderRadius: 6,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "center",
-          }}>
-          <Text
+          <TouchableOpacity
             style={{
-              color: "#333",
-              fontSize: 18,
-              fontWeight: "900",
-              color: "#fff",
+              position: 'absolute',
+              right: 20,
+              borderRadius: 6,
+              flexDirection: "row",
+              justifyContent: "center",
+              display: 'none'
             }}>
-            Create Transaction
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={{
+                color: "#333",
+                fontSize: 14,
+                fontWeight: "900",
+                color: "#0a5ac9",
+              }}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            width: "100%",
+            alignItems: "center",
+            borderColor: "#c9c9c9",
+            borderBottomWidth: 1,
+            paddingHorizontal: 10,
+            paddingVertical: 10,
+            // marginTop: 10
+          }}>
+          <ProfileIcon name="phone" color={"#464555"} size={20} style={{ marginRight: 10, marginRight: 20 }} />
+          <TextInput
+            value="810123523"
+            placeholderTextColor={"#aaa"}
+            style={{
+              color: "#464555", fontSize: 18,
+              fontWeight: '500', width: '100%'
+            }}
+          />
+
+          <TouchableOpacity
+            style={{
+              position: 'absolute',
+              right: 20,
+              borderRadius: 6,
+              flexDirection: "row",
+              justifyContent: "center",
+              display: 'none'
+            }}>
+            <Text
+              style={{
+                color: "#333",
+                fontSize: 14,
+                fontWeight: "900",
+                color: "#0a5ac9",
+              }}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            width: "100%",
+            alignItems: "center",
+            borderColor: "#c9c9c9",
+            borderBottomWidth: 1,
+            paddingHorizontal: 10,
+            paddingVertical: 10,
+            // marginTop: 10
+          }}>
+          <ProfileIcon name="building" color={"#464555"} size={20} style={{ marginRight: 10, marginRight: 20 }} />
+          <TextInput
+            placeholder="Your Name"
+            value="Business Name"
+            placeholderTextColor={"#aaa"}
+            style={{
+              color: "#464555", fontSize: 18,
+              fontWeight: '500', width: '100%'
+            }}
+          />
+
+          <TouchableOpacity
+            style={{
+              position: 'absolute',
+              right: 20,
+              borderRadius: 6,
+              flexDirection: "row",
+              justifyContent: "center",
+              display: 'none'
+            }}>
+            <Text
+              style={{
+                color: "#333",
+                fontSize: 14,
+                fontWeight: "900",
+                color: "#0a5ac9",
+              }}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        <View
+          style={{
+            flexDirection: "row",
+            width: "100%",
+            alignItems: "center",
+            borderColor: "#c9c9c9",
+            borderBottomWidth: 1,
+            paddingHorizontal: 10,
+            paddingVertical: 10,
+            // marginTop: 10
+          }}>
+          <ProfileIcon name="users" color={"#464555"} size={20} style={{ marginRight: 10, marginRight: 20 }} />
+          <TextInput
+            placeholder="Stuff Count"
+            value=""
+            placeholderTextColor={"#aaa"}
+            style={{
+              color: "#464555", fontSize: 18,
+              fontWeight: '500', width: '100%'
+            }}
+          />
+
+          <TouchableOpacity
+            style={{
+              position: 'absolute',
+              right: 20,
+              borderRadius: 6,
+              flexDirection: "row",
+              justifyContent: "center",
+              display: 'none'
+            }}>
+            <Text
+              style={{
+                color: "#333",
+                fontSize: 14,
+                fontWeight: "900",
+                color: "#0a5ac9",
+              }}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

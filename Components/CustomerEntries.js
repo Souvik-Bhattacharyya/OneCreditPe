@@ -193,10 +193,10 @@ const CashEntries = ({navigation, route}) => {
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            {height: 200, textAlignVertical: "top", paddingHorizontal: 20},
+            {textAlignVertical: "top", paddingHorizontal: 20},
           ]}
           multiline={true}
-          numberOfLines={10}
+          numberOfLines={2}
           onChangeText={val =>
             setCustomerCashEntry({...customerCashEntry, paymentDetails: val})
           }
