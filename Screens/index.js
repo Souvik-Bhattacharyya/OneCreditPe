@@ -23,6 +23,7 @@ import ToGet from "../Components/Cash/ToGet";
 import ToPay from "../Components/Cash/ToPay";
 import CustomerEntries from "../Components/CustomerEntries";
 import PartiesHeader from "../Components/PartiesHeader";
+import UserProfile from "./Settings/userProfile";
 // import LoanSection from "../Screens/loanSection/Loan";
 
 export {
@@ -51,5 +52,6 @@ export {
   ToGetUser,
   ToPay,
   ToGet,
-  CustomerEntries
+  CustomerEntries,
+  UserProfile,
 };
