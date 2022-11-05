@@ -6,11 +6,13 @@ import Help from "react-native-vector-icons/Entypo";
 import { List } from 'react-native-paper';
 import metrics from '../../Constants/metrics';
 import { useNavigation } from "@react-navigation/native";
+import CommonHeader from "../../Components/CommonHeader";
 
 const Settings = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      <CommonHeader />
       <View style={{ marginTop: metrics.verticalScale(20), marginBottom: metrics.verticalScale(50) }}>
         <View style={{
           width: '100%',
@@ -18,18 +20,20 @@ const Settings = () => {
           alignItems: 'center',
           marginVertical: 16
         }}>
-          <TouchableOpacity style={{
-            display: 'flex',
-            borderColor: '#464555',
-            borderWidth: 3,
-            borderRadius: 50,
-            borderStyle: 'dashed',
-            width: 110,
-            height: 110,
-            justifyContent: 'center',
-            alignItems: 'center',
-            position: 'relative'
-          }}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("UserProfile")}
+            style={{
+              display: 'flex',
+              borderColor: '#464555',
+              borderWidth: 3,
+              borderRadius: 50,
+              borderStyle: 'dashed',
+              width: 110,
+              height: 110,
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'relative'
+            }}>
             <Image
               source={require("../../Assets/profile.png")}
               style={{
@@ -173,7 +177,6 @@ export default Settings;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: metrics.verticalScale(15),
     backgroundColor: "#fff",
     flex: 1,
   },

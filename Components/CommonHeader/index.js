@@ -1,7 +1,7 @@
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 const CommonHeader = () => {
   const navigation = useNavigation();
@@ -26,7 +26,7 @@ const CommonHeader = () => {
           alignItems: "center",
           width: "75%",
         }}>
-        <TouchableOpacity onPress={() => navigation.navigate("UserProfile")}>
+        <View>
           <Image
             source={require("../../Assets/profile.png")}
             style={{
@@ -37,7 +37,7 @@ const CommonHeader = () => {
               // backgroundColor:'#fff'
             }}
           />
-        </TouchableOpacity>
+        </View>
         <View
           style={{
             flexDirection: "column",
@@ -48,19 +48,19 @@ const CommonHeader = () => {
               justifyContent: "center",
               alignItems: "center",
             }}>
-            <Text style={{fontWeight: "800", fontSize: 14, color: "#fff"}}>
+            <Text style={{ fontWeight: "800", fontSize: 14, color: "#fff" }}>
               Business Name
             </Text>
             <Icon name="caretdown" color={"#fff"} size={12} />
           </TouchableOpacity>
-          <Text style={{fontSize: 14, color: "#ddd", fontWeight: "800"}}>
+          <Text style={{ fontSize: 14, color: "#ddd", fontWeight: "800" }}>
             9192939495
           </Text>
         </View>
       </View>
       <TouchableOpacity
         onPress={() => navigation.push("Set Collection Date")}
-        style={{width: "25%", justifyContent: "center", alignItems: "center"}}>
+        style={{ width: "25%", justifyContent: "center", alignItems: "center" }}>
         <Image
           source={require("../../Assets/calender.png")}
           style={{

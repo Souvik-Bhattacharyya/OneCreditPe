@@ -10,10 +10,6 @@ import React from "react";
 import Icon from "react-native-vector-icons/Entypo";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 
-import CallIcon from "react-native-vector-icons/Ionicons";
-import BusinessIcon from "react-native-vector-icons/MaterialIcons";
-import RightIcon from "react-native-vector-icons/SimpleLineIcons";
-import metrics from "../../Constants/metrics";
 const width = Dimensions.get("window").width;
 const UserProfile = () => {
   return (
