@@ -14,6 +14,7 @@ import {Calendar} from "react-native-calendars";
 import TransactionFull from "../../Components/TransactionFull";
 import moment from "moment";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import TransactionEmpty from "../../Components/TransactionEmpty";
 const width = Dimensions.get("window").width;
 
 const ViewReport = ({navigation}) => {
@@ -131,7 +132,7 @@ const ViewReport = ({navigation}) => {
                 borderRightColor: "#c6c6c6",
                 borderRightWidth: 1,
               }}
-              onPress={showDateFrompicker}>
+              onPress={showDatepicker}>
               <Icon name="calendar" size={22} color={"#0A5AC9"} />
 
               <View>
@@ -164,7 +165,7 @@ const ViewReport = ({navigation}) => {
           </View>
         </View>
 
-        <TransactionFull />
+        <TransactionEmpty />
 
         <View
           style={{

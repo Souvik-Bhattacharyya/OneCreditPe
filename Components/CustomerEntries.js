@@ -9,15 +9,37 @@ import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import moment from "moment";
 import DatePicker from "react-native-date-picker";
 import Api from "../Services";
 
 const CashEntries = ({navigation, route}) => {
   const {userId} = route.params;
   const [isActive, setIsActive] = useState("cash in");
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [date, setDate] = useState(null);
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    showMode("date");
+  };
+  const showMode = currentMode => {
+    let maximumDate = new Date();
+    maximumDate.setFullYear(maximumDate.getFullYear());
+
+    DateTimePickerAndroid.open({
+      value: date || new Date(),
+      onChange,
+      mode: currentMode,
+      is24Hour: true,
+      minimumDate: new Date(1950, 0, 1),
+      maximumDate: maximumDate,
+    });
+  };
   const [customerCashEntry, setCustomerCashEntry] = useState({
     amount: null,
     entryDate: "2022-11-01 07:08:29",
@@ -90,34 +112,24 @@ const CashEntries = ({navigation, route}) => {
             paddingVertical: 15,
             paddingHorizontal: 20,
           }}
-          onPress={() => setOpen(true)}>
+          onPress={showDatepicker}>
           <DatePickerIcon
             name="date-range"
             color={"#828282"}
             style={{}}
             size={24}
           />
+
           <Text
+            placeholder="Select Date & Time"
             style={{
-              color: "#828282",
               fontSize: 18,
+              fontWeight: "600",
+              color: "#000",
               paddingHorizontal: 10,
-              fontWeight: "800",
             }}>
-            Select Date & Time
+            {date ? moment(date).format("L") : "Select Date & Time"}
           </Text>
-          <DatePicker
-            modal
-            open={open}
-            date={date}
-            onConfirm={date => {
-              setOpen(false);
-              setDate(date);
-            }}
-            onCancel={() => {
-              setOpen(false);
-            }}
-          />
         </TouchableOpacity>
       </View>
 
