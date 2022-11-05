@@ -1,141 +1,16 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
-import { ListItem } from "@rneui/themed";
-import setting from "../../Assets/settingIcon.png";
-import question from "../../Assets/question.png";
-import about from "../../Assets/aboutpng.png";
-import RightIcon from "react-native-vector-icons/AntDesign";
-import metrics from "../../Constants/metrics";
+import IconLow from "react-native-vector-icons/FontAwesome";
+import Help from "react-native-vector-icons/Entypo";
+import { List } from 'react-native-paper';
+import metrics from '../../Constants/metrics';
+import { useNavigation } from "@react-navigation/native";
 
 const Settings = () => {
-  const [expanded, setExpanded] = useState(false);
-  const [list, setList] = useState([
-    {
-      title: "Settings",
-      image: setting,
-      name: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Language Options</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-
-      name2:
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          // backgroundColor: '#ddd',
-          paddingVertical: 15
-        }}>
-          <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>User Profile</Text>
-          <RightIcon name="arrowright" color={'#464555'} size={16} />
-        </View>,
-      expanded: false,
-      id: 1,
-    },
-
-    {
-      title: "Help & Support",
-      image: question,
-
-      name: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>FAQ Listing</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-
-      name2: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>FAQ Answer</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-
-      name3: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Chat with us (redirect to whatsapp business)</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-
-      name4: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Call Us</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-      expanded: false,
-      id: 2,
-    },
-
-    {
-      title: "About Us",
-      image: about,
-      name: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Privacy Policy</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-
-      name2: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Terms and Condition</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-
-      name3: <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        // backgroundColor: '#ddd',
-        paddingVertical: 15
-      }}>
-        <Text style={{ fontSize: 16, fontWeight: '500', color: '#464555' }}>Invite friends</Text>
-        <RightIcon name="arrowright" color={'#464555'} size={16} />
-      </View>,
-      expanded: false,
-      id: 3,
-    },
-  ]);
-
-  const log = () => console.log("this is an example method");
-  const expandMenu = id => {
-    const data = list.map(item => {
-      if (item.id === id) {
-        item.expanded = !item.expanded;
-      } else {
-        item.expanded = false;
-      }
-      return item;
-    });
-    setList(data);
-  };
+  const navigation = useNavigation();
   return (
-    <View style={{ backgroundColor: "#fff", flex: 1 }}>
+    <View style={styles.container}>
       <View style={{ marginTop: metrics.verticalScale(20), marginBottom: metrics.verticalScale(50) }}>
         <View style={{
           width: '100%',
@@ -200,58 +75,124 @@ const Settings = () => {
         <Text style={{ textAlign: "center", fontSize: 16, color: '#828282' }}>+91 9192939495</Text>
       </View>
 
-      <View>
-        {list.map((l, i) => (
-          <ListItem.Accordion
-            bottomDivider
-            key={l.id}
-            content={
-              <>
-                <ListItem.Content
-                  style={{ flexDirection: "row", justifyContent: "flex-start" }}>
-                  {l.image && <Image source={l.image} />}
-                  <ListItem.Title style={{ marginLeft: 10 }}>
-                    {l.title}
-                  </ListItem.Title>
-                </ListItem.Content>
-              </>
-            }
-            isExpanded={l.expanded}
-            onPress={() => {
-              expandMenu(l.id);
-            }}>
-            <ListItem key={i} onPress={log} bottomDivider>
-              <ListItem.Content>
-                <TouchableOpacity>
-                  <ListItem.Title>
-                    {l.name}
-                  </ListItem.Title>
-                </TouchableOpacity>
 
-                <TouchableOpacity>
-                  <ListItem.Title>
-                    {l.name2}
-                  </ListItem.Title>
-                </TouchableOpacity>
+      <List.AccordionGroup>
+        <List.Accordion
+          style={styles.accordion}
+          theme={{ colors: { text: "#464555", primary: '#333' } }}
+          title="Settings"
+          id="1"
+          left={(props) => <Icon name="user-cog" size={20} color={'#464555'} />}
+        >
+          <List.Item title="Language Options"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => alert("In progress")}
+            left={(props) => <IconLow name="language" size={18} color={'#464555'} style={{ alignSelf: 'center' }} />}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+          <List.Item title="Log Out"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => { navigation.navigate('login') }}
+            left={(props) => <Help name="log-out" size={18} color={'#464555'} style={{ alignSelf: 'center' }} />}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+        </List.Accordion>
 
-                <TouchableOpacity>
-                  <ListItem.Title>
-                    {l.name3}
-                  </ListItem.Title>
-                </TouchableOpacity>
 
-                <TouchableOpacity>
-                  <ListItem.Title>
-                    {l.name4}
-                  </ListItem.Title>
-                </TouchableOpacity>
-              </ListItem.Content>
-            </ListItem>
-          </ListItem.Accordion>
-        ))}
-      </View>
-    </View>
-  );
-};
+        <List.Accordion
+          style={styles.accordion}
+          theme={{ colors: { text: "#464555", primary: '#333' } }}
+          title="Help & Support"
+          id="2"
+          left={(props) => <Help name="help-with-circle" size={24} color={'#464555'} />}
+        >
+          <List.Item title="FAQ Listing"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => alert("In progress")}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+          <List.Item title="FAQ Answer"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => alert("In progress")}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+          <List.Item title="Chat with us"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => alert("In progress")}
+            left={(props) => <Help name="message" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+          <List.Item title="Call Us"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => alert("In progress")}
+            left={(props) => <Icon name="phone" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+        </List.Accordion>
+
+
+        <List.Accordion
+          style={styles.accordion}
+          theme={{ colors: { text: "#464555", primary: '#333' } }}
+          title="About Us"
+          id="3"
+          left={(props) => <Icon name="info-circle" size={24} color={'#464555'} />}
+        >
+          <List.Item title="Privacy Policy"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => { navigation.navigate('Privacy And Policy') }}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+          <List.Item title="Terms And Conditions"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => { navigation.navigate('Terms And Conditions') }}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+          <List.Item title="Invite Friends"
+            theme={{ colors: { text: "#464555", } }}
+            style={styles.items}
+            onPress={() => alert("In progress")}
+            left={(props) => <Icon name="user-plus" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+            right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          />
+        </List.Accordion>
+      </List.AccordionGroup>
+    </View >
+  )
+}
 
 export default Settings;
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: metrics.verticalScale(15),
+    backgroundColor: "#fff",
+    flex: 1,
+  },
+  text: {
+    color: '#333'
+  },
+  accordion: {
+    backgroundColor: '#fff',
+    borderBottomColor: '#c9c9c9',
+    borderBottomWidth: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 15
+  },
+  items: {
+    backgroundColor: '#F1F1F1',
+    paddingVertical: metrics.verticalScale(15),
+    justifyContent: 'center',
+    borderBottomColor: '#c9c9c9',
+    borderBottomWidth: 1,
+    paddingHorizontal: 40,
+  }
+});

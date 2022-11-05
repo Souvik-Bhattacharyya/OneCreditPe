@@ -118,7 +118,7 @@ const CashEntries = ({navigation}) => {
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("LLL") : "Select Date & Time"}
+            {date ? moment(date).format("D-M-Y  hh-mm a") : "Select Date & Time"}
           </Text>
         </TouchableOpacity>
       </View>

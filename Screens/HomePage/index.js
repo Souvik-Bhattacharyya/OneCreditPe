@@ -28,7 +28,8 @@ const CustomerHome = () => {
     <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={[styles.card, styles.shadow]}>
+        <View style={{ height: 50, backgroundColor: '#0a5ac9' }}></View>
+        <View style={[styles.card, styles.shadow, { marginTop: -40 }]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
@@ -82,7 +83,7 @@ const CustomerHome = () => {
                 marginRight: 12,
                 fontFamily: "Poppins",
               }}>
-              View Report
+              Parties
             </Text>
             <Icon name="doubleright" color={"#0A5AC9"} size={16} />
           </TouchableOpacity>
@@ -161,6 +162,7 @@ const CustomerHome = () => {
               marginVertical: metrics.verticalScale(10),
               paddingVertical: metrics.verticalScale(10),
               paddingHorizontal: metrics.horizontalScale(10),
+              marginHorizontal: metrics.horizontalScale(15),
             },
           ]}>
           <Carousel />
@@ -179,6 +181,7 @@ const CustomerHome = () => {
               borderRadius: 6,
               marginVertical: metrics.verticalScale(10),
               borderColor: "#c6c6c6",
+              marginHorizontal: metrics.horizontalScale(15),
             },
           ]}>
           <View
@@ -205,54 +208,6 @@ const CustomerHome = () => {
           </View>
         </View>
 
-        <View style={{
-          position: "absolute",
-          bottom: metrics.verticalScale(0),
-          alignSelf: "center",
-          width,
-          flexDirection: 'row',
-          justifyContent: "space-between",
-          backgroundColor:'#fff',
-          paddingHorizontal:20,
-          paddingVertical: 10,
-          left: 0,
-        }}>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Parties', {
-              screen: 'CustomerStack'
-            })}
-            style={{
-              paddingHorizontal: metrics.horizontalScale(20),
-              paddingVertical: metrics.verticalScale(8),
-              backgroundColor: "#0a5ac9",
-              borderRadius: 6,
-              width: '48%',
-              flexDirection: 'row',
-              justifyContent: 'space-around'
-            }}>
-            <Image source={require('../../Assets/add-user.png')} style={styles.btnIcon} />
-            <Text style={[styles.btnTxt, { color: '#fff' }]}>Customer</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Parties', {
-              screen: 'SupplierStack'
-            })}
-            style={{
-              paddingHorizontal: metrics.horizontalScale(20),
-              paddingVertical: metrics.verticalScale(8),
-              backgroundColor: "#fff",
-              borderRadius: 6,
-              width: '48%',
-              flexDirection: 'row',
-              justifyContent: 'space-evenly',
-              borderWidth: 1,
-              borderColor: '#c6c6c6'
-            }}>
-            <Image source={require('../../Assets/manage-supplier(Theme).png')} style={styles.btnIcon} />
-            <Text style={styles.btnTxt}>Supplier</Text>
-          </TouchableOpacity>
-        </View>
-
       </View>
     </>
   );
@@ -262,17 +217,16 @@ export default CustomerHome;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: metrics.horizontalScale(15),
+    // paddingHorizontal: metrics.horizontalScale(15),
     backgroundColor: "#E8EEFF",
-    paddingVertical: metrics.verticalScale(15),
     position: "relative",
     flex: 1,
   },
   card: {
-    width: "100%",
     backgroundColor: "#fff",
     borderRadius: 6,
     marginVertical: metrics.verticalScale(10),
+    marginHorizontal: metrics.horizontalScale(15),
   },
   cardBody: {
     display: "flex",
