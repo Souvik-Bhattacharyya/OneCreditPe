@@ -17,7 +17,7 @@ import {useNavigation} from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
 
-const CustomerTransaction = ({customerType}) => {
+const CustomerTransaction = ({customerTransactionData}) => {
   const navigation = useNavigation();
   const styles = StyleSheet.create({
     container: {
@@ -43,18 +43,18 @@ const CustomerTransaction = ({customerType}) => {
     },
   });
 
-  const [customerTransactionData, setCustomerTransactionData] = useState([]);
+  // const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
   // const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
-  const customerTransactions = async () => {
-    try {
-      const responce = await Api.get("/auth/get-transaction/customer");
-      setCustomerTransactionData(responce.data.data || []);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const customerTransactions = async () => {
+  //   try {
+  //     const responce = await Api.get("/auth/get-transaction/customer");
+  //     setCustomerTransactionData(responce.data.data || []);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // const customerTransactions = async () => {
   //   try {
