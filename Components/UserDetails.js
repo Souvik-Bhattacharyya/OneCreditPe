@@ -16,7 +16,7 @@ import PartiesHeader from "./PartiesHeader";
 
 const CustomerHome = ({route}) => {
   const navigation = useNavigation();
-  const user = route.params?.user || {};
+  const user = route.params?.user || route.params?.object || {};
   const width = Dimensions.get("window").width;
 
   return (
@@ -24,12 +24,12 @@ const CustomerHome = ({route}) => {
       <PartiesHeader user={user} />
       <ScrollView style={{marginBottom: 60}}>
         <UserTransaction />
+        {/* <UserTransaction />
         <UserTransaction />
         <UserTransaction />
         <UserTransaction />
         <UserTransaction />
-        <UserTransaction />
-        <UserTransaction />
+        <UserTransaction /> */}
       </ScrollView>
 
       <View

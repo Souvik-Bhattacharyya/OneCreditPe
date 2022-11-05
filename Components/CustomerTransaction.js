@@ -43,38 +43,6 @@ const CustomerTransaction = ({customerTransactionData}) => {
     },
   });
 
-  // const [customerTransactionData, setCustomerTransactionData] = useState([]);
-
-  // const [customerTransactionData, setCustomerTransactionData] = useState([]);
-
-  // const customerTransactions = async () => {
-  //   try {
-  //     const responce = await Api.get("/auth/get-transaction/customer");
-  //     setCustomerTransactionData(responce.data.data || []);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const customerTransactions = async () => {
-  //   try {
-  //     const responce = await Api.get("/auth/get-transaction/customer");
-  //     console.log(responce.data);
-  //     setCustomerTransactionData(responce.data.data || []);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // const supplierTransactions = async () => {
-  //   try {
-  //     const responce = await Api.get("/auth/get-transaction/supplier");
-  //     setCustomerTransactionData(responce.data.data || []);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   return (
     <View style={styles.container}>
       <View style={{borderBottomColor: "#c6c6c6", borderBottomWidth: 0.6}}>

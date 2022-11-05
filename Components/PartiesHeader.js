@@ -4,6 +4,8 @@ import Icon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
 
 const PartiesHeader = ({user}) => {
+  console.log("user==>", user);
+
   const navigation = useNavigation();
   return (
     <View
@@ -48,7 +50,7 @@ const PartiesHeader = ({user}) => {
             }}>
             <Text style={{fontWeight: "800", fontSize: 17, color: "#fff"}}>
               {user.cus_name}
-              {user.customer_type}
+              {user.customer_type || user.cus_type}
             </Text>
           </TouchableOpacity>
           <Text style={{fontSize: 14, color: "#ddd", fontWeight: "800"}}>

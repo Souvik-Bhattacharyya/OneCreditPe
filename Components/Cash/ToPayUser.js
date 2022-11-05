@@ -12,7 +12,7 @@ const ToPayUser = ({object}) => {
   return (
     <>
       <TouchableOpacity
-        onPress={() => navigation.navigate("UserDetails")}
+        onPress={() => navigation.navigate("UserDetails", {object: object})}
         style={styles.contactBox}>
         <View
           style={{
