@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image, Linking } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import IconLow from "react-native-vector-icons/FontAwesome";
 import Help from "react-native-vector-icons/Entypo";
@@ -10,6 +10,16 @@ import CommonHeader from "../../Components/CommonHeader";
 
 const Settings = () => {
   const navigation = useNavigation();
+  const openDialScreen = () => {
+    let number = '';
+    if (Platform.OS === 'ios') {
+      number = 'telprompt:${+917980222011}';
+    } else {
+      number = 'tel:${+917980222011}';
+    }
+    Linking.openURL(number);
+  };
+
   return (
     <View style={styles.container}>
       <CommonHeader />
@@ -91,7 +101,7 @@ const Settings = () => {
           <List.Item title="Language Options"
             theme={{ colors: { text: "#464555", } }}
             style={styles.items}
-            onPress={() => alert("In progress")}
+            onPress={() => navigation.navigate('Language')}
             left={(props) => <IconLow name="language" size={18} color={'#464555'} style={{ alignSelf: 'center' }} />}
             right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
           />
@@ -127,14 +137,14 @@ const Settings = () => {
           <List.Item title="Chat with us"
             theme={{ colors: { text: "#464555", } }}
             style={styles.items}
-            onPress={() => alert("In progress")}
+            onPress={() => Linking.openURL('whatsapp://send?text=Hello&phone=+917980222011')}
             left={(props) => <Help name="message" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
             right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
           />
           <List.Item title="Call Us"
             theme={{ colors: { text: "#464555", } }}
             style={styles.items}
-            onPress={() => alert("In progress")}
+            onPress={() => openDialScreen()}
             left={(props) => <Icon name="phone" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
             right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
           />

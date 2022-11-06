@@ -24,7 +24,8 @@ import {
   CustomerEntries,
   UserProfile,
   PrivacyAndPolicy,
-  TermsAndConditions
+  TermsAndConditions,
+  LanguageScreen
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -190,6 +191,7 @@ const SettingsStack = () => {
       <Stack.Screen component={UserProfile} name="UserProfile" />
       <Stack.Screen component={PrivacyAndPolicy} name="Privacy And Policy" />
       <Stack.Screen component={TermsAndConditions} name="Terms And Conditions" />
+      <Stack.Screen component={LanguageScreen} name="Language" />
     </Stack.Navigator>
   );
 };

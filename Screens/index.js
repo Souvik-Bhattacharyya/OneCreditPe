@@ -24,6 +24,7 @@ import ToPay from "../Components/Cash/ToPay";
 import CustomerEntries from "../Components/CustomerEntries";
 import PartiesHeader from "../Components/PartiesHeader";
 import UserProfile from "./Settings/userProfile";
+import LanguageScreen from "./Settings/LanguageScreen"
 // import LoanSection from "../Screens/loanSection/Loan";
 
 export {
@@ -38,8 +39,8 @@ export {
   CustomerModal,
   NewCustomer,
   // LoanSection,
-  Settings,
   Customer,
+  CustomerEntries,
   AddContact,
   SetCollectionDate,
   CommonHeader,
@@ -52,6 +53,7 @@ export {
   ToGetUser,
   ToPay,
   ToGet,
-  CustomerEntries,
+  Settings,
   UserProfile,
+  LanguageScreen,
 };
