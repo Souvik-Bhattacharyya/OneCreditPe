@@ -16,10 +16,14 @@ import Api from "../../Services";
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
-  console.log(moment(date).format("YYYY-MM-DD hh:mm:ss"));
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate;
-    setDate(currentDate);
+  const [time, setTime] = useState(null);
+
+  const onChange = (event, selectedDate, mode) => {
+    if (mode === "date") {
+      setDate(selectedDate);
+    } else {
+      setTime(selectedDate);
+    }
   };
 
   const [cashDetails, setCashDetails] = useState({
@@ -29,12 +33,15 @@ const CashEntries = ({navigation}) => {
     paymentDetails: "",
     attachments: null,
   });
-
+  console.log("time", time);
   const cashEntry = async () => {
     try {
       const response = await Api.post("/auth/cashbook", {
         amount: cashDetails.amount,
-        date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
+        date_time: moment(date)
+          .set("hour", moment(time).get("hour"))
+          .set("minute", moment(time).get("minute"))
+          .format("YYYY-MM-DD hh:mm:ss"),
         cb_tns_type: cashDetails.cb_tns_type,
         payment_type: cashDetails.paymentType,
         payment_details: cashDetails.paymentDetails,
@@ -61,13 +68,17 @@ const CashEntries = ({navigation}) => {
   const showDatepicker = () => {
     showMode("date");
   };
+  const showTimepicker = () => {
+    showMode("time");
+  };
   const showMode = currentMode => {
     let maximumDate = new Date();
     maximumDate.setFullYear(maximumDate.getFullYear());
 
     DateTimePickerAndroid.open({
-      value: date || new Date(),
-      onChange,
+      value: (currentMode === "date" ? date : time) || new Date(),
+
+      onChange: (event, date) => onChange(event, date, currentMode),
       mode: currentMode,
       is24Hour: true,
       minimumDate: new Date(1950, 0, 1),
@@ -116,13 +127,43 @@ const CashEntries = ({navigation}) => {
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date
-              ? moment(date).format("D-M-Y  hh-mm a")
-              : "Select Date & Time"}
+            {date ? moment(date).format("D-M-Y") : "Select Date"}
           </Text>
         </TouchableOpacity>
       </View>
 
+      <View style={{marginVertical: 15}}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#fff",
+            flexDirection: "row",
+            alignItems: "center",
+            borderColor: "#ccc",
+            borderWidth: 1,
+            borderRadius: 6,
+            paddingVertical: 15,
+            paddingHorizontal: 20,
+          }}
+          onPress={showTimepicker}>
+          <DatePickerIcon
+            name="date-range"
+            color={"#828282"}
+            style={{}}
+            size={24}
+          />
+
+          <Text
+            placeholder="Select  Time"
+            style={{
+              fontSize: 18,
+              fontWeight: "600",
+              color: "#000",
+              paddingHorizontal: 10,
+            }}>
+            {date ? moment(date).format("hh-mm a") : "Select Time"}
+          </Text>
+        </TouchableOpacity>
+      </View>
       <View
         style={{
           flexDirection: "row",
