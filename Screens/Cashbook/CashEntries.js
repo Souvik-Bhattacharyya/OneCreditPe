@@ -33,7 +33,13 @@ const CashEntries = ({navigation}) => {
     paymentDetails: "",
     attachments: null,
   });
-  console.log("time", time);
+  console.log(
+    "time",
+    moment(date)
+      .set("hour", moment(time).get("hour"))
+      .set("minute", moment(time).get("minute"))
+      .format("YYYY-MM-DD hh:mm:ss"),
+  );
   const cashEntry = async () => {
     try {
       const response = await Api.post("/auth/cashbook", {
@@ -160,7 +166,7 @@ const CashEntries = ({navigation}) => {
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("hh-mm a") : "Select Time"}
+            {time ? moment(time).format("hh-mm a") : "Select Time"}
           </Text>
         </TouchableOpacity>
       </View>
