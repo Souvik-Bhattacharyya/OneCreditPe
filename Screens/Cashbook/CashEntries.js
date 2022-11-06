@@ -16,7 +16,7 @@ import Api from "../../Services";
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
-
+  console.log(moment(date).format("YYYY-MM-DD hh:mm:ss"));
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setDate(currentDate);
@@ -24,7 +24,6 @@ const CashEntries = ({navigation}) => {
 
   const [cashDetails, setCashDetails] = useState({
     amount: null,
-    entryDate: "2022-11-01 07:08:29",
     cb_tns_type: "in",
     paymentType: "online",
     paymentDetails: "",
@@ -35,7 +34,7 @@ const CashEntries = ({navigation}) => {
     try {
       const response = await Api.post("/auth/cashbook", {
         amount: cashDetails.amount,
-        date_time: cashDetails.entryDate,
+        date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
         cb_tns_type: cashDetails.cb_tns_type,
         payment_type: cashDetails.paymentType,
         payment_details: cashDetails.paymentDetails,
@@ -46,7 +45,6 @@ const CashEntries = ({navigation}) => {
         setCashDetails({
           ...cashDetails,
           amount: null,
-          entryDate: "2022-11-01 07:08:29",
           cb_tns_type: "in",
           paymentType: "online",
           paymentDetails: "",
@@ -118,7 +116,9 @@ const CashEntries = ({navigation}) => {
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("D-M-Y  hh-mm a") : "Select Date & Time"}
+            {date
+              ? moment(date).format("D-M-Y  hh-mm a")
+              : "Select Date & Time"}
           </Text>
         </TouchableOpacity>
       </View>
