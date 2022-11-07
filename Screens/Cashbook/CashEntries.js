@@ -36,18 +36,15 @@ const CashEntries = ({navigation}) => {
   console.log(
     "time",
     moment(date)
-      .set("hour", moment(time).get("hour"))
-      .set("minute", moment(time).get("minute"))
+      // .set("hour", moment(time).get("hour"))
+      // .set("minute", moment(time).get("minute"))
       .format("YYYY-MM-DD hh:mm:ss"),
   );
   const cashEntry = async () => {
     try {
       const response = await Api.post("/auth/cashbook", {
         amount: cashDetails.amount,
-        date_time: moment(date)
-          .set("hour", moment(time).get("hour"))
-          .set("minute", moment(time).get("minute"))
-          .format("YYYY-MM-DD hh:mm:ss"),
+        date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
         cb_tns_type: cashDetails.cb_tns_type,
         payment_type: cashDetails.paymentType,
         payment_details: cashDetails.paymentDetails,

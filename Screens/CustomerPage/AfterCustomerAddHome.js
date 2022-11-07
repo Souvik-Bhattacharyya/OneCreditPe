@@ -23,8 +23,10 @@ const Customer = () => {
   const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
   useEffect(() => {
-    customerTransactions();
-  }, []);
+    navigation.addListener("focus", () => {
+      customerTransactions();
+    });
+  }, [navigation]);
 
   const customerTransactions = async () => {
     try {
