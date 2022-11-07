@@ -2,10 +2,8 @@ import {
   ScrollView,
   View,
   Text,
-  TextInput,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   Image,
   Dimensions
 } from "react-native";

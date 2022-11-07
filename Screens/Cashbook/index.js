@@ -180,39 +180,6 @@ const Cashbook = ({ navigation }) => {
         </View>
 
         <View style={{ flex: 1, marginTop: 10 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              width: "100%",
-              justifyContent: "space-between",
-              alignItems: "center",
-              paddingVertical: 20,
-              paddingHorizontal: metrics.horizontalScale(20),
-              backgroundColor: "#fff",
-              borderBottomColor: "#c6c6c6",
-              borderBottomWidth: 1,
-            }}>
-            <View style={styles.search}>
-              <TextInput
-                placeholder="Search"
-                placeholderTextColor={"#828282"}
-                style={{
-                  width: "100%",
-                  fontSize: 16,
-                  color: "#000",
-                  fontWeight: "500",
-                  position: "relative",
-                  paddingLeft: metrics.horizontalScale(10),
-                  // backgroundColor:'#ddd',
-                  paddingVertical: metrics.verticalScale(7),
-                }}
-              />
-              <TouchableOpacity
-                style={{ position: "absolute", right: 20, alignSelf: "center" }}>
-                {/* <Icon name="search" color={'#333'} size={22} /> */}
-              </TouchableOpacity>
-            </View>
-          </View>
           {todayEntryDetails?.length ? (
             <TransactionFull todayEntryDetails={todayEntryDetails} />
           ) : (
