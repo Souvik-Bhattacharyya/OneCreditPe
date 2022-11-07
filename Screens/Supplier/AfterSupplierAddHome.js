@@ -17,15 +17,18 @@ import Api from "../../Services";
 const Supplier = () => {
   const navigation = useNavigation();
   // const [customerType, setCustomerType] = useState("supplier");
-  const [supplierTransactionData, setSupplierTransactionData] = useState([]);
+  const [customerTransactionData, setCustomerTransactionData] = useState([]);
+
   useEffect(() => {
-    supplierTransactions();
-  }, []);
+    navigation.addListener("focus", () => {
+      supplierTransactions();
+    });
+  }, [navigation]);
 
   const supplierTransactions = async () => {
     try {
       const responce = await Api.get("/auth/get-transaction/supplier");
-      setSupplierTransactionData(responce.data.data || []);
+      setCustomerTransactionData(responce.data.data || []);
     } catch (error) {
       console.log(error);
     }
@@ -128,10 +131,10 @@ const Supplier = () => {
             <Icon name="account-arrow-right" color={"#F31B24"} size={32} />
           </View>
         </View>
-        {supplierTransactionData?.length ? (
+        {customerTransactionData?.length ? (
           <CustomerTransaction
             // ToGetUser={"Advance"}
-            supplierTransactionData={supplierTransactionData}
+            customerTransactionData={customerTransactionData}
           />
         ) : (
           <CustomerTransactionEmpty />

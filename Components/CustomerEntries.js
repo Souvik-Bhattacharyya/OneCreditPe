@@ -15,7 +15,8 @@ import DatePicker from "react-native-date-picker";
 import Api from "../Services";
 
 const CashEntries = ({navigation, route}) => {
-  const {userId} = route.params;
+  const {userData} = route.params;
+  console.log("userDetails in customerEntry page", userData);
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
 
@@ -63,12 +64,11 @@ const CashEntries = ({navigation, route}) => {
         date_time: customerCashEntry.entryDate,
         tns_type: customerCashEntry.tns_type,
         payment_details: customerCashEntry.paymentDetails,
-        customer_id: userId,
+        customer_id: userData.customer_id,
         // attachments: customerCashEntry.attachments,
       });
 
       if (response.data.status == 200) {
-        console.log("====>", response.data);
         setCustomerCashEntry({
           ...customerCashEntry,
           amount: null,
@@ -78,7 +78,7 @@ const CashEntries = ({navigation, route}) => {
           attachments: null,
         });
 
-        navigation.navigate("UserDetails");
+        navigation.navigate("UserDetails", {userDetails: userData});
       }
     } catch (error) {
       console.log(error);
@@ -128,7 +128,9 @@ const CashEntries = ({navigation, route}) => {
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("D-M-Y  hh-mm a") : "Select Date & Time"}
+            {date
+              ? moment(date).format("D-M-Y  hh-mm a")
+              : "Select Date & Time"}
           </Text>
         </TouchableOpacity>
       </View>

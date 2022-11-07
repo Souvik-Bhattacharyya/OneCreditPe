@@ -1,11 +1,9 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import {View, Text, Image, TouchableOpacity} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 
-const PartiesHeader = ({ user }) => {
-  console.log("user==>", user);
-
+const PartiesHeader = ({user}) => {
   const navigation = useNavigation();
   return (
     <View
@@ -47,26 +45,27 @@ const PartiesHeader = ({ user }) => {
               flexDirection: "row",
               justifyContent: "center",
               alignItems: "center",
-              marginBottom: 3
+              marginBottom: 3,
             }}>
-            <Text style={{ fontWeight: "800", fontSize: 17, color: "#fff" }}>
+            <Text style={{fontWeight: "800", fontSize: 17, color: "#fff"}}>
               {user.cus_name}
             </Text>
-            <View style={{
-              backgroundColor: '#fff',
-              marginLeft: 10,
-              paddingHorizontal: 5,
-              paddingVertical: 2,
-              borderRadius: 4,
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <Text style={{ fontWeight: "800", fontSize: 14, color: "#0a5ac9",}}>
-                {user.customer_type || user.cus_type}
+            <View
+              style={{
+                backgroundColor: "#fff",
+                marginLeft: 10,
+                paddingHorizontal: 5,
+                paddingVertical: 2,
+                borderRadius: 4,
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+              <Text style={{fontWeight: "800", fontSize: 14, color: "#0a5ac9"}}>
+                {user.cus_type}
               </Text>
             </View>
           </View>
-          <Text style={{ fontSize: 14, color: "#ddd", fontWeight: "800" }}>
+          <Text style={{fontSize: 14, color: "#ddd", fontWeight: "800"}}>
             {user.cus_mobile}
           </Text>
         </View>
