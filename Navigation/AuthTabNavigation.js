@@ -27,6 +27,7 @@ import {
   TermsAndConditions,
   LanguageScreen,
   Faq,
+  InviteFriendModal,
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -213,6 +214,7 @@ const SettingsStack = () => {
       />
       <Stack.Screen component={LanguageScreen} name="Language" />
       <Stack.Screen component={Faq} name="faq" />
+      <Stack.Screen component={InviteFriendModal} name="InviteFriendModal" />
     </Stack.Navigator>
   );
 };

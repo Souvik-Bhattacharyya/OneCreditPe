@@ -480,7 +480,7 @@ import React, {useState} from "react";
 import {ExpandableSection} from "react-native-ui-lib";
 import {View, FlatList, ScrollView, Text, TextInput} from "react-native";
 import {List} from "react-native-paper";
-import styles from "./styles";
+// import styles from "./styles";
 const Faq = () => {
   const [faqs, setFaqs] = useState([
     {

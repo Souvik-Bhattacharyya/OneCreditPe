@@ -14,9 +14,14 @@ import {List} from "react-native-paper";
 import metrics from "../../Constants/metrics";
 import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
+import InviteFriendModal from "../../Components/InviteFriendModal";
 
 const Settings = () => {
   const navigation = useNavigation();
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
   const openDialScreen = () => {
     let number = "";
     if (Platform.OS === "ios") {
@@ -282,7 +287,7 @@ const Settings = () => {
             title="Invite Friends"
             theme={{colors: {text: "#464555"}}}
             style={styles.items}
-            onPress={() => navigation.navigate("")}
+            onPress={showModal}
             left={props => (
               <Icon
                 name="user-plus"
@@ -299,6 +304,11 @@ const Settings = () => {
                 style={{alignSelf: "center"}}
               />
             )}
+          />
+          <InviteFriendModal
+            visible={visible}
+            hideModal={hideModal}
+            setVisible={setVisible}
           />
         </List.Accordion>
       </List.AccordionGroup>
