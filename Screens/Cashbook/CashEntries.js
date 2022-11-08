@@ -83,7 +83,7 @@ const CashEntries = ({navigation}) => {
 
       onChange: (event, date) => onChange(event, date, currentMode),
       mode: currentMode,
-      is24Hour: true,
+      is24Hour: false,
       minimumDate: new Date(1950, 0, 1),
       maximumDate: maximumDate,
     });
