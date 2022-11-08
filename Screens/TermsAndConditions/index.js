@@ -4,8 +4,8 @@ import React from "react";
 const TermsAndConditions = () => {
   return (
     <ScrollView>
-      <View style={{ paddingHorizontal: 15, marginTop: 10 }}>
-        <Text style={{ fontSize: 14, fontWeight: '500', color: '#333', textAlign: 'justify' }}>
+      <View style={{ paddingHorizontal: 15, paddingTop: 10, backgroundColor:'#fff'}}>
+        <Text style={{ fontSize: 16, fontWeight: '500', color: '#333', textAlign: 'justify' }}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eu risus dictum
           vel enim, volutpat in egestas morbi lorem. Vitae, magna duis feugiat
           luctus pretium faucibus etiam bibendum in. Viverra fermentum tempus eu

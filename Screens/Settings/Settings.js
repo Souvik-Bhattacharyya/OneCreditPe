@@ -11,6 +11,7 @@ import {
 import Icon from "react-native-vector-icons/FontAwesome5";
 import IconLow from "react-native-vector-icons/FontAwesome";
 import Help from "react-native-vector-icons/Entypo";
+import Faq from "react-native-vector-icons/MaterialCommunityIcons";
 import { List } from "react-native-paper";
 import metrics from "../../Constants/metrics";
 import { useNavigation } from "@react-navigation/native";
@@ -37,7 +38,7 @@ const Settings = () => {
 
     <>
       <CommonHeader />
-      <ScrollView style={{backgroundColor: '#fff'}}>
+      <ScrollView style={{ backgroundColor: '#fff' }}>
         <View style={styles.container}>
           <View
             style={{
@@ -88,7 +89,7 @@ const Settings = () => {
                     borderColor: "#fff",
                     borderWidth: 2,
                   }}>
-                  <Icon name="pen" size={14} color="#fff" />
+                  <Icon name="pen" size={18} color="#fff" />
                 </View>
               </TouchableOpacity>
             </View>
@@ -184,12 +185,28 @@ const Settings = () => {
                     style={{ alignSelf: "center" }}
                   />
                 )}
+                left={props => (
+                  <Faq
+                    name="comment-question"
+                    size={18}
+                    color={"#464555"}
+                    style={{ alignSelf: "center" }}
+                  />
+                )}
               />
               <List.Item
                 title="FAQ Answer"
                 theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => alert("In progress")}
+                left={props => (
+                  <Faq
+                    name="frequently-asked-questions"
+                    size={18}
+                    color={"#464555"}
+                    style={{ alignSelf: "center" }}
+                  />
+                )}
                 right={props => (
                   <Icon
                     name="arrow-right"
@@ -209,7 +226,7 @@ const Settings = () => {
                 left={props => (
                   <Help
                     name="message"
-                    size={14}
+                    size={18}
                     color={"#464555"}
                     style={{ alignSelf: "center" }}
                   />
@@ -231,7 +248,7 @@ const Settings = () => {
                 left={props => (
                   <Icon
                     name="phone"
-                    size={14}
+                    size={18}
                     color={"#464555"}
                     style={{ alignSelf: "center" }}
                   />
@@ -258,10 +275,16 @@ const Settings = () => {
               <List.Item
                 title="Privacy Policy"
                 theme={{ colors: { text: "#464555" } }}
-                style={styles.items}
+                style={[styles.items, {paddingLeft: 35}]}
                 onPress={() => {
                   navigation.navigate("Privacy And Policy");
                 }}
+                left={props => (
+                  <Faq name="file-account" size={20}
+                    color={"#464555"}
+                    style={{ alignSelf: "center" }}
+                  />
+                )}
                 right={props => (
                   <Icon
                     name="arrow-right"
@@ -278,6 +301,12 @@ const Settings = () => {
                 onPress={() => {
                   navigation.navigate("Terms And Conditions");
                 }}
+                left={props => (
+                  <Icon name="file-contract" size={18}
+                    color={"#464555"}
+                    style={{ alignSelf: "center" }}
+                  />
+                )}
                 right={props => (
                   <Icon
                     name="arrow-right"
@@ -295,7 +324,7 @@ const Settings = () => {
                 left={props => (
                   <Icon
                     name="user-plus"
-                    size={14}
+                    size={16}
                     color={"#464555"}
                     style={{ alignSelf: "center" }}
                   />
@@ -309,14 +338,14 @@ const Settings = () => {
                   />
                 )}
               />
-              <InviteFriendModal
-                visible={visible}
-                hideModal={hideModal}
-                setVisible={setVisible}
-              />
             </List.Accordion>
           </List.AccordionGroup>
         </View>
+        <InviteFriendModal
+          visible={visible}
+          hideModal={hideModal}
+          setVisible={setVisible}
+        />
       </ScrollView>
     </>
   );

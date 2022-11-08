@@ -15,7 +15,7 @@ const CaroItem = ({ item }) => {
                 <View style={{ height: 54, width: 54, backgroundColor: '#0A5AC9', borderRadius: 100, justifyContent: 'center', alignItems: 'center' }}>
                     <Image source={item.image} style={{ resizeMode: 'contain', width: '100%' }} />
                 </View>
-                <Text style={{ fontSize: 14, fontWeight: '500', marginTop: 5, color: '#464555', textAlign: 'center' }}>
+                <Text style={{ fontSize: 14, fontWeight: '400', marginTop: 5, color: '#464555', textAlign: 'center' }}>
                     {item.title}
                 </Text>
             </View>

@@ -164,7 +164,7 @@ const Cashbook = ({ navigation }) => {
           </View>
           <TouchableOpacity
             style={styles.cardBtn}
-            onPress={() => navigation.navigate("View Report")}>
+            onPress={() => alert('In Progress')}>
             <Text
               style={{
                 fontSize: 14,
