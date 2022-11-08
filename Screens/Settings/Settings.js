@@ -1,15 +1,27 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image, Linking, ScrollView } from "react-native";
+import React, {useState} from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  Linking,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import IconLow from "react-native-vector-icons/FontAwesome";
 import Help from "react-native-vector-icons/Entypo";
-import { List } from 'react-native-paper';
-import metrics from '../../Constants/metrics';
-import { useNavigation } from "@react-navigation/native";
+import {List} from "react-native-paper";
+import metrics from "../../Constants/metrics";
+import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
+import InviteFriendModal from "../../Components/InviteFriendModal";
 
 const Settings = () => {
   const navigation = useNavigation();
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
   const openDialScreen = () => {
     let number = '';
     if (Platform.OS === 'ios') {
@@ -77,7 +89,6 @@ const Settings = () => {
                 </View>
               </TouchableOpacity>
             </View>
-
             <Text
               style={{
                 color: "#0A5AC9",
@@ -172,13 +183,33 @@ const Settings = () => {
                 onPress={() => { navigation.navigate('Terms And Conditions') }}
                 right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
               />
-              <List.Item title="Invite Friends"
-                theme={{ colors: { text: "#464555", } }}
-                style={styles.items}
-                onPress={() => alert("In progress")}
-                left={(props) => <Icon name="user-plus" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
-                right={(props) => <Icon name="arrow-right" size={14} color={'#464555'} style={{ alignSelf: 'center' }} />}
+          <List.Item
+            title="Invite Friends"
+            theme={{colors: {text: "#464555"}}}
+            style={styles.items}
+            onPress={showModal}
+            left={props => (
+              <Icon
+                name="user-plus"
+                size={14}
+                color={"#464555"}
+                style={{alignSelf: "center"}}
               />
+            )}
+            right={props => (
+              <Icon
+                name="arrow-right"
+                size={14}
+                color={"#464555"}
+                style={{alignSelf: "center"}}
+              />
+            )}
+          />
+          <InviteFriendModal
+            visible={visible}
+            hideModal={hideModal}
+            setVisible={setVisible}
+          />
             </List.Accordion>
           </List.AccordionGroup>
         </View >
@@ -195,21 +226,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   text: {
-    color: '#333'
+    color: "#333",
   },
   accordion: {
-    backgroundColor: '#fff',
-    borderBottomColor: '#c9c9c9',
+    backgroundColor: "#fff",
+    borderBottomColor: "#c9c9c9",
     borderBottomWidth: 1,
     paddingVertical: 10,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   items: {
-    backgroundColor: '#F1F1F1',
+    backgroundColor: "#F1F1F1",
     paddingVertical: metrics.verticalScale(15),
-    justifyContent: 'center',
-    borderBottomColor: '#c9c9c9',
+    justifyContent: "center",
+    borderBottomColor: "#c9c9c9",
     borderBottomWidth: 1,
     paddingHorizontal: 40,
-  }
+  },
 });
