@@ -26,6 +26,7 @@ import PartiesHeader from "../Components/PartiesHeader";
 import UserProfile from "./Settings/userProfile";
 import LanguageScreen from "./Settings/LanguageScreen";
 import Faq from "./Settings/faq";
+import Ans from "./Settings/ans";
 import InviteFriendModal from "../Components/InviteFriendModal";
 // import LoanSection from "../Screens/loanSection/Loan";
 
@@ -60,4 +61,5 @@ export {
   LanguageScreen,
   Faq,
   InviteFriendModal,
+  Ans,
 };
