@@ -27,6 +27,7 @@ import {
   TermsAndConditions,
   LanguageScreen,
   Faq,
+  Ans,
   InviteFriendModal,
 } from "../Screens";
 
@@ -214,6 +215,7 @@ const SettingsStack = () => {
       />
       <Stack.Screen component={LanguageScreen} name="Language" />
       <Stack.Screen component={Faq} name="faq" />
+      <Stack.Screen component={Ans} name="Ans" />
       <Stack.Screen component={InviteFriendModal} name="InviteFriendModal" />
     </Stack.Navigator>
   );

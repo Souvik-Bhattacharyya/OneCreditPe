@@ -8,7 +8,9 @@ const InviteFriendModal = ({visible, hideModal, setVisible}) => {
     borderRadius: 5,
     position: "absolute",
     bottom: 100,
+
     alignSelf: "center",
+
     paddingVertical: 45,
   };
 
