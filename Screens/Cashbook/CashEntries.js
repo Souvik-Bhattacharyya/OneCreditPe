@@ -8,7 +8,7 @@ import {
 import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
-import DatePickerIcon from "react-native-vector-icons/MaterialIcons";
+import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import moment from "moment";
 import Api from "../../Services";
@@ -36,18 +36,15 @@ const CashEntries = ({navigation}) => {
   console.log(
     "time",
     moment(date)
-      .set("hour", moment(time).get("hour"))
-      .set("minute", moment(time).get("minute"))
+      // .set("hour", moment(time).get("hour"))
+      // .set("minute", moment(time).get("minute"))
       .format("YYYY-MM-DD hh:mm:ss"),
   );
   const cashEntry = async () => {
     try {
       const response = await Api.post("/auth/cashbook", {
         amount: cashDetails.amount,
-        date_time: moment(date)
-          .set("hour", moment(time).get("hour"))
-          .set("minute", moment(time).get("minute"))
-          .format("YYYY-MM-DD hh:mm:ss"),
+        date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
         cb_tns_type: cashDetails.cb_tns_type,
         payment_type: cashDetails.paymentType,
         payment_details: cashDetails.paymentDetails,
@@ -105,7 +102,7 @@ const CashEntries = ({navigation}) => {
         <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
 
-      <View style={{marginVertical: 15}}>
+      <View style={{marginTop: 15}}>
         <TouchableOpacity
           style={{
             backgroundColor: "#fff",
@@ -119,7 +116,7 @@ const CashEntries = ({navigation}) => {
           }}
           onPress={showDatepicker}>
           <DatePickerIcon
-            name="date-range"
+            name="calendar"
             color={"#828282"}
             style={{}}
             size={24}
@@ -152,14 +149,14 @@ const CashEntries = ({navigation}) => {
           }}
           onPress={showTimepicker}>
           <DatePickerIcon
-            name="date-range"
+            name="clock"
             color={"#828282"}
             style={{}}
             size={24}
           />
 
           <Text
-            placeholder="Select  Time"
+            placeholder="Select Time"
             style={{
               fontSize: 18,
               fontWeight: "600",
@@ -260,7 +257,7 @@ const CashEntries = ({navigation}) => {
             flexDirection: "row",
           }}>
           <DatePickerIcon
-            name="camera-alt"
+            name="camera"
             color={"#0a5ac9"}
             style={{marginRight: 5}}
             size={24}

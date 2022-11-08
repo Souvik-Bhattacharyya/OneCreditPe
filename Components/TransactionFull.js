@@ -7,17 +7,17 @@ import {
   Dimensions,
   Text,
 } from "react-native";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import CashIn from "./Cash/CashIn";
 import CashOut from "./Cash/CashOut";
-import {useSelector} from "react-redux";
-import {Cashbook} from "../Screens";
+import { useSelector } from "react-redux";
+import { Cashbook } from "../Screens";
 
 const width = Dimensions.get("window").width;
 
-const TransactionFull = ({todayEntryDetails}) => {
+const TransactionFull = ({ todayEntryDetails }) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -26,12 +26,51 @@ const TransactionFull = ({todayEntryDetails}) => {
       flex: 1,
       position: "relative",
     },
+    search: {
+      flexDirection: "row",
+      width: "100%",
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingHorizontal: metrics.horizontalScale(10),
+      borderColor: "#c6c6c6",
+      borderWidth: 1,
+      borderRadius: 46,
+      backgroundColor: "#f6f6f6",
+    },
   });
 
   return (
     <View style={styles.container}>
+      <View
+        style={{
+          flexDirection: "row",
+          width: "100%",
+          justifyContent: "space-between",
+          alignItems: "center",
+          paddingVertical: 20,
+          paddingHorizontal: metrics.horizontalScale(20),
+          backgroundColor: "#fff",
+          borderBottomColor: "#c6c6c6",
+          borderBottomWidth: 1,
+        }}>
+        <View style={styles.search}>
+          <TextInput
+            placeholder="Search"
+            placeholderTextColor={"#828282"}
+            style={{
+              width: "100%",
+              fontSize: 16,
+              color: "#000",
+              fontWeight: "500",
+              position: "relative",
+              paddingLeft: metrics.horizontalScale(10),
+              paddingVertical: metrics.verticalScale(7),
+            }}
+          />
+        </View>
+      </View>
       <ScrollView>
-        <View style={{width}}>
+        <View style={{ width }}>
           {todayEntryDetails.map((obj, index) =>
             obj.cb_tns_type == "in" ? (
               <CashIn object={obj} key={index} />

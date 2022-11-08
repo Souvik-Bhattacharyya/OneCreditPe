@@ -16,12 +16,29 @@ import PartiesHeader from "./PartiesHeader";
 
 const CustomerHome = ({route}) => {
   const navigation = useNavigation();
-  const user = route.params?.user || route.params?.object || {};
+  const user =
+    route.params?.user || route.params?.object || route.params?.userDetails;
   const width = Dimensions.get("window").width;
-
+  let userData = {};
+  if (user.customer_id) {
+    userData = {
+      customer_id: user.customer_id,
+      cus_name: user.cus_name,
+      cus_mobile: user.cus_mobile,
+      cus_type: user.cus_type,
+    };
+  } else {
+    userData = {
+      customer_id: user.id,
+      cus_name: user.cus_name,
+      cus_mobile: user.cus_mobile,
+      cus_type: user.customer_type,
+    };
+  }
+  console.log("details of user in userDetails page", userData);
   return (
     <View style={{flex: 1, backgroundColor: "#E8EEFF"}}>
-      <PartiesHeader user={user} />
+      <PartiesHeader user={userData} />
       <ScrollView style={{marginBottom: 60}}>
         <UserTransaction />
         {/* <UserTransaction />
@@ -51,7 +68,7 @@ const CustomerHome = ({route}) => {
           onPress={() =>
             navigation.navigate("CustomerStack", {
               screen: "CustomerEntries",
-              params: {userId: user.customer_id},
+              params: {userData: userData},
             })
           }
           style={{
