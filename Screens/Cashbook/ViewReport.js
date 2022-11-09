@@ -25,23 +25,27 @@ const ViewReport = ({navigation, route}) => {
   const [showModal2, setShowModal2] = useState(false);
   const [showDate1, setShowDate1] = useState(new Date());
   const [showDate2, setShowDate2] = useState(new Date());
-  const [date, setDate] = useState(null);
-  const [dateFrom, setDateFrom] = useState(null);
+  const [date, setDate] = useState(new Date());
+  const [dateFrom, setDateFrom] = useState(new Date());
 
-  const onChange = (event, selectedDate) => {
+  const onChange = (event, selectedDate, type) => {
     const currentDate = selectedDate;
-    setDate(currentDate);
+    if (type == "from") {
+      setDateFrom(currentDate);
+    } else {
+      setDate(currentDate);
+    }
   };
-  const showDatepicker = () => {
-    showMode("date");
+  const showDatepicker = type => {
+    showMode("date", type);
   };
-  const showMode = currentMode => {
+  const showMode = (currentMode, type) => {
     let maximumDate = new Date();
     maximumDate.setFullYear(maximumDate.getFullYear());
 
     DateTimePickerAndroid.open({
       value: date || new Date(),
-      onChange,
+      onChange: (event, selectedDate) => onChange(event, selectedDate, type),
       mode: currentMode,
       is24Hour: true,
       minimumDate: new Date(1950, 0, 1),
@@ -115,7 +119,7 @@ const ViewReport = ({navigation, route}) => {
                 borderRightColor: "#c6c6c6",
                 borderRightWidth: 1,
               }}
-              onPress={showDatepicker}>
+              onPress={() => showDatepicker("from")}>
               <Icon name="calendar" size={22} color={"#0A5AC9"} />
 
               <View>
@@ -133,8 +137,7 @@ const ViewReport = ({navigation, route}) => {
                 width: "50%",
                 alignItems: "center",
               }}
-              // onPress={showDatepicker}
-            >
+              onPress={() => showDatepicker("to")}>
               <Icon name="calendar" size={22} color={"#349EFF"} />
 
               <View>
