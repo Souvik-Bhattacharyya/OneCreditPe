@@ -7,7 +7,7 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import {Calendar} from "react-native-calendars";
@@ -16,34 +16,17 @@ import moment from "moment";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 const width = Dimensions.get("window").width;
+import Api from "../../Services";
 
-const ViewReport = ({navigation}) => {
+const ViewReport = ({navigation, route}) => {
+  const {todayEntryDetails, viewResult} = route.params || {};
+  console.log(route.params);
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showDate1, setShowDate1] = useState(new Date());
   const [showDate2, setShowDate2] = useState(new Date());
   const [date, setDate] = useState(null);
   const [dateFrom, setDateFrom] = useState(null);
-
-  // const onChange = (event, selectedDate) => {
-  //   const currentDate = selectedDate;
-  //   setDateFrom(currentDate);
-  // };
-  // const showDateFrompicker = () => {
-  //   showModeFrom("dateFrom");
-  // };
-  // const showModeFrom = currentMode => {
-  //   let maximumDate = new Date();
-  //   maximumDate.setFullYear(maximumDate.getFullYear());
-  //   DateTimePickerAndroid.open({
-  //     value: dateFrom || new Date(),
-  //     onChange,
-  //     mode: currentMode,
-  //     is24Hour: true,
-  //     minimumDate: new Date(1950, 0, 1),
-  //     maximumDate: maximumDate,
-  //   });
-  // };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -79,7 +62,7 @@ const ViewReport = ({navigation}) => {
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
-                ₹ 0
+                {viewResult.cash_in_hands}
               </Text>
               <Text
                 style={{
@@ -99,7 +82,7 @@ const ViewReport = ({navigation}) => {
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
-                ₹ 0
+                {viewResult.todays_income}
               </Text>
               <Text
                 style={{
@@ -165,7 +148,11 @@ const ViewReport = ({navigation}) => {
           </View>
         </View>
 
-        <TransactionEmpty />
+        {todayEntryDetails?.length ? (
+          <TransactionFull todayEntryDetails={todayEntryDetails} />
+        ) : (
+          <TransactionEmpty />
+        )}
 
         <View
           style={{
