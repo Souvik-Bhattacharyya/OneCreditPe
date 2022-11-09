@@ -184,7 +184,6 @@ const Cashbook = ({navigation}) => {
                 todayEntryDetails: todayEntryDetails,
                 viewResult: viewResult,
               })
-            }>
             <Text
               style={{
                 fontSize: 14,
