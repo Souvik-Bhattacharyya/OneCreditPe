@@ -70,9 +70,7 @@ const CustomerHome = () => {
           </View>
           <TouchableOpacity
             style={styles.cardBtn}
-            onPress={() => navigation.navigate("Cashbook", {
-              screen: 'View Report'
-            })}>
+            onPress={() => alert('In Progress')}>
             <Text
               style={{
                 fontSize: 16,
@@ -191,14 +189,14 @@ const CustomerHome = () => {
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
           <View style={{ width: "70%", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "800" }}>
+            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "600" }}>
               Easy Loan
             </Text>
             <Text style={{ color: "#828282", fontWeight: '400' }}>
               Get easy loan without any paperwork
             </Text>
             <TouchableOpacity style={{ marginTop: 10, justifyContent: "center" }}>
-              <Text style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "800" }}>
+              <Text style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "600" }}>
                 Apply Now
                 <Icon name="doubleright" color={"#0A5AC9"} size={16} />
               </Text>

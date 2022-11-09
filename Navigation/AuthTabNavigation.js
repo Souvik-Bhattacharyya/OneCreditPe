@@ -25,7 +25,10 @@ import {
   UserProfile,
   PrivacyAndPolicy,
   TermsAndConditions,
-  LanguageScreen
+  LanguageScreen,
+  Faq,
+  Ans,
+  InviteFriendModal,
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -64,7 +67,11 @@ const CustomerStack = () => {
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
-      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false }} />
+      <Stack.Screen
+        component={UserDetails}
+        name="UserDetails"
+        options={{ headerShown: false }}
+      />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
@@ -91,12 +98,21 @@ const SupplierStack = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
-      <Stack.Screen component={NewCustomer} name="NewCustomer" />
+      <Stack.Screen component={NewCustomer} name="NewCustomer"
+        options={
+          {
+            headerTitle: 'Add New Customer'
+          }
+        }/>
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
-      <Stack.Screen component={UserDetails} name="UserDetails" options={{ headerShown: false }} />
+      <Stack.Screen
+        component={UserDetails}
+        name="UserDetails"
+        options={{ headerShown: false }}
+      />
       <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
     </Stack.Navigator>
   );
@@ -124,17 +140,22 @@ const CashBookStack = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: true,
-        headerTitleAlign: 'center', headerStyle: {
-          backgroundColor: '#0A5AC9',
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "#0A5AC9",
         },
         headerTintColor: "#fff",
         headerTitleStyle: {
           fontWeight: "bold",
         },
       }}>
-      <Stack.Screen options={{
-        headerShown: false,
-      }} component={Cashbook} name="Cash Book" />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        component={Cashbook}
+        name="Cash Book"
+      />
       <Stack.Screen component={ViewReport} name="View Report" />
       <Stack.Screen
         component={CashEntries}
@@ -177,21 +198,41 @@ const SettingsStack = () => {
     <Stack.Navigator
       cardShadowEnabled
       screenOptions={{
-        headerTitleAlign: 'center',
+        headerTitleAlign: "center",
         headerStyle: {
-          backgroundColor: '#0A5AC9',
+          backgroundColor: "#0A5AC9",
         },
-        headerTintColor: '#fff',
+        headerTintColor: "#fff",
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontWeight: "bold",
         },
-      }}
-    >
-      <Stack.Screen options={{ headerShown: false }} component={Settings} name="Settings" />
+      }}>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        component={Settings}
+        name="Settings"
+      />
       <Stack.Screen component={UserProfile} name="UserProfile" />
       <Stack.Screen component={PrivacyAndPolicy} name="Privacy And Policy" />
-      <Stack.Screen component={TermsAndConditions} name="Terms And Conditions" />
+      <Stack.Screen
+        component={TermsAndConditions}
+        name="Terms And Conditions"
+      />
       <Stack.Screen component={LanguageScreen} name="Language" />
+      <Stack.Screen component={Faq} name="faq"
+        options={
+          {
+            title: 'FAQ Listing Questions'
+          }
+        } />
+      <Stack.Screen component={Ans} name="Ans"
+        options={
+          {
+            title: 'FAQ Listing Ans'
+          }
+        }
+      />
+      <Stack.Screen component={InviteFriendModal} name="InviteFriendModal" />
     </Stack.Navigator>
   );
 };

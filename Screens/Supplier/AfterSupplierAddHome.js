@@ -170,7 +170,7 @@ const Supplier = () => {
             }}>
             <Icon name="plus-circle" color={"#fff"} size={20} />
             <Text style={[styles.btnTxt, {color: "#fff", marginLeft: 5}]}>
-              Add New Customer
+              Add New Supplier
             </Text>
           </TouchableOpacity>
         </View>
