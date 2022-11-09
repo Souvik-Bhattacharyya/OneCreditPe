@@ -194,7 +194,7 @@ const Settings = () => {
                   />
                 )}
               />
-              <List.Item
+              {/* <List.Item
                 title="FAQ Answer"
                 theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
@@ -215,7 +215,7 @@ const Settings = () => {
                     style={{ alignSelf: "center" }}
                   />
                 )}
-              />
+              /> */}
               <List.Item
                 title="Chat with us"
                 theme={{ colors: { text: "#464555" } }}

@@ -102,8 +102,8 @@ const SupplierStack = () => {
         options={
           {
             headerTitle: 'Add New Customer'
-          }
-        }/>
+          }}
+      />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
@@ -245,7 +245,7 @@ const AuthTabNavigation = ({ navigation }) => {
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: true,
         headerShown: false,
-        tabBarInactiveTintColor: "#828282",
+        tabBarInactiveTintColor: "#aaa",
         tabBarStyle: {
           paddingVertical: 10,
           height: 60,
