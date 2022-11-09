@@ -6,7 +6,7 @@ import {
   Dimensions,
   TextInput,
 } from "react-native";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 import TransactionFull from "../../Components/TransactionFull";
@@ -15,7 +15,7 @@ import Api from "../../Services";
 import CommonHeader from "../../Components/CommonHeader";
 const width = Dimensions.get("window").width;
 
-const Cashbook = ({navigation}) => {
+const Cashbook = ({ navigation }) => {
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#E8EEFF",
@@ -133,8 +133,8 @@ const Cashbook = ({navigation}) => {
     <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={{height: 50, backgroundColor: "#0a5ac9"}}></View>
-        <View style={[styles.card, {marginTop: -40}]}>
+        <View style={{ height: 50, backgroundColor: "#0a5ac9" }}></View>
+        <View style={[styles.card, { marginTop: -40 }]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
@@ -184,6 +184,7 @@ const Cashbook = ({navigation}) => {
                 todayEntryDetails: todayEntryDetails,
                 viewResult: viewResult,
               })
+            }>
             <Text
               style={{
                 fontSize: 14,
@@ -198,7 +199,7 @@ const Cashbook = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <View style={{flex: 1, marginTop: 10}}>
+        <View style={{ flex: 1, marginTop: 10 }}>
           {todayEntryDetails?.length ? (
             <TransactionFull todayEntryDetails={todayEntryDetails} />
           ) : (
@@ -221,7 +222,7 @@ const Cashbook = ({navigation}) => {
           }}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("CashEntries", {name: "Cash Entries"})
+              navigation.navigate("CashEntries", { name: "Cash Entries" })
             }
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
