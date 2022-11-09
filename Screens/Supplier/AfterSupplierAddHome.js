@@ -16,7 +16,6 @@ import CustomerTransactionEmpty from "../../Components/CustomerTransactionEmpty"
 import Api from "../../Services";
 const Supplier = () => {
   const navigation = useNavigation();
-  // const [customerType, setCustomerType] = useState("supplier");
   const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
   useEffect(() => {
@@ -27,8 +26,8 @@ const Supplier = () => {
 
   const supplierTransactions = async () => {
     try {
-      const responce = await Api.get("/auth/get-transaction/supplier");
-      setCustomerTransactionData(responce.data.data || []);
+      const response = await Api.get("/auth/get-transaction/supplier");
+      setCustomerTransactionData(response.data.data || []);
     } catch (error) {
       console.log(error);
     }
