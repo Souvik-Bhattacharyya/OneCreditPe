@@ -18,8 +18,6 @@ const width = Dimensions.get("window").width;
 
 const Customer = () => {
   const navigation = useNavigation();
-  // const [customerType, setCustomerType] = useState("customer");
-
   const [customerTransactionData, setCustomerTransactionData] = useState([]);
 
   useEffect(() => {
@@ -30,9 +28,8 @@ const Customer = () => {
 
   const customerTransactions = async () => {
     try {
-      const responce = await Api.get("/auth/get-transaction/customer");
-      console.log(responce.data);
-      setCustomerTransactionData(responce.data.data || []);
+      const response = await Api.get("/auth/get-transaction/customer");
+      setCustomerTransactionData(response.data.data || []);
     } catch (error) {
       console.log(error);
     }

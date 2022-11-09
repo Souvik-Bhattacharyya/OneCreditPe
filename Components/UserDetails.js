@@ -7,18 +7,29 @@ import {
   Text,
   Image,
 } from "react-native";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import {useNavigation} from "@react-navigation/native";
 import metrics from "../Constants/metrics";
 import UserTransaction from "./UserTransaction";
 import PartiesHeader from "./PartiesHeader";
+import Api from "../Services";
+import TransactionEmpty from "./TransactionEmpty";
 
 const CustomerHome = ({route}) => {
   const navigation = useNavigation();
+  const width = Dimensions.get("window").width;
+  const [allTransaction, setAllTransaction] = useState([]);
+
+  useEffect(() => {
+    navigation.addListener("focus", () => {
+      customersAllTransaction();
+    });
+  }, []);
+
   const user =
     route.params?.user || route.params?.object || route.params?.userDetails;
-  const width = Dimensions.get("window").width;
+
   let userData = {};
   if (user.customer_id) {
     userData = {
@@ -36,19 +47,28 @@ const CustomerHome = ({route}) => {
     };
   }
   console.log("details of user in userDetails page", userData);
+
+  const customersAllTransaction = async () => {
+    try {
+      const response = await Api.get(
+        `/auth/transactions-by-customer/${userData.customer_id}`,
+      );
+      setAllTransaction(response.data.transactions);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: "#E8EEFF"}}>
       <PartiesHeader user={userData} />
       <ScrollView style={{marginBottom: 60}}>
-        <UserTransaction />
-        {/* <UserTransaction />
-        <UserTransaction />
-        <UserTransaction />
-        <UserTransaction />
-        <UserTransaction />
-        <UserTransaction /> */}
+        {allTransaction?.length ? (
+          <UserTransaction allTransaction={allTransaction} />
+        ) : (
+          <TransactionEmpty />
+        )}
       </ScrollView>
-
       <View
         style={{
           position: "absolute",

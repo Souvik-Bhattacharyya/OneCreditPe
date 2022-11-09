@@ -98,9 +98,12 @@ const Cashbook = ({navigation}) => {
   });
 
   const [todayEntryDetails, setTodayEntryDetails] = useState([]);
+  const [viewResult, setViewResult] = useState({});
+
   useEffect(() => {
     navigation.addListener("focus", () => {
       getTodayCashEntries();
+      viewReport();
     });
   }, [navigation]);
 
@@ -109,6 +112,18 @@ const Cashbook = ({navigation}) => {
       const response = await Api.get("/auth/today-cashbook");
       if (response.data.status == 200) {
         setTodayEntryDetails(response.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const viewReport = async () => {
+    try {
+      const response = await Api.get("/auth/view_reports");
+      if (response.data) {
+        console.log(response.data);
+        setViewResult(response.data);
       }
     } catch (error) {
       console.log(error);
@@ -129,7 +144,7 @@ const Cashbook = ({navigation}) => {
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
-                ₹ 0
+                {viewResult.cash_in_hands}
               </Text>
               <Text
                 style={{
@@ -149,7 +164,7 @@ const Cashbook = ({navigation}) => {
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
-                ₹ 0
+                {viewResult.todays_income}
               </Text>
               <Text
                 style={{
@@ -164,7 +179,11 @@ const Cashbook = ({navigation}) => {
           </View>
           <TouchableOpacity
             style={styles.cardBtn}
-            onPress={() => alert("In Progress")}>
+            onPress={() =>
+              navigation.navigate("View Report", {
+                todayEntryDetails: todayEntryDetails,
+                viewResult: viewResult,
+              })
             <Text
               style={{
                 fontSize: 14,
