@@ -7,17 +7,18 @@ import {
   Dimensions,
   Text,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import CashIn from "./Cash/CashIn";
 import CashOut from "./Cash/CashOut";
-import { useSelector } from "react-redux";
-import { Cashbook } from "../Screens";
+import {useSelector} from "react-redux";
+import {Cashbook} from "../Screens";
 
 const width = Dimensions.get("window").width;
 
-const TransactionFull = ({ todayEntryDetails }) => {
+const TransactionFull = ({todayEntryDetails}) => {
+  const [value, setValue] = useState("");
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -66,18 +67,29 @@ const TransactionFull = ({ todayEntryDetails }) => {
               paddingLeft: metrics.horizontalScale(10),
               paddingVertical: metrics.verticalScale(7),
             }}
+            value={todayEntryDetails.payment_details}
+            onChangeText={e => setValue(e)}
           />
         </View>
       </View>
       <ScrollView>
-        <View style={{ width }}>
-          {todayEntryDetails.map((obj, index) =>
-            obj.cb_tns_type == "in" ? (
-              <CashIn object={obj} key={index} />
-            ) : (
-              <CashOut object={obj} key={index} />
-            ),
-          )}
+        <View style={{width}}>
+          {todayEntryDetails
+            .filter(item => {
+              if (!value) return true;
+              if (
+                item.payment_details.toLowerCase().includes(value.toLowerCase())
+              ) {
+                return true;
+              }
+            })
+            .map((obj, index) =>
+              obj.cb_tns_type == "in" ? (
+                <CashIn object={obj} key={index} />
+              ) : (
+                <CashOut object={obj} key={index} />
+              ),
+            )}
         </View>
       </ScrollView>
     </View>

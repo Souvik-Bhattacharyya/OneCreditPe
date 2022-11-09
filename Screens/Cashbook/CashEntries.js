@@ -11,6 +11,7 @@ import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import moment from "moment";
+import DocumentPicker, {types} from "react-native-document-picker";
 import Api from "../../Services";
 
 const CashEntries = ({navigation}) => {
@@ -88,6 +89,46 @@ const CashEntries = ({navigation}) => {
       maximumDate: maximumDate,
     });
   };
+
+  const handleDocumentSelection = () => {
+    DocumentPicker.pick({
+      type: [types.pdf, types.images],
+    })
+      .then(async response => {
+        setLoading(true);
+        const formData = new FormData();
+        formData.append("file", {
+          name: response[0].name,
+          uri: response[0].uri,
+          type: response[0].type,
+        });
+        //  try {
+
+        //    const res = await Axios.post(
+        //      `${API_BASE_URL}/upload/single`,
+        //      formData,
+        //      {
+        //        headers: {
+        //          "Content-Type": "multipart/form-data",
+        //        },
+        //      },
+        //    );
+        //    setError("");
+
+        //  }
+        //  catch (error) {
+        //    setError("error!");
+        //    dispatch(
+        //      notify({message: "Error uploading document", type: "error"}),
+        //    );
+        //  }
+        //  setLoading(false);
+      })
+      .catch(error => {
+        // setLoading(false);
+        console.log("error", error);
+      });
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -148,12 +189,7 @@ const CashEntries = ({navigation}) => {
             paddingHorizontal: 20,
           }}
           onPress={showTimepicker}>
-          <DatePickerIcon
-            name="clock"
-            color={"#828282"}
-            style={{}}
-            size={24}
-          />
+          <DatePickerIcon name="clock" color={"#828282"} style={{}} size={24} />
 
           <Text
             placeholder="Select Time"
@@ -255,6 +291,9 @@ const CashEntries = ({navigation}) => {
             borderColor: "#c9c9c9",
             borderWidth: 1,
             flexDirection: "row",
+          }}
+          onPress={() => {
+            handleDocumentSelection();
           }}>
           <DatePickerIcon
             name="camera"
