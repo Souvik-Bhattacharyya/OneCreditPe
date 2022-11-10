@@ -33,7 +33,7 @@ const CashIn = ({object}) => {
             style={{
               color: "#12ce12",
               fontSize: 18,
-              fontWeight: "800",
+              fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
             {amount}

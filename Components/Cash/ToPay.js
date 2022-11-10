@@ -35,7 +35,7 @@ const CashOut = ({object}) => {
             style={{
               color: "#F31B24",
               fontSize: 18,
-              fontWeight: "800",
+              fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
             {amount}
@@ -52,7 +52,7 @@ const CashOut = ({object}) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            {moment(date_time).format("Do MM YY - hh:mm A")}
+            {moment(date_time).format("dd mm yy - hh:mm A")}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
             Balance- Rs. 4,220

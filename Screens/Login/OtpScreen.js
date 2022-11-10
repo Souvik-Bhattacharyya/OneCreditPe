@@ -71,7 +71,7 @@ const OtpScreen = ({ navigation, route }) => {
             }}>
             <Text style={styles.text}>Otp send to </Text>
             <View style={{ display: "flex", flexDirection: "row" }}>
-              <Text style={[styles.text, { fontWeight: "800", fontSize: 20 }]}>
+              <Text style={[styles.text, { fontWeight: "600", fontSize: 20 }]}>
                 {mobileNumber || ""}
               </Text>
               <FontAwesome

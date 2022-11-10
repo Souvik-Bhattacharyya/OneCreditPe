@@ -52,7 +52,7 @@ const ToGetUser = ({object}) => {
             alignItems: "flex-end",
             backgroundColor: "#fff",
           }}>
-          <Text style={{fontSize: 18, fontWeight: "800", color: "#12CE12"}}>
+          <Text style={{fontSize: 18, fontWeight: "600", color: "#12CE12"}}>
             {amount}
           </Text>
           <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>

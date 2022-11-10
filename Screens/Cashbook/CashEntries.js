@@ -5,20 +5,34 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import moment from "moment";
-import DocumentPicker, {types} from "react-native-document-picker";
+import DocumentPicker, { types } from "react-native-document-picker";
 import Api from "../../Services";
+import { CheckBox } from '@rneui/themed';
 
-const CashEntries = ({navigation}) => {
+const CashEntries = ({ navigation }) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
   const [file, setFile] = useState({});
+  const [online, setOnline] = useState(false);
+  const [offline, setOffline] = useState(false);
+
+  const radioOnline = () => {
+    setOnline(true);
+    setOffline(false);
+  }
+
+  const radioOffline = () => {
+    setOnline(false);
+    setOffline(true);
+  }
+
 
   const onChange = (event, selectedDate, mode) => {
     if (mode === "date") {
@@ -139,78 +153,101 @@ const CashEntries = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginBottom: metrics.verticalScale(5),
+          alignItems: 'center',
+          width: '100%',
+        }}>
+        <View style={{
+          width: '48%', borderRadius: 6
+        }}>
+          <CheckBox
+            title="Online Pay"
+            checked={online}
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            onPress={radioOnline}
+          />
+        </View>
+        <View
+          style={{
+            width: '48%',
+            borderRadius: 6
+          }}>
+          <CheckBox
+            title="Offline Pay"
+            checked={offline}
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            onPress={radioOffline}
+          />
+        </View>
+      </View>
+
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#d6d6d6',
+        borderRadius: 6,
+        paddingVertical: 2
+      }}>
+        <Icon name="rupee" color={"#000"} style={{ marginLeft: 20 }} size={22} />
         <TextInput
           value={cashDetails.amount}
           placeholder="Enter Amount"
-          placeholderTextColor={"#828282"}
-          style={styles.textInput}
+          placeholderTextColor={"#757575"}
+          style={{
+            backgroundColor: '#fff',
+            fontSize: 22,
+            paddingHorizontal: 10,
+            color: '#000',
+            fontWeight: '600',
+            textAlign: 'left',
+
+          }}
           keyboardType="numeric"
-          onChangeText={val => setCashDetails({...cashDetails, amount: val})}
+          onChangeText={val => setCashDetails({ ...cashDetails, amount: val })}
         />
-        <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
 
-      <View style={{marginTop: 15}}>
+      <View style={{
+        marginVertical: 15,
+      }}>
         <TouchableOpacity
           style={{
             backgroundColor: "#fff",
             flexDirection: "row",
             alignItems: "center",
-            borderColor: "#ccc",
+            borderColor: "#d6d6d6",
             borderWidth: 1,
             borderRadius: 6,
             paddingVertical: 15,
-            paddingHorizontal: 20,
+            paddingHorizontal: 15,
+            width: '100%'
           }}
           onPress={showDatepicker}>
           <DatePickerIcon
             name="calendar"
             color={"#828282"}
-            style={{}}
             size={24}
           />
-
           <Text
-            placeholder="Select Date & Time"
             style={{
               fontSize: 18,
               fontWeight: "600",
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("D-M-Y") : "Select Date"}
+            {date ? moment(date).format("DD MMM YYYY") : "Select Date"}
           </Text>
         </TouchableOpacity>
       </View>
 
-      <View style={{marginVertical: 15}}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#fff",
-            flexDirection: "row",
-            alignItems: "center",
-            borderColor: "#ccc",
-            borderWidth: 1,
-            borderRadius: 6,
-            paddingVertical: 15,
-            paddingHorizontal: 20,
-          }}
-          onPress={showTimepicker}>
-          <DatePickerIcon name="clock" color={"#828282"} style={{}} size={24} />
-
-          <Text
-            placeholder="Select Time"
-            style={{
-              fontSize: 18,
-              fontWeight: "600",
-              color: "#000",
-              paddingHorizontal: 10,
-            }}>
-            {time ? moment(time).format("hh-mm a") : "Select Time"}
-          </Text>
-        </TouchableOpacity>
-      </View>
       <View
         style={{
           flexDirection: "row",
@@ -222,20 +259,20 @@ const CashEntries = ({navigation}) => {
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: isActive === "cash in" ? "#20409A" : "white",
-            borderColor: isActive === "cash in" ? "#20409A" : "#c6c6c6",
+            backgroundColor: isActive === "cash in" ? "#20409A" : "#f6f6f6",
+            borderColor: isActive === "cash in" ? "#20409A" : "#d6d6d6",
             borderWidth: 1,
             width: "48%",
             borderRadius: 4,
           }}
           onPress={() => {
             setIsActive("cash in");
-            setCashDetails({...cashDetails, cb_tns_type: "in"});
+            setCashDetails({ ...cashDetails, cb_tns_type: "in" });
           }}>
           <Text
             style={[
               styles.btnTxt,
-              {color: isActive === "cash in" ? "#fff" : "#20409A"},
+              { color: isActive === "cash in" ? "#fff" : "#20409A" },
             ]}>
             Cash In
           </Text>
@@ -244,25 +281,26 @@ const CashEntries = ({navigation}) => {
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: isActive === "cash out" ? "#20409A" : "white",
-            borderColor: isActive === "cash out" ? "#20409A" : "#c6c6c6",
+            backgroundColor: isActive === "cash out" ? "#20409A" : "#f6f6f6",
+            borderColor: isActive === "cash out" ? "#20409A" : "#d6d6d6",
             borderWidth: 1,
             width: "48%",
             borderRadius: 4,
           }}
           onPress={() => {
             setIsActive("cash out");
-            setCashDetails({...cashDetails, cb_tns_type: "out"});
+            setCashDetails({ ...cashDetails, cb_tns_type: "out" });
           }}>
           <Text
             style={[
               styles.btnTxt,
-              {color: isActive === "cash out" ? "#fff" : "#20409A"},
+              { color: isActive === "cash out" ? "#fff" : "#20409A" },
             ]}>
             Cash Out
           </Text>
         </TouchableOpacity>
       </View>
+
 
       <View>
         <TextInput
@@ -271,15 +309,38 @@ const CashEntries = ({navigation}) => {
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            {textAlignVertical: "top", paddingHorizontal: 20},
+            { textAlignVertical: "top", paddingHorizontal: 20 },
           ]}
-          multiline={true}
-          numberOfLines={2}
           onChangeText={val =>
-            setCashDetails({...cashDetails, paymentDetails: val})
+            setCashDetails({ ...cashDetails, paymentDetails: val })
           }
         />
       </View>
+      <View style={{ marginTop: 15 }}>
+        <TouchableOpacity
+          style={{
+            paddingHorizontal: metrics.horizontalScale(20),
+            paddingVertical: metrics.verticalScale(15),
+            backgroundColor: "#fff",
+            borderRadius: 6,
+            width: "100%",
+            borderColor: "#c9c9c9",
+            borderWidth: 1,
+            flexDirection: "row",
+          }}
+          onPress={() => {
+            handleDocumentSelection();
+          }}>
+          <DatePickerIcon
+            name="camera"
+            color={"#0a5ac9"}
+            style={{ marginRight: 5 }}
+            size={24}
+          />
+          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Attach Bill</Text>
+        </TouchableOpacity>
+      </View>
+
       <View
         style={{
           position: "absolute",
@@ -293,34 +354,12 @@ const CashEntries = ({navigation}) => {
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(12),
-            backgroundColor: "#fff",
-            borderRadius: 50,
-            width: "48%",
-            borderColor: "#c9c9c9",
-            borderWidth: 1,
-            flexDirection: "row",
-          }}
-          onPress={() => {
-            handleDocumentSelection();
-          }}>
-          <DatePickerIcon
-            name="camera"
-            color={"#0a5ac9"}
-            style={{marginRight: 5}}
-            size={24}
-          />
-          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Attach Bill</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            paddingHorizontal: metrics.horizontalScale(20),
-            paddingVertical: metrics.verticalScale(12),
             backgroundColor: "#0a5ac9",
             borderRadius: 50,
-            width: "48%",
+            width: '100%'
           }}
           onPress={cashEntry}>
-          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -333,28 +372,23 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: metrics.horizontalScale(15),
     paddingVertical: metrics.verticalScale(20),
-    backgroundColor: "#E8EEFF",
+    backgroundColor: "#fff",
     flex: 1,
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#d6d6d6",
     borderRadius: 6,
     paddingHorizontal: 50,
     paddingVertical: 15,
     color: "#000",
     fontSize: 18,
     backgroundColor: "#fff",
-    fontWeight: "800",
-  },
-  icon: {
-    position: "absolute",
-    top: "30%",
-    left: 25,
+    fontWeight: "600",
   },
   btnTxt: {
     fontSize: 18,
-    fontWeight: "800",
+    fontWeight: "600",
     textAlign: "center",
   },
 });

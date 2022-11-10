@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
     color: "#000",
     fontSize: 18,
     backgroundColor: "#fff",
-    fontWeight: "800",
+    fontWeight: "600",
   },
   icon: {
     position: "absolute",

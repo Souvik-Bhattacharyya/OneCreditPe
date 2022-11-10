@@ -47,7 +47,7 @@ const PartiesHeader = ({user}) => {
               alignItems: "center",
               marginBottom: 3,
             }}>
-            <Text style={{fontWeight: "800", fontSize: 17, color: "#fff"}}>
+            <Text style={{fontWeight: "600", fontSize: 17, color: "#fff"}}>
               {user.cus_name}
             </Text>
             <View
@@ -60,7 +60,7 @@ const PartiesHeader = ({user}) => {
                 alignItems: "center",
                 justifyContent: "center",
               }}>
-              <Text style={{fontWeight: "800", fontSize: 14, color: "#0a5ac9"}}>
+              <Text style={{fontWeight: "600", fontSize: 14, color: "#0a5ac9"}}>
                 {user.cus_type}
               </Text>
             </View>

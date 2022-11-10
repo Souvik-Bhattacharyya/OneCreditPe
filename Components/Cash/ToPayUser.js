@@ -8,7 +8,7 @@ import moment from "moment/moment";
 const ToPayUser = ({object}) => {
   const navigation = useNavigation();
   const {customer_id, cus_name, amount, date_time, attachment} = object;
-  const date = moment(date_time).format("Do MMM YY, hh:mm A");
+  const date = moment(date_time).format("dd yy mm, hh:mm A");
   return (
     <>
       <TouchableOpacity
@@ -50,7 +50,7 @@ const ToPayUser = ({object}) => {
             alignItems: "flex-end",
             backgroundColor: "#fff",
           }}>
-          <Text style={{fontSize: 18, fontWeight: "800", color: "#ED1C24"}}>
+          <Text style={{fontSize: 18, fontWeight: "600", color: "#ED1C24"}}>
             {amount}
           </Text>
           <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
