@@ -6,20 +6,20 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import OTPTextView from "../../Constants/AppOtpInput";
 import Api from "../../Services";
 
 //Redux
-import { useDispatch, useSelector } from "react-redux";
-import { addToken } from "../../Redux/Action/authActions";
+import {useDispatch, useSelector} from "react-redux";
+import {addToken} from "../../Redux/Action/authActions";
 
-const OtpScreen = ({ navigation, route }) => {
+const OtpScreen = ({navigation, route}) => {
   const dispatch = useDispatch();
 
-  const { mobileNumber } = route.params;
+  const {mobileNumber} = route.params;
 
   const [otp, setOtp] = React.useState(null);
   const [isLoading, setLoading] = React.useState(false);
@@ -51,7 +51,7 @@ const OtpScreen = ({ navigation, route }) => {
   return (
     <>
       <View style={styles.container}>
-        <View style={{ flex: 0.4 }}>
+        <View style={{flex: 0.4}}>
           <Image
             source={require("../../Assets/Logos/Logo.png")}
             style={styles.logo}
@@ -70,15 +70,15 @@ const OtpScreen = ({ navigation, route }) => {
               width: "100%",
             }}>
             <Text style={styles.text}>Otp send to </Text>
-            <View style={{ display: "flex", flexDirection: "row" }}>
-              <Text style={[styles.text, { fontWeight: "800", fontSize: 20 }]}>
+            <View style={{display: "flex", flexDirection: "row"}}>
+              <Text style={[styles.text, {fontWeight: "800", fontSize: 20}]}>
                 {mobileNumber || ""}
               </Text>
               <FontAwesome
                 name="pencil"
                 color="#0A5AC9"
                 size={20}
-                style={{ marginLeft: 10, alignSelf: "center" }}
+                style={{marginLeft: 10, alignSelf: "center"}}
               />
             </View>
           </TouchableOpacity>
@@ -88,22 +88,45 @@ const OtpScreen = ({ navigation, route }) => {
 
         <View
           style={{
-            flexDirection: 'column',
-            alignItems: 'center',
+            flexDirection: "column",
+            alignItems: "center",
             justifyContent: "space-around",
             marginTop: 20,
             width: "100%",
           }}>
           {isLoading && (
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-start', alignItems:'center', width:'100%'}}>
-              <ActivityIndicator animating={true} color={"red"} size={'large'} />
-              <Text style={{ fontSize: 18, fontWeight: "500", color: '#000', marginLeft: 30 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                width: "100%",
+              }}>
+              <ActivityIndicator
+                animating={true}
+                color={"red"}
+                size={"large"}
+              />
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "500",
+                  color: "#000",
+                  marginLeft: 30,
+                }}>
                 Auto verifying
               </Text>
             </View>
           )}
-          <View style={{width:'100%'}}>
-            <Text style={{ fontSize: 14, fontWeight: "500", textAlign: "left", color: '#0a5ac9', marginTop: 30 }}>
+          <View style={{width: "100%"}}>
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: "500",
+                textAlign: "left",
+                color: "#0a5ac9",
+                marginTop: 30,
+              }}>
               Resend OTP in 10s
             </Text>
           </View>

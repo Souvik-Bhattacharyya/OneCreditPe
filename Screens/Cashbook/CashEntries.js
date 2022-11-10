@@ -13,13 +13,14 @@ import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import moment from "moment";
 import DocumentPicker, {types} from "react-native-document-picker";
 import Api from "../../Services";
-
+import {useDispatch} from "react-redux";
+import {notify} from "../../Redux/Action/notificationActions";
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
   const [file, setFile] = useState({});
-
+  const dispatch = useDispatch();
   const onChange = (event, selectedDate, mode) => {
     if (mode === "date") {
       setDate(selectedDate);
@@ -119,7 +120,7 @@ const CashEntries = ({navigation}) => {
       formData.append("attachments", file);
 
       const response = await Api.postForm("/auth/cashbook", formData);
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log("====>", response.data);
         setCashDetails({
           ...cashDetails,
@@ -130,10 +131,16 @@ const CashEntries = ({navigation}) => {
           attachments: null,
         });
         setDate(new Date());
-        navigation.navigate("Cash Book");
+        dispatch(
+          notify({
+            message: "your transaction submitted successfully",
+            notifyType: "success",
+          }),
+        );
+        navigation.navigate("TransactionFull");
       }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
     }
   };
 
