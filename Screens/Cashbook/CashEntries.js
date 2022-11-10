@@ -18,54 +18,13 @@ const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
+  const [file, setFile] = useState({});
 
   const onChange = (event, selectedDate, mode) => {
     if (mode === "date") {
       setDate(selectedDate);
     } else {
       setTime(selectedDate);
-    }
-  };
-
-  const [cashDetails, setCashDetails] = useState({
-    amount: null,
-    cb_tns_type: "in",
-    paymentType: "online",
-    paymentDetails: "",
-    attachments: null,
-  });
-  console.log(
-    "time",
-    moment(date)
-      // .set("hour", moment(time).get("hour"))
-      // .set("minute", moment(time).get("minute"))
-      .format("YYYY-MM-DD hh:mm:ss"),
-  );
-  const cashEntry = async () => {
-    try {
-      const response = await Api.post("/auth/cashbook", {
-        amount: cashDetails.amount,
-        date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
-        cb_tns_type: cashDetails.cb_tns_type,
-        payment_type: cashDetails.paymentType,
-        payment_details: cashDetails.paymentDetails,
-        // attachments: cashDetails.attachments,
-      });
-      if (response.status == 200) {
-        console.log("====>", response.data);
-        setCashDetails({
-          ...cashDetails,
-          amount: null,
-          cb_tns_type: "in",
-          paymentType: "online",
-          paymentDetails: "",
-          attachments: null,
-        });
-
-        navigation.navigate("Cash Book");
-      }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -90,14 +49,27 @@ const CashEntries = ({navigation}) => {
     });
   };
 
+  const [cashDetails, setCashDetails] = useState({
+    amount: null,
+    cb_tns_type: "in",
+    paymentType: "online",
+    paymentDetails: "",
+    attachments: null,
+  });
+
   const handleDocumentSelection = () => {
     DocumentPicker.pick({
       type: [types.pdf, types.images],
     })
       .then(async response => {
         setLoading(true);
-        const formData = new FormData();
-        formData.append("file", {
+        // const formData = new FormData();
+        // formData.append("attachments", {
+        //   name: response[0].name,
+        //   uri: response[0].uri,
+        //   type: response[0].type,
+        // });
+        setFile({
           name: response[0].name,
           uri: response[0].uri,
           type: response[0].type,
@@ -129,6 +101,42 @@ const CashEntries = ({navigation}) => {
         console.log("error", error);
       });
   };
+
+  //Api integration
+
+  const cashEntry = async () => {
+    const dateTime = moment(date)
+      .set("hour", moment(time).get("hour"))
+      .set("minute", moment(time).get("minute"))
+      .format("YYYY-MM-DD hh:mm:ss");
+    try {
+      const formData = new FormData();
+      formData.append("amount", cashDetails.amount);
+      formData.append("date_time", dateTime);
+      formData.append("cb_tns_type", cashDetails.cb_tns_type);
+      formData.append("payment_details", cashDetails.paymentDetails);
+      formData.append("payment_type", cashDetails.paymentType);
+      formData.append("attachments", file);
+
+      const response = await Api.postForm("/auth/cashbook", formData);
+      if (response.status == 200) {
+        console.log("====>", response.data);
+        setCashDetails({
+          ...cashDetails,
+          amount: null,
+          cb_tns_type: "in",
+          paymentType: "online",
+          paymentDetails: "",
+          attachments: null,
+        });
+        setDate(new Date());
+        navigation.navigate("Cash Book");
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View>
