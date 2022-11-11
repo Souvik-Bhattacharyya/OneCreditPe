@@ -8,6 +8,17 @@ import moment from "moment";
 const CashIn = ({object}) => {
   const {amount, date_time, payment_details} = object;
   const date = moment(date_time).format("Do MMM YY, h:mm a");
+
+  const createTwoButtonAlert = () =>
+    Alert.alert("Are you sure to delete this entry?", "", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+      {text: "OK", onPress: () => console.log("OK Pressed")},
+    ]);
+
+
   return (
     <View>
       <View
