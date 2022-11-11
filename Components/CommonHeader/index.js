@@ -51,7 +51,7 @@ const CommonHeader = () => {
               alignItems: "center",
             }}>
             <Text style={{fontWeight: "600", fontSize: 14, color: "#fff"}}>
-              Business Name
+              {user.name}
             </Text>
             <Icon name="caretdown" color={"#fff"} size={12} />
           </TouchableOpacity>

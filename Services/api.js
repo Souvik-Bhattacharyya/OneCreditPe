@@ -8,6 +8,9 @@ export default class API {
   get(endpoint, params, header) {
     return this.httpRequest("GET", endpoint, params, header);
   }
+  delete(endpoint, params, header) {
+    return this.httpRequest("DELETE", endpoint, params, header);
+  }
 
   post(endpoint, params, header) {
     return this.httpRequest("POST", endpoint, params, header);
@@ -30,7 +33,7 @@ export default class API {
     let clientToken = state.auth.clientToken;
     return new Promise((resolve, reject) => {
       let body = {};
-      if (method === "GET") {
+      if (method === "GET" || method === "DELETE") {
         body = {
           method: method,
           url: url,

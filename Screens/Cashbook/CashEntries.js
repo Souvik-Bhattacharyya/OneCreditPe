@@ -16,6 +16,7 @@ import Api from "../../Services";
 import {CheckBox} from "@rneui/themed";
 
 const CashEntries = ({navigation}) => {
+  const [isDisabled, setIsDisabled] = useState(false);
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
   const [file, setFile] = useState(null);
@@ -82,19 +83,18 @@ const CashEntries = ({navigation}) => {
   //Api integration
 
   const cashEntry = async () => {
-    console.log("--------->", file);
-
     try {
+      setIsDisabled(true);
       const formData = new FormData();
       formData.append("amount", cashDetails.amount);
-      formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
+      formData.append("date_time", moment().format("YYYY-MM-DD hh:mm:ss"));
       formData.append("cb_tns_type", cashDetails.cb_tns_type);
       formData.append("payment_details", cashDetails.paymentDetails);
       formData.append("payment_type", cashDetails.paymentType);
       file ? formData.append("attachments", file) : "";
 
       const response = await Api.postForm("/auth/cashbook", formData);
-      // if (response.status == 200) {
+
       console.log("====>", response.data);
       setCashDetails({
         ...cashDetails,
@@ -105,8 +105,8 @@ const CashEntries = ({navigation}) => {
       });
       setDate(new Date());
       setFile(null);
+
       navigation.navigate("Cash Book");
-      // }
     } catch (error) {
       console.log(error.message);
     }
@@ -313,12 +313,14 @@ const CashEntries = ({navigation}) => {
           justifyContent: "space-between",
         }}>
         <TouchableOpacity
+          disabled={isDisabled}
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(12),
-            backgroundColor: "#0a5ac9",
+            // backgroundColor: "#0a5ac9",
             borderRadius: 50,
             width: "100%",
+            backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
           onPress={cashEntry}>
           <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
