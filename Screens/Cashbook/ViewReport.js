@@ -22,8 +22,6 @@ const ViewReport = ({navigation, route}) => {
   const {todayEntryDetails, viewResult} = route.params || {};
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
-  const [showDate1, setShowDate1] = useState(new Date());
-  const [showDate2, setShowDate2] = useState(new Date());
   const [date, setDate] = useState(new Date());
   const [dateFrom, setDateFrom] = useState(new Date());
 
@@ -65,7 +63,7 @@ const ViewReport = ({navigation, route}) => {
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
-                {viewResult.cash_in_hands}
+                ₹{viewResult.cash_in_hands}
               </Text>
               <Text
                 style={{
@@ -85,7 +83,7 @@ const ViewReport = ({navigation, route}) => {
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
-                {viewResult.todays_income}
+                ₹{viewResult.todays_income}
               </Text>
               <Text
                 style={{

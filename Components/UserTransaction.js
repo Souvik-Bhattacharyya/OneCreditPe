@@ -12,7 +12,7 @@ const UserTransaction = ({allTransaction}) => {
           alignItems: "center",
           marginBottom: 10,
         }}>
-        <Text style={{fontSize: 14, color: "#aaa", fontWeight: "900"}}>
+        <Text style={{fontSize: 14, color: "#828282", fontWeight: "600"}}>
           Date
         </Text>
       </View>

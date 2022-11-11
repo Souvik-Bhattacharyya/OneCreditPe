@@ -123,6 +123,7 @@ const Cashbook = ({navigation}) => {
       const response = await Api.get("/auth/view_reports");
       if (response.data) {
         setViewResult(response.data);
+        console.log(response.data);
       }
     } catch (error) {
       console.log(error);

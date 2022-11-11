@@ -53,7 +53,7 @@ const ToGetUser = ({object}) => {
             backgroundColor: "#fff",
           }}>
           <Text style={{fontSize: 18, fontWeight: "600", color: "#12CE12"}}>
-            {amount}
+            ₹{amount}
           </Text>
           <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
             To Get
