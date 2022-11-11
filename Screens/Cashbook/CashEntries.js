@@ -5,22 +5,22 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { useState } from "react";
+import Icon2 from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import moment from "moment";
-import DocumentPicker, {types} from "react-native-document-picker";
+import DocumentPicker, { types } from "react-native-document-picker";
 import Api from "../../Services";
-import {CheckBox} from "@rneui/themed";
+import { CheckBox, Icon } from "@rneui/themed";
 
 const CashEntries = ({navigation}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
   const [file, setFile] = useState(null);
-  const [online, setOnline] = useState(false);
+  const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
   const [cashDetails, setCashDetails] = useState({
     amount: null,
@@ -32,13 +32,13 @@ const CashEntries = ({navigation}) => {
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
-    setCashDetails({...cashDetails, paymentType: "online"});
+    setCashDetails({ ...cashDetails, paymentType: "online" });
   };
 
   const radioOffline = () => {
     setOnline(false);
     setOffline(true);
-    setCashDetails({...cashDetails, paymentType: "cash"});
+    setCashDetails({ ...cashDetails, paymentType: "cash" });
   };
 
   const onChange = (event, selectedDate) => {
@@ -121,17 +121,41 @@ const CashEntries = ({navigation}) => {
           marginBottom: metrics.verticalScale(5),
           alignItems: "center",
           width: "100%",
+          // backgroundColor: '#ddd',
+          marginBottom: 15
         }}>
         <View
           style={{
             width: "48%",
             borderRadius: 6,
+            paddingVertical: 0,
+            borderColor: '#c9c9c9',
+            borderWidth: 1,
+            borderRadius: 4,
           }}>
           <CheckBox
+            style={{ paddingVertical: 0 }}
             title="Online Pay"
             checked={online}
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
+            center
+            textStyle={{ fontSize: 18 }}
+            containerStyle={{ paddingHorizontal: 0, paddingVertical: 5 }}
+            checkedIcon={
+              <Icon
+                name="radio-button-checked"
+                type="material"
+                color="#0a5ac9"
+                size={25}
+              />
+            }
+            uncheckedIcon={
+              <Icon
+                name="radio-button-unchecked"
+                type="material"
+                color="grey"
+                size={25}
+              />
+            }
             onPress={radioOnline}
           />
         </View>
@@ -139,12 +163,32 @@ const CashEntries = ({navigation}) => {
           style={{
             width: "48%",
             borderRadius: 6,
+            borderColor: '#c9c9c9',
+            borderWidth: 1,
+            borderRadius: 4
           }}>
           <CheckBox
-            title="Offline Pay"
+            title="Cash Pay"
             checked={offline}
-            checkedIcon="dot-circle-o"
-            uncheckedIcon="circle-o"
+            center
+            textStyle={{ fontSize: 18 }}
+            containerStyle={{ paddingHorizontal: 0, paddingVertical: 5 }}
+            checkedIcon={
+              <Icon
+                name="radio-button-checked"
+                type="material"
+                color="#0a5ac9"
+                size={25}
+              />
+            }
+            uncheckedIcon={
+              <Icon
+                name="radio-button-unchecked"
+                type="material"
+                color="grey"
+                size={25}
+              />
+            }
             onPress={radioOffline}
           />
         </View>
@@ -155,27 +199,27 @@ const CashEntries = ({navigation}) => {
           flexDirection: "row",
           alignItems: "center",
           backgroundColor: "#fff",
-          borderWidth: 1,
+          borderBottomWidth: 1,
           borderColor: "#d6d6d6",
           borderRadius: 6,
           paddingVertical: 2,
           paddingRight: 20,
         }}>
-        <Icon name="rupee" color={"#000"} style={{marginLeft: 20}} size={22} />
+        <Icon2 name="rupee" color={"#828282"} style={{ marginLeft: 20 }} size={22} />
         <TextInput
           value={cashDetails.amount}
           placeholder="Enter Amount"
           placeholderTextColor={"#757575"}
           style={{
             backgroundColor: "#fff",
-            fontSize: 22,
+            fontSize: 18,
             paddingHorizontal: 10,
             color: "#000",
             fontWeight: "600",
             width: "90%",
           }}
           keyboardType="numeric"
-          onChangeText={val => setCashDetails({...cashDetails, amount: val})}
+          onChangeText={val => setCashDetails({ ...cashDetails, amount: val })}
         />
       </View>
 
@@ -189,7 +233,7 @@ const CashEntries = ({navigation}) => {
             flexDirection: "row",
             alignItems: "center",
             borderColor: "#d6d6d6",
-            borderWidth: 1,
+            borderBottomWidth: 1,
             borderRadius: 6,
             paddingVertical: 15,
             paddingHorizontal: 15,
@@ -214,69 +258,86 @@ const CashEntries = ({navigation}) => {
           flexDirection: "row",
           justifyContent: "space-between",
           marginBottom: metrics.verticalScale(15),
+          marginTop: metrics.verticalScale(10),
           width: "100%",
         }}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: isActive === "cash in" ? "#20409A" : "#f6f6f6",
-            borderColor: isActive === "cash in" ? "#20409A" : "#d6d6d6",
-            borderWidth: 1,
+            backgroundColor: isActive === "cash in" ? "#12CE12" : "#f6f6f6",
+            borderColor: isActive === "cash in" ? "transparent" : "#d6d6d6",
+            borderBottomWidth: 2,
             width: "48%",
             borderRadius: 4,
           }}
           onPress={() => {
             setIsActive("cash in");
-            setCashDetails({...cashDetails, cb_tns_type: "in"});
+            setCashDetails({ ...cashDetails, cb_tns_type: "in" });
           }}>
           <Text
             style={[
               styles.btnTxt,
-              {color: isActive === "cash in" ? "#fff" : "#20409A"},
+              { color: isActive === "cash in" ? "#fff" : "#20409A" },
             ]}>
-            Cash In
+            {/* <Icon name='money' /> */}
+            Amount In
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: isActive === "cash out" ? "#20409A" : "#f6f6f6",
-            borderColor: isActive === "cash out" ? "#20409A" : "#d6d6d6",
-            borderWidth: 1,
+            backgroundColor: isActive === "cash out" ? "#C91E25" : "#f6f6f6",
+            borderColor: isActive === "cash out" ? "transparent" : "#d6d6d6",
+            borderBottomWidth: 2,
             width: "48%",
             borderRadius: 4,
           }}
           onPress={() => {
             setIsActive("cash out");
-            setCashDetails({...cashDetails, cb_tns_type: "out"});
+            setCashDetails({ ...cashDetails, cb_tns_type: "out" });
           }}>
           <Text
             style={[
               styles.btnTxt,
-              {color: isActive === "cash out" ? "#fff" : "#20409A"},
+              { color: isActive === "cash out" ? "#fff" : "#20409A" },
             ]}>
-            Cash Out
+            Amount Out
           </Text>
         </TouchableOpacity>
       </View>
 
-      <View>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          borderBottomWidth: 1,
+          borderColor: "#d6d6d6",
+          borderRadius: 6,
+          paddingRight: 20,
+        }}>
+        <Icon2 name="file-text-o" color={"#828282"} style={{ marginLeft: 20 }} size={18} />
         <TextInput
           value={cashDetails.paymentDetails}
           placeholder="Enter Payment Details"
           placeholderTextColor={"#828282"}
-          style={[
-            styles.textInput,
-            {textAlignVertical: "top", paddingHorizontal: 20},
-          ]}
+          style={{
+            backgroundColor: "#fff",
+            fontSize: 18,
+            paddingHorizontal: 10,
+            color: "#000",
+            fontWeight: "600",
+            width: "90%",
+          }}
           onChangeText={val =>
-            setCashDetails({...cashDetails, paymentDetails: val})
+            setCashDetails({ ...cashDetails, paymentDetails: val })
           }
         />
       </View>
-      <View style={{marginTop: 15}}>
+
+      <View style={{ marginTop: 20 }}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
@@ -285,7 +346,7 @@ const CashEntries = ({navigation}) => {
             borderRadius: 6,
             width: "100%",
             borderColor: "#c9c9c9",
-            borderWidth: 1,
+            borderBottomWidth: 1,
             flexDirection: "row",
           }}
           onPress={() => {
@@ -294,10 +355,10 @@ const CashEntries = ({navigation}) => {
           <DatePickerIcon
             name="camera"
             color={"#0a5ac9"}
-            style={{marginRight: 5}}
+            style={{ marginRight: 5 }}
             size={24}
           />
-          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>
+          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>
             {file?.name || "Attach Bill"}
           </Text>
         </TouchableOpacity>
@@ -306,7 +367,7 @@ const CashEntries = ({navigation}) => {
       <View
         style={{
           position: "absolute",
-          bottom: metrics.verticalScale(20),
+          bottom: metrics.verticalScale(10),
           alignSelf: "center",
           width: "100%",
           flexDirection: "row",
@@ -323,7 +384,7 @@ const CashEntries = ({navigation}) => {
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
           onPress={cashEntry}>
-          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -340,7 +401,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   textInput: {
-    borderWidth: 1,
+    borderBottomWidth: 1,
     borderColor: "#d6d6d6",
     borderRadius: 6,
     paddingHorizontal: 50,
