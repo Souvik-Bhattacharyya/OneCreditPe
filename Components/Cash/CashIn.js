@@ -4,9 +4,9 @@ import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
-
+import Api from "../../Services";
 const CashIn = ({object}) => {
-  const {amount, date_time, payment_details} = object;
+  const {id, amount, date_time, payment_details} = object;
   const date = moment(date_time).format("Do MMM YY, h:mm a");
 
   const createTwoButtonAlert = () =>
@@ -15,9 +15,23 @@ const CashIn = ({object}) => {
         text: "Cancel",
         onPress: () => console.log("Cancel Pressed"),
       },
-      {text: "OK", onPress: () => console.log("OK Pressed")},
+      {
+        text: "OK",
+        onPress: () => {
+          console.log("OK Pressed");
+          deleteEntry();
+        },
+      },
     ]);
 
+  const deleteEntry = async () => {
+    try {
+      const response = await Api.delete(`/auth/cashbook/${id}`);
+      console.log("=======>", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View>
       <View
