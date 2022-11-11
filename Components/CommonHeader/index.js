@@ -48,7 +48,7 @@ const CommonHeader = () => {
               justifyContent: "center",
               alignItems: "center",
             }}>
-            <Text style={{ fontWeight: "800", fontSize: 14, color: "#fff" }}>
+            <Text style={{ fontWeight: "600", fontSize: 14, color: "#fff" }}>
               Business Name
             </Text>
             <Icon name="caretdown" color={"#fff"} size={12} />

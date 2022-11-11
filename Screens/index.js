@@ -28,7 +28,6 @@ import LanguageScreen from "./Settings/LanguageScreen";
 import Faq from "./Settings/faq";
 import Ans from "./Settings/ans";
 import InviteFriendModal from "../Components/InviteFriendModal";
-import TransactionFull from "../Components/TransactionFull";
 // import LoanSection from "../Screens/loanSection/Loan";
 
 export {
@@ -63,5 +62,4 @@ export {
   Faq,
   InviteFriendModal,
   Ans,
-  TransactionFull,
 };

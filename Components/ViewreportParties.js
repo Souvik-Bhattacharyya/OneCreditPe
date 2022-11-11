@@ -286,7 +286,7 @@ import {
     },
     btnTxt: {
       fontSize: 22,
-      fontWeight: "800",
+      fontWeight: "600",
       color: "#fff",
       textAlign: "center",
     },

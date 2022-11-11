@@ -79,7 +79,7 @@ const Cashbook = ({ navigation }) => {
     },
     btnTxt: {
       fontSize: 22,
-      fontWeight: "800",
+      fontWeight: "600",
       color: "#fff",
       textAlign: "center",
       marginLeft: 10,
@@ -144,6 +144,7 @@ const Cashbook = ({ navigation }) => {
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
+                ₹
                 {viewResult.cash_in_hands}
               </Text>
               <Text
@@ -163,7 +164,7 @@ const Cashbook = ({ navigation }) => {
                   color: "#12CE12",
                   fontWeight: "bold",
                   fontFamily: "Roboto",
-                }}>
+                }}>₹
                 {viewResult.todays_income}
               </Text>
               <Text

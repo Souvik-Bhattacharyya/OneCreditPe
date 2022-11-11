@@ -13,14 +13,26 @@ import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import moment from "moment";
 import DocumentPicker, {types} from "react-native-document-picker";
 import Api from "../../Services";
-import {useDispatch} from "react-redux";
-import {notify} from "../../Redux/Action/notificationActions";
+import {CheckBox} from "@rneui/themed";
+
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
   const [time, setTime] = useState(null);
   const [file, setFile] = useState({});
-  const dispatch = useDispatch();
+  const [online, setOnline] = useState(false);
+  const [offline, setOffline] = useState(false);
+
+  const radioOnline = () => {
+    setOnline(true);
+    setOffline(false);
+  };
+
+  const radioOffline = () => {
+    setOnline(false);
+    setOffline(true);
+  };
+
   const onChange = (event, selectedDate, mode) => {
     if (mode === "date") {
       setDate(selectedDate);
@@ -120,7 +132,7 @@ const CashEntries = ({navigation}) => {
       formData.append("attachments", file);
 
       const response = await Api.postForm("/auth/cashbook", formData);
-      if (response.status === 200) {
+      if (response.status == 200) {
         console.log("====>", response.data);
         setCashDetails({
           ...cashDetails,
@@ -131,93 +143,110 @@ const CashEntries = ({navigation}) => {
           attachments: null,
         });
         setDate(new Date());
-        dispatch(
-          notify({
-            message: "your transaction submitted successfully",
-            notifyType: "success",
-          }),
-        );
-        navigation.navigate("TransactionFull");
+        navigation.navigate("Cash Book");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
   return (
     <View style={styles.container}>
-      <View>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginBottom: metrics.verticalScale(5),
+          alignItems: "center",
+          width: "100%",
+        }}>
+        <View
+          style={{
+            width: "48%",
+            borderRadius: 6,
+          }}>
+          <CheckBox
+            title="Online Pay"
+            checked={online}
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            onPress={radioOnline}
+          />
+        </View>
+        <View
+          style={{
+            width: "48%",
+            borderRadius: 6,
+          }}>
+          <CheckBox
+            title="Offline Pay"
+            checked={offline}
+            checkedIcon="dot-circle-o"
+            uncheckedIcon="circle-o"
+            onPress={radioOffline}
+          />
+        </View>
+      </View>
+
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          borderWidth: 1,
+          borderColor: "#d6d6d6",
+          borderRadius: 6,
+          paddingVertical: 2,
+          paddingRight: 20,
+        }}>
+        <Icon name="rupee" color={"#000"} style={{marginLeft: 20}} size={22} />
         <TextInput
           value={cashDetails.amount}
           placeholder="Enter Amount"
-          placeholderTextColor={"#828282"}
-          style={styles.textInput}
+          placeholderTextColor={"#757575"}
+          style={{
+            backgroundColor: "#fff",
+            fontSize: 22,
+            paddingHorizontal: 10,
+            color: "#000",
+            fontWeight: "600",
+            width: "90%",
+          }}
           keyboardType="numeric"
           onChangeText={val => setCashDetails({...cashDetails, amount: val})}
         />
-        <Icon name="rupee" color={"#828282"} style={styles.icon} size={26} />
       </View>
 
-      <View style={{marginTop: 15}}>
+      <View
+        style={{
+          marginVertical: 15,
+        }}>
         <TouchableOpacity
           style={{
             backgroundColor: "#fff",
             flexDirection: "row",
             alignItems: "center",
-            borderColor: "#ccc",
+            borderColor: "#d6d6d6",
             borderWidth: 1,
             borderRadius: 6,
             paddingVertical: 15,
-            paddingHorizontal: 20,
+            paddingHorizontal: 15,
+            width: "100%",
           }}
           onPress={showDatepicker}>
-          <DatePickerIcon
-            name="calendar"
-            color={"#828282"}
-            style={{}}
-            size={24}
-          />
-
+          <DatePickerIcon name="calendar" color={"#828282"} size={24} />
           <Text
-            placeholder="Select Date & Time"
             style={{
               fontSize: 18,
               fontWeight: "600",
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {date ? moment(date).format("D-M-Y") : "Select Date"}
+            {date ? moment(date).format("DD MMM YYYY") : "Select Date"}
           </Text>
         </TouchableOpacity>
       </View>
 
-      <View style={{marginVertical: 15}}>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#fff",
-            flexDirection: "row",
-            alignItems: "center",
-            borderColor: "#ccc",
-            borderWidth: 1,
-            borderRadius: 6,
-            paddingVertical: 15,
-            paddingHorizontal: 20,
-          }}
-          onPress={showTimepicker}>
-          <DatePickerIcon name="clock" color={"#828282"} style={{}} size={24} />
-
-          <Text
-            placeholder="Select Time"
-            style={{
-              fontSize: 18,
-              fontWeight: "600",
-              color: "#000",
-              paddingHorizontal: 10,
-            }}>
-            {time ? moment(time).format("hh-mm a") : "Select Time"}
-          </Text>
-        </TouchableOpacity>
-      </View>
       <View
         style={{
           flexDirection: "row",
@@ -229,8 +258,8 @@ const CashEntries = ({navigation}) => {
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: isActive === "cash in" ? "#20409A" : "white",
-            borderColor: isActive === "cash in" ? "#20409A" : "#c6c6c6",
+            backgroundColor: isActive === "cash in" ? "#20409A" : "#f6f6f6",
+            borderColor: isActive === "cash in" ? "#20409A" : "#d6d6d6",
             borderWidth: 1,
             width: "48%",
             borderRadius: 4,
@@ -251,8 +280,8 @@ const CashEntries = ({navigation}) => {
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(10),
-            backgroundColor: isActive === "cash out" ? "#20409A" : "white",
-            borderColor: isActive === "cash out" ? "#20409A" : "#c6c6c6",
+            backgroundColor: isActive === "cash out" ? "#20409A" : "#f6f6f6",
+            borderColor: isActive === "cash out" ? "#20409A" : "#d6d6d6",
             borderWidth: 1,
             width: "48%",
             borderRadius: 4,
@@ -280,29 +309,19 @@ const CashEntries = ({navigation}) => {
             styles.textInput,
             {textAlignVertical: "top", paddingHorizontal: 20},
           ]}
-          multiline={true}
-          numberOfLines={2}
           onChangeText={val =>
             setCashDetails({...cashDetails, paymentDetails: val})
           }
         />
       </View>
-      <View
-        style={{
-          position: "absolute",
-          bottom: metrics.verticalScale(20),
-          alignSelf: "center",
-          width: "100%",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}>
+      <View style={{marginTop: 15}}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
-            paddingVertical: metrics.verticalScale(12),
+            paddingVertical: metrics.verticalScale(15),
             backgroundColor: "#fff",
-            borderRadius: 50,
-            width: "48%",
+            borderRadius: 6,
+            width: "100%",
             borderColor: "#c9c9c9",
             borderWidth: 1,
             flexDirection: "row",
@@ -318,13 +337,24 @@ const CashEntries = ({navigation}) => {
           />
           <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Attach Bill</Text>
         </TouchableOpacity>
+      </View>
+
+      <View
+        style={{
+          position: "absolute",
+          bottom: metrics.verticalScale(20),
+          alignSelf: "center",
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
             paddingVertical: metrics.verticalScale(12),
             backgroundColor: "#0a5ac9",
             borderRadius: 50,
-            width: "48%",
+            width: "100%",
           }}
           onPress={cashEntry}>
           <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
@@ -340,28 +370,23 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: metrics.horizontalScale(15),
     paddingVertical: metrics.verticalScale(20),
-    backgroundColor: "#E8EEFF",
+    backgroundColor: "#fff",
     flex: 1,
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: "#d6d6d6",
     borderRadius: 6,
     paddingHorizontal: 50,
     paddingVertical: 15,
     color: "#000",
     fontSize: 18,
     backgroundColor: "#fff",
-    fontWeight: "800",
-  },
-  icon: {
-    position: "absolute",
-    top: "30%",
-    left: 25,
+    fontWeight: "600",
   },
   btnTxt: {
     fontSize: 18,
-    fontWeight: "800",
+    fontWeight: "600",
     textAlign: "center",
   },
 });
