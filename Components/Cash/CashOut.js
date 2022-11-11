@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import React, {useEffect} from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
@@ -9,7 +9,7 @@ const CashOut = ({object}) => {
   console.log("object", object);
   let date = moment(date_time).format("Do MMM YY, h:mm a");
   const createTwoButtonAlert = () =>
-    Alert.alert("Are you sure to delete this?", "", [
+    Alert.alert("Are you sure to delete this entry?", "", [
       {
         text: "Cancel",
         onPress: () => console.log("Cancel Pressed"),
