@@ -1,4 +1,4 @@
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
@@ -17,7 +17,6 @@ const CashIn = ({object}) => {
       },
       {text: "OK", onPress: () => console.log("OK Pressed")},
     ]);
-
 
   return (
     <View>
@@ -72,11 +71,28 @@ const CashIn = ({object}) => {
             {payment_details}
           </Text>
         </View>
-        <View style={{width: "10%"}}>
-          <TouchableOpacity
-          // style={{ display: 'none' }}
-          >
-            <IconMat name="attachment" color={"#0a5ac9"} size={24} />
+
+        <View
+          style={{
+            width: "18%",
+            flexDirection: "row",
+          }}>
+          <TouchableOpacity>
+            <IconMat
+              name="attachment"
+              color={"#0a5ac9"}
+              size={24}
+              style={{paddingRight: 15}}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={createTwoButtonAlert}>
+            <Icon
+              name="delete"
+              color={"red"}
+              size={16}
+              style={{marginVertical: 3}}
+            />
           </TouchableOpacity>
         </View>
       </View>
