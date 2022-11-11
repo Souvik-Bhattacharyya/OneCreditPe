@@ -1,12 +1,21 @@
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import React, {useEffect} from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
-
+import Icon from "react-native-vector-icons/AntDesign";
 const CashOut = ({object}) => {
   const {amount, date_time, payment_details} = object;
+  console.log("object", object);
   let date = moment(date_time).format("Do MMM YY, h:mm a");
+  const createTwoButtonAlert = () =>
+    Alert.alert("Are you sure to delete this entry?", "", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+      {text: "OK", onPress: () => console.log("OK Pressed")},
+    ]);
   return (
     <View>
       <View
@@ -61,9 +70,28 @@ const CashOut = ({object}) => {
             {/* {detais} */}
           </Text>
         </View>
-        <View style={{width: "10%"}}>
+
+        <View
+          style={{
+            width: "18%",
+            flexDirection: "row",
+          }}>
           <TouchableOpacity>
-            <IconMat name="attachment" color={"#0a5ac9"} size={24} />
+            <IconMat
+              name="attachment"
+              color={"#0a5ac9"}
+              size={24}
+              style={{paddingRight: 15}}
+            />
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={createTwoButtonAlert}>
+            <Icon
+              name="delete"
+              color={"red"}
+              size={16}
+              style={{marginVertical: 3}}
+            />
           </TouchableOpacity>
         </View>
       </View>
