@@ -37,7 +37,7 @@ const CashEntries = ({navigation}) => {
   const radioOffline = () => {
     setOnline(false);
     setOffline(true);
-    setCashDetails({...cashDetails, paymentType: "offline"});
+    setCashDetails({...cashDetails, paymentType: "cash"});
   };
 
   const onChange = (event, selectedDate) => {

@@ -5,29 +5,28 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
-  Dimensions
+  Dimensions,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/AntDesign";
 import Carousel from "../../Components/Carousel/Carousel";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
 // import {useDispatch} from "react-redux";
 // import {logout} from "../../Redux/Action/authActions";
 
-const CustomerHome = () => {
+const CustomerHome = ({route}) => {
   const navigation = useNavigation();
   // const dispatch = useDispatch();
-
-  const width = Dimensions.get('window').width;
+  const width = Dimensions.get("window").width;
 
   return (
     <>
       <CommonHeader />
       <View style={styles.container}>
-        <View style={{ height: 50, backgroundColor: '#0a5ac9' }}></View>
-        <View style={[styles.card, styles.shadow, { marginTop: -40 }]}>
+        <View style={{height: 50, backgroundColor: "#0a5ac9"}}></View>
+        <View style={[styles.card, styles.shadow, {marginTop: -40}]}>
           <View style={styles.cardBody}>
             <View style={styles.boxOne}>
               <Text
@@ -70,7 +69,7 @@ const CustomerHome = () => {
           </View>
           <TouchableOpacity
             style={styles.cardBtn}
-            onPress={() => alert('In Progress')}>
+            onPress={() => alert("In Progress")}>
             <Text
               style={{
                 fontSize: 16,
@@ -129,9 +128,11 @@ const CustomerHome = () => {
           </View>
           <TouchableOpacity
             style={styles.cardBtn}
-            onPress={() => navigation.navigate("Cashbook", {
-              screen: 'Cash Book'
-            })}>
+            onPress={() =>
+              navigation.navigate("Cashbook", {
+                screen: "Cash Book",
+              })
+            }>
             <Text
               style={{
                 fontSize: 16,
@@ -188,22 +189,21 @@ const CustomerHome = () => {
             }}>
             <Image source={require("../../Assets/loanSec.png")} />
           </View>
-          <View style={{ width: "70%", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "600" }}>
+          <View style={{width: "70%", paddingHorizontal: 20}}>
+            <Text style={{color: "#464555", fontSize: 18, fontWeight: "600"}}>
               Easy Loan
             </Text>
-            <Text style={{ color: "#828282", fontWeight: '400' }}>
+            <Text style={{color: "#828282", fontWeight: "400"}}>
               Get easy loan without any paperwork
             </Text>
-            <TouchableOpacity style={{ marginTop: 10, justifyContent: "center" }}>
-              <Text style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "600" }}>
+            <TouchableOpacity style={{marginTop: 10, justifyContent: "center"}}>
+              <Text style={{color: "#0A5AC9", fontSize: 16, fontWeight: "600"}}>
                 Apply Now
                 <Icon name="doubleright" color={"#0A5AC9"} size={16} />
               </Text>
             </TouchableOpacity>
           </View>
         </View>
-
       </View>
     </>
   );
@@ -281,6 +281,6 @@ const styles = StyleSheet.create({
   },
   btnIcon: {
     width: 24,
-    height: 24
+    height: 24,
   },
 });

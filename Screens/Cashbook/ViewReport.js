@@ -20,7 +20,6 @@ import Api from "../../Services";
 
 const ViewReport = ({navigation, route}) => {
   const {todayEntryDetails, viewResult} = route.params || {};
-  console.log(route.params);
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [showDate1, setShowDate1] = useState(new Date());

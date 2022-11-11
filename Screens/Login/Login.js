@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
@@ -18,34 +18,29 @@ import Api from "../../Services";
 // import {useDispatch, useSelector} from "react-redux";
 // import {editName, editMobile} from "../../Redux/Action/registerActions";
 
-const Login = ({ navigation }) => {
+const Login = ({navigation}) => {
   const [credentials, setCredentials] = useState({
     businessName: "",
     mobileNumber: "",
   });
 
   const login = async () => {
-    console.log(
-      "--------->",
-      credentials.businessName,
-      credentials.mobileNumber,
-    );
     try {
       const response = await Api.post("/send-otp", {
         name: credentials.businessName,
         mobile: credentials.mobileNumber,
       });
       if (response.status == 200) {
-        navigation.navigate("otp", { mobileNumber: credentials.mobileNumber });
+        navigation.navigate("otp", {mobileNumber: credentials.mobileNumber});
       }
     } catch (error) {
       console.log(error);
     }
-    setCredentials({ businessName: "", mobileNumber: "" });
+    setCredentials({businessName: "", mobileNumber: ""});
   };
   return (
     <View style={styles.container}>
-      <View style={{ alignItems: 'flex-start', marginTop: 20 }}>
+      <View style={{alignItems: "flex-start", marginTop: 20}}>
         <Text
           style={{
             fontSize: 28,
@@ -59,21 +54,21 @@ const Login = ({ navigation }) => {
           style={{
             color: "#828282",
             fontWeight: "500",
-            fontSize: 18
+            fontSize: 18,
           }}>
           Create an account
         </Text>
       </View>
 
       <View>
-        <SafeAreaView style={{ alignItems: "center", marginTop: 0 }}>
+        <SafeAreaView style={{alignItems: "center", marginTop: 0}}>
           <TextInput
             value={credentials.businessName}
             style={styles.name}
             placeholder="Your Business Name"
             placeholderTextColor="#B4B4B4"
             onChangeText={val =>
-              setCredentials({ ...credentials, businessName: val })
+              setCredentials({...credentials, businessName: val})
             }
           />
           <TextInput
@@ -83,17 +78,18 @@ const Login = ({ navigation }) => {
             keyboardType="numeric"
             placeholderTextColor="#B4B4B4"
             onChangeText={val =>
-              setCredentials({ ...credentials, mobileNumber: val })
+              setCredentials({...credentials, mobileNumber: val})
             }
           />
         </SafeAreaView>
       </View>
 
-      <View style={{
-        alignItems: "center",
-        marginTop: 50,
-        flex: 1
-      }}>
+      <View
+        style={{
+          alignItems: "center",
+          marginTop: 50,
+          flex: 1,
+        }}>
         <Image
           source={require("../../Assets/loginGif.png")}
           style={styles.logo}
@@ -106,7 +102,7 @@ const Login = ({ navigation }) => {
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableOpacity onPress={login} style={{ width: "100%" }}>
+        <TouchableOpacity onPress={login} style={{width: "100%"}}>
           <View
             style={{
               backgroundColor: "#349EFF",
@@ -130,8 +126,6 @@ const Login = ({ navigation }) => {
           </View>
         </TouchableOpacity>
       </View>
-
-
     </View>
   );
 };
@@ -157,7 +151,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     borderWidth: 1,
     borderColor: "#C6C6C6",
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
   },
   input: {
     paddingVertical: 15,
@@ -171,7 +165,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#C6C6C6",
     paddingHorizontal: 20,
-    borderRadius: 6
+    borderRadius: 6,
   },
   logo: {
     height: 350,
