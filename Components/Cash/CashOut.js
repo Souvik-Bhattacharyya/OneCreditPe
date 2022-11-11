@@ -70,11 +70,7 @@ const CashOut = ({object}) => {
             {/* {detais} */}
           </Text>
         </View>
-        {/* <View style={{width: "10%"}}>
-          <TouchableOpacity>
-            <IconMat name="attachment" color={"#0a5ac9"} size={24} />
-          </TouchableOpacity>
-        </View> */}
+
         <View
           style={{
             width: "18%",
