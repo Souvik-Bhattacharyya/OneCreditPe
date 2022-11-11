@@ -18,14 +18,20 @@ import {CheckBox} from "@rneui/themed";
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
-  const [time, setTime] = useState(null);
-  const [file, setFile] = useState({});
+  const [file, setFile] = useState(null);
   const [online, setOnline] = useState(false);
   const [offline, setOffline] = useState(false);
+  const [cashDetails, setCashDetails] = useState({
+    amount: null,
+    cb_tns_type: "in",
+    paymentType: "",
+    paymentDetails: "",
+  });
 
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
+    setCashDetails({...cashDetails, paymentType: "online"});
   };
 
   const radioOffline = () => {
@@ -34,26 +40,20 @@ const CashEntries = ({navigation}) => {
     setCashDetails({...cashDetails, paymentType: "cash"});
   };
 
-  const onChange = (event, selectedDate, mode) => {
-    if (mode === "date") {
-      setDate(selectedDate);
-    } else {
-      setTime(selectedDate);
-    }
+  const onChange = (event, selectedDate) => {
+    setDate(selectedDate);
   };
 
   const showDatepicker = () => {
     showMode("date");
   };
-  const showTimepicker = () => {
-    showMode("time");
-  };
+
   const showMode = currentMode => {
     let maximumDate = new Date();
     maximumDate.setFullYear(maximumDate.getFullYear());
 
     DateTimePickerAndroid.open({
-      value: (currentMode === "date" ? date : time) || new Date(),
+      value: date || new Date(),
 
       onChange: (event, date) => onChange(event, date, currentMode),
       mode: currentMode,
@@ -63,55 +63,18 @@ const CashEntries = ({navigation}) => {
     });
   };
 
-  const [cashDetails, setCashDetails] = useState({
-    amount: null,
-    cb_tns_type: "in",
-    paymentType: "online",
-    paymentDetails: "",
-    attachments: null,
-  });
-
   const handleDocumentSelection = () => {
     DocumentPicker.pick({
       type: [types.pdf, types.images],
     })
       .then(async response => {
-        setLoading(true);
-        // const formData = new FormData();
-        // formData.append("attachments", {
-        //   name: response[0].name,
-        //   uri: response[0].uri,
-        //   type: response[0].type,
-        // });
         setFile({
           name: response[0].name,
           uri: response[0].uri,
           type: response[0].type,
         });
-        //  try {
-
-        //    const res = await Axios.post(
-        //      `${API_BASE_URL}/upload/single`,
-        //      formData,
-        //      {
-        //        headers: {
-        //          "Content-Type": "multipart/form-data",
-        //        },
-        //      },
-        //    );
-        //    setError("");
-
-        //  }
-        //  catch (error) {
-        //    setError("error!");
-        //    dispatch(
-        //      notify({message: "Error uploading document", type: "error"}),
-        //    );
-        //  }
-        //  setLoading(false);
       })
       .catch(error => {
-        // setLoading(false);
         console.log("error", error);
       });
   };
@@ -119,33 +82,31 @@ const CashEntries = ({navigation}) => {
   //Api integration
 
   const cashEntry = async () => {
-    const dateTime = moment(date)
-      .set("hour", moment(time).get("hour"))
-      .set("minute", moment(time).get("minute"))
-      .format("YYYY-MM-DD hh:mm:ss");
+    console.log("--------->", file);
+
     try {
       const formData = new FormData();
       formData.append("amount", cashDetails.amount);
-      formData.append("date_time", dateTime);
+      formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
       formData.append("cb_tns_type", cashDetails.cb_tns_type);
       formData.append("payment_details", cashDetails.paymentDetails);
       formData.append("payment_type", cashDetails.paymentType);
-      formData.append("attachments", file);
+      file ? formData.append("attachments", file) : "";
 
       const response = await Api.postForm("/auth/cashbook", formData);
-      if (response.status == 200) {
-        console.log("====>", response.data);
-        setCashDetails({
-          ...cashDetails,
-          amount: null,
-          cb_tns_type: "in",
-          paymentType: "online",
-          paymentDetails: "",
-          attachments: null,
-        });
-        setDate(new Date());
-        navigation.navigate("Cash Book");
-      }
+      // if (response.status == 200) {
+      console.log("====>", response.data);
+      setCashDetails({
+        ...cashDetails,
+        amount: null,
+        cb_tns_type: "in",
+        paymentType: "",
+        paymentDetails: "",
+      });
+      setDate(new Date());
+      setFile(null);
+      navigation.navigate("Cash Book");
+      // }
     } catch (error) {
       console.log(error.message);
     }
@@ -336,7 +297,9 @@ const CashEntries = ({navigation}) => {
             style={{marginRight: 5}}
             size={24}
           />
-          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Attach Bill</Text>
+          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>
+            {file?.name || "Attach Bill"}
+          </Text>
         </TouchableOpacity>
       </View>
 
