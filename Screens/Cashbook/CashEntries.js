@@ -5,55 +5,55 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import moment from "moment";
-import DocumentPicker, { types } from "react-native-document-picker";
+import DocumentPicker, {types} from "react-native-document-picker";
 import Api from "../../Services";
-import { CheckBox } from '@rneui/themed';
+import {CheckBox} from "@rneui/themed";
 
-const CashEntries = ({ navigation }) => {
+const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
-  const [time, setTime] = useState(null);
-  const [file, setFile] = useState({});
+  const [file, setFile] = useState(null);
   const [online, setOnline] = useState(false);
   const [offline, setOffline] = useState(false);
+  const [cashDetails, setCashDetails] = useState({
+    amount: null,
+    cb_tns_type: "in",
+    paymentType: "",
+    paymentDetails: "",
+  });
 
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
-  }
+    setCashDetails({...cashDetails, paymentType: "online"});
+  };
 
   const radioOffline = () => {
     setOnline(false);
     setOffline(true);
-  }
+    setCashDetails({...cashDetails, paymentType: "offline"});
+  };
 
-
-  const onChange = (event, selectedDate, mode) => {
-    if (mode === "date") {
-      setDate(selectedDate);
-    } else {
-      setTime(selectedDate);
-    }
+  const onChange = (event, selectedDate) => {
+    setDate(selectedDate);
   };
 
   const showDatepicker = () => {
     showMode("date");
   };
-  const showTimepicker = () => {
-    showMode("time");
-  };
+
   const showMode = currentMode => {
     let maximumDate = new Date();
     maximumDate.setFullYear(maximumDate.getFullYear());
 
     DateTimePickerAndroid.open({
-      value: (currentMode === "date" ? date : time) || new Date(),
+      value: date || new Date(),
 
       onChange: (event, date) => onChange(event, date, currentMode),
       mode: currentMode,
@@ -63,55 +63,18 @@ const CashEntries = ({ navigation }) => {
     });
   };
 
-  const [cashDetails, setCashDetails] = useState({
-    amount: null,
-    cb_tns_type: "in",
-    paymentType: "online",
-    paymentDetails: "",
-    attachments: null,
-  });
-
   const handleDocumentSelection = () => {
     DocumentPicker.pick({
-      type: [types.pdf, types.images],
+      type: [types.pdf, types.images, types.doc],
     })
       .then(async response => {
-        setLoading(true);
-        // const formData = new FormData();
-        // formData.append("attachments", {
-        //   name: response[0].name,
-        //   uri: response[0].uri,
-        //   type: response[0].type,
-        // });
         setFile({
           name: response[0].name,
           uri: response[0].uri,
           type: response[0].type,
         });
-        //  try {
-
-        //    const res = await Axios.post(
-        //      `${API_BASE_URL}/upload/single`,
-        //      formData,
-        //      {
-        //        headers: {
-        //          "Content-Type": "multipart/form-data",
-        //        },
-        //      },
-        //    );
-        //    setError("");
-
-        //  }
-        //  catch (error) {
-        //    setError("error!");
-        //    dispatch(
-        //      notify({message: "Error uploading document", type: "error"}),
-        //    );
-        //  }
-        //  setLoading(false);
       })
       .catch(error => {
-        // setLoading(false);
         console.log("error", error);
       });
   };
@@ -119,18 +82,15 @@ const CashEntries = ({ navigation }) => {
   //Api integration
 
   const cashEntry = async () => {
-    const dateTime = moment(date)
-      .set("hour", moment(time).get("hour"))
-      .set("minute", moment(time).get("minute"))
-      .format("YYYY-MM-DD hh:mm:ss");
+    console.log("--------->", file);
     try {
       const formData = new FormData();
       formData.append("amount", cashDetails.amount);
-      formData.append("date_time", dateTime);
+      formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
       formData.append("cb_tns_type", cashDetails.cb_tns_type);
       formData.append("payment_details", cashDetails.paymentDetails);
       formData.append("payment_type", cashDetails.paymentType);
-      formData.append("attachments", file);
+      file ? formData.append("attachments", file) : "";
 
       const response = await Api.postForm("/auth/cashbook", formData);
       if (response.status == 200) {
@@ -139,10 +99,10 @@ const CashEntries = ({ navigation }) => {
           ...cashDetails,
           amount: null,
           cb_tns_type: "in",
-          paymentType: "online",
+          paymentType: "",
           paymentDetails: "",
-          attachments: null,
         });
+        setFile(null);
         setDate(new Date());
         navigation.navigate("Cash Book");
       }
@@ -158,12 +118,14 @@ const CashEntries = ({ navigation }) => {
           flexDirection: "row",
           justifyContent: "space-between",
           marginBottom: metrics.verticalScale(5),
-          alignItems: 'center',
-          width: '100%',
+          alignItems: "center",
+          width: "100%",
         }}>
-        <View style={{
-          width: '48%', borderRadius: 6
-        }}>
+        <View
+          style={{
+            width: "48%",
+            borderRadius: 6,
+          }}>
           <CheckBox
             title="Online Pay"
             checked={online}
@@ -174,8 +136,8 @@ const CashEntries = ({ navigation }) => {
         </View>
         <View
           style={{
-            width: '48%',
-            borderRadius: 6
+            width: "48%",
+            borderRadius: 6,
           }}>
           <CheckBox
             title="Offline Pay"
@@ -187,37 +149,38 @@ const CashEntries = ({ navigation }) => {
         </View>
       </View>
 
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderWidth: 1,
-        borderColor: '#d6d6d6',
-        borderRadius: 6,
-        paddingVertical: 2
-      }}>
-        <Icon name="rupee" color={"#000"} style={{ marginLeft: 20 }} size={22} />
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          backgroundColor: "#fff",
+          borderWidth: 1,
+          borderColor: "#d6d6d6",
+          borderRadius: 6,
+          paddingVertical: 2,
+        }}>
+        <Icon name="rupee" color={"#000"} style={{marginLeft: 20}} size={22} />
         <TextInput
           value={cashDetails.amount}
           placeholder="Enter Amount"
           placeholderTextColor={"#757575"}
           style={{
-            backgroundColor: '#fff',
+            backgroundColor: "#fff",
             fontSize: 22,
             paddingHorizontal: 10,
-            color: '#000',
-            fontWeight: '600',
-            textAlign: 'left',
-
+            color: "#000",
+            fontWeight: "600",
+            textAlign: "left",
           }}
           keyboardType="numeric"
-          onChangeText={val => setCashDetails({ ...cashDetails, amount: val })}
+          onChangeText={val => setCashDetails({...cashDetails, amount: val})}
         />
       </View>
 
-      <View style={{
-        marginVertical: 15,
-      }}>
+      <View
+        style={{
+          marginVertical: 15,
+        }}>
         <TouchableOpacity
           style={{
             backgroundColor: "#fff",
@@ -228,14 +191,10 @@ const CashEntries = ({ navigation }) => {
             borderRadius: 6,
             paddingVertical: 15,
             paddingHorizontal: 15,
-            width: '100%'
+            width: "100%",
           }}
           onPress={showDatepicker}>
-          <DatePickerIcon
-            name="calendar"
-            color={"#828282"}
-            size={24}
-          />
+          <DatePickerIcon name="calendar" color={"#828282"} size={24} />
           <Text
             style={{
               fontSize: 18,
@@ -267,12 +226,12 @@ const CashEntries = ({ navigation }) => {
           }}
           onPress={() => {
             setIsActive("cash in");
-            setCashDetails({ ...cashDetails, cb_tns_type: "in" });
+            setCashDetails({...cashDetails, cb_tns_type: "in"});
           }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash in" ? "#fff" : "#20409A" },
+              {color: isActive === "cash in" ? "#fff" : "#20409A"},
             ]}>
             Cash In
           </Text>
@@ -289,18 +248,17 @@ const CashEntries = ({ navigation }) => {
           }}
           onPress={() => {
             setIsActive("cash out");
-            setCashDetails({ ...cashDetails, cb_tns_type: "out" });
+            setCashDetails({...cashDetails, cb_tns_type: "out"});
           }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash out" ? "#fff" : "#20409A" },
+              {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
             Cash Out
           </Text>
         </TouchableOpacity>
       </View>
-
 
       <View>
         <TextInput
@@ -309,14 +267,14 @@ const CashEntries = ({ navigation }) => {
           placeholderTextColor={"#828282"}
           style={[
             styles.textInput,
-            { textAlignVertical: "top", paddingHorizontal: 20 },
+            {textAlignVertical: "top", paddingHorizontal: 20},
           ]}
           onChangeText={val =>
-            setCashDetails({ ...cashDetails, paymentDetails: val })
+            setCashDetails({...cashDetails, paymentDetails: val})
           }
         />
       </View>
-      <View style={{ marginTop: 15 }}>
+      <View style={{marginTop: 15}}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
@@ -334,10 +292,12 @@ const CashEntries = ({ navigation }) => {
           <DatePickerIcon
             name="camera"
             color={"#0a5ac9"}
-            style={{ marginRight: 5 }}
+            style={{marginRight: 5}}
             size={24}
           />
-          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Attach Bill</Text>
+          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>
+            {file?.type || "Attach Bill"}
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -356,10 +316,10 @@ const CashEntries = ({ navigation }) => {
             paddingVertical: metrics.verticalScale(12),
             backgroundColor: "#0a5ac9",
             borderRadius: 50,
-            width: '100%'
+            width: "100%",
           }}
           onPress={cashEntry}>
-          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
