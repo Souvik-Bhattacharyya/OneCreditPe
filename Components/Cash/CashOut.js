@@ -92,14 +92,16 @@ const CashOut = ({object}) => {
             width: "18%",
             flexDirection: "row",
           }}>
-          <TouchableOpacity>
-            <IconMat
-              name="attachment"
-              color={"#0a5ac9"}
-              size={24}
-              style={{paddingRight: 15}}
-            />
-          </TouchableOpacity>
+          {object.attachments === "null" && (
+            <TouchableOpacity>
+              <IconMat
+                name="attachment"
+                color={"#0a5ac9"}
+                size={24}
+                style={{paddingRight: 15}}
+              />
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity onPress={createTwoButtonAlert}>
             <Icon
