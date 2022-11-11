@@ -7,6 +7,7 @@ import moment from "moment";
 import Api from "../../Services";
 const CashIn = ({object}) => {
   const {id, amount, date_time, payment_details} = object;
+  console.log("object", object);
   const date = moment(date_time).format("Do MMM YY, h:mm a");
 
   const createTwoButtonAlert = () =>
@@ -64,7 +65,7 @@ const CashIn = ({object}) => {
             }}>
             ̥₹{amount}
           </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
+          <Text style={{color: "#000", fontSize: 12, fontWeight: "400"}}>
             Cash In
           </Text>
         </View>
@@ -73,7 +74,7 @@ const CashIn = ({object}) => {
             style={{
               color: "#000",
               fontSize: 14,
-              fontWeight: "600",
+              fontWeight: "400",
               marginBottom: metrics.verticalScale(5),
             }}>
             {date}
@@ -91,14 +92,16 @@ const CashIn = ({object}) => {
             width: "18%",
             flexDirection: "row",
           }}>
-          <TouchableOpacity>
-            <IconMat
-              name="attachment"
-              color={"#0a5ac9"}
-              size={24}
-              style={{paddingRight: 15}}
-            />
-          </TouchableOpacity>
+          {object.attachments === "null" && (
+            <TouchableOpacity>
+              <IconMat
+                name="attachment"
+                color={"#0a5ac9"}
+                size={24}
+                style={{paddingRight: 15}}
+              />
+            </TouchableOpacity>
+          )}
 
           <TouchableOpacity onPress={createTwoButtonAlert}>
             <Icon
