@@ -18,42 +18,41 @@ import {CheckBox} from "@rneui/themed";
 const CashEntries = ({navigation}) => {
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(null);
-  const [file, setFile] = useState(null);
+  const [time, setTime] = useState(null);
+  const [file, setFile] = useState({});
   const [online, setOnline] = useState(false);
   const [offline, setOffline] = useState(false);
-  const [cashDetails, setCashDetails] = useState({
-    amount: null,
-    cb_tns_type: "in",
-    paymentType: "",
-    paymentDetails: "",
-  });
 
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
-    setCashDetails({...cashDetails, paymentType: "online"});
   };
 
   const radioOffline = () => {
     setOnline(false);
     setOffline(true);
-    setCashDetails({...cashDetails, paymentType: "offline"});
   };
 
-  const onChange = (event, selectedDate) => {
-    setDate(selectedDate);
+  const onChange = (event, selectedDate, mode) => {
+    if (mode === "date") {
+      setDate(selectedDate);
+    } else {
+      setTime(selectedDate);
+    }
   };
 
   const showDatepicker = () => {
     showMode("date");
   };
-
+  const showTimepicker = () => {
+    showMode("time");
+  };
   const showMode = currentMode => {
     let maximumDate = new Date();
     maximumDate.setFullYear(maximumDate.getFullYear());
 
     DateTimePickerAndroid.open({
-      value: date || new Date(),
+      value: (currentMode === "date" ? date : time) || new Date(),
 
       onChange: (event, date) => onChange(event, date, currentMode),
       mode: currentMode,
@@ -63,18 +62,55 @@ const CashEntries = ({navigation}) => {
     });
   };
 
+  const [cashDetails, setCashDetails] = useState({
+    amount: null,
+    cb_tns_type: "in",
+    paymentType: "online",
+    paymentDetails: "",
+    attachments: null,
+  });
+
   const handleDocumentSelection = () => {
     DocumentPicker.pick({
-      type: [types.pdf, types.images, types.doc],
+      type: [types.pdf, types.images],
     })
       .then(async response => {
+        setLoading(true);
+        // const formData = new FormData();
+        // formData.append("attachments", {
+        //   name: response[0].name,
+        //   uri: response[0].uri,
+        //   type: response[0].type,
+        // });
         setFile({
           name: response[0].name,
           uri: response[0].uri,
           type: response[0].type,
         });
+        //  try {
+
+        //    const res = await Axios.post(
+        //      `${API_BASE_URL}/upload/single`,
+        //      formData,
+        //      {
+        //        headers: {
+        //          "Content-Type": "multipart/form-data",
+        //        },
+        //      },
+        //    );
+        //    setError("");
+
+        //  }
+        //  catch (error) {
+        //    setError("error!");
+        //    dispatch(
+        //      notify({message: "Error uploading document", type: "error"}),
+        //    );
+        //  }
+        //  setLoading(false);
       })
       .catch(error => {
+        // setLoading(false);
         console.log("error", error);
       });
   };
@@ -82,15 +118,18 @@ const CashEntries = ({navigation}) => {
   //Api integration
 
   const cashEntry = async () => {
-    console.log("--------->", file);
+    const dateTime = moment(date)
+      .set("hour", moment(time).get("hour"))
+      .set("minute", moment(time).get("minute"))
+      .format("YYYY-MM-DD hh:mm:ss");
     try {
       const formData = new FormData();
       formData.append("amount", cashDetails.amount);
-      formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
+      formData.append("date_time", dateTime);
       formData.append("cb_tns_type", cashDetails.cb_tns_type);
       formData.append("payment_details", cashDetails.paymentDetails);
       formData.append("payment_type", cashDetails.paymentType);
-      file ? formData.append("attachments", file) : "";
+      formData.append("attachments", file);
 
       const response = await Api.postForm("/auth/cashbook", formData);
       if (response.status == 200) {
@@ -99,10 +138,10 @@ const CashEntries = ({navigation}) => {
           ...cashDetails,
           amount: null,
           cb_tns_type: "in",
-          paymentType: "",
+          paymentType: "online",
           paymentDetails: "",
+          attachments: null,
         });
-        setFile(null);
         setDate(new Date());
         navigation.navigate("Cash Book");
       }
@@ -158,6 +197,7 @@ const CashEntries = ({navigation}) => {
           borderColor: "#d6d6d6",
           borderRadius: 6,
           paddingVertical: 2,
+          paddingRight: 20,
         }}>
         <Icon name="rupee" color={"#000"} style={{marginLeft: 20}} size={22} />
         <TextInput
@@ -170,7 +210,7 @@ const CashEntries = ({navigation}) => {
             paddingHorizontal: 10,
             color: "#000",
             fontWeight: "600",
-            textAlign: "left",
+            width: "90%",
           }}
           keyboardType="numeric"
           onChangeText={val => setCashDetails({...cashDetails, amount: val})}
@@ -295,9 +335,7 @@ const CashEntries = ({navigation}) => {
             style={{marginRight: 5}}
             size={24}
           />
-          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>
-            {file?.type || "Attach Bill"}
-          </Text>
+          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Attach Bill</Text>
         </TouchableOpacity>
       </View>
 
