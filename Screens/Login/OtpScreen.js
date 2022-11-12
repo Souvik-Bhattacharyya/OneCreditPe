@@ -32,6 +32,7 @@ const OtpScreen = ({navigation, route}) => {
           mobile: mobileNumber,
           otp: otp,
         });
+
         if (response.status == 200) {
           console.log("------------------>", response.data);
           const payload = {
@@ -42,6 +43,8 @@ const OtpScreen = ({navigation, route}) => {
           navigation.navigate("loading");
           setLoading(false);
         }
+      } else {
+        alert("This is wrong otp");
       }
     } catch (error) {
       console.log(error);

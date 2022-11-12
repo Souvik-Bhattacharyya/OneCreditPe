@@ -3,8 +3,9 @@ import {HIDE, NOTIFY} from "../actionTypes";
 export const notify = payload => {
   return {
     type: NOTIFY,
-    message: payload.message,
-    notifyType: payload.notifyType,
+    payload,
+    // message: payload.message,
+    // notifyType: payload.notifyType,
   };
 };
 

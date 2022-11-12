@@ -11,9 +11,9 @@ const reducer = (state = INITIAL_STATE, action) => {
     case NOTIFY:
       return {
         ...state,
-        message: action.message,
+        message: action.payload.message,
         isVisible: true,
-        type: action.notifyType || "error",
+        type: action.payload.notifyType || "error",
       };
     case HIDE:
       return {
