@@ -14,7 +14,8 @@ import moment from "moment";
 import DocumentPicker, {types} from "react-native-document-picker";
 import Api from "../../Services";
 import {CheckBox, Icon} from "@rneui/themed";
-
+import {notify} from "../../Redux/Action/notificationActions";
+import {useDispatch} from "react-redux";
 const CashEntries = ({navigation}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isActive, setIsActive] = useState("cash in");
@@ -22,6 +23,7 @@ const CashEntries = ({navigation}) => {
   const [file, setFile] = useState(null);
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
+  const dispatch = useDispatch();
   const [cashDetails, setCashDetails] = useState({
     amount: null,
     cb_tns_type: "in",
@@ -100,8 +102,15 @@ const CashEntries = ({navigation}) => {
         payment_type: cashDetails.paymentType,
       });
       const response = await Api.postForm("/auth/cashbook", formData);
+      if (response.status === 1) {
+        dispatch(
+          notify({
+            message: "your entry has submitted successfully",
+            notifyType: "success",
+          }),
+        );
+      }
 
-      console.log("====>", response.data);
       setCashDetails({
         ...cashDetails,
         amount: null,
