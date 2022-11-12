@@ -19,7 +19,7 @@ import {useDispatch} from "react-redux";
 const CashEntries = ({navigation}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isActive, setIsActive] = useState("cash in");
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
@@ -30,7 +30,7 @@ const CashEntries = ({navigation}) => {
     paymentType: "online",
     paymentDetails: "",
   });
-
+  console.log("-------", date);
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -56,7 +56,7 @@ const CashEntries = ({navigation}) => {
     maximumDate.setFullYear(maximumDate.getFullYear());
 
     DateTimePickerAndroid.open({
-      value: date || new Date(),
+      value: date,
 
       onChange: (event, date) => onChange(event, date, currentMode),
       mode: currentMode,
@@ -89,7 +89,7 @@ const CashEntries = ({navigation}) => {
       setIsDisabled(true);
       const formData = new FormData();
       formData.append("amount", cashDetails.amount);
-      formData.append("date_time", moment().format("YYYY-MM-DD hh:mm:ss"));
+      formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
       formData.append("cb_tns_type", cashDetails.cb_tns_type);
       formData.append("payment_details", cashDetails.paymentDetails);
       formData.append("payment_type", cashDetails.paymentType);
@@ -270,7 +270,7 @@ const CashEntries = ({navigation}) => {
               color: "#000",
               paddingHorizontal: 10,
             }}>
-            {moment().format("DD MMM YYYY")}
+            {moment(date).format("DD MMM YYYY")}
           </Text>
         </TouchableOpacity>
       </View>
