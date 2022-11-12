@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-// import {Toast} from "react-native-ui-lib";
 import {Button, Snackbar} from "react-native-paper";
-
 import {useDispatch, useSelector} from "react-redux";
 import {hide} from "../../Redux/Action/notificationActions";
 import {View} from "react-native";
@@ -18,36 +16,8 @@ const SnackBar = () => {
   const onDismissSnackBar = () => dispatch(hide());
 
   return (
-    // <Toast
-    //   visible={notification.isVisible}
-    //   position={"bottom"}
-    //   autoDismiss={3000}
-    //   onDismiss={onDismissSnackBar}
-    //   message={notification.message}
-    //   style={{backgroundColor: notification.type === "error" ? "red" : "green"}}
-    // />
-    // <Snackbar
-    //   visible={notification.isVisible}
-    //   onDismiss={onDismissSnackBar}
-    //   action={{
-    //     label: "Undo",
-    //     onPress: () => {
-    //       // Do something
-    //     },
-    //   }}>
-    //   {notification.message}
-    // </Snackbar>
     <View>
-      {/* <Button onPress={onToggleSnackBar}>{visible ? "Hide" : "Show"}</Button> */}
-      <Snackbar
-        visible={notification.isVisible}
-        onDismiss={onDismissSnackBar}
-        action={{
-          label: "Undo",
-          onPress: () => {
-            // Do something
-          },
-        }}>
+      <Snackbar visible={notification.isVisible} onDismiss={onDismissSnackBar}>
         {notification.message}
       </Snackbar>
     </View>

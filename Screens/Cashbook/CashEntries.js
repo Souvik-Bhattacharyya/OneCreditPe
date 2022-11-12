@@ -102,7 +102,7 @@ const CashEntries = ({navigation}) => {
         payment_type: cashDetails.paymentType,
       });
       const response = await Api.postForm("/auth/cashbook", formData);
-      if (response.status === 1) {
+      if (response.status === 200) {
         dispatch(
           notify({
             message: "your entry has submitted successfully",
