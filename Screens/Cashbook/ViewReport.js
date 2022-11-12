@@ -79,7 +79,7 @@ const ViewReport = ({navigation, route}) => {
               <Text
                 style={{
                   fontSize: 24,
-                  color: "#12CE12",
+                  color: viewResult.todays_income > 0 ? "#12CE12" : "#FF0000",
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>

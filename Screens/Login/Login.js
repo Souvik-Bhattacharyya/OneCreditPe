@@ -20,7 +20,7 @@ import Api from "../../Services";
 
 const Login = ({navigation}) => {
   const [credentials, setCredentials] = useState({
-    businessName: "",
+    businessName: "My Business",
     mobileNumber: "",
   });
 
@@ -36,7 +36,7 @@ const Login = ({navigation}) => {
     } catch (error) {
       console.log(error);
     }
-    setCredentials({businessName: "", mobileNumber: ""});
+    setCredentials({businessName: "my-business", mobileNumber: ""});
   };
   return (
     <View style={styles.container}>
@@ -62,7 +62,7 @@ const Login = ({navigation}) => {
 
       <View>
         <SafeAreaView style={{alignItems: "center", marginTop: 0}}>
-          <TextInput
+          {/* <TextInput
             value={credentials.businessName}
             style={styles.name}
             placeholder="Your Business Name"
@@ -70,7 +70,7 @@ const Login = ({navigation}) => {
             onChangeText={val =>
               setCredentials({...credentials, businessName: val})
             }
-          />
+          /> */}
           <TextInput
             value={credentials.mobileNumber}
             style={styles.input}
