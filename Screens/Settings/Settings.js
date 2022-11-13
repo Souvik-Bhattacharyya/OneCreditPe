@@ -70,7 +70,7 @@ const Settings = () => {
                   position: "relative",
                 }}>
                 <Image
-                  source={require("../../Assets/profile.png")}
+                  source={require("../../Assets/blank-profile.png")}
                   style={{
                     height: 105,
                     width: 105,
