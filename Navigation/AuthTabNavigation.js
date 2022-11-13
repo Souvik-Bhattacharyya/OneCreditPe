@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import User from "react-native-vector-icons/FontAwesome"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationAction } from "@react-navigation/native";
 import {
@@ -241,11 +242,11 @@ const AuthTabNavigation = ({ navigation }) => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#0A5AC9",
+        tabBarActiveTintColor: "#000",
         tabBarHideOnKeyboard: true,
         tabBarShowLabel: true,
         headerShown: false,
-        tabBarInactiveTintColor: "#aaa",
+        tabBarInactiveTintColor: "#828282",
         tabBarStyle: {
           paddingVertical: 10,
           height: 60,
@@ -261,10 +262,10 @@ const AuthTabNavigation = ({ navigation }) => {
         name="Home"
         component={HomeScreenStack}
         options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesome
-              name="home"
-              size={24}
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialCommunityIcons
+              name={focused ? "home" : "home-outline"}
+              size={32}
               color={color}
               style={{ marginTop: 2 }}
             />
@@ -275,10 +276,10 @@ const AuthTabNavigation = ({ navigation }) => {
         name="Parties"
         component={PartiesStack}
         options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesome
-              name="user-plus"
-              size={24}
+          tabBarIcon: ({ color, focused }) => (
+            <User
+              name={focused ? "user" : "user-o"}
+              size={26}
               color={color}
               style={{ marginTop: 2 }}
             />
@@ -289,9 +290,9 @@ const AuthTabNavigation = ({ navigation }) => {
         name="Cashbook"
         component={CashBookStack}
         options={{
-          tabBarIcon: ({ color }) => (
-            <FontAwesome
-              name="book"
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialCommunityIcons
+              name={focused ? "book-account" : "book-account-outline"}
               size={24}
               color={color}
               style={{ marginTop: 2 }}

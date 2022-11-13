@@ -40,7 +40,7 @@ const Settings = () => {
 
   return (
     <>
-      <CommonHeader />
+      <CommonHeader color= "#0a5ac9" />
       <ScrollView style={{backgroundColor: "#fff"}}>
         <View style={styles.container}>
           <View

@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingHorizontal: metrics.horizontalScale(15),
     height: '100%',
-    backgroundColor: '#E8EEFF'
+    backgroundColor: '#EEF3FF'
   },
   getLoan: {
     width: '100%',

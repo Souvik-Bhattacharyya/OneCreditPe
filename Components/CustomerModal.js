@@ -12,7 +12,7 @@ import ActionSheet from "react-native-actions-sheet";
 
 const CustomerModal = ({ActionSheetRef, navigation}) => {
   return (
-    // <View style={[styles.centeredView, {backgroundColor: "#E8EEFF"}]}>
+    // <View style={[styles.centeredView, {backgroundColor: "#EEF3FF"}]}>
     <ActionSheet
       ref={ActionSheetRef}
       closeOnTouchBackdrop={false}

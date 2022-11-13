@@ -9,41 +9,45 @@ const data = [
   {
     id: "1",
     title: "Request Money",
-    image: require('../../Assets/ReqMoney.png'),
+    iconName: "account-arrow-up-outline",
   },
   {
     id: "2",
     title: "Send Money",
-    image: require('../../Assets/SendMoney.png'),
+    iconName: "account-arrow-down-outline",
   },
-  {
-    id: "3",
-    title: "My QR",
-    image: require('../../Assets/MyQR.png'),
-  },
+  // {
+  //   id: "3",
+  //   title: "My QR",
+  //   iconName: require('../../Assets/MyQR.png'),
+  // },
   {
     id: "4",
     title: "My Wallet",
-    image: require('../../Assets/MyWallet.png'),
+    iconName: 'wallet',
   },
   {
     id: "5",
     title: "Rent Pay",
-    image: require('../../Assets/RentPay.png'),
+    iconName: "bank",
   },
 ];
 
 const Welcome = () => {
   return (
-    <View style={{ flexDirection: 'column',height: 100}}>
+    <View style={{
+      flexDirection: 'row',
+      width: '100%',
+
+    }}>
       <FlatList
-        data={data} renderItem={({ item }) => <CaroItem item={item} />}
-        horizontal
-        showsHorizontalScrollIndicator
+        data={data}
+        renderItem={({ item }) => <CaroItem item={item} />}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         bounces={false}
-        pagingEnabled
-        keyExtractor={(item) => item.id}
-        on
+        keyExtractor={(_ , i) => String(i)}
+        numColumns={3}
       />
     </View>
   );

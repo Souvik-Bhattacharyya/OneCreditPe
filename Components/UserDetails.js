@@ -60,7 +60,7 @@ const CustomerHome = ({route}) => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: "#E8EEFF"}}>
+    <View style={{flex: 1, backgroundColor: "#EEF3FF"}}>
       <PartiesHeader user={userData} />
       <ScrollView style={{marginBottom: 60}}>
         {allTransaction?.length ? (

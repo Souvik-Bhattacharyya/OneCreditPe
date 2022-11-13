@@ -4,7 +4,7 @@ import metrics from '../../Constants/metrics';
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#E8EEFF",
+        backgroundColor: "#EEF3FF",
         flex: 1,
         paddingHorizontal: metrics.horizontalScale(20),
         paddingVertical: metrics.verticalScale(20)
