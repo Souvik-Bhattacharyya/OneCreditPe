@@ -6,10 +6,10 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import CustomerTransaction from "../../Components/CustomerTransaction";
 import CommonHeader from "../../Components/CommonHeader";
 import CustomerTransactionEmpty from "../../Components/CustomerTransactionEmpty";
@@ -34,7 +34,7 @@ const Supplier = () => {
   };
   return (
     <>
-      <CommonHeader />
+      <CommonHeader color= "#0a5ac9" />
       <View style={styles.container}>
         {/*Tab Button */}
         <View
@@ -66,7 +66,7 @@ const Supplier = () => {
               source={require("../../Assets/add-user(Theme).png")}
               style={styles.btnIcon}
             />
-            <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Customer</Text>
+            <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Customer</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -95,41 +95,47 @@ const Supplier = () => {
         <View
           style={[
             styles.card,
-            {borderColor: "#c6c6c6", backgroundColor: "#fff"},
+            { borderColor: "#c6c6c6", backgroundColor: "#fff" },
           ]}>
-          <View style={styles.box}>
-            <Text style={{fontSize: 20, color: "#12CE12", fontWeight: "900"}}>
-              ₹ 4,242.00
-            </Text>
+          <View style={[styles.box, { borderRightWidth: 1, borderColor: '#c9c9c9', paddingRight: 10 }]}>
+            <View style={{
+              backgroundColor: '#12CE12',
+              borderRadius: 50,
+              padding: 8,
+              marginRight: 15
+            }}>
+              <Icon name="account-arrow-left" color={"#fff"} size={30} />
+            </View>
+            <View style={{ flexDirection: 'column' }}>
+              <Text style={{ fontSize: 18, color: "#333", fontWeight: "700", fontFamily: 'Poppins' }}>
+                ₹4,242
+              </Text>
+              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                To Get
+              </Text>
+            </View>
           </View>
-          <View style={styles.box}>
-            <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-              Total amount purchase for Month
-            </Text>
-          </View>
-          <View style={styles.box}>
-            <Icon name="account-arrow-left" color={"#12CE12"} size={32} />
+          <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
+            <View style={{
+              backgroundColor: '#C91E25',
+              borderRadius: 50,
+              padding: 8,
+              marginRight: 15
+            }}>
+              <Icon name="account-arrow-right" color={"#fff"} size={30} />
+            </View>
+            <View style={{ flexDirection: 'column' }}>
+              <Text style={{ fontSize: 18, color: "#333", fontWeight: "700" }}>
+                ₹4,242
+              </Text>
+              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                To Pay
+              </Text>
+            </View>
           </View>
         </View>
-        <View
-          style={[
-            styles.card,
-            {borderColor: "#c6c6c6", backgroundColor: "#fff"},
-          ]}>
-          <View style={styles.box}>
-            <Text style={{fontSize: 20, color: "#F31B24", fontWeight: "900"}}>
-              ₹ 3,560.00
-            </Text>
-          </View>
-          <View style={styles.box}>
-            <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-              Total amount paid in advance
-            </Text>
-          </View>
-          <View style={styles.box}>
-            <Icon name="account-arrow-right" color={"#F31B24"} size={32} />
-          </View>
-        </View>
+        {/* Card end */}
+
         {customerTransactionData?.length ? (
           <CustomerTransaction
             // ToGetUser={"Advance"}
@@ -156,7 +162,7 @@ const Supplier = () => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("NewCustomer", {customerType: "supplier"});
+              navigation.navigate("NewCustomer", { customerType: "supplier" });
             }}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
@@ -169,7 +175,7 @@ const Supplier = () => {
               alignItems: "center",
             }}>
             <Icon name="plus-circle" color={"#fff"} size={20} />
-            <Text style={[styles.btnTxt, {color: "#fff", marginLeft: 5}]}>
+            <Text style={[styles.btnTxt, { color: "#fff", marginLeft: 5 }]}>
               Add New Supplier
             </Text>
           </TouchableOpacity>
@@ -183,7 +189,7 @@ export default Supplier;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#E8EEFF",
+    backgroundColor: "#EEF3FF",
     paddingTop: metrics.verticalScale(15),
     position: "relative",
     flex: 1,
@@ -192,19 +198,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    width: "100%",
     backgroundColor: "#fff",
-    paddingHorizontal: metrics.horizontalScale(20),
     paddingVertical: metrics.verticalScale(15),
     borderRadius: 6,
-    borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderWidth: 1,
+    borderColor: '#c6c6c6',
     marginBottom: 10,
   },
   box: {
-    width: "38%",
+    width: "50%",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: 'row',
+    // backgroundColor: '#ddd'
   },
   btnTxt: {
     fontSize: 16,

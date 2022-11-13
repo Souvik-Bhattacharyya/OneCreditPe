@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: metrics.horizontalScale(15),
     paddingVertical: metrics.verticalScale(20),
-    backgroundColor: "#E8EEFF",
+    backgroundColor: "#EEF3FF",
     flex: 1,
   },
   textInput: {

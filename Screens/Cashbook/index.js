@@ -4,7 +4,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  TextInput,
 } from "react-native";
 import React, {useState, useEffect} from "react";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -18,7 +17,7 @@ const width = Dimensions.get("window").width;
 const Cashbook = ({navigation}) => {
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: "#E8EEFF",
+      backgroundColor: "#EEF3FF",
       position: "relative",
       flex: 1,
     },
@@ -132,7 +131,7 @@ const Cashbook = ({navigation}) => {
   };
   return (
     <>
-      <CommonHeader />
+      <CommonHeader color= "#0a5ac9" />
       <View style={styles.container}>
         <View style={{height: 50, backgroundColor: "#0a5ac9"}}></View>
         <View style={[styles.card, {marginTop: -40}]}>
@@ -161,7 +160,7 @@ const Cashbook = ({navigation}) => {
               <Text
                 style={{
                   fontSize: 24,
-                  color: "#12CE12",
+                  color: viewResult.todays_income >= 0 ? "#12CE12" :  "#C91E25",
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>

@@ -14,7 +14,7 @@ const Ans = ({ route }) => {
   };
   return (
     <>
-      <ScrollView style={{backgroundColor:'#E8EEFF'}}>
+      <ScrollView style={{backgroundColor:'#EEF3FF'}}>
         <View
           style={{
             backgroundColor: "white",

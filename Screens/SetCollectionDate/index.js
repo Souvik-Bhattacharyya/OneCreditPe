@@ -36,7 +36,7 @@ export default function SetCollectionDate() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#E8EEFF",
+        backgroundColor: "#EEF3FF",
     },
     card: {
         flexDirection: 'row',

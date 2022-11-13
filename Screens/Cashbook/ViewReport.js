@@ -236,7 +236,7 @@ export default ViewReport;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#E8EEFF",
+    backgroundColor: "#EEF3FF",
     paddingTop: metrics.verticalScale(15),
     position: "relative",
     flex: 1,

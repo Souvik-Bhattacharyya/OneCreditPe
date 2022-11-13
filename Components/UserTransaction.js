@@ -34,7 +34,7 @@ export default UserTransaction;
 const styles = StyleSheet.create({
   container: {
     paddingTop: metrics.verticalScale(15),
-    backgroundColor: "#E8EEFF",
+    backgroundColor: "#EEF3FF",
     flex: 1,
   },
 });
