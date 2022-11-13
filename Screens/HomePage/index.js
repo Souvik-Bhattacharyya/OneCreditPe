@@ -44,11 +44,11 @@ const CustomerHome = ({ route }) => {
   return (
     <>
 
-      <ImageBackground resizeMode="cover" source={require("../../Assets/background.jpg")} style={{ flex: 1, backgroundColor: '#000' }}>
+      <ImageBackground resizeMode="cover" source={require("../../Assets/background.jpg")} style={{ flex: 1, backgroundColor: '#000'}}>
         <CommonHeader color="transparent" />
         <View style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-            <View style={[styles.paddingHorizontal, { height: 180, backgroundColor: "transparent", justifyContent: 'center', borderRadius: 20 }]}>
+            <View style={[styles.paddingHorizontal, { height: 180, backgroundColor: "transparent", justifyContent: 'center' }]}>
               <Image source={require("../../Assets/Images/carousel.jpg")} style={{ resizeMode: 'contain', width: '100%' }} />
             </View>
 
