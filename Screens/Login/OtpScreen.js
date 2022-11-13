@@ -33,7 +33,7 @@ const OtpScreen = ({navigation, route}) => {
           otp: otp,
         });
 
-        console.log("------------------>", response.data.user);
+        console.log("------------------>", response.data);
         if (response.data.status === "200") {
           const payload = {
             user: response.data.user,

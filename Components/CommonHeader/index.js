@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 const CommonHeader = () => {
   const navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
-
+  console.log("========>", user);
   return (
     <View
       style={{
@@ -30,12 +30,13 @@ const CommonHeader = () => {
         }}>
         <View>
           <Image
-            source={require("../../Assets/profile.png")}
+            source={require("../../Assets/blank-profile.png")}
             style={{
               height: 40,
               width: 40,
               resizeMode: "contain",
               marginRight: 10,
+
               // backgroundColor:'#fff'
             }}
           />
