@@ -117,7 +117,7 @@ const Supplier = () => {
           </View>
           <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
             <View style={{
-              backgroundColor: '#C91E25',
+              backgroundColor: '#e23c41',
               borderRadius: 50,
               padding: 8,
               marginRight: 15
