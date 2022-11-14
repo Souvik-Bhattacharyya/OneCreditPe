@@ -34,7 +34,7 @@ const Supplier = () => {
   };
   return (
     <>
-      <CommonHeader color= "#0a5ac9" />
+      <CommonHeader color="#0a5ac9" />
       <View style={styles.container}>
         {/*Tab Button */}
         <View
@@ -138,7 +138,6 @@ const Supplier = () => {
 
         {customerTransactionData?.length ? (
           <CustomerTransaction
-            // ToGetUser={"Advance"}
             customerTransactionData={customerTransactionData}
           />
         ) : (

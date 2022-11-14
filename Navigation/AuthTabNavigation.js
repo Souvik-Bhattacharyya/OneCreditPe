@@ -64,7 +64,12 @@ const CustomerStack = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
-      <Stack.Screen component={NewCustomer} name="NewCustomer" />
+      <Stack.Screen component={NewCustomer} name="NewCustomer"
+        options={
+          {
+            headerTitle: 'Add New Customer'
+          }}
+      />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
@@ -102,10 +107,10 @@ const SupplierStack = () => {
       <Stack.Screen component={NewCustomer} name="NewCustomer"
         options={
           {
-            headerTitle: 'Add New Customer'
+            headerTitle: 'Add New Supplier'
           }}
       />
-      <Stack.Screen component={AddContact} name="AddContact" />
+      <Stack.Screen component={AddContact} name="AddContact"/>
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />

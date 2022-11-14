@@ -44,7 +44,7 @@ const CustomerHome = ({ route }) => {
   return (
     <>
 
-      <ImageBackground resizeMode="cover" source={require("../../Assets/background.jpg")} style={{ flex: 1, backgroundColor: '#000'}}>
+      <ImageBackground resizeMode="cover" source={require("../../Assets/background.jpg")} style={{ flex: 1, backgroundColor: '#000' }}>
         <CommonHeader color="transparent" />
         <View style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
@@ -66,11 +66,7 @@ const CustomerHome = ({ route }) => {
               <View>
                 <View style={styles.header}>
                   <Text
-                    style={{
-                      fontSize: 18,
-                      color: '#333',
-                      fontWeight: '800'
-                    }}
+                    style={styles.headText}
                   >Customer Transaction</Text>
                   <TouchableOpacity
                     onPress={() =>
@@ -93,7 +89,7 @@ const CustomerHome = ({ route }) => {
                 </View>
                 <View
                   style={styles.card}>
-                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#c9c9c9', paddingRight: 10 }]}>
+                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#f1f1f1', paddingRight: 10 }]}>
                     <View style={{
                       backgroundColor: '#C2FBD1',
                       borderRadius: 50,
@@ -111,7 +107,7 @@ const CustomerHome = ({ route }) => {
                       </Text>
                     </View>
                   </View>
-                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
+                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#f1f1f1', paddingLeft: 10 }]}>
                     <View style={{
                       backgroundColor: '#FFC3C6',
                       borderRadius: 50,
@@ -137,11 +133,7 @@ const CustomerHome = ({ route }) => {
               <View>
                 <View style={styles.header}>
                   <Text
-                    style={{
-                      fontSize: 18,
-                      color: '#333',
-                      fontWeight: '800'
-                    }}
+                    style={styles.headText}
                   >Supplier Transaction</Text>
                   <TouchableOpacity
                     onPress={() =>
@@ -164,7 +156,7 @@ const CustomerHome = ({ route }) => {
                 </View>
                 <View
                   style={styles.card}>
-                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#c9c9c9', paddingRight: 10 }]}>
+                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#f1f1f1', paddingRight: 10 }]}>
                     <View style={{
                       backgroundColor: '#C2FBD1',
                       borderRadius: 50,
@@ -182,7 +174,7 @@ const CustomerHome = ({ route }) => {
                       </Text>
                     </View>
                   </View>
-                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
+                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#f1f1f1', paddingLeft: 10 }]}>
                     <View style={{
                       backgroundColor: '#FFC3C6',
                       borderRadius: 50,
@@ -208,11 +200,7 @@ const CustomerHome = ({ route }) => {
               <View>
                 <View style={styles.header}>
                   <Text
-                    style={{
-                      fontSize: 18,
-                      color: '#333',
-                      fontWeight: '800'
-                    }}
+                    style={styles.headText}
                   >Cashbook</Text>
                   <TouchableOpacity
                     onPress={() =>
@@ -235,7 +223,7 @@ const CustomerHome = ({ route }) => {
                 </View>
                 <View
                   style={styles.card}>
-                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#c9c9c9', paddingRight: 10 }]}>
+                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#f1f1f1', paddingRight: 10 }]}>
                     <View style={{
                       flexDirection: 'column',
                       justifyContent: 'center',
@@ -253,7 +241,7 @@ const CustomerHome = ({ route }) => {
                       </Text>
                     </View>
                   </View>
-                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
+                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#f1f1f1', paddingLeft: 10 }]}>
                     <View style={{ flexDirection: 'column', alignItems: 'center' }}>
                       <Text style={{
                         fontSize: 22,
@@ -274,11 +262,7 @@ const CustomerHome = ({ route }) => {
               <View>
                 <View style={styles.header}>
                   <Text
-                    style={{
-                      fontSize: 18,
-                      color: '#333',
-                      fontWeight: '800'
-                    }}
+                    style={styles.headText}
                   >Other Services</Text>
                   {/* <TouchableOpacity
                 onPress={() =>
@@ -376,7 +360,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     // backgroundColor: "#fff",
-    paddingVertical: metrics.verticalScale(20),
+    // paddingVertical: metrics.verticalScale(10),
     borderRadius: 6,
     // borderWidth: 1,
     // borderColor: '#c6c6c6',
@@ -430,8 +414,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 15,
-    backgroundColor: '#f1f1f1',
+    backgroundColor: '#f6f6f6',
     paddingVertical: metrics.verticalScale(10),
     paddingHorizontal: 15
+  },
+  headText: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: '800'
   }
 });
