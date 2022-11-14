@@ -1,12 +1,12 @@
-import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
-import React, {useEffect} from "react";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
+import React, { useEffect } from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
 import Icon from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
-const CashOut = ({object}) => {
-  const {id, amount, date_time, payment_details} = object;
+const CashOut = ({ object }) => {
+  const { id, amount, date_time, payment_details } = object;
   let date = moment(date_time).format("Do MMM YY, h:mm a");
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
@@ -54,7 +54,7 @@ const CashOut = ({object}) => {
           }}>
           <IconMat name="account-arrow-right" color={"#F31B24"} size={32} />
         </View>
-        <View style={{width: "20%"}}>
+        <View style={{ width: "20%" }}>
           <Text
             style={{
               color: "#F31B24",
@@ -64,11 +64,11 @@ const CashOut = ({object}) => {
             }}>
             ₹{amount}
           </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
+          <Text style={{ color: "#000", fontSize: 12, fontWeight: "800" }}>
             Cash Out
           </Text>
         </View>
-        <View style={{width: "45%"}}>
+        <View style={{ width: "45%" }}>
           <Text
             style={{
               color: "#000",
@@ -78,10 +78,10 @@ const CashOut = ({object}) => {
             }}>
             {date}
           </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
             Balance- Rs. {amount}
           </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
             {payment_details}
             {/* {detais} */}
           </Text>
@@ -90,7 +90,9 @@ const CashOut = ({object}) => {
         <View
           style={{
             width: "18%",
-            flexDirection: "row",
+            flexDirection: 'column',
+            alignItems: 'center',
+            paddingHorizontal: 7,
           }}>
           {object.attachments === "null" && (
             <TouchableOpacity>
@@ -98,17 +100,17 @@ const CashOut = ({object}) => {
                 name="attachment"
                 color={"#0a5ac9"}
                 size={24}
-                style={{paddingRight: 15}}
               />
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity onPress={createTwoButtonAlert}>
+          <TouchableOpacity
+            onPress={createTwoButtonAlert}>
             <Icon
               name="delete"
               color={"red"}
               size={16}
-              style={{marginVertical: 3}}
+              style={{ marginVertical: 3 }}
             />
           </TouchableOpacity>
         </View>

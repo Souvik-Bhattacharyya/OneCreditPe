@@ -1,12 +1,12 @@
-import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
+import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
 import Api from "../../Services";
-const CashIn = ({object}) => {
-  const {id, amount, date_time, payment_details} = object;
+const CashIn = ({ object }) => {
+  const { id, amount, date_time, payment_details } = object;
   console.log("object", object);
   const date = moment(date_time).format("Do MMM YY, h:mm a");
 
@@ -55,7 +55,7 @@ const CashIn = ({object}) => {
           }}>
           <IconMat name="account-arrow-left" color={"#12ce12"} size={32} />
         </View>
-        <View style={{width: "20%"}}>
+        <View style={{ width: "20%" }}>
           <Text
             style={{
               color: "#12ce12",
@@ -65,11 +65,11 @@ const CashIn = ({object}) => {
             }}>
             ̥₹{amount}
           </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "400"}}>
+          <Text style={{ color: "#000", fontSize: 12, fontWeight: "400" }}>
             Cash In
           </Text>
         </View>
-        <View style={{width: "45%"}}>
+        <View style={{ width: "45%" }}>
           <Text
             style={{
               color: "#000",
@@ -79,10 +79,10 @@ const CashIn = ({object}) => {
             }}>
             {date}
           </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
             Balance- Rs. {amount}
           </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
             {payment_details}
           </Text>
         </View>
@@ -90,7 +90,10 @@ const CashIn = ({object}) => {
         <View
           style={{
             width: "18%",
-            flexDirection: "row",
+            flexDirection: 'column',
+            alignItems: 'center',
+            // backgroundColor: '#ddd',
+            paddingHorizontal: 7
           }}>
           {object.attachments === "null" && (
             <TouchableOpacity>
@@ -98,17 +101,17 @@ const CashIn = ({object}) => {
                 name="attachment"
                 color={"#0a5ac9"}
                 size={24}
-                style={{paddingRight: 15}}
               />
             </TouchableOpacity>
-          )}
+           )}
 
-          <TouchableOpacity onPress={createTwoButtonAlert}>
+          <TouchableOpacity
+            onPress={createTwoButtonAlert}>
             <Icon
               name="delete"
               color={"red"}
               size={16}
-              style={{marginVertical: 3}}
+              style={{ marginVertical: 3 }}
             />
           </TouchableOpacity>
         </View>

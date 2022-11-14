@@ -30,6 +30,7 @@ import {
   Faq,
   Ans,
   InviteFriendModal,
+  PartiesHeader,
 } from "../Screens";
 
 const Tab = createBottomTabNavigator();
@@ -76,10 +77,19 @@ const CustomerStack = () => {
       <Stack.Screen
         component={UserDetails}
         name="UserDetails"
-        options={{ headerShown: false }}
+        options={{
+          header: ({ navigation }) => {
+            <PartiesHeader ScreenNavigation={navigation} />
+          }
+        }}
       />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
+      <Stack.Screen component={CustomerEntries} name="CustomerEntries"
+        options={
+          {
+            headerTitle: 'Customer Entries'
+          }}
+      />
     </Stack.Navigator>
   );
 };
@@ -110,16 +120,25 @@ const SupplierStack = () => {
             headerTitle: 'Add New Supplier'
           }}
       />
-      <Stack.Screen component={AddContact} name="AddContact"/>
+      <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
       <Stack.Screen
         component={UserDetails}
         name="UserDetails"
-        options={{ headerShown: false }}
+        options={{
+          header: ({ navigation }) => {
+            <PartiesHeader navigation={navigation} />
+          }
+        }}
       />
-      <Stack.Screen component={CustomerEntries} name="CustomerEntries" />
+      <Stack.Screen component={CustomerEntries} name="CustomerEntries"
+        options={
+          {
+            headerTitle: 'Customer Entries'
+          }}
+      />
     </Stack.Navigator>
   );
 };

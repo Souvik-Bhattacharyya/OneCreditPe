@@ -16,15 +16,10 @@ const CommonHeader = (props) => {
         width: "100%",
         paddingVertical: 10,
         paddingHorizontal: 20,
-        // paddingBottom: 50,
-        // borderBottomWidth: 1,
-        // borderBottomColor: "#C6C6C6",
       }}>
       <View
         style={{
           flexDirection: "row",
-          // backgroundColor:'#fff',
-          // justifyContent:'center',
           alignItems: "center",
           width: "75%",
         }}>
@@ -36,8 +31,6 @@ const CommonHeader = (props) => {
               width: 40,
               resizeMode: "contain",
               marginRight: 10,
-
-              // backgroundColor:'#fff'
             }}
           />
         </View>
