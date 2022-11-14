@@ -106,7 +106,7 @@ const CustomerTransaction = ({customerTransactionData}) => {
         </View>
       </View>
       <ScrollView>
-        <View style={{width}}>
+        <View style={{width, marginBottom: 60}}>
           {customerTransactionData.map((obj, index) =>
             obj.tns_type == "got" ? (
               <ToGetUser object={obj} key={index} />

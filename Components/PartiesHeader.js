@@ -1,10 +1,12 @@
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
-const PartiesHeader = ({user}) => {
+const PartiesHeader = ({ user, ScreenNavigation }) => {
   const navigation = useNavigation();
+  const nameIcon = Array.from(user.cus_name)[0];
+
   return (
     <View
       style={{
@@ -21,21 +23,38 @@ const PartiesHeader = ({user}) => {
       <View
         style={{
           flexDirection: "row",
-          // backgroundColor:'#fff',
-          // justifyContent:'center',
           alignItems: "center",
           width: "75%",
         }}>
-        <Image
-          source={require("../Assets/profile.png")}
+
+        {
+          navigation.canGoBack() ? (
+            <TouchableOpacity
+              onPress={() => navigation.pop()}>
+              <Icon name="arrowleft" size={24} color="#fff" style={{ marginRight: 15 }} />
+            </TouchableOpacity>
+          )
+            :
+            (null)
+        }
+        <View
           style={{
-            height: 50,
-            width: 50,
+            height: 40,
+            width: 40,
             resizeMode: "contain",
             marginRight: 10,
-            // backgroundColor:'#fff'
+            backgroundColor: '#EEF3FF',
+            borderRadius: 6,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}>
+          <Text style={{
+            color: '#0a5ac9',
+            fontWeight: '900',
+            fontSize: 22,
           }}
-        />
+          >{nameIcon}</Text>
+        </View>
         <View
           style={{
             flexDirection: "column",
@@ -47,7 +66,7 @@ const PartiesHeader = ({user}) => {
               alignItems: "center",
               marginBottom: 3,
             }}>
-            <Text style={{fontWeight: "600", fontSize: 17, color: "#fff"}}>
+            <Text style={{ fontWeight: "600", fontSize: 17, color: "#fff" }}>
               {user.cus_name}
             </Text>
             <View
@@ -60,12 +79,12 @@ const PartiesHeader = ({user}) => {
                 alignItems: "center",
                 justifyContent: "center",
               }}>
-              <Text style={{fontWeight: "600", fontSize: 14, color: "#0a5ac9"}}>
+              <Text style={{ fontWeight: "600", fontSize: 14, color: "#0a5ac9" }}>
                 {user.cus_type}
               </Text>
             </View>
           </View>
-          <Text style={{fontSize: 14, color: "#ddd", fontWeight: "800"}}>
+          <Text style={{ fontSize: 14, color: "#ddd", fontWeight: "800" }}>
             {user.cus_mobile}
           </Text>
         </View>
