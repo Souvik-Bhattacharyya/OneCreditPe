@@ -29,11 +29,10 @@ const CustomerHome = ({route}) => {
   };
   const addCustomer = async () => {
     try {
-      console.log("--->", customerType);
       const response = await Api.post("/auth/customer", payload);
       if (response.data) {
         setCustomer({...customer, name: "", mobile: null});
-        navigation.navigate("UserDetails", {user: response.data.data});
+        navigation.navigate("UserDetails", {customerId: response.data.data.id});
       }
     } catch (error) {
       console.log(error);
@@ -46,7 +45,7 @@ const CustomerHome = ({route}) => {
       const response = await Api.post("/auth/customer", payload);
       if (response.data) {
         setCustomer({...customer, name: "", mobile: null});
-        navigation.navigate("UserDetails", {user: response.data.data});
+        navigation.navigate("UserDetails", {customerId: response.data.data.id});
       }
     } catch (error) {
       console.log(error);

@@ -13,7 +13,7 @@ const ToGetUser = ({object}) => {
     <>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("UserDetails", {object: object});
+          navigation.navigate("UserDetails", {customerId: customer_id});
         }}
         style={styles.contactBox}>
         <View

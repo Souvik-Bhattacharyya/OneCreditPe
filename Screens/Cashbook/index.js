@@ -12,9 +12,11 @@ import TransactionFull from "../../Components/TransactionFull";
 import metrics from "../../Constants/metrics";
 import Api from "../../Services";
 import CommonHeader from "../../Components/CommonHeader";
+import {useDispatch} from "react-redux";
 const width = Dimensions.get("window").width;
 
 const Cashbook = ({navigation}) => {
+  const dispatch = useDispatch();
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#EEF3FF",
@@ -109,12 +111,14 @@ const Cashbook = ({navigation}) => {
   const getTodayCashEntries = async () => {
     try {
       const response = await Api.get("/auth/cashbook");
-      console.log(response.data);
-      // if (response.data.status === "OK") {
-      setTodayEntryDetails(response.data.data);
-      // }
+      if (response.status == 200 && response.data) {
+        setTodayEntryDetails(response.data.data);
+      } else {
+        throw new Error(response.message);
+      }
     } catch (error) {
       console.log(error);
+      dispatch({message: error.message});
     }
   };
 
@@ -123,15 +127,17 @@ const Cashbook = ({navigation}) => {
       const response = await Api.get("/auth/view_reports");
       if (response.data) {
         setViewResult(response.data);
-        console.log(response.data);
+      } else {
+        throw new Error(response.message);
       }
     } catch (error) {
       console.log(error);
+      // dispatch()
     }
   };
   return (
     <>
-      <CommonHeader color= "#0a5ac9" />
+      <CommonHeader color="#0a5ac9" />
       <View style={styles.container}>
         <View style={{height: 50, backgroundColor: "#0a5ac9"}}></View>
         <View style={[styles.card, {marginTop: -40}]}>
@@ -160,7 +166,7 @@ const Cashbook = ({navigation}) => {
               <Text
                 style={{
                   fontSize: 24,
-                  color: viewResult.todays_income >= 0 ? "#12CE12" :  "#C91E25",
+                  color: viewResult.todays_income >= 0 ? "#12CE12" : "#C91E25",
                   fontWeight: "bold",
                   fontFamily: "Roboto",
                 }}>
@@ -201,7 +207,10 @@ const Cashbook = ({navigation}) => {
 
         <View style={{flex: 1, marginTop: 10}}>
           {todayEntryDetails?.length ? (
-            <TransactionFull todayEntryDetails={todayEntryDetails} />
+            <TransactionFull
+              todayEntryDetails={todayEntryDetails}
+              getTodayCashEntries={getTodayCashEntries}
+            />
           ) : (
             <TransactionEmpty />
           )}

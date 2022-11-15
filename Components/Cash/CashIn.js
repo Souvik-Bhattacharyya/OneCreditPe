@@ -1,14 +1,16 @@
-import { View, Text, Image, TouchableOpacity, Alert } from "react-native";
+import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import React from "react";
+import {useDispatch} from "react-redux";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
 import Api from "../../Services";
-const CashIn = ({ object }) => {
-  const { id, amount, date_time, payment_details } = object;
-  console.log("object", object);
-  const date = moment(date_time).format("Do MMM YY, h:mm a");
+import {notify} from "../../Redux/Action/notificationActions";
+
+const CashIn = ({entryDetails, getTodayCashEntries}) => {
+  const dispatch = useDispatch();
+  const date = moment(entryDetails?.date_time).format("Do MMM YY, hh:mm a");
 
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
@@ -20,17 +22,22 @@ const CashIn = ({ object }) => {
         text: "OK",
         onPress: () => {
           console.log("OK Pressed");
-          deleteEntry();
+          deleteEntry(entryDetails?.id);
         },
       },
     ]);
 
-  const deleteEntry = async () => {
+  const deleteEntry = async id => {
     try {
       const response = await Api.delete(`/auth/cashbook/${id}`);
-      console.log("=======>", response.data);
+      if (response.status == 200) {
+        getTodayCashEntries();
+      } else {
+        throw new Error(response.message);
+      }
     } catch (error) {
       console.log(error);
+      dispatch(notify({message: error.message}));
     }
   };
   return (
@@ -55,7 +62,7 @@ const CashIn = ({ object }) => {
           }}>
           <IconMat name="account-arrow-left" color={"#12ce12"} size={32} />
         </View>
-        <View style={{ width: "20%" }}>
+        <View style={{width: "20%"}}>
           <Text
             style={{
               color: "#12ce12",
@@ -63,13 +70,13 @@ const CashIn = ({ object }) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            ̥₹{amount}
+            ̥₹{entryDetails?.amount}
           </Text>
-          <Text style={{ color: "#000", fontSize: 12, fontWeight: "400" }}>
+          <Text style={{color: "#000", fontSize: 12, fontWeight: "400"}}>
             Cash In
           </Text>
         </View>
-        <View style={{ width: "45%" }}>
+        <View style={{width: "45%"}}>
           <Text
             style={{
               color: "#000",
@@ -79,39 +86,34 @@ const CashIn = ({ object }) => {
             }}>
             {date}
           </Text>
-          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
-            Balance- Rs. {amount}
+          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+            Balance- Rs. {entryDetails?.amount}
           </Text>
-          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
-            {payment_details}
+          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+            {entryDetails?.payment_details}
           </Text>
         </View>
 
         <View
           style={{
             width: "18%",
-            flexDirection: 'column',
-            alignItems: 'center',
+            flexDirection: "column",
+            alignItems: "center",
             // backgroundColor: '#ddd',
-            paddingHorizontal: 7
+            paddingHorizontal: 7,
           }}>
-          {object.attachments === "null" && (
+          {entryDetails?.attachments !== null && (
             <TouchableOpacity>
-              <IconMat
-                name="attachment"
-                color={"#0a5ac9"}
-                size={24}
-              />
+              <IconMat name="attachment" color={"#0a5ac9"} size={24} />
             </TouchableOpacity>
-           )}
+          )}
 
-          <TouchableOpacity
-            onPress={createTwoButtonAlert}>
+          <TouchableOpacity onPress={createTwoButtonAlert}>
             <Icon
               name="delete"
               color={"red"}
               size={16}
-              style={{ marginVertical: 3 }}
+              style={{marginVertical: 3}}
             />
           </TouchableOpacity>
         </View>

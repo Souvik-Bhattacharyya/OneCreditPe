@@ -5,17 +5,17 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
-import DocumentPicker, { types } from "react-native-document-picker";
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import DocumentPicker, {types} from "react-native-document-picker";
 import moment from "moment";
 import Api from "../Services";
 
-const CashEntries = ({ navigation, route }) => {
-  const { userData } = route.params;
+const CashEntries = ({navigation, route}) => {
+  const {customerId} = route.params;
   console.log("userDetails in customerEntry page", userData);
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(new Date());
@@ -92,25 +92,23 @@ const CashEntries = ({ navigation, route }) => {
         setCustomerCashEntry({
           ...customerCashEntry,
           amount: null,
-          entryDate:  moment(date).format("YYYY-MM-DD hh:mm:ss"),
+          entryDate: moment(date).format("YYYY-MM-DD hh:mm:ss"),
           tns_type: "get",
           paymentDetails: "",
           attachments: null,
         });
 
-        navigation.navigate("UserDetails", { userDetails: userData });
+        navigation.navigate("UserDetails", {customerId: customerId});
       }
       setDate(new Date());
       setFile(null);
       setIsDisabled(false);
-
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <View style={styles.container}>
-
       <View
         style={{
           flexDirection: "row",
@@ -125,7 +123,7 @@ const CashEntries = ({ navigation, route }) => {
         <Icon
           name="rupee"
           color={"#828282"}
-          style={{ marginLeft: 20 }}
+          style={{marginLeft: 20}}
           size={22}
         />
         <TextInput
@@ -141,7 +139,9 @@ const CashEntries = ({ navigation, route }) => {
             width: "90%",
           }}
           keyboardType="numeric"
-          onChangeText={val => setCustomerCashEntry({ ...customerCashEntry, amount: val })}
+          onChangeText={val =>
+            setCustomerCashEntry({...customerCashEntry, amount: val})
+          }
         />
       </View>
 
@@ -194,12 +194,12 @@ const CashEntries = ({ navigation, route }) => {
           }}
           onPress={() => {
             setIsActive("cash in");
-            setCustomerCashEntry({ ...customerCashEntry, tns_type: "got" });
+            setCustomerCashEntry({...customerCashEntry, tns_type: "got"});
           }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash in" ? "#fff" : "#0a5ac9" },
+              {color: isActive === "cash in" ? "#fff" : "#0a5ac9"},
             ]}>
             To Get
           </Text>
@@ -216,12 +216,12 @@ const CashEntries = ({ navigation, route }) => {
           }}
           onPress={() => {
             setIsActive("cash out");
-            setCustomerCashEntry({ ...customerCashEntry, tns_type: "give" });
+            setCustomerCashEntry({...customerCashEntry, tns_type: "give"});
           }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash out" ? "#fff" : "#20409A" },
+              {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
             To Pay
           </Text>
@@ -241,7 +241,7 @@ const CashEntries = ({ navigation, route }) => {
         <Icon
           name="file-text-o"
           color={"#828282"}
-          style={{ marginLeft: 20 }}
+          style={{marginLeft: 20}}
           size={18}
         />
         <TextInput
@@ -257,12 +257,12 @@ const CashEntries = ({ navigation, route }) => {
             width: "90%",
           }}
           onChangeText={val =>
-            setCustomerCashEntry({ ...customerCashEntry, paymentDetails: val })
+            setCustomerCashEntry({...customerCashEntry, paymentDetails: val})
           }
         />
       </View>
 
-      <View style={{ marginTop: 20 }}>
+      <View style={{marginTop: 20}}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
@@ -280,10 +280,10 @@ const CashEntries = ({ navigation, route }) => {
           <DatePickerIcon
             name="camera"
             color={"#0a5ac9"}
-            style={{ marginRight: 5 }}
+            style={{marginRight: 5}}
             size={24}
           />
-          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>
+          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>
             {file?.name || "Attach Bill"}
           </Text>
         </TouchableOpacity>
@@ -309,7 +309,7 @@ const CashEntries = ({ navigation, route }) => {
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
           onPress={cashEntry}>
-          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
