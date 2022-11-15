@@ -33,7 +33,7 @@ export default class API {
     let clientToken = state.auth.clientToken;
     return new Promise((resolve, reject) => {
       let body = {};
-      if (method === "GET" || method === "DELETE") {
+      if (method === "GET") {
         body = {
           method: method,
           url: url,

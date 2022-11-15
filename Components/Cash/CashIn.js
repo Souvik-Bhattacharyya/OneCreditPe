@@ -1,14 +1,16 @@
 import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import React from "react";
+import {useDispatch} from "react-redux";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
 import Api from "../../Services";
-const CashIn = ({object}) => {
-  const {id, amount, date_time, payment_details} = object;
-  console.log("object", object);
-  const date = moment(date_time).format("Do MMM YY, h:mm a");
+import {notify} from "../../Redux/Action/notificationActions";
+
+const CashIn = ({entryDetails, getTodayCashEntries}) => {
+  const dispatch = useDispatch();
+  const date = moment(entryDetails?.date_time).format("Do MMM YY, hh:mm a");
 
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
@@ -20,17 +22,22 @@ const CashIn = ({object}) => {
         text: "OK",
         onPress: () => {
           console.log("OK Pressed");
-          deleteEntry();
+          deleteEntry(entryDetails?.id);
         },
       },
     ]);
 
-  const deleteEntry = async () => {
+  const deleteEntry = async id => {
     try {
       const response = await Api.delete(`/auth/cashbook/${id}`);
-      console.log("=======>", response.data);
+      if (response.status == 200) {
+        getTodayCashEntries();
+      } else {
+        throw new Error(response.message);
+      }
     } catch (error) {
       console.log(error);
+      dispatch(notify({message: error.message}));
     }
   };
   return (
@@ -63,7 +70,7 @@ const CashIn = ({object}) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            ̥₹{amount}
+            ̥₹{entryDetails?.amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "400"}}>
             Cash In
@@ -80,10 +87,10 @@ const CashIn = ({object}) => {
             {date}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
-            Balance- Rs. {amount}
+            Balance- Rs. {entryDetails?.amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
-            {payment_details}
+            {entryDetails?.payment_details}
           </Text>
         </View>
 
@@ -95,7 +102,7 @@ const CashIn = ({object}) => {
             // backgroundColor: '#ddd',
             paddingHorizontal: 7,
           }}>
-          {object.attachments && (
+          {entryDetails?.attachments !== null && (
             <TouchableOpacity>
               <IconMat name="attachment" color={"#0a5ac9"} size={24} />
             </TouchableOpacity>

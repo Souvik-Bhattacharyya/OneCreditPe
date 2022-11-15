@@ -17,7 +17,7 @@ import {Cashbook} from "../Screens";
 
 const width = Dimensions.get("window").width;
 
-const TransactionFull = ({todayEntryDetails}) => {
+const TransactionFull = ({todayEntryDetails, getTodayCashEntries}) => {
   const [value, setValue] = useState("");
   const styles = StyleSheet.create({
     container: {
@@ -83,11 +83,19 @@ const TransactionFull = ({todayEntryDetails}) => {
                 return true;
               }
             })
-            .map((obj, index) =>
-              obj.cb_tns_type == "in" ? (
-                <CashIn object={obj} key={index} />
+            .map((entry, index) =>
+              entry.cb_tns_type == "in" ? (
+                <CashIn
+                  entryDetails={entry}
+                  key={index}
+                  getTodayCashEntries={getTodayCashEntries}
+                />
               ) : (
-                <CashOut object={obj} key={index} />
+                <CashOut
+                  entryDetails={entry}
+                  key={index}
+                  getTodayCashEntries={getTodayCashEntries}
+                />
               ),
             )}
         </View>

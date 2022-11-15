@@ -20,48 +20,35 @@ const CustomerHome = ({route}) => {
   const navigation = useNavigation();
   const width = Dimensions.get("window").width;
   const [allTransaction, setAllTransaction] = useState([]);
+  const [customerData, setCustomerData] = useState({});
 
   useEffect(() => {
     navigation.addListener("focus", () => {
-      customersAllTransaction();
+      route.params.customerId &&
+        customersAllTransaction(route.params.customerId);
     });
-  }, []);
+  }, [navigation]);
 
-  const user =
-    route.params?.user || route.params?.object || route.params?.userDetails;
-
-  let userData = {};
-  if (user.customer_id) {
-    userData = {
-      customer_id: user.customer_id,
-      cus_name: user.cus_name,
-      cus_mobile: user.cus_mobile,
-      cus_type: user.cus_type,
-    };
-  } else {
-    userData = {
-      customer_id: user.id,
-      cus_name: user.cus_name,
-      cus_mobile: user.cus_mobile,
-      cus_type: user.customer_type,
-    };
-  }
-  console.log("details of user in userDetails page", userData);
-
-  const customersAllTransaction = async () => {
+  const customersAllTransaction = async customerId => {
     try {
       const response = await Api.get(
-        `/auth/transactions-by-customer/${userData.customer_id}`,
+        `/auth/transactions-by-customer/${customerId}`,
       );
-      setAllTransaction(response.data.transactions);
+      if (response.data) {
+        setCustomerData(response.data);
+        setAllTransaction(response.data.transactions);
+      } else {
+        throw new Error(response.message);
+      }
     } catch (error) {
       console.log(error);
+      // dispatch()
     }
   };
 
   return (
     <View style={{flex: 1, backgroundColor: "#EEF3FF"}}>
-      <PartiesHeader user={userData} />
+      <PartiesHeader customerData={customerData} />
       <ScrollView style={{marginBottom: 60}}>
         {allTransaction?.length ? (
           <UserTransaction allTransaction={allTransaction} />
@@ -88,7 +75,7 @@ const CustomerHome = ({route}) => {
           onPress={() =>
             navigation.navigate("CustomerStack", {
               screen: "CustomerEntries",
-              params: {userData: userData},
+              params: {customerId: route.params.customerId},
             })
           }
           style={{

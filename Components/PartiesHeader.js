@@ -1,12 +1,11 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import {View, Text, Image, TouchableOpacity} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 
-const PartiesHeader = ({ user, ScreenNavigation }) => {
+const PartiesHeader = ({customerData, ScreenNavigation}) => {
   const navigation = useNavigation();
-  const nameIcon = Array.from(user.cus_name)[0];
-
+  const nameIcon = customerData?.customer?.cus_name?.charAt(0);
   return (
     <View
       style={{
@@ -16,7 +15,6 @@ const PartiesHeader = ({ user, ScreenNavigation }) => {
         width: "100%",
         paddingVertical: 10,
         paddingHorizontal: 20,
-        // paddingBottom: 50,
         borderBottomWidth: 1,
         borderBottomColor: "#C6C6C6",
       }}>
@@ -26,34 +24,35 @@ const PartiesHeader = ({ user, ScreenNavigation }) => {
           alignItems: "center",
           width: "75%",
         }}>
-
-        {
-          navigation.canGoBack() ? (
-            <TouchableOpacity
-              onPress={() => navigation.pop()}>
-              <Icon name="arrowleft" size={24} color="#fff" style={{ marginRight: 15 }} />
-            </TouchableOpacity>
-          )
-            :
-            (null)
-        }
+        {navigation.canGoBack() ? (
+          <TouchableOpacity onPress={() => navigation.pop()}>
+            <Icon
+              name="arrowleft"
+              size={24}
+              color="#fff"
+              style={{marginRight: 15}}
+            />
+          </TouchableOpacity>
+        ) : null}
         <View
           style={{
             height: 40,
             width: 40,
             resizeMode: "contain",
             marginRight: 10,
-            backgroundColor: '#EEF3FF',
+            backgroundColor: "#EEF3FF",
             borderRadius: 6,
-            justifyContent: 'center',
-            alignItems: 'center'
+            justifyContent: "center",
+            alignItems: "center",
           }}>
-          <Text style={{
-            color: '#0a5ac9',
-            fontWeight: '900',
-            fontSize: 22,
-          }}
-          >{nameIcon}</Text>
+          <Text
+            style={{
+              color: "#0a5ac9",
+              fontWeight: "900",
+              fontSize: 22,
+            }}>
+            {nameIcon}
+          </Text>
         </View>
         <View
           style={{
@@ -66,8 +65,8 @@ const PartiesHeader = ({ user, ScreenNavigation }) => {
               alignItems: "center",
               marginBottom: 3,
             }}>
-            <Text style={{ fontWeight: "600", fontSize: 17, color: "#fff" }}>
-              {user.cus_name}
+            <Text style={{fontWeight: "600", fontSize: 17, color: "#fff"}}>
+              {customerData?.customer?.cus_name}
             </Text>
             <View
               style={{
@@ -79,28 +78,16 @@ const PartiesHeader = ({ user, ScreenNavigation }) => {
                 alignItems: "center",
                 justifyContent: "center",
               }}>
-              <Text style={{ fontWeight: "600", fontSize: 14, color: "#0a5ac9" }}>
-                {user.cus_type}
+              <Text style={{fontWeight: "600", fontSize: 14, color: "#0a5ac9"}}>
+                {customerData?.customer?.customer_type}
               </Text>
             </View>
           </View>
-          <Text style={{ fontSize: 14, color: "#ddd", fontWeight: "800" }}>
-            {user.cus_mobile}
+          <Text style={{fontSize: 14, color: "#ddd", fontWeight: "800"}}>
+            {customerData?.customer?.cus_mobile}
           </Text>
         </View>
       </View>
-      {/* <TouchableOpacity
-        onPress={() => navigation.push("Set Collection Date")}
-        style={{ width: '25%', justifyContent: 'center', alignItems: 'center' }}>
-        <Image
-          source={require("../Assets/calender.png")}
-          style={{
-            height: 38,
-            width: 38,
-            resizeMode: "contain",
-          }}
-        />
-      </TouchableOpacity> */}
     </View>
   );
 };
