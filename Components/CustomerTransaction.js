@@ -19,6 +19,8 @@ const width = Dimensions.get("window").width;
 
 const CustomerTransaction = ({customerTransactionData}) => {
   const navigation = useNavigation();
+  const [value, setValue] = useState("");
+  console.log("customerTransactionData", customerTransactionData);
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -69,6 +71,7 @@ const CustomerTransaction = ({customerTransactionData}) => {
                 // backgroundColor:'#ddd',
                 paddingVertical: metrics.verticalScale(7),
               }}
+              onChangeText={e => setValue(e)}
             />
             <TouchableOpacity
               style={{position: "absolute", right: 20, alignSelf: "center"}}>
@@ -107,13 +110,20 @@ const CustomerTransaction = ({customerTransactionData}) => {
       </View>
       <ScrollView>
         <View style={{width}}>
-          {customerTransactionData.map((obj, index) =>
-            obj.tns_type == "got" ? (
-              <ToGetUser object={obj} key={index} />
-            ) : (
-              <ToPayUser object={obj} key={index} />
-            ),
-          )}
+          {customerTransactionData
+            .filter(item => {
+              if (!value) return true;
+              if (item.cus_name.toLowerCase().includes(value.toLowerCase())) {
+                return true;
+              }
+            })
+            .map((obj, index) =>
+              obj.tns_type == "got" ? (
+                <ToGetUser object={obj} key={index} />
+              ) : (
+                <ToPayUser object={obj} key={index} />
+              ),
+            )}
         </View>
       </ScrollView>
     </View>
