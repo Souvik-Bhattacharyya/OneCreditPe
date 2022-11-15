@@ -30,9 +30,14 @@ const CustomerHome = ({route}) => {
   const addCustomer = async () => {
     try {
       const response = await Api.post("/auth/customer", payload);
-      if (response.data) {
+
+      if (response.data.message === "mobile number exist") {
+        alert("This number has already added as a supplier");
+      } else {
         setCustomer({...customer, name: "", mobile: null});
-        navigation.navigate("UserDetails", {customerId: response.data.data.id});
+        navigation.navigate("UserDetails", {
+          customerId: response.data.data.id,
+        });
       }
     } catch (error) {
       console.log(error);
@@ -41,11 +46,15 @@ const CustomerHome = ({route}) => {
 
   const addSupplier = async () => {
     try {
-      console.log("--->", customerType);
       const response = await Api.post("/auth/customer", payload);
-      if (response.data) {
+
+      if (response.data.message === "mobile number exist") {
+        alert("This number has already added as a customer");
+      } else {
         setCustomer({...customer, name: "", mobile: null});
-        navigation.navigate("UserDetails", {customerId: response.data.data.id});
+        navigation.navigate("UserDetails", {
+          customerId: response.data.data.id,
+        });
       }
     } catch (error) {
       console.log(error);
