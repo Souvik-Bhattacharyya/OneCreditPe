@@ -264,24 +264,24 @@ const CustomerHome = ({ route }) => {
                   <Text
                     style={styles.headText}
                   >Other Services</Text>
-                  {/* <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("Cashbook", {
-                    screen: "Cash Book",
-                  })
-                }
-                style={{
-                  paddingHorizontal: 10,
-                  paddingVertical: 2,
-                  borderRadius: 4,
-                }}
-              >
-                <Text style={{
-                  fontSize: 14,
-                  color: '#0a5ac9',
-                  fontWeight: '700'
-                }}>Open Now?</Text>
-              </TouchableOpacity> */}
+                  <Text
+                    // onPress={() =>
+                    //   navigation.navigate("Cashbook", {
+                    //     screen: "Cash Book",
+                    //   })
+                    // }
+                    style={{
+                      paddingHorizontal: 10,
+                      paddingVertical: 2,
+                      borderRadius: 4,
+                    }}
+                  >
+                    <Text style={{
+                      fontSize: 14,
+                      color: '#0a5ac9',
+                      fontWeight: '700'
+                    }}>Coming Soon</Text>
+                  </Text>
                 </View>
                 <View
                   style={[

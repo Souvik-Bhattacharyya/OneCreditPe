@@ -1,8 +1,8 @@
-import React, {useState} from "react";
-import {Button, Snackbar} from "react-native-paper";
-import {useDispatch, useSelector} from "react-redux";
-import {hide} from "../../Redux/Action/notificationActions";
-import {View} from "react-native";
+import React, { useState } from "react";
+import { Button, Snackbar } from "react-native-paper";
+import { useDispatch, useSelector } from "react-redux";
+import { hide } from "../../Redux/Action/notificationActions";
+import { View } from "react-native";
 const SnackBar = () => {
   const notification = useSelector(state => state.notification);
   console.log("notification", notification);
@@ -17,7 +17,16 @@ const SnackBar = () => {
 
   return (
     <View>
-      <Snackbar visible={notification.isVisible} onDismiss={onDismissSnackBar}>
+      <Snackbar
+        visible={notification.isVisible} onDismiss={onDismissSnackBar}
+        action={{
+          color: "#333",
+          label: 'Close',
+          onPress: () => {
+            onDismissSnackBar();
+          },
+        }}
+      >
         {notification.message}
       </Snackbar>
     </View>
