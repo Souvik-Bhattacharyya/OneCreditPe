@@ -6,10 +6,9 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
 } from "react-native";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import Contacts from "react-native-contacts";
-import {useNavigation} from "@react-navigation/native";
-import CustomerHome from "../Screens/CustomerPage/NewCustomer";
+import { useNavigation } from "@react-navigation/native";
 
 const AddContact = () => {
   const navigation = useNavigation();
@@ -42,7 +41,7 @@ const AddContact = () => {
       });
   };
 
-  const ListItem = ({item}) => {
+  const ListItem = ({ item }) => {
     return (
       <TouchableOpacity
         onPress={() => navigation.navigate("UserDetails")}
@@ -93,9 +92,9 @@ const styles = StyleSheet.create({
   placeholder: {
     width: 45,
     height: 45,
-    borderRadius: 30,
+    borderRadius: 4,
     overflow: "hidden",
-    backgroundColor: "#7CC0FF",
+    backgroundColor: "#C3E2FF",
     alignItems: "center",
     justifyContent: "center",
   },
@@ -105,9 +104,9 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   txt: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: "900",
-    color: "#fff",
+    color: "#0a5ac9",
   },
   name: {
     fontSize: 16,

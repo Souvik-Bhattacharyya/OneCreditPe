@@ -102,7 +102,7 @@ const Customer = () => {
           ]}>
           <View style={[styles.box, { borderRightWidth: 1, borderColor: '#c9c9c9', paddingRight: 10 }]}>
             <View style={{
-              backgroundColor: '#12CE12',
+              backgroundColor: '#12ce12',
               borderRadius: 50,
               padding: 8,
               marginRight: 15
@@ -120,7 +120,7 @@ const Customer = () => {
           </View>
           <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
             <View style={{
-              backgroundColor: '#C91E25',
+              backgroundColor: '#e23c41',
               borderRadius: 50,
               padding: 8,
               marginRight: 15

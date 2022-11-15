@@ -21,16 +21,16 @@ const OtpScreen = ({navigation, route}) => {
 
   const {mobileNumber} = route.params;
 
-  const [otp, setOtp] = React.useState(null);
+  // const [otp, setOtp] = React.useState(null);
   const [isLoading, setLoading] = React.useState(false);
 
-  const onSubmitOtp = async () => {
-    setLoading(true);
+  const onSubmitOtp = async e => {
     try {
-      if (otp == 1000) {
+      setLoading(true);
+      if (e == 1000) {
         const response = await Api.post("/check-otp", {
           mobile: mobileNumber,
-          otp: otp,
+          otp: e,
         });
 
         console.log("------------------>", response.data);
@@ -49,7 +49,6 @@ const OtpScreen = ({navigation, route}) => {
     } catch (error) {
       console.log(error);
     }
-    setOtp(null);
   };
 
   return (
@@ -87,7 +86,12 @@ const OtpScreen = ({navigation, route}) => {
             </View>
           </TouchableOpacity>
 
-          <OTPTextView inputCount={4} handleTextChange={e => setOtp(e)} />
+          <OTPTextView
+            inputCount={4}
+            handleTextChange={e => {
+              e == 1000 && onSubmitOtp(e);
+            }}
+          />
         </View>
 
         <View
@@ -136,7 +140,7 @@ const OtpScreen = ({navigation, route}) => {
           </View>
         </View>
 
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={onSubmitOtp}
           style={{
             backgroundColor: "#349EFF",
@@ -159,7 +163,7 @@ const OtpScreen = ({navigation, route}) => {
             Verify OTP
           </Text>
           <AntDesign name="arrowright" color="white" size={30} />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     </>
   );
