@@ -13,14 +13,21 @@ import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import DocumentPicker, {types} from "react-native-document-picker";
 import moment from "moment";
 import Api from "../Services";
+import {useDispatch} from "react-redux";
+import {notify} from "../Redux/Action/notificationActions";
 
 const CashEntries = ({navigation, route}) => {
-  const {customerId} = route.params;
-  console.log("userDetails in customerEntry page", userData);
+  const dispatch = useDispatch();
+  // const {customerId} = route.params;
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [customerCashEntry, setCustomerCashEntry] = useState({
+    amount: null,
+    tns_type: "got",
+    paymentDetails: "",
+  });
 
   const onChange = (event, selectedDate) => {
     setDate(selectedDate);
@@ -43,13 +50,6 @@ const CashEntries = ({navigation, route}) => {
       maximumDate: maximumDate,
     });
   };
-
-  const [customerCashEntry, setCustomerCashEntry] = useState({
-    amount: null,
-    tns_type: "got",
-    paymentDetails: "",
-    attachments: null,
-  });
 
   const handleDocumentSelection = () => {
     DocumentPicker.pick({
@@ -76,33 +76,73 @@ const CashEntries = ({navigation, route}) => {
   //   attachments: customerCashEntry.attachments,
   // };
 
-  const cashEntry = async () => {
+  // const newTransaction = async () => {
+  //   try {
+  //     setIsDisabled(true);
+  //     const response = await Api.post("/auth/transaction", {
+  //       amount: customerCashEntry.amount,
+  //       date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
+  //       tns_type: customerCashEntry.tns_type,
+  //       payment_details: customerCashEntry.paymentDetails,
+  //       customer_id: userData.customer_id,
+  //       // attachments: customerCashEntry.attachments,
+  //     });
+
+  //     if (response.data.status == 200) {
+  //       setCustomerCashEntry({
+  //         ...customerCashEntry,
+  //         amount: null,
+  //         entryDate: moment(date).format("YYYY-MM-DD hh:mm:ss"),
+  //         tns_type: "get",
+  //         paymentDetails: "",
+  //         attachments: null,
+  //       });
+
+  //       navigation.navigate("UserDetails", {customerId: customerId});
+  //     }
+  //     setDate(new Date());
+  //     setFile(null);
+  //     setIsDisabled(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const newTransaction = async () => {
     try {
       setIsDisabled(true);
-      const response = await Api.post("/auth/transaction", {
-        amount: customerCashEntry.amount,
-        date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
-        tns_type: customerCashEntry.tns_type,
-        payment_details: customerCashEntry.paymentDetails,
-        customer_id: userData.customer_id,
-        // attachments: customerCashEntry.attachments,
-      });
+      const formData = new FormData();
+      formData.append("amount", customerCashEntry.amount);
+      formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
+      formData.append("tns_type", customerCashEntry.tns_type);
+      formData.append("payment_details", customerCashEntry.paymentDetails);
+      formData.append("customer_id", route.params?.customerId);
+      file ? formData.append("attachments", file) : "";
 
-      if (response.data.status == 200) {
+      const response = await Api.postForm("/auth/transaction", formData);
+      console.log(response);
+      if (response.status == 200) {
         setCustomerCashEntry({
           ...customerCashEntry,
           amount: null,
-          entryDate: moment(date).format("YYYY-MM-DD hh:mm:ss"),
-          tns_type: "get",
+          tns_type: "got",
           paymentDetails: "",
-          attachments: null,
         });
-
-        navigation.navigate("UserDetails", {customerId: customerId});
+        setDate(new Date());
+        setFile(null);
+        setIsDisabled(false);
+        navigation.navigate("UserDetails", {
+          customerId: route.params?.customerId,
+        });
+        dispatch(
+          notify({
+            message: "your entry has submitted successfully",
+            notifyType: "success",
+          }),
+        );
+      } else {
+        throw new Error(response.message);
       }
-      setDate(new Date());
-      setFile(null);
-      setIsDisabled(false);
     } catch (error) {
       console.log(error);
     }
@@ -308,7 +348,7 @@ const CashEntries = ({navigation, route}) => {
             width: "100%",
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
-          onPress={cashEntry}>
+          onPress={newTransaction}>
           <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
         </TouchableOpacity>
       </View>

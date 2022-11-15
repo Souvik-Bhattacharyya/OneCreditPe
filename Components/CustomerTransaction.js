@@ -20,7 +20,6 @@ const width = Dimensions.get("window").width;
 const CustomerTransaction = ({customerTransactionData}) => {
   const navigation = useNavigation();
   const [value, setValue] = useState("");
-  console.log("customerTransactionData", customerTransactionData);
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#fff",
@@ -117,11 +116,11 @@ const CustomerTransaction = ({customerTransactionData}) => {
                 return true;
               }
             })
-            .map((obj, index) =>
-              obj.tns_type == "got" ? (
-                <ToGetUser object={obj} key={index} />
+            .map((trns, index) =>
+              trns.tns_type == "got" ? (
+                <ToGetUser trnsDetails={trns} key={index} />
               ) : (
-                <ToPayUser object={obj} key={index} />
+                <ToPayUser trnsDetails={trns} key={index} />
               ),
             )}
         </View>

@@ -5,15 +5,19 @@ import metrics from "../../Constants/metrics";
 import {useNavigation} from "@react-navigation/native";
 import moment from "moment/moment";
 
-const ToGetUser = ({object}) => {
+const ToGetUser = ({trnsDetails}) => {
   const navigation = useNavigation();
-  const {customer_id, cus_name, amount, date_time, attachment} = object;
-  const date = moment(date_time).format("Do MMM YY, hh:mm A");
+  // const {customer_id, cus_name, amount, date_time, attachment} = object;
+  // const nameIcon=
+  const nameIcon = trnsDetails.cus_name?.charAt(0);
+  const date = moment(trnsDetails?.date_time).format("Do MMM YY, hh:mm A");
   return (
     <>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("UserDetails", {customerId: customer_id});
+          navigation.navigate("UserDetails", {
+            customerId: trnsDetails?.customer_id,
+          });
         }}
         style={styles.contactBox}>
         <View
@@ -34,12 +38,12 @@ const ToGetUser = ({object}) => {
               borderRadius: 4,
             }}>
             <Text style={{fontSize: 24, fontWeight: "900", color: "#0A5AC9"}}>
-              {cus_name[0]}
+              {nameIcon}
             </Text>
           </View>
           <View style={{flexDirection: "column", marginLeft: 10}}>
             <Text style={{fontSize: 18, fontWeight: "700", color: "#333"}}>
-              {cus_name}
+              {trnsDetails?.cus_name}
             </Text>
             <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
               {date}
@@ -53,7 +57,7 @@ const ToGetUser = ({object}) => {
             backgroundColor: "#fff",
           }}>
           <Text style={{fontSize: 18, fontWeight: "600", color: "#12CE12"}}>
-            ₹{amount}
+            ₹{trnsDetails?.amount}
           </Text>
           <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
             To Get

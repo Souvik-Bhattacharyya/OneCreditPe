@@ -1,31 +1,26 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-} from "react-native";
+import {View, Text, StyleSheet} from "react-native";
 import React from "react";
 import metrics from "../Constants/metrics";
-import { ToGet, ToPay } from "../Screens";
+import {ToGet, ToPay} from "../Screens";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-const UserTransaction = ({ allTransaction }) => {
+const UserTransaction = ({allTransaction}) => {
   return (
     <View style={styles.container}>
-
       {/* Card Started */}
 
       {/* get */}
       <View
         style={[
           styles.card,
-          { borderColor: "#c6c6c6", backgroundColor: "#fff" },
+          {borderColor: "#c6c6c6", backgroundColor: "#fff"},
         ]}>
         <View style={styles.box}>
-          <Text style={{ fontSize: 20, color: "#12CE12", fontWeight: "900" }}>
+          <Text style={{fontSize: 20, color: "#12CE12", fontWeight: "900"}}>
             ₹ 4,242.00
           </Text>
         </View>
         <View style={styles.box}>
-          <Text style={{ color: "#000", fontSize: 14, fontWeight: "700" }}>
+          <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
             Total amount you will get
           </Text>
         </View>
@@ -38,15 +33,15 @@ const UserTransaction = ({ allTransaction }) => {
       <View
         style={[
           styles.card,
-          { borderColor: "#c6c6c6", backgroundColor: "#fff" },
+          {borderColor: "#c6c6c6", backgroundColor: "#fff"},
         ]}>
         <View style={styles.box}>
-          <Text style={{ fontSize: 20, color: "#F31B24", fontWeight: "900" }}>
+          <Text style={{fontSize: 20, color: "#F31B24", fontWeight: "900"}}>
             ₹ 3,560.00
           </Text>
         </View>
         <View style={styles.box}>
-          <Text style={{ color: "#000", fontSize: 14, fontWeight: "700" }}>
+          <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
             Total amount you have to pay
           </Text>
         </View>
@@ -64,16 +59,16 @@ const UserTransaction = ({ allTransaction }) => {
           alignItems: "center",
           marginBottom: 10,
         }}>
-        <Text style={{ fontSize: 14, color: "#828282", fontWeight: "600" }}>
+        <Text style={{fontSize: 14, color: "#828282", fontWeight: "600"}}>
           Date
         </Text>
       </View>
       <View>
-        {allTransaction.map((obj, index) =>
-          obj.tns_type == "got" ? (
-            <ToGet object={obj} key={index} />
+        {allTransaction.map((trns, index) =>
+          trns.tns_type == "got" ? (
+            <ToGet trnsDetails={trns} key={index} />
           ) : (
-            <ToPay object={obj} key={index} />
+            <ToPay trnsDetails={trns} key={index} />
           ),
         )}
       </View>

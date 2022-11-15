@@ -5,19 +5,19 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import moment from "moment";
-import DocumentPicker, { types } from "react-native-document-picker";
+import DocumentPicker, {types} from "react-native-document-picker";
 import Api from "../../Services";
-import { CheckBox, Icon } from "@rneui/themed";
-import { notify } from "../../Redux/Action/notificationActions";
-import { useDispatch } from "react-redux";
+import {CheckBox, Icon} from "@rneui/themed";
+import {notify} from "../../Redux/Action/notificationActions";
+import {useDispatch} from "react-redux";
 
-const CashEntries = ({ navigation }) => {
+const CashEntries = ({navigation}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(new Date());
@@ -35,13 +35,13 @@ const CashEntries = ({ navigation }) => {
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
-    setCashDetails({ ...cashDetails, paymentType: "online" });
+    setCashDetails({...cashDetails, paymentType: "online"});
   };
 
   const radioOffline = () => {
     setOnline(false);
     setOffline(true);
-    setCashDetails({ ...cashDetails, paymentType: "cash" });
+    setCashDetails({...cashDetails, paymentType: "cash"});
   };
 
   const onChange = (event, selectedDate) => {
@@ -102,7 +102,6 @@ const CashEntries = ({ navigation }) => {
         payment_type: cashDetails.paymentType,
       });
       const response = await Api.postForm("/auth/cashbook", formData);
-      console.log("++++++++++++", response.data);
       if (response.status === 200) {
         dispatch(
           notify({
@@ -153,12 +152,12 @@ const CashEntries = ({ navigation }) => {
             borderRadius: 4,
           }}>
           <CheckBox
-            style={{ paddingVertical: 0 }}
+            style={{paddingVertical: 0}}
             title="Online Pay"
             checked={online}
             center
-            textStyle={{ fontSize: 18 }}
-            containerStyle={{ paddingHorizontal: 0, paddingVertical: 5 }}
+            textStyle={{fontSize: 18}}
+            containerStyle={{paddingHorizontal: 0, paddingVertical: 5}}
             checkedIcon={
               <Icon
                 name="radio-button-checked"
@@ -190,8 +189,8 @@ const CashEntries = ({ navigation }) => {
             title="Cash Pay"
             checked={offline}
             center
-            textStyle={{ fontSize: 18 }}
-            containerStyle={{ paddingHorizontal: 0, paddingVertical: 5 }}
+            textStyle={{fontSize: 18}}
+            containerStyle={{paddingHorizontal: 0, paddingVertical: 5}}
             checkedIcon={
               <Icon
                 name="radio-button-checked"
@@ -228,7 +227,7 @@ const CashEntries = ({ navigation }) => {
         <Icon2
           name="rupee"
           color={"#828282"}
-          style={{ marginLeft: 20 }}
+          style={{marginLeft: 20}}
           size={22}
         />
         <TextInput
@@ -244,7 +243,7 @@ const CashEntries = ({ navigation }) => {
             width: "90%",
           }}
           keyboardType="numeric"
-          onChangeText={val => setCashDetails({ ...cashDetails, amount: val })}
+          onChangeText={val => setCashDetails({...cashDetails, amount: val})}
         />
       </View>
 
@@ -299,12 +298,12 @@ const CashEntries = ({ navigation }) => {
           }}
           onPress={() => {
             setIsActive("cash in");
-            setCashDetails({ ...cashDetails, cb_tns_type: "in" });
+            setCashDetails({...cashDetails, cb_tns_type: "in"});
           }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash in" ? "#fff" : "#20409A" },
+              {color: isActive === "cash in" ? "#fff" : "#20409A"},
             ]}>
             {/* <Icon name='money' /> */}
             Amount In
@@ -322,12 +321,12 @@ const CashEntries = ({ navigation }) => {
           }}
           onPress={() => {
             setIsActive("cash out");
-            setCashDetails({ ...cashDetails, cb_tns_type: "out" });
+            setCashDetails({...cashDetails, cb_tns_type: "out"});
           }}>
           <Text
             style={[
               styles.btnTxt,
-              { color: isActive === "cash out" ? "#fff" : "#20409A" },
+              {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
             Amount Out
           </Text>
@@ -347,7 +346,7 @@ const CashEntries = ({ navigation }) => {
         <Icon2
           name="file-text-o"
           color={"#828282"}
-          style={{ marginLeft: 20 }}
+          style={{marginLeft: 20}}
           size={18}
         />
         <TextInput
@@ -363,12 +362,12 @@ const CashEntries = ({ navigation }) => {
             width: "90%",
           }}
           onChangeText={val =>
-            setCashDetails({ ...cashDetails, paymentDetails: val })
+            setCashDetails({...cashDetails, paymentDetails: val})
           }
         />
       </View>
 
-      <View style={{ marginTop: 20 }}>
+      <View style={{marginTop: 20}}>
         <TouchableOpacity
           style={{
             paddingHorizontal: metrics.horizontalScale(20),
@@ -386,10 +385,10 @@ const CashEntries = ({ navigation }) => {
           <DatePickerIcon
             name="camera"
             color={"#0a5ac9"}
-            style={{ marginRight: 5 }}
+            style={{marginRight: 5}}
             size={24}
           />
-          <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>
+          <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>
             {file?.name || "Attach Bill"}
           </Text>
         </TouchableOpacity>
@@ -415,7 +414,7 @@ const CashEntries = ({ navigation }) => {
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
           onPress={cashEntry}>
-          <Text style={[styles.btnTxt, { color: "#fff" }]}>Save</Text>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
