@@ -75,7 +75,7 @@ const CustomerHome = ({route}) => {
           onPress={() =>
             navigation.navigate("CustomerStack", {
               screen: "CustomerEntries",
-              params: {customerId: route.params.customerId},
+              params: {customerId: route.params?.customerId},
             })
           }
           style={{

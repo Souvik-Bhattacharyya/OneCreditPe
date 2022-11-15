@@ -1,13 +1,13 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import {View, Text, Image, TouchableOpacity} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
 
-const CashOut = ({ object }) => {
-  const { amount, date_time, payment_details } = object;
-
+const CashOut = ({trnsDetails}) => {
+  const date = moment(trnsDetails?.date_time).format("Do MMM YY - hh:mm A");
+  console.log(trnsDetails);
   return (
     <View>
       <View
@@ -30,7 +30,7 @@ const CashOut = ({ object }) => {
           }}>
           <IconMat name="account-arrow-right" color={"#F31B24"} size={32} />
         </View>
-        <View style={{ width: "20%" }}>
+        <View style={{width: "20%"}}>
           <Text
             style={{
               color: "#F31B24",
@@ -38,13 +38,13 @@ const CashOut = ({ object }) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            {amount}
+            {trnsDetails?.amount}
           </Text>
-          <Text style={{ color: "#000", fontSize: 12, fontWeight: "800" }}>
+          <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
             To Pay
           </Text>
         </View>
-        <View style={{ width: "45%" }}>
+        <View style={{width: "45%"}}>
           <Text
             style={{
               color: "#000",
@@ -52,41 +52,34 @@ const CashOut = ({ object }) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            {moment(date_time).format("dd mm yy - hh:mm A")}
+            {date}
           </Text>
-          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
+          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
             Balance- Rs. 4,220
           </Text>
-          <Text style={{ color: "#000", fontSize: 12, fontWeight: "500" }}>
-            {payment_details}
+          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+            {trnsDetails?.payment_details}
           </Text>
         </View>
         <View
           style={{
             width: "10%",
-            flexDirection: 'column',
-            alignItems: 'center',
-            // backgroundColor: '#ddd',
-            paddingHorizontal: 7
+            flexDirection: "column",
+            alignItems: "center",
+            paddingHorizontal: 7,
           }}>
-          {/* {object.attachments === "null" && ( */}
-          <TouchableOpacity>
-            <IconMat
-              name="attachment"
-              color={"#0a5ac9"}
-              size={24}
-            />
-          </TouchableOpacity>
-          {/* )} */}
+          {trnsDetails?.attachment !== null && (
+            <TouchableOpacity>
+              <IconMat name="attachment" color={"#0a5ac9"} size={24} />
+            </TouchableOpacity>
+          )}
 
-          <TouchableOpacity
-          // onPress={createTwoButtonAlert}
-          >
+          <TouchableOpacity>
             <Icon
               name="delete"
               color={"red"}
               size={16}
-              style={{ marginVertical: 3 }}
+              style={{marginVertical: 3}}
             />
           </TouchableOpacity>
         </View>
