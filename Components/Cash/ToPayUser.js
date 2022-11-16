@@ -7,8 +7,6 @@ import moment from "moment/moment";
 
 const ToPayUser = ({trnsDetails}) => {
   const navigation = useNavigation();
-  // const {customer_id, cus_name, amount, date_time, attachment} = object;
-  const nameIcon = trnsDetails.cus_name?.charAt(0);
 
   return (
     <>

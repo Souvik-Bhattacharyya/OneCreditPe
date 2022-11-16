@@ -22,11 +22,17 @@ const ViewReport = ({navigation, route}) => {
   const {todayEntryDetails, viewResult} = route.params || {};
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
+  const [filteredEntry, setFilteredEntry] = useState([]);
   const [date, setDate] = useState(new Date());
   const [dateFrom, setDateFrom] = useState(new Date());
 
-  console.log("dateForm :", dateFrom);
-  console.log("date :", date);
+  const startDate = moment(dateFrom).format("YYYY-MM-DD");
+  const endDate = moment(date).format("YYYY-MM-DD");
+
+  useEffect(() => {
+    filterEntries();
+  }, [date, dateFrom]);
+
   const onChange = (event, selectedDate, type) => {
     const currentDate = selectedDate;
     if (type == "from") {
@@ -52,6 +58,19 @@ const ViewReport = ({navigation, route}) => {
     });
   };
 
+  const filterEntries = async () => {
+    console.log("dateForm :", startDate);
+    console.log("date :", endDate);
+    try {
+      const response = await Api.get(`/auth/cashbook/${startDate}/${endDate}`);
+      if (response.status === "Ok") {
+        console.log("------------>", response.data);
+        setFilteredEntry(response.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const downloadPdf = async () => {
     try {
       const response = await Api.get("/auth/create-cashbook-pdf");
@@ -162,8 +181,8 @@ const ViewReport = ({navigation, route}) => {
           </View>
         </View>
 
-        {todayEntryDetails?.length ? (
-          <TransactionFull todayEntryDetails={todayEntryDetails} />
+        {filteredEntry?.length ? (
+          <TransactionFull todayEntryDetails={filteredEntry} />
         ) : (
           <TransactionEmpty />
         )}

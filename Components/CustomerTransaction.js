@@ -116,14 +116,12 @@ const CustomerTransaction = ({allCustomerTrnsData}) => {
                 return true;
               }
             })
-            .map(
-              (trns, index) => (
-                // trns.tns_type == "got" ?
+            .map((trns, index) =>
+              trns.aggsum > 0 ? (
                 <ToGetUser trnsDetails={trns} key={index} />
+              ) : (
+                <ToPayUser trnsDetails={trns} key={index} />
               ),
-              // ) : (
-              //   <ToPayUser trnsDetails={trns} key={index} />
-              // ),
             )}
         </View>
       </ScrollView>
