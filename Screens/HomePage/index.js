@@ -103,7 +103,7 @@ const CustomerHome = ({ route }) => {
                         ₹4,242
                       </Text>
                       <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
-                        To Get
+                        Advance
                       </Text>
                     </View>
                   </View>
@@ -121,7 +121,7 @@ const CustomerHome = ({ route }) => {
                         ₹4,242
                       </Text>
                       <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
-                        To Pay
+                        Purchase
                       </Text>
                     </View>
                   </View>
@@ -170,7 +170,7 @@ const CustomerHome = ({ route }) => {
                         ₹4,242
                       </Text>
                       <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
-                        To Get
+                        Advance
                       </Text>
                     </View>
                   </View>
@@ -188,7 +188,7 @@ const CustomerHome = ({ route }) => {
                         ₹4,242
                       </Text>
                       <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
-                        To Pay
+                        Purchase
                       </Text>
                     </View>
                   </View>

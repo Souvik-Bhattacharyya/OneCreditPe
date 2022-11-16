@@ -129,8 +129,8 @@ const Customer = () => {
                 }}>
                 ₹4,242
               </Text>
-              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
-                To Get
+              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                Advance
               </Text>
             </View>
           </View>
@@ -152,8 +152,8 @@ const Customer = () => {
               <Text style={{fontSize: 18, color: "#333", fontWeight: "700"}}>
                 ₹4,242
               </Text>
-              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
-                To Pay
+              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                Purchase
               </Text>
             </View>
           </View>

@@ -41,7 +41,7 @@ const CashOut = ({trnsDetails}) => {
             {trnsDetails?.amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
-            To Pay
+            Advance
           </Text>
         </View>
         <View style={{width: "45%"}}>

@@ -1,11 +1,11 @@
-import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
-import {TabRouter, useNavigation} from "@react-navigation/native";
+import { TabRouter, useNavigation } from "@react-navigation/native";
 import moment from "moment/moment";
 
-const ToPayUser = ({trnsDetails}) => {
+const ToPayUser = ({ trnsDetails }) => {
   const navigation = useNavigation();
 
   return (
@@ -22,7 +22,7 @@ const ToPayUser = ({trnsDetails}) => {
             flexDirection: "row",
             alignItems: "flex-start",
             width: "50%",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             backgroundColor: "#fff",
           }}>
           <View
@@ -34,15 +34,15 @@ const ToPayUser = ({trnsDetails}) => {
               alignItems: "center",
               borderRadius: 4,
             }}>
-            <Text style={{fontSize: 24, fontWeight: "900", color: "#0A5AC9"}}>
-              {nameIcon}
+            <Text style={{ fontSize: 24, fontWeight: "900", color: "#0A5AC9" }}>
+              {trnsDetails.cus_name?.charAt(0)}
             </Text>
           </View>
-          <View style={{flexDirection: "column", marginLeft: 10}}>
-            <Text style={{fontSize: 18, fontWeight: "700", color: "#333"}}>
+          <View style={{ flexDirection: "column", marginLeft: 10 }}>
+            <Text style={{ fontSize: 18, fontWeight: "700", color: "#333" }}>
               {trnsDetails?.cus_name}
             </Text>
-            <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
+            <Text style={{ fontSize: 12, fontWeight: "400", color: "#828282" }}>
               {trnsDetails?.last_transaction_duration} days
             </Text>
           </View>
@@ -53,10 +53,10 @@ const ToPayUser = ({trnsDetails}) => {
             alignItems: "flex-end",
             backgroundColor: "#fff",
           }}>
-          <Text style={{fontSize: 18, fontWeight: "600", color: "#ED1C24"}}>
+          <Text style={{ fontSize: 18, fontWeight: "600", color: "#ED1C24" }}>
             ₹{trnsDetails?.aggsum}
           </Text>
-          <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
+          <Text style={{ fontSize: 12, fontWeight: "400", color: "#828282" }}>
             {moment(trnsDetails?.last_transacion_date).format(
               "Do MMM YY, hh:mm A",
             )}

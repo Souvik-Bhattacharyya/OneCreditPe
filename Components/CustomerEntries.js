@@ -241,7 +241,7 @@ const CashEntries = ({navigation, route}) => {
               styles.btnTxt,
               {color: isActive === "cash in" ? "#fff" : "#0a5ac9"},
             ]}>
-            To Get
+            Advance
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -263,7 +263,7 @@ const CashEntries = ({navigation, route}) => {
               styles.btnTxt,
               {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
-            To Pay
+            Purchase
           </Text>
         </TouchableOpacity>
       </View>
