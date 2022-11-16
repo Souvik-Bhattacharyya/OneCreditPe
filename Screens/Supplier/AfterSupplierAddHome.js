@@ -6,32 +6,38 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import CustomerTransaction from "../../Components/CustomerTransaction";
 import CommonHeader from "../../Components/CommonHeader";
 import CustomerTransactionEmpty from "../../Components/CustomerTransactionEmpty";
 import Api from "../../Services";
 const Supplier = () => {
   const navigation = useNavigation();
-  const [customerTransactionData, setCustomerTransactionData] = useState([]);
+  const [allCustomerTrnsData, setAllCustomerTrnsData] = useState([]);
 
   useEffect(() => {
     navigation.addListener("focus", () => {
-      supplierTransactions();
+      allSupplierTransactions();
     });
   }, [navigation]);
 
-  const supplierTransactions = async () => {
+  const allSupplierTransactions = async () => {
     try {
-      const response = await Api.get("/auth/get-transaction/supplier");
-      setCustomerTransactionData(response.data.data || []);
+      const response = await Api.get("/auth/user-all-suppliers-transactions");
+      if (response.status == 200) {
+        console.log(response.data);
+        setAllCustomerTrnsData(response.data || []);
+      } else {
+        throw new Error(response.message);
+      }
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <>
       <CommonHeader color="#0a5ac9" />
@@ -66,7 +72,7 @@ const Supplier = () => {
               source={require("../../Assets/add-user(Theme).png")}
               style={styles.btnIcon}
             />
-            <Text style={[styles.btnTxt, { color: "#0a5ac9" }]}>Customer</Text>
+            <Text style={[styles.btnTxt, {color: "#0a5ac9"}]}>Customer</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -95,40 +101,56 @@ const Supplier = () => {
         <View
           style={[
             styles.card,
-            { borderColor: "#c6c6c6", backgroundColor: "#fff" },
+            {borderColor: "#c6c6c6", backgroundColor: "#fff"},
           ]}>
-          <View style={[styles.box, { borderRightWidth: 1, borderColor: '#c9c9c9', paddingRight: 10 }]}>
-            <View style={{
-              backgroundColor: '#12CE12',
-              borderRadius: 50,
-              padding: 8,
-              marginRight: 15
-            }}>
+          <View
+            style={[
+              styles.box,
+              {borderRightWidth: 1, borderColor: "#c9c9c9", paddingRight: 10},
+            ]}>
+            <View
+              style={{
+                backgroundColor: "#12CE12",
+                borderRadius: 50,
+                padding: 8,
+                marginRight: 15,
+              }}>
               <Icon name="account-arrow-left" color={"#fff"} size={30} />
             </View>
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={{ fontSize: 18, color: "#333", fontWeight: "700", fontFamily: 'Poppins' }}>
+            <View style={{flexDirection: "column"}}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: "#333",
+                  fontWeight: "700",
+                  fontFamily: "Poppins",
+                }}>
                 ₹4,242
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 To Get
               </Text>
             </View>
           </View>
-          <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
-            <View style={{
-              backgroundColor: '#e23c41',
-              borderRadius: 50,
-              padding: 8,
-              marginRight: 15
-            }}>
+          <View
+            style={[
+              styles.box,
+              {borderLeftWidth: 1, borderColor: "#c9c9c9", paddingLeft: 10},
+            ]}>
+            <View
+              style={{
+                backgroundColor: "#e23c41",
+                borderRadius: 50,
+                padding: 8,
+                marginRight: 15,
+              }}>
               <Icon name="account-arrow-right" color={"#fff"} size={30} />
             </View>
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={{ fontSize: 18, color: "#333", fontWeight: "700" }}>
+            <View style={{flexDirection: "column"}}>
+              <Text style={{fontSize: 18, color: "#333", fontWeight: "700"}}>
                 ₹4,242
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 To Pay
               </Text>
             </View>
@@ -136,10 +158,8 @@ const Supplier = () => {
         </View>
         {/* Card end */}
 
-        {customerTransactionData?.length ? (
-          <CustomerTransaction
-            customerTransactionData={customerTransactionData}
-          />
+        {allCustomerTrnsData?.length ? (
+          <CustomerTransaction allCustomerTrnsData={allCustomerTrnsData} />
         ) : (
           <CustomerTransactionEmpty />
         )}
@@ -161,7 +181,7 @@ const Supplier = () => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("NewCustomer", { customerType: "supplier" });
+              navigation.navigate("NewCustomer", {customerType: "supplier"});
             }}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
@@ -174,7 +194,7 @@ const Supplier = () => {
               alignItems: "center",
             }}>
             <Icon name="plus-circle" color={"#fff"} size={20} />
-            <Text style={[styles.btnTxt, { color: "#fff", marginLeft: 5 }]}>
+            <Text style={[styles.btnTxt, {color: "#fff", marginLeft: 5}]}>
               Add New Supplier
             </Text>
           </TouchableOpacity>
@@ -201,14 +221,14 @@ const styles = StyleSheet.create({
     paddingVertical: metrics.verticalScale(15),
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#c6c6c6',
+    borderColor: "#c6c6c6",
     marginBottom: 10,
   },
   box: {
     width: "50%",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: 'row',
+    flexDirection: "row",
     // backgroundColor: '#ddd'
   },
   btnTxt: {

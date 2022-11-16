@@ -9,13 +9,13 @@ const ToPayUser = ({trnsDetails}) => {
   const navigation = useNavigation();
   // const {customer_id, cus_name, amount, date_time, attachment} = object;
   const nameIcon = trnsDetails.cus_name?.charAt(0);
-  const date = moment(trnsDetails?.date_time).format("Do MMM YY, hh:mm A");
+
   return (
     <>
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("UserDetails", {
-            customerId: trnsDetails?.customer_id,
+            customerId: trnsDetails?.id,
           })
         }
         style={styles.contactBox}>
@@ -45,7 +45,7 @@ const ToPayUser = ({trnsDetails}) => {
               {trnsDetails?.cus_name}
             </Text>
             <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
-              {date}
+              {trnsDetails?.last_transaction_duration} days
             </Text>
           </View>
         </View>
@@ -56,10 +56,12 @@ const ToPayUser = ({trnsDetails}) => {
             backgroundColor: "#fff",
           }}>
           <Text style={{fontSize: 18, fontWeight: "600", color: "#ED1C24"}}>
-            ₹{trnsDetails?.amount}
+            ₹{trnsDetails?.aggsum}
           </Text>
           <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
-            To Pay
+            {moment(trnsDetails?.last_transacion_date).format(
+              "Do MMM YY, hh:mm A",
+            )}
           </Text>
         </View>
       </TouchableOpacity>
