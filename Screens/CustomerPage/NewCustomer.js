@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Alert,
 } from "react-native";
 import React, {useEffect, useState} from "react";
 import metrics from "../../Constants/metrics";
@@ -31,8 +32,28 @@ const CustomerHome = ({route}) => {
     try {
       const response = await Api.post("/auth/customer", payload);
 
-      if (response.data.message === "mobile number exist") {
-        alert("This number has already added as a supplier");
+      if (
+        response.data.message === "mobile number exist" &&
+        response.data.data.customer_type === "supplier"
+      ) {
+        Alert.alert(
+          `The entered contact has already been added as a ${response.data.data.customer_type}`,
+          "",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel",
+            },
+            {
+              text: `Go to ${response.data.data.customer_type}`,
+              onPress: () =>
+                navigation.navigate("UserDetails", {
+                  customerId: response.data.data.id,
+                }),
+            },
+          ],
+        );
       } else {
         setCustomer({...customer, name: "", mobile: null});
         navigation.navigate("UserDetails", {
@@ -47,9 +68,29 @@ const CustomerHome = ({route}) => {
   const addSupplier = async () => {
     try {
       const response = await Api.post("/auth/customer", payload);
-
-      if (response.data.message === "mobile number exist") {
-        alert("This number has already added as a customer");
+      console.log("response", response);
+      if (
+        response.data.message === "mobile number exist" &&
+        response.data.data.customer_type === "customer"
+      ) {
+        Alert.alert(
+          `The entered contact has already been added as a ${response.data.data.customer_type}`,
+          "",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              style: "cancel",
+            },
+            {
+              text: `Go to ${response.data.data.customer_type}`,
+              onPress: () =>
+                navigation.navigate("UserDetails", {
+                  customerId: response.data.data.id,
+                }),
+            },
+          ],
+        );
       } else {
         setCustomer({...customer, name: "", mobile: null});
         navigation.navigate("UserDetails", {
