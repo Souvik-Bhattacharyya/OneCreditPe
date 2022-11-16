@@ -5,18 +5,17 @@ import {
   Dimensions,
   TouchableOpacity,
   Text,
-  Image,
 } from "react-native";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import metrics from "../Constants/metrics";
 import UserTransaction from "./UserTransaction";
 import PartiesHeader from "./PartiesHeader";
 import Api from "../Services";
 import TransactionEmpty from "./TransactionEmpty";
 
-const CustomerHome = ({route}) => {
+const CustomerHome = ({ route }) => {
   const navigation = useNavigation();
   const width = Dimensions.get("window").width;
   const [allTransaction, setAllTransaction] = useState([]);
@@ -47,9 +46,9 @@ const CustomerHome = ({route}) => {
   };
 
   return (
-    <View style={{flex: 1, backgroundColor: "#EEF3FF"}}>
+    <View style={{ flex: 1, backgroundColor: "#EEF3FF" }}>
       <PartiesHeader customerData={customerData} />
-      <ScrollView style={{marginBottom: 60}}>
+      <ScrollView style={{ marginBottom: 60 }}>
         {allTransaction?.length ? (
           <UserTransaction allTransaction={allTransaction} />
         ) : (
@@ -75,7 +74,7 @@ const CustomerHome = ({route}) => {
           onPress={() =>
             navigation.navigate("CustomerStack", {
               screen: "CustomerEntries",
-              params: {customerId: route.params?.customerId},
+              params: { customerId: route.params?.customerId },
             })
           }
           style={{
@@ -88,8 +87,8 @@ const CustomerHome = ({route}) => {
             justifyContent: "center",
           }}>
           <IconMat name="cash-plus" color={"#fff"} size={24} />
-          <Text style={[styles.btnTxt, {color: "#fff", marginLeft: 5}]}>
-            Cash Entries
+          <Text style={[styles.btnTxt, { color: "#fff", marginLeft: 5 }]}>
+            New Transaction
           </Text>
         </TouchableOpacity>
       </View>

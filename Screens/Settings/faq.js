@@ -9,22 +9,22 @@ const Faq = ({ navigation }) => {
     {
       id: 1,
       qus: "How do I add a customer?",
-      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'To Pay/To Get' to add a transaction for this customer.",
+      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'Purchase/Advance' to add a transaction for this customer.",
     },
     {
       id: 2,
       qus: "How do I add a customer?",
-      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'To Pay/To Get' to add a transaction for this customer.",
+      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'Purchase/Advance' to add a transaction for this customer.",
     },
     {
       id: 3,
       qus: "How do I add a customer?",
-      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'To Pay/To Get' to add a transaction for this customer.",
+      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'Purchase/Advance' to add a transaction for this customer.",
     },
     {
       id: 4,
       qus: "How do I add a customer?",
-      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'To Pay/To Get' to add a transaction for this customer.",
+      ans: "To add customer: \n \nClick on 'Add Customer' on Home  \n \nIf you want, you can add their contact number or select from your phone book, click SAVE \n \nOn the next screen click on 'Purchase/Advance' to add a transaction for this customer.",
     },
   ]);
   return (

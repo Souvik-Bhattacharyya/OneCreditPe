@@ -5,7 +5,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
 
-const CashIn = ({trnsDetails}) => {
+const ToGet = ({trnsDetails}) => {
   const date = moment(trnsDetails?.date_time).format("Do MMM YY - hh:mm A");
   return (
     <View>
@@ -40,7 +40,7 @@ const CashIn = ({trnsDetails}) => {
             {trnsDetails?.amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
-            To Get
+            Purchase
           </Text>
         </View>
         <View style={{width: "45%"}}>
@@ -52,9 +52,6 @@ const CashIn = ({trnsDetails}) => {
               marginBottom: metrics.verticalScale(5),
             }}>
             {date}
-          </Text>
-          <Text style={{color: "#828282", fontSize: 12, fontWeight: "800"}}>
-            Balance- Rs. 4,220
           </Text>
           <Text style={{color: "#111", fontSize: 12, fontWeight: "600"}}>
             {trnsDetails?.payment_details}
@@ -90,4 +87,4 @@ const CashIn = ({trnsDetails}) => {
   );
 };
 
-export default CashIn;
+export default ToGet;

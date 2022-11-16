@@ -20,7 +20,7 @@ export default function SetCollectionDate() {
                     </View>
                     <View style={styles.box}>
                         <Text style={{ color: "#000", fontSize: 14, fontWeight: "700", }}>
-                            Total amount you have to pay
+                            Total amount you have Purchase
                         </Text>
                     </View>
                 </View>

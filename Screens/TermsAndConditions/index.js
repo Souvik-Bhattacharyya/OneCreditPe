@@ -73,7 +73,7 @@ const TermsAndConditions = () => {
           distribute any comments you submit for any purpose whatsoever, without
           restriction and without compensating you in any way. http://onecpe.in/
           is and shall be under no obligation (1) to maintain any Comments in
-          confidence; or (2) to pay you any compensation for any Comments; or
+          confidence; or (2) Purchase you any compensation for any Comments; or
           (3) to respond to any Comments. You agree that any comments submitted
           by you to the Site will not violate this policy or any right of any
           third party, including copyright, trademark, privacy or other personal

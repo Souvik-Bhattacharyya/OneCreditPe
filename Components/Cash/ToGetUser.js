@@ -22,7 +22,7 @@ const ToGetUser = ({trnsDetails}) => {
             flexDirection: "row",
             alignItems: "flex-start",
             width: "50%",
-            justifyContent: "center",
+            justifyContent: 'flex-start',
             backgroundColor: "#fff",
           }}>
           <View
@@ -49,7 +49,7 @@ const ToGetUser = ({trnsDetails}) => {
         </View>
         <View
           style={{
-            width: "40%",
+            width: "50%",
             alignItems: "flex-end",
             backgroundColor: "#fff",
           }}>
