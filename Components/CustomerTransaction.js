@@ -17,7 +17,7 @@ import {useNavigation} from "@react-navigation/native";
 
 const width = Dimensions.get("window").width;
 
-const CustomerTransaction = ({customerTransactionData}) => {
+const CustomerTransaction = ({allCustomerTrnsData}) => {
   const navigation = useNavigation();
   const [value, setValue] = useState("");
   const styles = StyleSheet.create({
@@ -109,19 +109,21 @@ const CustomerTransaction = ({customerTransactionData}) => {
       </View>
       <ScrollView>
         <View style={{width}}>
-          {customerTransactionData
+          {allCustomerTrnsData
             .filter(item => {
               if (!value) return true;
               if (item.cus_name.toLowerCase().includes(value.toLowerCase())) {
                 return true;
               }
             })
-            .map((trns, index) =>
-              trns.tns_type == "got" ? (
+            .map(
+              (trns, index) => (
+                // trns.tns_type == "got" ?
                 <ToGetUser trnsDetails={trns} key={index} />
-              ) : (
-                <ToPayUser trnsDetails={trns} key={index} />
               ),
+              // ) : (
+              //   <ToPayUser trnsDetails={trns} key={index} />
+              // ),
             )}
         </View>
       </ScrollView>

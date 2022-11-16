@@ -7,16 +7,13 @@ import moment from "moment/moment";
 
 const ToGetUser = ({trnsDetails}) => {
   const navigation = useNavigation();
-  // const {customer_id, cus_name, amount, date_time, attachment} = object;
-  // const nameIcon=
-  const nameIcon = trnsDetails.cus_name?.charAt(0);
-  const date = moment(trnsDetails?.date_time).format("Do MMM YY, hh:mm A");
+  console.log(trnsDetails);
   return (
     <>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate("UserDetails", {
-            customerId: trnsDetails?.customer_id,
+            customerId: trnsDetails?.id,
           });
         }}
         style={styles.contactBox}>
@@ -38,7 +35,7 @@ const ToGetUser = ({trnsDetails}) => {
               borderRadius: 4,
             }}>
             <Text style={{fontSize: 24, fontWeight: "900", color: "#0A5AC9"}}>
-              {nameIcon}
+              {trnsDetails.cus_name?.charAt(0)}
             </Text>
           </View>
           <View style={{flexDirection: "column", marginLeft: 10}}>
@@ -46,7 +43,7 @@ const ToGetUser = ({trnsDetails}) => {
               {trnsDetails?.cus_name}
             </Text>
             <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
-              {date}
+              {trnsDetails?.last_transaction_duration} days
             </Text>
           </View>
         </View>
@@ -57,10 +54,12 @@ const ToGetUser = ({trnsDetails}) => {
             backgroundColor: "#fff",
           }}>
           <Text style={{fontSize: 18, fontWeight: "600", color: "#12CE12"}}>
-            ₹{trnsDetails?.amount}
+            ₹{trnsDetails?.aggsum}
           </Text>
           <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
-            To Get
+            {moment(trnsDetails?.last_transaction_date).format(
+              "Do MMM YY, hh:mm A",
+            )}
           </Text>
         </View>
       </TouchableOpacity>

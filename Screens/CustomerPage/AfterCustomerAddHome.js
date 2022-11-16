@@ -6,10 +6,10 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import CustomerTransaction from "../../Components/CustomerTransaction";
 import CustomerTransactionEmpty from "../../Components/CustomerTransactionEmpty";
 import CommonHeader from "../../Components/CommonHeader";
@@ -18,18 +18,23 @@ const width = Dimensions.get("window").width;
 
 const Customer = () => {
   const navigation = useNavigation();
-  const [customerTransactionData, setCustomerTransactionData] = useState([]);
+  const [allCustomerTrnsData, setAllCustomerTrnsData] = useState([]);
 
   useEffect(() => {
     navigation.addListener("focus", () => {
-      customerTransactions();
+      allCustomerTransactions();
     });
   }, [navigation]);
 
-  const customerTransactions = async () => {
+  const allCustomerTransactions = async () => {
     try {
-      const response = await Api.get("/auth/get-transaction/customer");
-      setCustomerTransactionData(response.data.data || []);
+      const response = await Api.get("/auth/user-all-customers-transactions");
+      console.log("customers--------->", response.data);
+      if (response.status == 200) {
+        setAllCustomerTrnsData(response.data || []);
+      } else {
+        throw new Error(response.message);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -37,7 +42,7 @@ const Customer = () => {
 
   return (
     <>
-      <CommonHeader color= "#0a5ac9" />
+      <CommonHeader color="#0a5ac9" />
       <View style={styles.container}>
         {/*Tab Button */}
         <View
@@ -71,7 +76,7 @@ const Customer = () => {
               source={require("../../Assets/add-user.png")}
               style={styles.btnIcon}
             />
-            <Text style={[styles.btnTxt, { color: "#fff" }]}>Customer</Text>
+            <Text style={[styles.btnTxt, {color: "#fff"}]}>Customer</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
@@ -98,40 +103,56 @@ const Customer = () => {
         <View
           style={[
             styles.card,
-            { borderColor: "#c6c6c6", backgroundColor: "#fff" },
+            {borderColor: "#c6c6c6", backgroundColor: "#fff"},
           ]}>
-          <View style={[styles.box, { borderRightWidth: 1, borderColor: '#c9c9c9', paddingRight: 10 }]}>
-            <View style={{
-              backgroundColor: '#12ce12',
-              borderRadius: 50,
-              padding: 8,
-              marginRight: 15
-            }}>
+          <View
+            style={[
+              styles.box,
+              {borderRightWidth: 1, borderColor: "#c9c9c9", paddingRight: 10},
+            ]}>
+            <View
+              style={{
+                backgroundColor: "#12ce12",
+                borderRadius: 50,
+                padding: 8,
+                marginRight: 15,
+              }}>
               <Icon name="account-arrow-left" color={"#fff"} size={30} />
             </View>
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={{ fontSize: 18, color: "#333", fontWeight: "700", fontFamily: 'Poppins' }}>
+            <View style={{flexDirection: "column"}}>
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: "#333",
+                  fontWeight: "700",
+                  fontFamily: "Poppins",
+                }}>
                 ₹4,242
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 To Get
               </Text>
             </View>
           </View>
-          <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#c9c9c9', paddingLeft: 10 }]}>
-            <View style={{
-              backgroundColor: '#e23c41',
-              borderRadius: 50,
-              padding: 8,
-              marginRight: 15
-            }}>
+          <View
+            style={[
+              styles.box,
+              {borderLeftWidth: 1, borderColor: "#c9c9c9", paddingLeft: 10},
+            ]}>
+            <View
+              style={{
+                backgroundColor: "#e23c41",
+                borderRadius: 50,
+                padding: 8,
+                marginRight: 15,
+              }}>
               <Icon name="account-arrow-right" color={"#fff"} size={30} />
             </View>
-            <View style={{ flexDirection: 'column' }}>
-              <Text style={{ fontSize: 18, color: "#333", fontWeight: "700" }}>
+            <View style={{flexDirection: "column"}}>
+              <Text style={{fontSize: 18, color: "#333", fontWeight: "700"}}>
                 ₹4,242
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 To Pay
               </Text>
             </View>
@@ -139,10 +160,8 @@ const Customer = () => {
         </View>
         {/* Card end */}
 
-        {customerTransactionData?.length ? (
-          <CustomerTransaction
-            customerTransactionData={customerTransactionData}
-          />
+        {allCustomerTrnsData?.length ? (
+          <CustomerTransaction allCustomerTrnsData={allCustomerTrnsData} />
         ) : (
           <CustomerTransactionEmpty />
         )}
@@ -164,7 +183,7 @@ const Customer = () => {
           }}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("NewCustomer", { customerType: "customer" });
+              navigation.navigate("NewCustomer", {customerType: "customer"});
             }}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
@@ -177,7 +196,7 @@ const Customer = () => {
               alignItems: "center",
             }}>
             <Icon name="plus-circle" color={"#fff"} size={20} />
-            <Text style={[styles.btnTxt, { color: "#fff", marginLeft: 5 }]}>
+            <Text style={[styles.btnTxt, {color: "#fff", marginLeft: 5}]}>
               Add New Customer
             </Text>
           </TouchableOpacity>
@@ -204,14 +223,14 @@ const styles = StyleSheet.create({
     paddingVertical: metrics.verticalScale(15),
     borderRadius: 6,
     borderWidth: 1,
-    borderColor: '#c6c6c6',
+    borderColor: "#c6c6c6",
     marginBottom: 10,
   },
   box: {
     width: "50%",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: 'row',
+    flexDirection: "row",
     // backgroundColor: '#ddd'
   },
   btnTxt: {

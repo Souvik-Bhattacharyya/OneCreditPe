@@ -25,6 +25,8 @@ const ViewReport = ({navigation, route}) => {
   const [date, setDate] = useState(new Date());
   const [dateFrom, setDateFrom] = useState(new Date());
 
+  console.log("dateForm :", dateFrom);
+  console.log("date :", date);
   const onChange = (event, selectedDate, type) => {
     const currentDate = selectedDate;
     if (type == "from") {
@@ -50,6 +52,18 @@ const ViewReport = ({navigation, route}) => {
     });
   };
 
+  const downloadPdf = async () => {
+    try {
+      const response = await Api.get("/auth/create-cashbook-pdf");
+      if (response.status == 200) {
+        console.log(response.data);
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <View style={styles.container}>
@@ -170,6 +184,7 @@ const ViewReport = ({navigation, route}) => {
             borderColor: "#c9c9c9",
           }}>
           <TouchableOpacity
+            onPress={downloadPdf}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(15),
