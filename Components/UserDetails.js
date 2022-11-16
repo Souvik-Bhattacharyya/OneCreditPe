@@ -5,9 +5,11 @@ import {
   Dimensions,
   TouchableOpacity,
   Text,
+  Image
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from 'react-native-vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
 import metrics from "../Constants/metrics";
 import UserTransaction from "./UserTransaction";
@@ -46,13 +48,34 @@ const CustomerHome = ({ route }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#EEF3FF" }}>
+    <View style={{ flex: 1, backgroundColor: "#fff" }}>
       <PartiesHeader customerData={customerData} />
-      <ScrollView style={{ marginBottom: 60 }}>
+      <ScrollView style={{ marginBottom: 60}}>
         {allTransaction?.length ? (
           <UserTransaction allTransaction={allTransaction} />
         ) : (
-          <TransactionEmpty />
+          <View style={{
+            backgroundColor: "#fff",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            paddingTop: metrics.verticalScale(15),
+            position: "relative",
+          }}>
+            <View style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: metrics.verticalScale(20)
+            }}>
+              <View>
+                <Image source={require('../Assets/Images/add-notes.png')} style={{ width: 220, flex: 1, resizeMode: 'contain', marginTop: '-5%' }} />
+                <View style={{ alignItems: 'center', marginTop: 30 }}>
+                  <Text style={{ color: '#464555', fontSize: 22, fontWeight: '800', marginBottom: 5 }}>No Items Found</Text>
+                  <Text style={{ color: '#aaa', fontSize: 18, fontWeight: '500', marginBottom: 5 }}>Click below to add some</Text>
+                  <Icon name='arrowdown' color={'#aaa'} size={24} />
+                </View>
+              </View>
+            </View>
+          </View>
         )}
       </ScrollView>
       <View

@@ -7,19 +7,19 @@ import {
   Modal,
   Dimensions,
 } from "react-native";
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
-import {Calendar} from "react-native-calendars";
+import { Calendar } from "react-native-calendars";
 import TransactionFull from "../../Components/TransactionFull";
 import moment from "moment";
-import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import TransactionEmpty from "../../Components/TransactionEmpty";
 const width = Dimensions.get("window").width;
 import Api from "../../Services";
 
-const ViewReport = ({navigation, route}) => {
-  const {todayEntryDetails, viewResult} = route.params || {};
+const ViewReport = ({ navigation, route }) => {
+  const { todayEntryDetails, viewResult } = route.params || {};
   const [showModal1, setShowModal1] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [filteredEntry, setFilteredEntry] = useState([]);
@@ -63,10 +63,10 @@ const ViewReport = ({navigation, route}) => {
     console.log("date :", endDate);
     try {
       const response = await Api.get(`/auth/cashbook/${startDate}/${endDate}`);
-      if (response.status === "Ok") {
-        console.log("------------>", response.data);
-        setFilteredEntry(response.data.data);
-      }
+      // if (response.status === "Ok") {
+      console.log("------------>", response.data);
+      setFilteredEntry(response.data.data);
+      // }
     } catch (error) {
       console.log(error);
     }
@@ -131,7 +131,7 @@ const ViewReport = ({navigation, route}) => {
           </View>
         </View>
 
-        <View style={{backgroundColor: "#fff", marginTop: 15}}>
+        <View style={{ backgroundColor: "#fff", marginTop: 15 }}>
           <View
             style={{
               borderBottomWidth: 1.5,
@@ -153,9 +153,9 @@ const ViewReport = ({navigation, route}) => {
               <Icon name="calendar" size={22} color={"#0A5AC9"} />
 
               <View>
-                <Text style={{color: "#0A5AC9"}}>From Date</Text>
+                <Text style={{ color: "#0A5AC9" }}>From Date</Text>
                 <Text
-                  style={{color: "#0A5AC9", fontSize: 16, fontWeight: "700"}}>
+                  style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "700" }}>
                   {moment(dateFrom).format("ll")}
                 </Text>
               </View>
@@ -171,9 +171,9 @@ const ViewReport = ({navigation, route}) => {
               <Icon name="calendar" size={22} color={"#349EFF"} />
 
               <View>
-                <Text style={{color: "#349EFF"}}>To Date</Text>
+                <Text style={{ color: "#349EFF" }}>To Date</Text>
                 <Text
-                  style={{color: "#349EFF", fontSize: 16, fontWeight: "700"}}>
+                  style={{ color: "#349EFF", fontSize: 16, fontWeight: "700" }}>
                   {moment(date).format("ll")}
                 </Text>
               </View>
@@ -234,7 +234,7 @@ const ViewReport = ({navigation, route}) => {
               backgroundColor: "#000000aa",
             }}>
             <Calendar
-              style={{borderRadius: 10, width: "100%"}}
+              style={{ borderRadius: 10, width: "100%" }}
               onDayPress={date => {
                 setShowDate1(date);
                 setShowModal1(false);
@@ -252,7 +252,7 @@ const ViewReport = ({navigation, route}) => {
               backgroundColor: "#000000aa",
             }}>
             <Calendar
-              style={{borderRadius: 10, width: "100%"}}
+              style={{ borderRadius: 10, width: "100%" }}
               onDayPress={date => {
                 setShowDate2(date);
                 setShowModal2(false);

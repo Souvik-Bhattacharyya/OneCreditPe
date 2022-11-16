@@ -10,7 +10,7 @@ import {notify} from "../../Redux/Action/notificationActions";
 
 const CashIn = ({entryDetails, getTodayCashEntries}) => {
   const dispatch = useDispatch();
-  const date = moment(entryDetails?.date_time).format("Do MMM YY, hh:mm a");
+  const date = moment(entryDetails?.date_time).format("Do MMM YY");
 
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
