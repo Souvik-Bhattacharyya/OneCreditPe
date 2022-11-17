@@ -8,7 +8,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
 
-const CashOut = ({entryDetails, getTodayCashEntries}) => {
+const CashOut = ({entryDetails, getTodayCashEntries, viewReport}) => {
   const dispatch = useDispatch();
   console.log("-----?", entryDetails);
   let date = moment(entryDetails?.date_time).format("Do MMM YY");
@@ -33,6 +33,7 @@ const CashOut = ({entryDetails, getTodayCashEntries}) => {
       const response = await Api.delete(`/auth/cashbook/${id}`);
       if (response.status == 200) {
         getTodayCashEntries();
+        viewReport();
       } else {
         throw new Error(response.message);
       }

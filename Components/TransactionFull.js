@@ -17,7 +17,11 @@ import {Cashbook} from "../Screens";
 
 const width = Dimensions.get("window").width;
 
-const TransactionFull = ({todayEntryDetails, getTodayCashEntries}) => {
+const TransactionFull = ({
+  todayEntryDetails,
+  getTodayCashEntries,
+  viewReport,
+}) => {
   const [value, setValue] = useState("");
   const styles = StyleSheet.create({
     container: {
@@ -89,12 +93,14 @@ const TransactionFull = ({todayEntryDetails, getTodayCashEntries}) => {
                   entryDetails={entry}
                   key={index}
                   getTodayCashEntries={getTodayCashEntries}
+                  viewReport={viewReport}
                 />
               ) : (
                 <CashOut
                   entryDetails={entry}
                   key={index}
                   getTodayCashEntries={getTodayCashEntries}
+                  viewReport={viewReport}
                 />
               ),
             )}

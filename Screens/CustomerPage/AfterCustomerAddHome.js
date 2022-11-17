@@ -29,7 +29,6 @@ const Customer = () => {
   const allCustomerTransactions = async () => {
     try {
       const response = await Api.get("/auth/user-all-customers-transactions");
-      console.log("customers--------->", response.data);
       if (response.status == 200) {
         setAllCustomerTrnsData(response.data || []);
       } else {

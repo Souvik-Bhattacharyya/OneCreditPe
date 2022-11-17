@@ -8,7 +8,9 @@ import moment from "moment";
 import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
 import {Modal, Portal, Provider} from "react-native-paper";
-const CashIn = ({entryDetails, getTodayCashEntries}) => {
+
+const CashIn = ({entryDetails, getTodayCashEntries, viewReport}) => {
+
   const dispatch = useDispatch();
   const date = moment(entryDetails?.date_time).format("Do MMM YY");
   const [visible, setVisible] = React.useState(false);
@@ -36,6 +38,7 @@ const CashIn = ({entryDetails, getTodayCashEntries}) => {
       const response = await Api.delete(`/auth/cashbook/${id}`);
       if (response.status == 200) {
         getTodayCashEntries();
+        viewReport();
       } else {
         throw new Error(response.message);
       }

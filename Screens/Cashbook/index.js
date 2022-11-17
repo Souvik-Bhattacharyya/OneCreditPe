@@ -118,7 +118,7 @@ const Cashbook = ({navigation}) => {
       }
     } catch (error) {
       console.log(error);
-      dispatch({message: error.message});
+      // dispatch({message: error.message});
     }
   };
 
@@ -210,6 +210,7 @@ const Cashbook = ({navigation}) => {
             <TransactionFull
               todayEntryDetails={todayEntryDetails}
               getTodayCashEntries={getTodayCashEntries}
+              viewReport={viewReport}
             />
           ) : (
             <TransactionEmpty />
