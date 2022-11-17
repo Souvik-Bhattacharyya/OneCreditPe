@@ -29,7 +29,6 @@ const Customer = () => {
   const allCustomerTransactions = async () => {
     try {
       const response = await Api.get("/auth/user-all-customers-transactions");
-      console.log("customers--------->", response.data);
       if (response.status == 200) {
         setAllCustomerTrnsData(response.data || []);
       } else {
@@ -129,7 +128,7 @@ const Customer = () => {
                 }}>
                 ₹4,242
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 Advance
               </Text>
             </View>
@@ -152,7 +151,7 @@ const Customer = () => {
               <Text style={{fontSize: 18, color: "#333", fontWeight: "700"}}>
                 ₹4,242
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 Purchase
               </Text>
             </View>

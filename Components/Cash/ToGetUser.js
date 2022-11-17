@@ -21,8 +21,8 @@ const ToGetUser = ({trnsDetails}) => {
           style={{
             flexDirection: "row",
             alignItems: "flex-start",
-            width: "50%",
-            justifyContent: 'flex-start',
+            // width: "50%",
+            justifyContent: "flex-start",
             backgroundColor: "#fff",
           }}>
           <View
@@ -42,14 +42,16 @@ const ToGetUser = ({trnsDetails}) => {
             <Text style={{fontSize: 18, fontWeight: "700", color: "#333"}}>
               {trnsDetails?.cus_name}
             </Text>
-            <Text style={{fontSize: 12, fontWeight: "400", color: "#828282"}}>
-              {trnsDetails?.last_transaction_duration} days
+            <Text style={{fontSize: 12, fontWeight: "bold", color: "#828282"}}>
+              last transaction :{" "}
+              {moment(trnsDetails?.last_transaction_date).fromNow()}
+              {/* {trnsDetails?.last_transaction_duration==0?"today":`${days}days`} */}
             </Text>
           </View>
         </View>
         <View
           style={{
-            width: "50%",
+            // width: "50%",
             alignItems: "flex-end",
             backgroundColor: "#fff",
           }}>

@@ -8,7 +8,7 @@ import moment from "moment";
 import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
 
-const CashIn = ({entryDetails, getTodayCashEntries}) => {
+const CashIn = ({entryDetails, getTodayCashEntries, viewReport}) => {
   const dispatch = useDispatch();
   const date = moment(entryDetails?.date_time).format("Do MMM YY");
 
@@ -32,6 +32,7 @@ const CashIn = ({entryDetails, getTodayCashEntries}) => {
       const response = await Api.delete(`/auth/cashbook/${id}`);
       if (response.status == 200) {
         getTodayCashEntries();
+        viewReport();
       } else {
         throw new Error(response.message);
       }

@@ -6,11 +6,11 @@ import {
   TouchableOpacity,
   PermissionsAndroid,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Contacts from "react-native-contacts";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 
-const AddContact = () => {
+const AddContact = ({addCustomer, addSupplier, customerType}) => {
   const navigation = useNavigation();
   const [contacts, setContacts] = useState([]);
 
@@ -41,10 +41,23 @@ const AddContact = () => {
       });
   };
 
-  const ListItem = ({ item }) => {
+  const ListItem = ({item}) => {
+    const payload = {
+      cus_name: `${item?.givenName} ${item?.middleName && item.middleName} ${
+        item?.familyName
+      }`,
+      cus_mobile: `${item?.phoneNumbers[0]?.number}`,
+      customer_type: customerType,
+    };
+
     return (
       <TouchableOpacity
-        onPress={() => navigation.navigate("UserDetails")}
+        onPress={() => {
+          console.log(payload);
+          customerType === "customer"
+            ? addCustomer(payload)
+            : addSupplier(payload);
+        }}
         style={styles.contactCon}>
         <View style={styles.imgCon}>
           <View style={styles.placeholder}>

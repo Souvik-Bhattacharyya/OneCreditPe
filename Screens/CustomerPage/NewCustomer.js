@@ -14,6 +14,7 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import {useNavigation} from "@react-navigation/native";
 import AddContact from "../../Components/AddContact";
 import Api from "../../Services";
+import {useDispatch} from "react-redux";
 
 const CustomerHome = ({route}) => {
   const navigation = useNavigation();
@@ -28,74 +29,94 @@ const CustomerHome = ({route}) => {
     cus_mobile: customer.mobile,
     customer_type: customerType,
   };
-  const addCustomer = async () => {
+  const addCustomer = async payload => {
     try {
-      const response = await Api.post("/auth/customer", payload);
-
-      if (
-        response.data.message === "mobile number exist" &&
-        response.data.data.customer_type === "supplier"
-      ) {
-        Alert.alert(
-          `The entered contact has already been added as a ${response.data.data.customer_type}`,
-          "",
-          [
-            {
-              text: "Cancel",
-              onPress: () => console.log("Cancel Pressed"),
-              style: "cancel",
-            },
-            {
-              text: `Go to ${response.data.data.customer_type}`,
-              onPress: () =>
-                navigation.navigate("UserDetails", {
-                  customerId: response.data.data.id,
-                }),
-            },
-          ],
-        );
+      if (payload.cus_mobile.length >= 10) {
+        const response = await Api.post("/auth/customer", payload);
+        if (
+          response.data.message === "mobile number exist" &&
+          response.data.data.customer_type === "supplier"
+        ) {
+          Alert.alert(
+            `The entered contact has already been added as a ${response.data.data.customer_type}`,
+            "",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+              },
+              {
+                text: `Go to ${response.data.data.customer_type}`,
+                onPress: () => {
+                  setCustomer({...customer, name: "", mobile: null});
+                  navigation.navigate("UserDetails", {
+                    customerId: response.data.data.id,
+                  });
+                },
+              },
+            ],
+          );
+        } else {
+          setCustomer({...customer, name: "", mobile: null});
+          navigation.navigate("UserDetails", {
+            customerId: response.data.data.id,
+          });
+        }
       } else {
-        setCustomer({...customer, name: "", mobile: null});
-        navigation.navigate("UserDetails", {
-          customerId: response.data.data.id,
-        });
+        Alert.alert("Please give a valid mobile number", "", [
+          {
+            text: "Ok",
+            onPress: () => console.log("Ok Pressed"),
+            style: "cancel",
+          },
+        ]);
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const addSupplier = async () => {
+  const addSupplier = async payload => {
     try {
-      const response = await Api.post("/auth/customer", payload);
-      console.log("response", response);
-      if (
-        response.data.message === "mobile number exist" &&
-        response.data.data.customer_type === "customer"
-      ) {
-        Alert.alert(
-          `The entered contact has already been added as a ${response.data.data.customer_type}`,
-          "",
-          [
-            {
-              text: "Cancel",
-              onPress: () => console.log("Cancel Pressed"),
-              style: "cancel",
-            },
-            {
-              text: `Go to ${response.data.data.customer_type}`,
-              onPress: () =>
-                navigation.navigate("UserDetails", {
-                  customerId: response.data.data.id,
-                }),
-            },
-          ],
-        );
+      if (payload.cus_mobile.length >= 10) {
+        const response = await Api.post("/auth/customer", payload);
+        if (
+          response.data.message === "mobile number exist" &&
+          response.data.data.customer_type === "customer"
+        ) {
+          Alert.alert(
+            `The entered contact has already been added as a ${response.data.data.customer_type}`,
+            "",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+              },
+              {
+                text: `Go to ${response.data.data.customer_type}`,
+                onPress: () =>
+                  navigation.navigate("UserDetails", {
+                    customerId: response.data.data.id,
+                  }),
+              },
+            ],
+          );
+        } else {
+          setCustomer({...customer, name: "", mobile: null});
+          navigation.navigate("UserDetails", {
+            customerId: response.data.data.id,
+          });
+        }
       } else {
-        setCustomer({...customer, name: "", mobile: null});
-        navigation.navigate("UserDetails", {
-          customerId: response.data.data.id,
-        });
+        Alert.alert("Please give a valid mobile number", "", [
+          {
+            text: "Ok",
+            onPress: () => console.log("Ok Pressed"),
+            style: "cancel",
+          },
+        ]);
       }
     } catch (error) {
       console.log(error);
@@ -157,7 +178,9 @@ const CustomerHome = ({route}) => {
             <TouchableOpacity
               style={{width: "100%"}}
               onPress={() =>
-                customerType === "customer" ? addCustomer() : addSupplier()
+                customerType === "customer"
+                  ? addCustomer(payload)
+                  : addSupplier(payload)
               }>
               <View
                 style={{
@@ -196,11 +219,14 @@ const CustomerHome = ({route}) => {
             flex: 1,
           }}>
           <AddContact
-          // customer={customer}
-          // setCustomer={setCustomer}
-          // addCustomer={addCustomer}
-          // addSupplier={addSupplier}
-          // customerType={customerType}
+            addCustomer={addCustomer}
+            addSupplier={addSupplier}
+            customerType={customerType}
+            // customer={customer}
+            // setCustomer={setCustomer}
+            // addCustomer={addCustomer}
+            // addSupplier={addSupplier}
+            // customerType={customerType}
           />
         </View>
       </View>
