@@ -129,7 +129,7 @@ const Customer = () => {
                 ₹4,242
               </Text>
               <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
-                Advance
+                You Got
               </Text>
             </View>
           </View>
@@ -152,7 +152,7 @@ const Customer = () => {
                 ₹4,242
               </Text>
               <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
-                Purchase
+                You Gave
               </Text>
             </View>
           </View>
