@@ -6,26 +6,30 @@ import {
   TouchableOpacity,
   ImageBackground,
   Dimensions,
-  Image
+  Image,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import metrics from "../../Constants/metrics";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Carousel from "../../Components/Carousel/Carousel";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
 import Api from "../../Services";
 
-const CustomerHome = ({ route }) => {
+const CustomerHome = ({route}) => {
   const navigation = useNavigation();
   // const dispatch = useDispatch();
   const width = Dimensions.get("window").width;
 
   const [viewResult, setViewResult] = useState({});
-
+  const [cusTransaction, setCusTransaction] = useState([]);
+  const [suppTransaction, setSuppTransaction] = useState([]);
+  const [cusGive, setCusGive] = useState("");
   useEffect(() => {
     navigation.addListener("focus", () => {
       viewReport();
+      customerTransaction();
+      supplierTransaction();
     });
   }, [navigation]);
 
@@ -40,34 +44,97 @@ const CustomerHome = ({ route }) => {
     }
   };
 
+  const customerTransaction = async () => {
+    try {
+      const response = await Api.get("/auth/user-all-customers-transactions");
+      console.log("cus trans", response);
+      if (response.data) {
+        setCusTransaction(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const supplierTransaction = async () => {
+    try {
+      const response = await Api.get("/auth/user-all-customers-transactions");
+      console.log("supp trans", response);
+      if (response.data) {
+        setSuppTransaction(response.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  const cusGot = cusTransaction
+    .filter(item => item.aggsum > 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
+
+  const cusGave = cusTransaction
+    .filter(item => item.aggsum < 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
+
+  const suppGot = cusTransaction
+    .filter(item => item.aggsum > 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
+
+  const suppGave = cusTransaction
+    .filter(item => item.aggsum < 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
   return (
     <>
-
-      <ImageBackground resizeMode="cover" source={require("../../Assets/background.jpg")} style={{ flex: 1, backgroundColor: '#000' }}>
+      <ImageBackground
+        resizeMode="cover"
+        source={require("../../Assets/background.jpg")}
+        style={{flex: 1, backgroundColor: "#000"}}>
         <CommonHeader color="transparent" />
         <View style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
-            <View style={[styles.paddingHorizontal, { height: 180, backgroundColor: "transparent", justifyContent: 'center' }]}>
-              <Image source={require("../../Assets/Images/carousel.jpg")} style={{ resizeMode: 'contain', width: '100%' }} />
+            <View
+              style={[
+                styles.paddingHorizontal,
+                {
+                  height: 180,
+                  backgroundColor: "transparent",
+                  justifyContent: "center",
+                },
+              ]}>
+              <Image
+                source={require("../../Assets/Images/carousel.jpg")}
+                style={{resizeMode: "contain", width: "100%"}}
+              />
             </View>
 
-            <View style={{ borderTopLeftRadius: 15, borderTopRightRadius: 15, backgroundColor: '#fff' }}>
-              <View style={{
-                marginBottom: 10,
-                marginTop: 20,
-                height: 6,
-                borderRadius: 50,
-                width: 60,
-                backgroundColor: '#828282',
-                alignSelf: 'center'
-              }} />
+            <View
+              style={{
+                borderTopLeftRadius: 15,
+                borderTopRightRadius: 15,
+                backgroundColor: "#fff",
+              }}>
+              <View
+                style={{
+                  marginBottom: 10,
+                  marginTop: 20,
+                  height: 6,
+                  borderRadius: 50,
+                  width: 60,
+                  backgroundColor: "#828282",
+                  alignSelf: "center",
+                }}
+              />
 
               <View>
                 <View style={styles.header}>
-                  <Text
-                    style={styles.headText}
-                  >Customer Transaction</Text>
+                  <Text style={styles.headText}>Customer Transaction</Text>
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("Parties", {
@@ -78,50 +145,94 @@ const CustomerHome = ({ route }) => {
                       paddingHorizontal: 10,
                       paddingVertical: 2,
                       borderRadius: 4,
-                    }}
-                  >
-                    <Text style={{
-                      fontSize: 14,
-                      color: '#0a5ac9',
-                      fontWeight: '700'
-                    }}>See More</Text>
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: "#0a5ac9",
+                        fontWeight: "700",
+                      }}>
+                      See More
+                    </Text>
                   </TouchableOpacity>
                 </View>
-                <View
-                  style={styles.card}>
-                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#f1f1f1', paddingRight: 10 }]}>
-                    <View style={{
-                      backgroundColor: '#C2FBD1',
-                      borderRadius: 50,
-                      padding: 8,
-                      marginRight: 15
-                    }}>
+                <View style={styles.card}>
+                  <View
+                    style={[
+                      styles.box,
+                      {
+                        borderRightWidth: 1,
+                        borderColor: "#f1f1f1",
+                        paddingRight: 10,
+                      },
+                    ]}>
+                    <View
+                      style={{
+                        backgroundColor: "#C2FBD1",
+                        borderRadius: 50,
+                        padding: 8,
+                        marginRight: 15,
+                      }}>
                       <Icon name="arrow-up-bold" color={"#12ce12"} size={30} />
                     </View>
-                    <View style={{ flexDirection: 'column' }}>
-                      <Text style={{ fontSize: 18, color: "#333", fontWeight: "700", fontFamily: 'Poppins' }}>
-                        ₹4,242
+                    <View style={{flexDirection: "column"}}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          color: "#333",
+                          fontWeight: "700",
+                          fontFamily: "Poppins",
+                        }}>
+                        ₹{cusGot}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
-                        Advance
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: "#828282",
+                          fontWeight: "600",
+                        }}>
+                        You Got
                       </Text>
                     </View>
                   </View>
-                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#f1f1f1', paddingLeft: 10 }]}>
-                    <View style={{
-                      backgroundColor: '#FFC3C6',
-                      borderRadius: 50,
-                      padding: 8,
-                      marginRight: 15
-                    }}>
-                      <Icon name="arrow-down-bold" color={"#c91e25"} size={30} />
+                  <View
+                    style={[
+                      styles.box,
+                      {
+                        borderLeftWidth: 1,
+                        borderColor: "#f1f1f1",
+                        paddingLeft: 10,
+                      },
+                    ]}>
+                    <View
+                      style={{
+                        backgroundColor: "#FFC3C6",
+                        borderRadius: 50,
+                        padding: 8,
+                        marginRight: 15,
+                      }}>
+                      <Icon
+                        name="arrow-down-bold"
+                        color={"#c91e25"}
+                        size={30}
+                      />
                     </View>
-                    <View style={{ flexDirection: 'column' }}>
-                      <Text style={{ fontSize: 18, color: "#333", fontWeight: "700" }}>
-                        ₹4,242
+                    <View style={{flexDirection: "column"}}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          color: "#333",
+                          fontWeight: "700",
+                        }}>
+                        ₹{cusGave}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
-                        Purchase
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: "#828282",
+                          fontWeight: "600",
+                        }}>
+                        You Gave
                       </Text>
                     </View>
                   </View>
@@ -132,9 +243,7 @@ const CustomerHome = ({ route }) => {
               {/* Card Started */}
               <View>
                 <View style={styles.header}>
-                  <Text
-                    style={styles.headText}
-                  >Supplier Transaction</Text>
+                  <Text style={styles.headText}>Supplier Transaction</Text>
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("Parties", {
@@ -145,49 +254,97 @@ const CustomerHome = ({ route }) => {
                       paddingHorizontal: 10,
                       paddingVertical: 2,
                       borderRadius: 4,
-                    }}
-                  >
-                    <Text style={{
-                      fontSize: 14,
-                      color: '#0a5ac9',
-                      fontWeight: '700'
-                    }}>See More</Text>
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: "#0a5ac9",
+                        fontWeight: "700",
+                      }}>
+                      See More
+                    </Text>
                   </TouchableOpacity>
                 </View>
-                <View
-                  style={styles.card}>
-                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#f1f1f1', paddingRight: 10 }]}>
-                    <View style={{
-                      backgroundColor: '#C2FBD1',
-                      borderRadius: 50,
-                      padding: 8,
-                      marginRight: 15
-                    }}>
-                      <Icon name="account-arrow-left" color={"#12ce12"} size={30} />
+                <View style={styles.card}>
+                  <View
+                    style={[
+                      styles.box,
+                      {
+                        borderRightWidth: 1,
+                        borderColor: "#f1f1f1",
+                        paddingRight: 10,
+                      },
+                    ]}>
+                    <View
+                      style={{
+                        backgroundColor: "#C2FBD1",
+                        borderRadius: 50,
+                        padding: 8,
+                        marginRight: 15,
+                      }}>
+                      <Icon
+                        name="account-arrow-left"
+                        color={"#12ce12"}
+                        size={30}
+                      />
                     </View>
-                    <View style={{ flexDirection: 'column' }}>
-                      <Text style={{ fontSize: 18, color: "#333", fontWeight: "700", fontFamily: 'Poppins' }}>
-                        ₹4,242
+                    <View style={{flexDirection: "column"}}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          color: "#333",
+                          fontWeight: "700",
+                          fontFamily: "Poppins",
+                        }}>
+                        ₹{suppGot}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: "#828282",
+                          fontWeight: "600",
+                        }}>
                         Advance
                       </Text>
                     </View>
                   </View>
-                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#f1f1f1', paddingLeft: 10 }]}>
-                    <View style={{
-                      backgroundColor: '#FFC3C6',
-                      borderRadius: 50,
-                      padding: 8,
-                      marginRight: 15
-                    }}>
-                      <Icon name="account-arrow-right" color={"#c91e25"} size={30} />
+                  <View
+                    style={[
+                      styles.box,
+                      {
+                        borderLeftWidth: 1,
+                        borderColor: "#f1f1f1",
+                        paddingLeft: 10,
+                      },
+                    ]}>
+                    <View
+                      style={{
+                        backgroundColor: "#FFC3C6",
+                        borderRadius: 50,
+                        padding: 8,
+                        marginRight: 15,
+                      }}>
+                      <Icon
+                        name="account-arrow-right"
+                        color={"#c91e25"}
+                        size={30}
+                      />
                     </View>
-                    <View style={{ flexDirection: 'column' }}>
-                      <Text style={{ fontSize: 18, color: "#333", fontWeight: "700" }}>
-                        ₹4,242
+                    <View style={{flexDirection: "column"}}>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          color: "#333",
+                          fontWeight: "700",
+                        }}>
+                        ₹{suppGave}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: "#828282",
+                          fontWeight: "600",
+                        }}>
                         Purchase
                       </Text>
                     </View>
@@ -199,9 +356,7 @@ const CustomerHome = ({ route }) => {
               {/* Cashbook Started */}
               <View>
                 <View style={styles.header}>
-                  <Text
-                    style={styles.headText}
-                  >Cashbook</Text>
+                  <Text style={styles.headText}>Cashbook</Text>
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("Cashbook", {
@@ -212,45 +367,82 @@ const CustomerHome = ({ route }) => {
                       paddingHorizontal: 10,
                       paddingVertical: 2,
                       borderRadius: 4,
-                    }}
-                  >
-                    <Text style={{
-                      fontSize: 14,
-                      color: '#0a5ac9',
-                      fontWeight: '700'
-                    }}>Open Now?</Text>
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: "#0a5ac9",
+                        fontWeight: "700",
+                      }}>
+                      Open Now?
+                    </Text>
                   </TouchableOpacity>
                 </View>
-                <View
-                  style={styles.card}>
-                  <View style={[styles.box, { borderRightWidth: 1, borderColor: '#f1f1f1', paddingRight: 10 }]}>
-                    <View style={{
-                      flexDirection: 'column',
-                      justifyContent: 'center',
-                      alignItems: 'center'
-                    }}>
-                      <Text style={{
-                        fontSize: 22,
-                        color: viewResult.cash_in_hands >= 0 ? "#12CE12" : "#C91E25",
-                        fontWeight: "700"
+                <View style={styles.card}>
+                  <View
+                    style={[
+                      styles.box,
+                      {
+                        borderRightWidth: 1,
+                        borderColor: "#f1f1f1",
+                        paddingRight: 10,
+                      },
+                    ]}>
+                    <View
+                      style={{
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
                       }}>
+                      <Text
+                        style={{
+                          fontSize: 22,
+                          color:
+                            viewResult.cash_in_hands >= 0
+                              ? "#12CE12"
+                              : "#C91E25",
+                          fontWeight: "700",
+                        }}>
                         ₹{viewResult.cash_in_hands}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: "#828282",
+                          fontWeight: "600",
+                        }}>
                         Cash In Hand
                       </Text>
                     </View>
                   </View>
-                  <View style={[styles.box, { borderLeftWidth: 1, borderColor: '#f1f1f1', paddingLeft: 10 }]}>
-                    <View style={{ flexDirection: 'column', alignItems: 'center' }}>
-                      <Text style={{
-                        fontSize: 22,
-                        color: viewResult.todays_income >= 0 ? "#12CE12" : "#C91E25",
-                        fontWeight: "700"
-                      }}>
+                  <View
+                    style={[
+                      styles.box,
+                      {
+                        borderLeftWidth: 1,
+                        borderColor: "#f1f1f1",
+                        paddingLeft: 10,
+                      },
+                    ]}>
+                    <View
+                      style={{flexDirection: "column", alignItems: "center"}}>
+                      <Text
+                        style={{
+                          fontSize: 22,
+                          color:
+                            viewResult.todays_income >= 0
+                              ? "#12CE12"
+                              : "#C91E25",
+                          fontWeight: "700",
+                        }}>
                         ₹{viewResult.todays_income}
                       </Text>
-                      <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          color: "#828282",
+                          fontWeight: "600",
+                        }}>
                         Today's Income
                       </Text>
                     </View>
@@ -261,9 +453,7 @@ const CustomerHome = ({ route }) => {
 
               <View>
                 <View style={styles.header}>
-                  <Text
-                    style={styles.headText}
-                  >Other Services</Text>
+                  <Text style={styles.headText}>Other Services</Text>
                   <Text
                     // onPress={() =>
                     //   navigation.navigate("Cashbook", {
@@ -274,13 +464,15 @@ const CustomerHome = ({ route }) => {
                       paddingHorizontal: 10,
                       paddingVertical: 2,
                       borderRadius: 4,
-                    }}
-                  >
-                    <Text style={{
-                      fontSize: 14,
-                      color: '#0a5ac9',
-                      fontWeight: '700'
-                    }}>Coming Soon</Text>
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: "#0a5ac9",
+                        fontWeight: "700",
+                      }}>
+                      Coming Soon
+                    </Text>
                   </Text>
                 </View>
                 <View
@@ -340,7 +532,7 @@ const CustomerHome = ({ route }) => {
           </View>
         </View> */}
           </ScrollView>
-        </View >
+        </View>
       </ImageBackground>
     </>
   );
@@ -351,7 +543,7 @@ export default CustomerHome;
 const styles = StyleSheet.create({
   container: {
     // backgroundColor: "#EEF3FF",
-    backgroundColor: 'transparent',
+    backgroundColor: "transparent",
     position: "relative",
     flex: 1,
   },
@@ -370,7 +562,7 @@ const styles = StyleSheet.create({
     width: "50%",
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: 'row',
+    flexDirection: "row",
     // backgroundColor: '#ddd'
   },
   cardBtn: {
@@ -408,19 +600,19 @@ const styles = StyleSheet.create({
     height: 24,
   },
   paddingHorizontal: {
-    paddingHorizontal: metrics.horizontalScale(15)
+    paddingHorizontal: metrics.horizontalScale(15),
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    justifyContent: "space-between",
     marginVertical: 15,
-    backgroundColor: '#f6f6f6',
+    backgroundColor: "#f6f6f6",
     paddingVertical: metrics.verticalScale(10),
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
   },
   headText: {
     fontSize: 16,
-    color: '#333',
-    fontWeight: '800'
-  }
+    color: "#333",
+    fontWeight: "800",
+  },
 });
