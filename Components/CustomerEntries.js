@@ -117,8 +117,9 @@ const CashEntries = ({navigation, route}) => {
       formData.append("tns_type", customerCashEntry.tns_type);
       formData.append("payment_details", customerCashEntry.paymentDetails);
       formData.append("customer_id", route.params?.customerId);
-      file && formData.append("attachments", file);
+      file && formData.append("attachment", file);
 
+      console.log("file-->", file);
       const response = await Api.postForm("/auth/transaction", formData);
       console.log(response);
       if (response.status == 200) {

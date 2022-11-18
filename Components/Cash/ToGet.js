@@ -50,7 +50,7 @@ const ToGet = ({trnsDetails}) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            {moment(trnsDetails?.date_time).format("Do MMM YY - hh:mm A")}
+            {moment(trnsDetails?.date_time).format("Do MMM YY")}
           </Text>
           <Text style={{color: "#111", fontSize: 12, fontWeight: "600"}}>
             {trnsDetails?.payment_details}

@@ -6,7 +6,6 @@ import metrics from "../../Constants/metrics";
 import moment from "moment";
 
 const CashOut = ({trnsDetails}) => {
-  const date = moment(trnsDetails?.date_time).format("Do MMM YY - hh:mm A");
   console.log(trnsDetails);
   return (
     <View>
@@ -52,7 +51,7 @@ const CashOut = ({trnsDetails}) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            {date}
+            {moment(trnsDetails?.date_time).format("Do MMM YY")}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
             Balance- Rs. 4,220
