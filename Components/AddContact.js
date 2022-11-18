@@ -46,7 +46,7 @@ const AddContact = ({addCustomer, addSupplier, customerType}) => {
       cus_name: `${item?.givenName} ${item?.middleName && item.middleName} ${
         item?.familyName
       }`,
-      cus_mobile: `${item?.phoneNumbers[0]?.number}`,
+      cus_mobile: item?.phoneNumbers[0]?.number,
       customer_type: customerType,
     };
 

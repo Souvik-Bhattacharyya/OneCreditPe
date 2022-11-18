@@ -6,7 +6,6 @@ import metrics from "../../Constants/metrics";
 import moment from "moment";
 
 const ToGet = ({trnsDetails}) => {
-  const date = moment(trnsDetails?.date_time).format("Do MMM YY - hh:mm A");
   return (
     <View>
       <View
@@ -51,7 +50,7 @@ const ToGet = ({trnsDetails}) => {
               fontWeight: "600",
               marginBottom: metrics.verticalScale(5),
             }}>
-            {date}
+            {moment(trnsDetails?.date_time).format("Do MMM YY - hh:mm A")}
           </Text>
           <Text style={{color: "#111", fontSize: 12, fontWeight: "600"}}>
             {trnsDetails?.payment_details}

@@ -1,9 +1,15 @@
 import {View, Text, StyleSheet} from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import metrics from "../Constants/metrics";
 import {ToGet, ToPay} from "../Screens";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 const UserTransaction = ({allTransaction}) => {
+  let get = 0;
+  let give = 0;
+  for (let i of allTransaction) {
+    i.tns_type == "got" ? (get = get + i?.amount) : (give = give + i?.amount);
+  }
+
   return (
     <View style={styles.container}>
       {/* Card Started */}
@@ -16,7 +22,7 @@ const UserTransaction = ({allTransaction}) => {
         ]}>
         <View style={styles.box}>
           <Text style={{fontSize: 20, color: "#12CE12", fontWeight: "900"}}>
-            ₹ 4,242.00
+            ₹ {get}
           </Text>
         </View>
         <View style={styles.box}>
@@ -37,7 +43,7 @@ const UserTransaction = ({allTransaction}) => {
         ]}>
         <View style={styles.box}>
           <Text style={{fontSize: 20, color: "#F31B24", fontWeight: "900"}}>
-            ₹ 3,560.00
+            ₹ {give}
           </Text>
         </View>
         <View style={styles.box}>
