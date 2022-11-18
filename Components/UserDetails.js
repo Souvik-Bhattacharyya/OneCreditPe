@@ -5,19 +5,19 @@ import {
   Dimensions,
   TouchableOpacity,
   Text,
-  Image
+  Image,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
-import Icon from 'react-native-vector-icons/AntDesign';
-import { useNavigation } from "@react-navigation/native";
+import Icon from "react-native-vector-icons/AntDesign";
+import {useNavigation} from "@react-navigation/native";
 import metrics from "../Constants/metrics";
 import UserTransaction from "./UserTransaction";
 import PartiesHeader from "./PartiesHeader";
 import Api from "../Services";
 import TransactionEmpty from "./TransactionEmpty";
 
-const CustomerHome = ({ route }) => {
+const CustomerHome = ({route}) => {
   const navigation = useNavigation();
   const width = Dimensions.get("window").width;
   const [allTransaction, setAllTransaction] = useState([]);
@@ -48,30 +48,59 @@ const CustomerHome = ({ route }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    <View style={{flex: 1, backgroundColor: "#fff"}}>
       <PartiesHeader customerData={customerData} />
-      <ScrollView style={{ marginBottom: 60}}>
+      <ScrollView style={{marginBottom: 60}}>
         {allTransaction?.length ? (
-          <UserTransaction allTransaction={allTransaction} />
+          <UserTransaction
+            allTransaction={allTransaction}
+            // customersAllTransaction={customersAllTransaction(id)}
+          />
         ) : (
-          <View style={{
-            backgroundColor: "#fff",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            paddingTop: metrics.verticalScale(15),
-            position: "relative",
-          }}>
-            <View style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: metrics.verticalScale(20)
+          <View
+            style={{
+              backgroundColor: "#fff",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              paddingTop: metrics.verticalScale(15),
+              position: "relative",
             }}>
+            <View
+              style={{
+                justifyContent: "center",
+                alignItems: "center",
+                marginTop: metrics.verticalScale(20),
+              }}>
               <View>
-                <Image source={require('../Assets/Images/add-notes.png')} style={{ width: 220, flex: 1, resizeMode: 'contain', marginTop: '-5%' }} />
-                <View style={{ alignItems: 'center', marginTop: 30 }}>
-                  <Text style={{ color: '#464555', fontSize: 22, fontWeight: '800', marginBottom: 5 }}>No Items Found</Text>
-                  <Text style={{ color: '#aaa', fontSize: 18, fontWeight: '500', marginBottom: 5 }}>Click below to add some</Text>
-                  <Icon name='arrowdown' color={'#aaa'} size={24} />
+                <Image
+                  source={require("../Assets/Images/add-notes.png")}
+                  style={{
+                    width: 220,
+                    flex: 1,
+                    resizeMode: "contain",
+                    marginTop: "-5%",
+                  }}
+                />
+                <View style={{alignItems: "center", marginTop: 30}}>
+                  <Text
+                    style={{
+                      color: "#464555",
+                      fontSize: 22,
+                      fontWeight: "800",
+                      marginBottom: 5,
+                    }}>
+                    No Items Found
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#aaa",
+                      fontSize: 18,
+                      fontWeight: "500",
+                      marginBottom: 5,
+                    }}>
+                    Click below to add some
+                  </Text>
+                  <Icon name="arrowdown" color={"#aaa"} size={24} />
                 </View>
               </View>
             </View>
@@ -97,7 +126,7 @@ const CustomerHome = ({ route }) => {
           onPress={() =>
             navigation.navigate("CustomerStack", {
               screen: "CustomerEntries",
-              params: { customerId: route.params?.customerId },
+              params: {customerId: route.params?.customerId},
             })
           }
           style={{
@@ -110,7 +139,7 @@ const CustomerHome = ({ route }) => {
             justifyContent: "center",
           }}>
           <IconMat name="cash-plus" color={"#fff"} size={24} />
-          <Text style={[styles.btnTxt, { color: "#fff", marginLeft: 5 }]}>
+          <Text style={[styles.btnTxt, {color: "#fff", marginLeft: 5}]}>
             New Transaction
           </Text>
         </TouchableOpacity>

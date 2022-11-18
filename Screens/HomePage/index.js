@@ -47,7 +47,7 @@ const CustomerHome = ({route}) => {
   const customerTransaction = async () => {
     try {
       const response = await Api.get("/auth/user-all-customers-transactions");
-      console.log("cus trans", response);
+
       if (response.data) {
         setCusTransaction(response.data);
       }
@@ -57,8 +57,8 @@ const CustomerHome = ({route}) => {
   };
   const supplierTransaction = async () => {
     try {
-      const response = await Api.get("/auth/user-all-customers-transactions");
-      console.log("supp trans", response);
+      const response = await Api.get("/auth/user-all-suppliers-transactions");
+
       if (response.data) {
         setSuppTransaction(response.data);
       }
@@ -79,17 +79,18 @@ const CustomerHome = ({route}) => {
       return accumulator + object.aggsum;
     }, 0);
 
-  const suppGot = cusTransaction
+  const advance = suppTransaction
     .filter(item => item.aggsum > 0)
     .reduce((accumulator, object) => {
       return accumulator + object.aggsum;
     }, 0);
 
-  const suppGave = cusTransaction
+  const purchase = suppTransaction
     .filter(item => item.aggsum < 0)
     .reduce((accumulator, object) => {
       return accumulator + object.aggsum;
     }, 0);
+
   return (
     <>
       <ImageBackground
@@ -296,7 +297,7 @@ const CustomerHome = ({route}) => {
                           fontWeight: "700",
                           fontFamily: "Poppins",
                         }}>
-                        ₹{suppGot}
+                        ₹{advance}
                       </Text>
                       <Text
                         style={{
@@ -337,7 +338,7 @@ const CustomerHome = ({route}) => {
                           color: "#333",
                           fontWeight: "700",
                         }}>
-                        ₹{suppGave}
+                        ₹{purchase}
                       </Text>
                       <Text
                         style={{
@@ -492,45 +493,49 @@ const CustomerHome = ({route}) => {
               </View>
             </View>
             {/* Loan */}
-            {/* <View
-          style={[
-            styles.shadow,
-            {
-              flexDirection: "row",
-              paddingHorizontal: metrics.horizontalScale(20),
-              paddingVertical: metrics.verticalScale(15),
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#fff",
-              borderRadius: 6,
-              marginVertical: metrics.verticalScale(5),
-              borderColor: "#c6c6c6",
-              marginHorizontal: metrics.horizontalScale(15),
-            },
-          ]}>
-          <View
-            style={{
-              width: "30%",
-              justifyContent: "center",
-              alignItems: "center",
-            }}>
-            <Image source={require("../../Assets/loanSec.png")} />
-          </View>
-          <View style={{ width: "70%", paddingHorizontal: 20 }}>
-            <Text style={{ color: "#464555", fontSize: 18, fontWeight: "600" }}>
-              Easy Loan
-            </Text>
-            <Text style={{ color: "#828282", fontWeight: "400" }}>
-              Get easy loan without any paperwork
-            </Text>
-            <TouchableOpacity style={{ marginTop: 10, justifyContent: "center" }}>
-              <Text style={{ color: "#0A5AC9", fontSize: 16, fontWeight: "600" }}>
-                Apply Now
-                <Icon name="doubleright" color={"#0A5AC9"} size={16} />
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View> */}
+            <View
+              style={[
+                styles.shadow,
+                {
+                  flexDirection: "row",
+                  paddingHorizontal: metrics.horizontalScale(20),
+                  paddingVertical: metrics.verticalScale(15),
+                  justifyContent: "center",
+                  alignItems: "center",
+                  backgroundColor: "#fff",
+                  borderRadius: 6,
+                  marginVertical: metrics.verticalScale(5),
+                  borderColor: "#c6c6c6",
+                  marginHorizontal: metrics.horizontalScale(15),
+                },
+              ]}>
+              <View
+                style={{
+                  width: "30%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}>
+                <Image source={require("../../Assets/loanSec.png")} />
+              </View>
+              <View style={{width: "70%", paddingHorizontal: 20}}>
+                <Text
+                  style={{color: "#464555", fontSize: 18, fontWeight: "600"}}>
+                  Easy Loan
+                </Text>
+                <Text style={{color: "#828282", fontWeight: "400"}}>
+                  Get easy loan without any paperwork
+                </Text>
+                <TouchableOpacity
+                  style={{marginTop: 10, justifyContent: "center"}}
+                  onPress={() => navigation.navigate("LoanScreenStack")}>
+                  <Text
+                    style={{color: "#0A5AC9", fontSize: 16, fontWeight: "600"}}>
+                    Apply Now
+                    <Icon name="doubleright" color={"#0A5AC9"} size={16} />
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </ScrollView>
         </View>
       </ImageBackground>

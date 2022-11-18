@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import metrics from "../Constants/metrics";
 import {ToGet, ToPay} from "../Screens";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-const UserTransaction = ({allTransaction}) => {
+const UserTransaction = ({allTransaction, customersAllTransaction}) => {
   let get = 0;
   let give = 0;
   for (let i of allTransaction) {
@@ -72,9 +72,17 @@ const UserTransaction = ({allTransaction}) => {
       <View>
         {allTransaction.map((trns, index) =>
           trns.tns_type == "got" ? (
-            <ToGet trnsDetails={trns} key={index} />
+            <ToGet
+              trnsDetails={trns}
+              key={index}
+              customersAllTransaction={customersAllTransaction}
+            />
           ) : (
-            <ToPay trnsDetails={trns} key={index} />
+            <ToPay
+              trnsDetails={trns}
+              key={index}
+              customersAllTransaction={customersAllTransaction}
+            />
           ),
         )}
       </View>

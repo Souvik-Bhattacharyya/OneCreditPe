@@ -137,7 +137,7 @@ const CashEntries = ({navigation, route}) => {
         });
         dispatch(
           notify({
-            message: "your entry has submitted successfully",
+            message: "Your entry has been submitted successfully",
             notifyType: "success",
           }),
         );

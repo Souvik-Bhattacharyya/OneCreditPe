@@ -8,16 +8,19 @@ import moment from "moment";
 import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
 import {Modal, Portal, Provider} from "react-native-paper";
+const CashIn = ({
+  entryDetails,
+  getTodayCashEntries,
+  viewReport,
 
-const CashIn = ({entryDetails, getTodayCashEntries, viewReport}) => {
+  showModal,
+}) => {
+  console.log("entryDetails", entryDetails);
 
+  // const hideModal = () => setVisible(false);
   const dispatch = useDispatch();
   const date = moment(entryDetails?.date_time).format("Do MMM YY");
-  const [visible, setVisible] = React.useState(false);
-  const showModal = () => setVisible(true);
-  const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: "white"};
-  console.log("entryDetails", entryDetails);
+
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
       {
@@ -48,21 +51,7 @@ const CashIn = ({entryDetails, getTodayCashEntries, viewReport}) => {
     }
   };
   return (
-    <Provider>
-      <Portal>
-        <Modal
-          visible={visible}
-          onDismiss={hideModal}
-          // contentContainerStyle={containerStyle}
-        >
-          <Image
-            source={{
-              uri: `https://onepay.alsoltech.in${entryDetails.attachments}`,
-            }}
-          />
-        </Modal>
-      </Portal>
-
+    <>
       <View>
         <View
           style={{
@@ -141,7 +130,7 @@ const CashIn = ({entryDetails, getTodayCashEntries, viewReport}) => {
           </View>
         </View>
       </View>
-    </Provider>
+    </>
   );
 };
 
