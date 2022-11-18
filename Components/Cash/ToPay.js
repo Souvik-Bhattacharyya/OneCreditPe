@@ -1,89 +1,142 @@
-import {View, Text, Image, TouchableOpacity} from "react-native";
+import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
+import Api from "../../Services";
+import {useDispatch} from "react-redux";
+import {Modal, Portal, Provider} from "react-native-paper";
 
 const CashOut = ({trnsDetails}) => {
   console.log(trnsDetails);
-  return (
-    <View>
-      <View
-        style={{
-          justifyContent: "space-around",
-          flexDirection: "row",
-          paddingHorizontal: metrics.horizontalScale(5),
-          paddingVertical: metrics.verticalScale(10),
-          alignItems: "center",
-          backgroundColor: "#fff",
-          borderBottomWidth: 1,
-          borderColor: "#c6c6c6",
-          width: "100%",
-        }}>
-        <View
-          style={{
-            width: "10%",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-          <IconMat name="account-arrow-right" color={"#F31B24"} size={32} />
-        </View>
-        <View style={{width: "20%"}}>
-          <Text
-            style={{
-              color: "#F31B24",
-              fontSize: 18,
-              fontWeight: "600",
-              marginBottom: metrics.verticalScale(5),
-            }}>
-            {trnsDetails?.amount}
-          </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
-            Advance
-          </Text>
-        </View>
-        <View style={{width: "45%"}}>
-          <Text
-            style={{
-              color: "#000",
-              fontSize: 14,
-              fontWeight: "600",
-              marginBottom: metrics.verticalScale(5),
-            }}>
-            {moment(trnsDetails?.date_time).format("Do MMM YY")}
-          </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
-            Balance- Rs. 4,220
-          </Text>
-          <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
-            {trnsDetails?.payment_details}
-          </Text>
-        </View>
-        <View
-          style={{
-            width: "10%",
-            flexDirection: "column",
-            alignItems: "center",
-            paddingHorizontal: 7,
-          }}>
-          {trnsDetails?.attachment !== null && (
-            <TouchableOpacity>
-              <IconMat name="attachment" color={"#0a5ac9"} size={24} />
-            </TouchableOpacity>
-          )}
+  const [visible, setVisible] = React.useState(false);
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const dispatch = useDispatch();
+  const createTwoButtonAlert = () =>
+    Alert.alert("Are you sure to delete this entry?", "", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          console.log("OK Pressed");
+          deleteEntry(trnsDetails?.id);
+        },
+      },
+    ]);
 
-          <TouchableOpacity>
-            <Icon
-              name="delete"
-              color={"red"}
-              size={16}
-              style={{marginVertical: 3}}
-            />
-          </TouchableOpacity>
+  const deleteEntry = async id => {
+    try {
+      const response = await Api.delete(`/auth/transaction/${id}`);
+      console.log("del en", response);
+      if (response.status == 200) {
+        console.log("successful");
+        //  getTodayCashEntries();
+        //  viewReport();
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+      //  dispatch(notify({message: error.message}));
+    }
+  };
+  return (
+    <Provider>
+      <View>
+        <View
+          style={{
+            justifyContent: "space-around",
+            flexDirection: "row",
+            paddingHorizontal: metrics.horizontalScale(5),
+            paddingVertical: metrics.verticalScale(10),
+            alignItems: "center",
+            backgroundColor: "#fff",
+            borderBottomWidth: 1,
+            borderColor: "#c6c6c6",
+            width: "100%",
+          }}>
+          <View
+            style={{
+              width: "10%",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+            <IconMat name="account-arrow-right" color={"#F31B24"} size={32} />
+          </View>
+          <View style={{width: "20%"}}>
+            <Text
+              style={{
+                color: "#F31B24",
+                fontSize: 18,
+                fontWeight: "600",
+                marginBottom: metrics.verticalScale(5),
+              }}>
+              {trnsDetails?.amount}
+            </Text>
+            <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
+              You Gave
+            </Text>
+          </View>
+          <View style={{width: "45%"}}>
+            <Text
+              style={{
+                color: "#000",
+                fontSize: 14,
+                fontWeight: "600",
+                marginBottom: metrics.verticalScale(5),
+              }}>
+              {moment(trnsDetails?.date_time).format("Do MMM YY")}
+            </Text>
+            <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+              Balance- Rs. 4,220
+            </Text>
+            <Text style={{color: "#000", fontSize: 12, fontWeight: "500"}}>
+              {trnsDetails?.payment_details}
+            </Text>
+          </View>
+          <View
+            style={{
+              width: "10%",
+              flexDirection: "column",
+              alignItems: "center",
+              paddingHorizontal: 7,
+            }}>
+            {trnsDetails?.attachment !== null && (
+              <TouchableOpacity onPress={showModal}>
+                <IconMat name="attachment" color={"#0a5ac9"} size={24} />
+                <Portal>
+                  <Modal
+                    visible={visible}
+                    onDismiss={hideModal}
+                    // contentContainerStyle={containerStyle}
+                  >
+                    <Image
+                      source={{
+                        uri: `https://onepay.alsoltech.in/public${trnsDetails.attachments}`,
+                      }}
+                    />
+                  </Modal>
+                </Portal>
+              </TouchableOpacity>
+            )}
+
+            <TouchableOpacity onPress={createTwoButtonAlert}>
+              <Icon
+                name="delete"
+                color={"red"}
+                size={16}
+                style={{marginVertical: 3}}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </Provider>
   );
 };
 

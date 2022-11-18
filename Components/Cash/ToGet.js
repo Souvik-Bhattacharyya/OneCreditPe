@@ -1,11 +1,44 @@
-import {View, Text, TouchableOpacity, Image} from "react-native";
+import {View, Text, TouchableOpacity, Image, Alert} from "react-native";
 import React from "react";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/AntDesign";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
+import Api from "../../Services";
+import {useDispatch} from "react-redux";
+const ToGet = ({trnsDetails, customersAllTransaction}) => {
+  console.log("trnsDetails", trnsDetails);
+  const dispatch = useDispatch();
+  const createTwoButtonAlert = () =>
+    Alert.alert("Are you sure to delete this entry?", "", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          console.log("OK Pressed");
+          deleteEntry(trnsDetails?.id);
+        },
+      },
+    ]);
 
-const ToGet = ({trnsDetails}) => {
+  const deleteEntry = async id => {
+    try {
+      const response = await Api.delete(`/auth/transaction/${id}`);
+
+      if (response.status == 200) {
+        console.log("success");
+        // customersAllTransaction(id);
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      dispatch(notify({message: error.message}));
+    }
+  };
+
   return (
     <View>
       <View
@@ -39,7 +72,7 @@ const ToGet = ({trnsDetails}) => {
             {trnsDetails?.amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
-            Purchase
+            You Got
           </Text>
         </View>
         <View style={{width: "45%"}}>
@@ -70,9 +103,7 @@ const ToGet = ({trnsDetails}) => {
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity
-          // onPress={createTwoButtonAlert}
-          >
+          <TouchableOpacity onPress={createTwoButtonAlert}>
             <Icon
               name="delete"
               color={"red"}

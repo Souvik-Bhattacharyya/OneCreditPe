@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import React, {useEffect, useState} from "react";
+import {View, Text, StyleSheet, TouchableOpacity, Image} from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import User from "react-native-vector-icons/FontAwesome"
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationAction } from "@react-navigation/native";
+import User from "react-native-vector-icons/FontAwesome";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {NavigationAction} from "@react-navigation/native";
 import {
   HomePage,
   Customer,
@@ -32,6 +32,7 @@ import {
   InviteFriendModal,
   PartiesHeader,
 } from "../Screens";
+import Loan from "../Screens/loanSection/Loan";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -39,7 +40,7 @@ const Stack = createNativeStackNavigator();
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 150, height: 50 }}
+      style={{width: 150, height: 50}}
       source={require("../Assets/Logos/Logo.png")}
     />
   );
@@ -62,14 +63,15 @@ const CustomerStack = () => {
       <Stack.Screen
         component={Customer}
         name="Customer"
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
-      <Stack.Screen component={NewCustomer} name="NewCustomer"
-        options={
-          {
-            headerTitle: 'Add New Customer'
-          }}
+      <Stack.Screen
+        component={NewCustomer}
+        name="NewCustomer"
+        options={{
+          headerTitle: "Add New Customer",
+        }}
       />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
@@ -78,17 +80,18 @@ const CustomerStack = () => {
         component={UserDetails}
         name="UserDetails"
         options={{
-          header: ({ navigation }) => {
-            <PartiesHeader ScreenNavigation={navigation} />
-          }
+          header: ({navigation}) => {
+            <PartiesHeader ScreenNavigation={navigation} />;
+          },
         }}
       />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      <Stack.Screen component={CustomerEntries} name="CustomerEntries"
-        options={
-          {
-            headerTitle: 'Customer Entries'
-          }}
+      <Stack.Screen
+        component={CustomerEntries}
+        name="CustomerEntries"
+        options={{
+          headerTitle: "Customer Entries",
+        }}
       />
     </Stack.Navigator>
   );
@@ -111,14 +114,15 @@ const SupplierStack = () => {
       <Stack.Screen
         component={Supplier}
         name="Supplier"
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
-      <Stack.Screen component={NewCustomer} name="NewCustomer"
-        options={
-          {
-            headerTitle: 'Add New Supplier'
-          }}
+      <Stack.Screen
+        component={NewCustomer}
+        name="NewCustomer"
+        options={{
+          headerTitle: "Add New Supplier",
+        }}
       />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
@@ -128,16 +132,17 @@ const SupplierStack = () => {
         component={UserDetails}
         name="UserDetails"
         options={{
-          header: ({ navigation }) => {
-            <PartiesHeader navigation={navigation} />
-          }
+          header: ({navigation}) => {
+            <PartiesHeader navigation={navigation} />;
+          },
         }}
       />
-      <Stack.Screen component={CustomerEntries} name="CustomerEntries"
-        options={
-          {
-            headerTitle: 'Customer Entries'
-          }}
+      <Stack.Screen
+        component={CustomerEntries}
+        name="CustomerEntries"
+        options={{
+          headerTitle: "Customer Entries",
+        }}
       />
     </Stack.Navigator>
   );
@@ -149,12 +154,12 @@ const PartiesStack = () => {
       <Stack.Screen
         component={CustomerStack}
         name="CustomerStack"
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         component={SupplierStack}
         name="SupplierStack"
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
     </Stack.Navigator>
   );
@@ -185,7 +190,7 @@ const CashBookStack = () => {
       <Stack.Screen
         component={CashEntries}
         name="CashEntries"
-        options={({ route }) => ({
+        options={({route}) => ({
           title: route.params.name,
         })}
       />
@@ -208,11 +213,44 @@ const HomeScreenStack = () => {
         },
       }}>
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
         component={HomePage}
         name="CustomerHome"
       />
       <Stack.Screen component={SetCollectionDate} name="Set Collection Date" />
+      <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      <Stack.Screen
+        component={LoanScreenStack}
+        name="LoanScreenStack"
+        options={{headerTitle: "Easy Loan"}}
+      />
+    </Stack.Navigator>
+  );
+};
+const LoanScreenStack = () => {
+  return (
+    <Stack.Navigator
+      cardShadowEnabled
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerStyle: {
+          backgroundColor: "#0A5AC9",
+        },
+        headerTitle: "Easy Loan",
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+      }}>
+      <Stack.Screen
+        component={Loan}
+        name="EasyLoan"
+        options={{
+          headerTitle: "Easy Loan",
+          headerShown: false,
+        }}
+      />
+      {/* <Stack.Screen component={SetCollectionDate} name="Set Collection Date" /> */}
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
     </Stack.Navigator>
   );
@@ -233,7 +271,7 @@ const SettingsStack = () => {
         },
       }}>
       <Stack.Screen
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
         component={Settings}
         name="Settings"
       />
@@ -244,25 +282,26 @@ const SettingsStack = () => {
         name="Terms And Conditions"
       />
       <Stack.Screen component={LanguageScreen} name="Language" />
-      <Stack.Screen component={Faq} name="faq"
-        options={
-          {
-            title: 'FAQ Listing Questions'
-          }
-        } />
-      <Stack.Screen component={Ans} name="Ans"
-        options={
-          {
-            title: 'FAQ Listing Ans'
-          }
-        }
+      <Stack.Screen
+        component={Faq}
+        name="faq"
+        options={{
+          title: "FAQ Listing Questions",
+        }}
+      />
+      <Stack.Screen
+        component={Ans}
+        name="Ans"
+        options={{
+          title: "FAQ Listing Ans",
+        }}
       />
       <Stack.Screen component={InviteFriendModal} name="InviteFriendModal" />
     </Stack.Navigator>
   );
 };
 
-const AuthTabNavigation = ({ navigation }) => {
+const AuthTabNavigation = ({navigation}) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -286,12 +325,12 @@ const AuthTabNavigation = ({ navigation }) => {
         name="Home"
         component={HomeScreenStack}
         options={{
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({color, focused}) => (
             <MaterialCommunityIcons
               name={focused ? "home" : "home-outline"}
               size={32}
               color={color}
-              style={{ marginTop: 2 }}
+              style={{marginTop: 2}}
             />
           ),
         }}
@@ -300,12 +339,12 @@ const AuthTabNavigation = ({ navigation }) => {
         name="Parties"
         component={PartiesStack}
         options={{
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({color, focused}) => (
             <User
               name={focused ? "user" : "user-o"}
               size={26}
               color={color}
-              style={{ marginTop: 2 }}
+              style={{marginTop: 2}}
             />
           ),
         }}
@@ -314,12 +353,12 @@ const AuthTabNavigation = ({ navigation }) => {
         name="Cashbook"
         component={CashBookStack}
         options={{
-          tabBarIcon: ({ color, focused }) => (
+          tabBarIcon: ({color, focused}) => (
             <MaterialCommunityIcons
               name={focused ? "book-account" : "book-account-outline"}
               size={24}
               color={color}
-              style={{ marginTop: 2 }}
+              style={{marginTop: 2}}
             />
           ),
         }}
@@ -328,12 +367,12 @@ const AuthTabNavigation = ({ navigation }) => {
         name="More"
         component={SettingsStack}
         options={{
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({color}) => (
             <Icon
               name="menu-fold"
               size={24}
               color={color}
-              style={{ marginTop: 2 }}
+              style={{marginTop: 2}}
             />
           ),
         }}

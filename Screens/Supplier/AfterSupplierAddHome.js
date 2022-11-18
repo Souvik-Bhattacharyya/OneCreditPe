@@ -28,7 +28,6 @@ const Supplier = () => {
     try {
       const response = await Api.get("/auth/user-all-suppliers-transactions");
       if (response.status == 200) {
-        console.log(response.data);
         setAllCustomerTrnsData(response.data || []);
       } else {
         throw new Error(response.message);

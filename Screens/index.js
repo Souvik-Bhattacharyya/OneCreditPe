@@ -29,7 +29,7 @@ import Faq from "./Settings/faq";
 import Ans from "./Settings/ans";
 import InviteFriendModal from "../Components/InviteFriendModal";
 import SnackBar from "../Components/SnackBar";
-// import LoanSection from "../Screens/loanSection/Loan";
+import LoanSection from "../Screens/loanSection/Loan";
 
 export {
   Login,
@@ -42,7 +42,7 @@ export {
   ViewReport,
   CustomerModal,
   NewCustomer,
-  // LoanSection,
+  LoanSection,
   Customer,
   CustomerEntries,
   AddContact,
