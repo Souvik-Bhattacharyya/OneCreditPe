@@ -10,14 +10,13 @@ import {notify} from "../../Redux/Action/notificationActions";
 import {Modal, Portal, Provider} from "react-native-paper";
 
 const CashIn = ({entryDetails, getTodayCashEntries, viewReport}) => {
-
   const dispatch = useDispatch();
   const date = moment(entryDetails?.date_time).format("Do MMM YY");
   const [visible, setVisible] = React.useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: "white"};
-  console.log("entryDetails", entryDetails);
+
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
       {
@@ -57,7 +56,7 @@ const CashIn = ({entryDetails, getTodayCashEntries, viewReport}) => {
         >
           <Image
             source={{
-              uri: `https://onepay.alsoltech.in${entryDetails.attachments}`,
+              uri: `https://onepay.alsoltech.in/public${entryDetails.attachments}`,
             }}
           />
         </Modal>

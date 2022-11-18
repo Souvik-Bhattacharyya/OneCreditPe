@@ -37,7 +37,17 @@ const Supplier = () => {
       console.log(error);
     }
   };
+  const advance = allCustomerTrnsData
+    .filter(item => item.aggsum > 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
 
+  const purchase = allCustomerTrnsData
+    .filter(item => item.aggsum < 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
   return (
     <>
       <CommonHeader color="#0a5ac9" />
@@ -125,9 +135,9 @@ const Supplier = () => {
                   fontWeight: "700",
                   fontFamily: "Poppins",
                 }}>
-                ₹4,242
+                ₹{advance}
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 Advance
               </Text>
             </View>
@@ -148,9 +158,9 @@ const Supplier = () => {
             </View>
             <View style={{flexDirection: "column"}}>
               <Text style={{fontSize: 18, color: "#333", fontWeight: "700"}}>
-                ₹4,242
+                ₹{purchase}
               </Text>
-              <Text style={{ fontSize: 12, color: "#828282", fontWeight: "600" }}>
+              <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 Purchase
               </Text>
             </View>

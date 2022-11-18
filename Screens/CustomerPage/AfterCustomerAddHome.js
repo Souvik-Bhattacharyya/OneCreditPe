@@ -39,6 +39,17 @@ const Customer = () => {
     }
   };
 
+  const cusGot = allCustomerTrnsData
+    .filter(item => item.aggsum > 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
+
+  const cusGave = allCustomerTrnsData
+    .filter(item => item.aggsum < 0)
+    .reduce((accumulator, object) => {
+      return accumulator + object.aggsum;
+    }, 0);
   return (
     <>
       <CommonHeader color="#0a5ac9" />
@@ -126,7 +137,7 @@ const Customer = () => {
                   fontWeight: "700",
                   fontFamily: "Poppins",
                 }}>
-                ₹4,242
+                ₹{cusGot}
               </Text>
               <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 You Got
@@ -149,7 +160,7 @@ const Customer = () => {
             </View>
             <View style={{flexDirection: "column"}}>
               <Text style={{fontSize: 18, color: "#333", fontWeight: "700"}}>
-                ₹4,242
+                ₹{cusGave}
               </Text>
               <Text style={{fontSize: 12, color: "#828282", fontWeight: "600"}}>
                 You Gave
