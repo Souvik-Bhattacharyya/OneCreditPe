@@ -1,7 +1,7 @@
 import {
   View,
   Text,
-  TextInput,
+  ToastAndroid,
   StyleSheet,
   TouchableOpacity,
   Modal,
@@ -15,6 +15,7 @@ import TransactionFull from "../../Components/TransactionFull";
 import moment from "moment";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import TransactionEmpty from "../../Components/TransactionEmpty";
+import ReactNativeBlobUtil from "react-native-blob-util";
 const width = Dimensions.get("window").width;
 import Api from "../../Services";
 
@@ -88,13 +89,41 @@ const ViewReport = ({navigation, route}) => {
   const downloadPdf = async () => {
     try {
       const response = await Api.get("/auth/create-cashbook-pdf");
-      if (response.status == 200) {
+      // ToastAndroid.show("File Saved !", ToastAndroid.SHORT);
+
+      if (response.status == 200 && response.data) {
+        console.log(`https://onepay.alsoltech.in/api/${response.data.path}`);
+        ReactNativeBlobUtil.config({
+          // add this option that makes response data to be stored as a file,
+          // this is much more performant.
+          fileCache: true,
+          // addAndroidDownloads: {
+          //   // Show notification when response data transmitted
+          //   notification: true,
+          //   // Title of download notification
+          //   title: "Great ! Download Success ! :O ",
+          //   // File description (not notification description)
+          //   description: "An pdf file.",
+          //   mime: "application/pdf",
+          //   // Make the file scannable  by media scanner
+          //   mediaScannable: true,
+          // },
+        })
+          .fetch("GET", `https://onepay.alsoltech.in/api/${response.data.path}`)
+          .then(res => {
+            // the temp file path
+            console.log("The file saved to ", res.path());
+            ToastAndroid.show("File Saved !", ToastAndroid.SHORT);
+          })
+          .catch(() => {
+            ToastAndroid.show("Failed to download !", ToastAndroid.SHORT);
+          });
         console.log(response.data);
       } else {
         throw new Error(response.message);
       }
     } catch (error) {
-      console.log(error);
+      ToastAndroid.show(error.message, ToastAndroid.SHORT);
     }
   };
 
