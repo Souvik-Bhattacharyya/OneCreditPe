@@ -6,8 +6,8 @@ import metrics from "../../Constants/metrics";
 import moment from "moment";
 import Api from "../../Services";
 import {useDispatch} from "react-redux";
+
 const ToGet = ({trnsDetails, customersAllTransaction}) => {
-  console.log("trnsDetails", trnsDetails);
   const dispatch = useDispatch();
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
@@ -72,7 +72,7 @@ const ToGet = ({trnsDetails, customersAllTransaction}) => {
             {trnsDetails?.amount}
           </Text>
           <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
-            You Got
+            {trnsDetails?.tns_type}
           </Text>
         </View>
         <View style={{width: "45%"}}>

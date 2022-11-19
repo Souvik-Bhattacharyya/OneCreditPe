@@ -235,7 +235,7 @@ const CashEntries = ({navigation, route}) => {
           }}
           onPress={() => {
             setIsActive("cash in");
-            setCustomerCashEntry({...customerCashEntry, tns_type: "got"});
+            setCustomerCashEntry({...customerCashEntry, tns_type: "advance"});
           }}>
           <Text
             style={[
@@ -257,7 +257,7 @@ const CashEntries = ({navigation, route}) => {
           }}
           onPress={() => {
             setIsActive("cash out");
-            setCustomerCashEntry({...customerCashEntry, tns_type: "give"});
+            setCustomerCashEntry({...customerCashEntry, tns_type: "purchase"});
           }}>
           <Text
             style={[
