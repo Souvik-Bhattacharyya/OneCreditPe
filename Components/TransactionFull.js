@@ -28,10 +28,7 @@ const TransactionFull = ({
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {
-    backgroundColor: "white",
-    marginHorizontal: 20,
-    paddingVertical: 30,
-    marginTop: 110,
+    alignSelf: "center",
   };
   const [itemSelected, setItemSelected] = useState({});
   const styles = StyleSheet.create({
@@ -41,6 +38,7 @@ const TransactionFull = ({
       justifyContent: "center",
       flex: 1,
       position: "relative",
+      height: "100%",
     },
     search: {
       flexDirection: "row",
@@ -126,17 +124,17 @@ const TransactionFull = ({
               visible={visible}
               onDismiss={hideModal}
               contentContainerStyle={containerStyle}>
-              <Image
-                source={{
-                  uri: `https://onepay.alsoltech.in/public/assets/cashbook/attachments/${itemSelected.attachments}`,
-                }}
-                style={{
-                  height: 120,
-                  width: 120,
-                  resizeMode: "contain",
-                  alignSelf: "center",
-                }}
-              />
+              <View style={{backgroundColor: "black"}}>
+                <Image
+                  source={{
+                    uri: `https://onepay.alsoltech.in/public/assets/cashbook/attachments/${itemSelected.attachments}`,
+                  }}
+                  style={{
+                    height: 170,
+                    width: 150,
+                  }}
+                />
+              </View>
             </Modal>
           </Portal>
         </Provider>
