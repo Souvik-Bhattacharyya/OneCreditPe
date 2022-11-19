@@ -6,6 +6,7 @@ import metrics from "../../Constants/metrics";
 import moment from "moment";
 import Api from "../../Services";
 import {useDispatch} from "react-redux";
+import {notify} from "../../Redux/Action/notificationActions";
 
 const ToGet = ({trnsDetails, customersAllTransaction}) => {
   const dispatch = useDispatch();
@@ -27,14 +28,16 @@ const ToGet = ({trnsDetails, customersAllTransaction}) => {
   const deleteEntry = async id => {
     try {
       const response = await Api.delete(`/auth/transaction/${id}`);
+      console.log(response);
 
       if (response.status == 200) {
-        console.log("success");
-        // customersAllTransaction(id);
+        customersAllTransaction(trnsDetails?.customer_id);
+        dispatch(notify({message: "Transaction deleted successfully"}));
       } else {
         throw new Error(response.message);
       }
     } catch (error) {
+      console.log(error);
       dispatch(notify({message: error.message}));
     }
   };

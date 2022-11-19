@@ -54,7 +54,7 @@ const CustomerHome = ({route}) => {
         {allTransaction?.length ? (
           <UserTransaction
             allTransaction={allTransaction}
-            // customersAllTransaction={customersAllTransaction(id)}
+            customersAllTransaction={customersAllTransaction}
           />
         ) : (
           <View

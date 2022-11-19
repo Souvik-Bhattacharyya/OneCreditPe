@@ -92,11 +92,12 @@ const ViewReport = ({navigation, route}) => {
       // ToastAndroid.show("File Saved !", ToastAndroid.SHORT);
 
       if (response.status == 200 && response.data) {
-        console.log(`https://onepay.alsoltech.in/api/${response.data.path}`);
+        // console.log(`https://onepay.alsoltech.in/${response.data.path}`);
         ReactNativeBlobUtil.config({
           // add this option that makes response data to be stored as a file,
           // this is much more performant.
           fileCache: true,
+          // appendExt: "png",
           // addAndroidDownloads: {
           //   // Show notification when response data transmitted
           //   notification: true,
@@ -109,9 +110,13 @@ const ViewReport = ({navigation, route}) => {
           //   mediaScannable: true,
           // },
         })
-          .fetch("GET", `https://onepay.alsoltech.in/api/${response.data.path}`)
+          .fetch(
+            "GET",
+            `https://onepay.alsoltech.in/public/assets/cashbook/report/${response.data?.path}`,
+          )
           .then(res => {
             // the temp file path
+            console.log(res);
             console.log("The file saved to ", res.path());
             ToastAndroid.show("File Saved !", ToastAndroid.SHORT);
           })

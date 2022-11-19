@@ -7,9 +7,9 @@ import moment from "moment";
 import Api from "../../Services";
 import {useDispatch} from "react-redux";
 import {Modal, Portal, Provider} from "react-native-paper";
+import {notify} from "../../Redux/Action/notificationActions";
 
-const CashOut = ({trnsDetails}) => {
-  console.log(trnsDetails);
+const CashOut = ({trnsDetails, customersAllTransaction}) => {
   const [visible, setVisible] = React.useState(false);
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -34,15 +34,14 @@ const CashOut = ({trnsDetails}) => {
       const response = await Api.delete(`/auth/transaction/${id}`);
       console.log("del en", response);
       if (response.status == 200) {
-        console.log("successful");
-        //  getTodayCashEntries();
-        //  viewReport();
+        customersAllTransaction(trnsDetails?.customer_id);
+        dispatch(notify({message: "Transaction deleted successfully"}));
       } else {
         throw new Error(response.message);
       }
     } catch (error) {
       console.log(error);
-      //  dispatch(notify({message: error.message}));
+      dispatch(notify({message: error.message}));
     }
   };
   return (
