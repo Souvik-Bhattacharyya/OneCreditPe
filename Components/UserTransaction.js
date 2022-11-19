@@ -4,60 +4,54 @@ import metrics from "../Constants/metrics";
 import {ToGet, ToPay} from "../Screens";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 const UserTransaction = ({allTransaction, customersAllTransaction}) => {
-  let get = 0;
-  let give = 0;
+  let totalAmount = 0;
   for (let i of allTransaction) {
-    i.tns_type == "got" ? (get = get + i?.amount) : (give = give + i?.amount);
+    i.tns_type == "got" || i.tns_type == "advance"
+      ? (totalAmount = totalAmount + i?.amount)
+      : (totalAmount = totalAmount - i?.amount);
   }
+
+  const Get = () => (
+    <View
+      style={[styles.card, {borderColor: "#c6c6c6", backgroundColor: "#fff"}]}>
+      <View style={styles.box}>
+        <Text style={{fontSize: 20, color: "#12CE12", fontWeight: "900"}}>
+          ₹ {totalAmount}
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
+          Total amount you will get
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Icon name="account-arrow-left" color={"#12CE12"} size={32} />
+      </View>
+    </View>
+  );
+
+  const Pay = () => (
+    <View
+      style={[styles.card, {borderColor: "#c6c6c6", backgroundColor: "#fff"}]}>
+      <View style={styles.box}>
+        <Text style={{fontSize: 20, color: "#F31B24", fontWeight: "900"}}>
+          ₹ {totalAmount}
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
+          Total amount you have Purchase
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Icon name="account-arrow-right" color={"#F31B24"} size={32} />
+      </View>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      {/* Card Started */}
-
-      {/* get */}
-      <View
-        style={[
-          styles.card,
-          {borderColor: "#c6c6c6", backgroundColor: "#fff"},
-        ]}>
-        <View style={styles.box}>
-          <Text style={{fontSize: 20, color: "#12CE12", fontWeight: "900"}}>
-            ₹ {get}
-          </Text>
-        </View>
-        <View style={styles.box}>
-          <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-            Total amount you will get
-          </Text>
-        </View>
-        <View style={styles.box}>
-          <Icon name="account-arrow-left" color={"#12CE12"} size={32} />
-        </View>
-      </View>
-
-      {/* pay */}
-      <View
-        style={[
-          styles.card,
-          {borderColor: "#c6c6c6", backgroundColor: "#fff"},
-        ]}>
-        <View style={styles.box}>
-          <Text style={{fontSize: 20, color: "#F31B24", fontWeight: "900"}}>
-            ₹ {give}
-          </Text>
-        </View>
-        <View style={styles.box}>
-          <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-            Total amount you have Purchase
-          </Text>
-        </View>
-        <View style={styles.box}>
-          <Icon name="account-arrow-right" color={"#F31B24"} size={32} />
-        </View>
-      </View>
-
-      {/* Card end */}
-
+      {totalAmount > 0 ? Get() : Pay()}
       <View
         style={{
           width: "100%",
@@ -71,7 +65,7 @@ const UserTransaction = ({allTransaction, customersAllTransaction}) => {
       </View>
       <View>
         {allTransaction.map((trns, index) =>
-          trns.tns_type == "got" ? (
+          trns.tns_type == "got" || trns.tns_type == "advance" ? (
             <ToGet
               trnsDetails={trns}
               key={index}

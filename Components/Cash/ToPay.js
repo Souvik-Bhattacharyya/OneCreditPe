@@ -79,7 +79,7 @@ const CashOut = ({trnsDetails}) => {
               {trnsDetails?.amount}
             </Text>
             <Text style={{color: "#000", fontSize: 12, fontWeight: "800"}}>
-              You Gave
+              {trnsDetails.tns_type}
             </Text>
           </View>
           <View style={{width: "45%"}}>
