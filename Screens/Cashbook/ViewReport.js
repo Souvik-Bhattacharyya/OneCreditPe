@@ -89,41 +89,36 @@ const ViewReport = ({navigation, route}) => {
   const downloadPdf = async () => {
     try {
       const response = await Api.get("/auth/create-cashbook-pdf");
-      // ToastAndroid.show("File Saved !", ToastAndroid.SHORT);
-
       if (response.status == 200 && response.data) {
-        // console.log(`https://onepay.alsoltech.in/${response.data.path}`);
         ReactNativeBlobUtil.config({
-          // add this option that makes response data to be stored as a file,
-          // this is much more performant.
-          fileCache: true,
-          // appendExt: "png",
-          // addAndroidDownloads: {
-          //   // Show notification when response data transmitted
-          //   notification: true,
-          //   // Title of download notification
-          //   title: "Great ! Download Success ! :O ",
-          //   // File description (not notification description)
-          //   description: "An pdf file.",
-          //   mime: "application/pdf",
-          //   // Make the file scannable  by media scanner
-          //   mediaScannable: true,
-          // },
+          path: ReactNativeBlobUtil.fs.dirs.DownloadDir + response.data?.path,
+          addAndroidDownloads: {
+            notification: true,
+            title: response.data?.path,
+            description: "An pdf file.",
+            mime: "application/pdf",
+            mediaScannable: true,
+          },
         })
           .fetch(
             "GET",
             `https://onepay.alsoltech.in/public/assets/cashbook/report/${response.data?.path}`,
           )
-          .then(res => {
-            // the temp file path
-            console.log(res);
-            console.log("The file saved to ", res.path());
+          .then(async res => {
+            await ReactNativeBlobUtil.MediaCollection.copyToMediaStore(
+              {
+                name: response.data?.path,
+                parentFolder: "",
+                mimeType: "application/pdf",
+              },
+              "Download",
+              res.path(),
+            );
             ToastAndroid.show("File Saved !", ToastAndroid.SHORT);
           })
           .catch(() => {
             ToastAndroid.show("Failed to download !", ToastAndroid.SHORT);
           });
-        console.log(response.data);
       } else {
         throw new Error(response.message);
       }
