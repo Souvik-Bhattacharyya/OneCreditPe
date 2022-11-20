@@ -1,9 +1,9 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import {View, Text, Image, TouchableOpacity} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
-import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
-const CommonHeader = (props) => {
+import {useNavigation} from "@react-navigation/native";
+import {useSelector} from "react-redux";
+const CommonHeader = props => {
   const navigation = useNavigation();
   const user = useSelector(state => state.auth.user);
   console.log("========>", user);
@@ -44,19 +44,25 @@ const CommonHeader = (props) => {
               justifyContent: "center",
               alignItems: "center",
             }}>
-            <Text style={{ fontWeight: "600", fontSize: 17, color: "#fff", marginRight: 5 }}>
-              {user.name}
+            <Text
+              style={{
+                fontWeight: "600",
+                fontSize: 17,
+                color: "#fff",
+                marginRight: 5,
+              }}>
+              {user.name != null ? user.name : "Username"}
             </Text>
             <Icon name="caretdown" color={"#fff"} size={12} />
           </TouchableOpacity>
-          <Text style={{ fontSize: 14, color: "#c9c9c9", fontWeight: "800" }}>
+          <Text style={{fontSize: 14, color: "#c9c9c9", fontWeight: "800"}}>
             {user.mobile}
           </Text>
         </View>
       </View>
       <TouchableOpacity
         onPress={() => alert("In Progress")}
-        style={{ width: "25%", justifyContent: "center", alignItems: "center" }}>
+        style={{width: "25%", justifyContent: "center", alignItems: "center"}}>
         <Image
           source={require("../../Assets/calender.png")}
           style={{
