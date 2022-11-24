@@ -5,6 +5,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import React, {useEffect} from "react";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -26,16 +27,16 @@ const OtpScreen = ({navigation, route}) => {
 
   const onSubmitOtp = async e => {
     try {
-      setLoading(true);
       if (e == 1000) {
+        setLoading(true);
         const response = await Api.post("/check-otp", {
           mobile: mobileNumber,
           otp: e,
         });
 
-        if (response.status == 200) {
+        if (response.status == "200") {
           const payload = {
-            user: response.data[0].user,
+            user: response.data.user,
             clientToken: response.data.token,
           };
           dispatch(addToken(payload));
@@ -88,7 +89,7 @@ const OtpScreen = ({navigation, route}) => {
           <OTPTextView
             inputCount={4}
             handleTextChange={e => {
-              e == 1000 && onSubmitOtp(e);
+              e.length == 4 && onSubmitOtp(e);
             }}
           />
         </View>
