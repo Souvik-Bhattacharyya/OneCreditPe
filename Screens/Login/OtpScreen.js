@@ -33,10 +33,9 @@ const OtpScreen = ({navigation, route}) => {
           otp: otp,
         });
 
-        console.log("------------------>", response.data);
-        if (response.data.status === "200") {
+        if (response.status == 200) {
           const payload = {
-            user: response.data.user,
+            user: response.data[0].user,
             clientToken: response.data.token,
           };
           dispatch(addToken(payload));
@@ -44,7 +43,7 @@ const OtpScreen = ({navigation, route}) => {
           setLoading(false);
         }
       } else {
-        alert("You have entered wrong OTP");
+        alert("This is wrong otp");
       }
     } catch (error) {
       console.log(error);
