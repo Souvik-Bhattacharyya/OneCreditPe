@@ -31,7 +31,7 @@ const CustomerHome = ({route}) => {
   };
   const addCustomer = async payload => {
     try {
-      if (payload.cus_mobile.length >= 10) {
+      if (payload.cus_mobile.length === 10) {
         const response = await Api.post("/auth/customer", payload);
         if (
           response.data.message === "mobile number exist" &&
@@ -79,7 +79,7 @@ const CustomerHome = ({route}) => {
 
   const addSupplier = async payload => {
     try {
-      if (payload.cus_mobile.length >= 10) {
+      if (payload.cus_mobile.length === 10) {
         const response = await Api.post("/auth/customer", payload);
         if (
           response.data.message === "mobile number exist" &&
