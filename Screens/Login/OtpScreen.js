@@ -43,7 +43,7 @@ const OtpScreen = ({navigation, route}) => {
           setLoading(false);
         }
       } else {
-        alert("This is wrong otp");
+        alert("You have entered wrong OTP");
       }
     } catch (error) {
       console.log(error);
