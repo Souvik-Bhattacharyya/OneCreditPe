@@ -33,6 +33,7 @@ import {
   PartiesHeader,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
+import AddAccount from "../Screens/loanSection/addAccount";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -363,6 +364,7 @@ const AuthTabNavigation = ({navigation}) => {
           ),
         }}
       />
+
       <Tab.Screen
         name="More"
         component={SettingsStack}
@@ -377,6 +379,21 @@ const AuthTabNavigation = ({navigation}) => {
           ),
         }}
       />
+
+      {/* <Tab.Screen
+        name="Loan"
+        component={LoanScreenStack}
+        options={{
+          tabBarIcon: ({color, focused}) => (
+            <MaterialCommunityIcons
+              name={focused ? "loan" : "loan-outline"}
+              size={32}
+              color={color}
+              style={{marginTop: 2}}
+            />
+          ),
+        }}
+      /> */}
     </Tab.Navigator>
   );
 };
