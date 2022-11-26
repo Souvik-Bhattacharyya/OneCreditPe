@@ -30,6 +30,7 @@ import Ans from "./Settings/ans";
 import InviteFriendModal from "../Components/InviteFriendModal";
 import SnackBar from "../Components/SnackBar";
 import LoanSection from "../Screens/loanSection/Loan";
+import AddAccount from "./loanSection/addAccount";
 
 export {
   Login,
