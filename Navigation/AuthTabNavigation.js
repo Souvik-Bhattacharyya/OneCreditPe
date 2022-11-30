@@ -31,6 +31,9 @@ import {
   Ans,
   InviteFriendModal,
   PartiesHeader,
+  LoanDetails,
+  AddDetails,
+  AddBankDetails,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 
@@ -247,6 +250,30 @@ const LoanScreenStack = () => {
         name="EasyLoan"
         options={{
           headerTitle: "Easy Loan",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={LoanDetails}
+        name="LoanDetails"
+        options={{
+          headerTitle: "Loan Details",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddDetails}
+        name="AddDetails"
+        options={{
+          headerTitle: "Complete Your KYC",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddBankDetails}
+        name="AddBankDetails"
+        options={{
+          headerTitle: "Add Your bank account",
           headerShown: false,
         }}
       />
