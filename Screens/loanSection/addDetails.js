@@ -141,15 +141,18 @@ const AddDetails = ({navigation}) => {
               source={require("../../Assets/adhaar.png")}
               style={{height: 50, width: 80}}
             />
-            <Text
-              style={{
-                color: "#0A5AC9",
-                fontFamily: "Roboto",
-                fontWeight: "bold",
-                fontSize: 14,
-              }}>
-              Add Aaddhar Details
-            </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("AddAdhaarDetails")}>
+              <Text
+                style={{
+                  color: "#0A5AC9",
+                  fontFamily: "Roboto",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                }}>
+                Add Aaddhar Details
+              </Text>
+            </TouchableOpacity>
             <Text style={{fontSize: 9}}>Add your bank details here to</Text>
             <Text style={{fontSize: 9}}>transfer the money</Text>
             <Text
@@ -184,15 +187,17 @@ const AddDetails = ({navigation}) => {
               source={require("../../Assets/camera.png")}
               style={{height: 50, width: 50}}
             />
-            <Text
-              style={{
-                color: "#0A5AC9",
-                fontFamily: "Roboto",
-                fontWeight: "bold",
-                fontSize: 14,
-              }}>
-              Add A Picture
-            </Text>
+            <TouchableOpacity onPress={() => navigation.navigate("AddPicture")}>
+              <Text
+                style={{
+                  color: "#0A5AC9",
+                  fontFamily: "Roboto",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                }}>
+                Add A Picture
+              </Text>
+            </TouchableOpacity>
             <Text style={{fontSize: 9}}>Add your bank details here to</Text>
             <Text style={{fontSize: 9}}>transfer the money</Text>
             <Text

@@ -34,6 +34,9 @@ import {
   LoanDetails,
   AddDetails,
   AddBankDetails,
+  FindIfsc,
+  AddPicture,
+  AddAdhaarDetails,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 
@@ -274,6 +277,30 @@ const LoanScreenStack = () => {
         name="AddBankDetails"
         options={{
           headerTitle: "Add Your bank account",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={FindIfsc}
+        name="FindIfsc"
+        options={{
+          headerTitle: "Add Your bank account",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddPicture}
+        name="AddPicture"
+        options={{
+          headerTitle: "Add Your Picture",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddAdhaarDetails}
+        name="AddAdhaarDetails"
+        options={{
+          headerTitle: "Add Your Aaddhar",
           headerShown: false,
         }}
       />

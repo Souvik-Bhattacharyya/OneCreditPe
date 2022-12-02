@@ -2,7 +2,7 @@ import {View, Text, TextInput, TouchableOpacity} from "react-native";
 import React from "react";
 import CorrectIcon from "react-native-vector-icons/AntDesign";
 import metrics from "../../Constants/metrics";
-const AddBankDetails = () => {
+const AddBankDetails = ({navigation}) => {
   return (
     <View
       style={{
@@ -36,6 +36,7 @@ const AddBankDetails = () => {
             borderRadius: 5,
           }}
         />
+
         <TextInput
           style={{
             backgroundColor: "#FFFFFF",
@@ -48,6 +49,18 @@ const AddBankDetails = () => {
           }}
           placeholder="Bank IFSC Code"
         />
+        <TouchableOpacity onPress={() => navigation.navigate("FindIfsc")}>
+          <Text
+            style={{
+              position: "absolute",
+              right: 20,
+              bottom: 15,
+              fontSize: 12,
+              color: "#0A5AC9",
+            }}>
+            Find IFSC
+          </Text>
+        </TouchableOpacity>
         <TextInput
           style={{
             backgroundColor: "#FFFFFF",
