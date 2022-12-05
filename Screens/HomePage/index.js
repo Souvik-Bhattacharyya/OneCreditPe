@@ -25,13 +25,13 @@ const CustomerHome = ({route}) => {
   const [cusTransaction, setCusTransaction] = useState([]);
   const [suppTransaction, setSuppTransaction] = useState([]);
   const [cusGive, setCusGive] = useState("");
-  useEffect(() => {
-    navigation.addListener("focus", () => {
-      viewReport();
-      customerTransaction();
-      supplierTransaction();
-    });
-  }, [navigation]);
+  // useEffect(() => {
+  //   navigation.addListener("focus", () => {
+  //     viewReport();
+  //     customerTransaction();
+  //     supplierTransaction();
+  //   });
+  // }, [navigation]);
 
   const viewReport = async () => {
     try {
@@ -90,14 +90,14 @@ const CustomerHome = ({route}) => {
     .reduce((accumulator, object) => {
       return accumulator + object.aggsum;
     }, 0);
-
+  console.log("homescreen");
   return (
     <>
       <ImageBackground
         resizeMode="cover"
         source={require("../../Assets/background.jpg")}
         style={{flex: 1, backgroundColor: "#000"}}>
-        <CommonHeader color="transparent" />
+        {/* <CommonHeader color="transparent" /> */}
         <View style={styles.container}>
           <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
             <View
@@ -531,7 +531,7 @@ const CustomerHome = ({route}) => {
                   <Text
                     style={{color: "#0A5AC9", fontSize: 16, fontWeight: "600"}}>
                     Apply Now
-                    <Icon name="doubleright" color={"#0A5AC9"} size={16} />
+                    {/* <Icon name="doubleright" color={"#0A5AC9"} size={16} /> */}
                   </Text>
                 </TouchableOpacity>
               </View>

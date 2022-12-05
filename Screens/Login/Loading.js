@@ -5,7 +5,7 @@ const Loading = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate("HomeScreens");
-    }, 1000);
+    }, 100);
   }, []);
 
   return (

@@ -202,7 +202,7 @@ const Cashbook = ({navigation}) => {
               }}>
               View Report
             </Text>
-            <Icon name="doubleright" color={"#0A5AC9"} size={16} />
+            {/* <Icon name="doubleright" color={"#0A5AC9"} size={16} /> */}
           </TouchableOpacity>
         </View>
 
