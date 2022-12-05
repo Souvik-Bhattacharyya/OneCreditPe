@@ -27,24 +27,22 @@ const OtpScreen = ({navigation, route}) => {
 
   const onSubmitOtp = async e => {
     try {
-      if (e == 1000) {
-        setLoading(true);
-        const response = await Api.post("/check-otp", {
-          mobile: mobileNumber,
-          otp: e,
-        });
-
-        if (response.status == "200") {
-          const payload = {
-            user: response.data.user,
-            clientToken: response.data.token,
-          };
-          dispatch(addToken(payload));
-          navigation.navigate("loading");
-          setLoading(false);
-        }
-      } else {
+      setLoading(true);
+      const response = await Api.post("/check-otp", {
+        mobile: mobileNumber,
+        otp: e,
+      });
+      console.log("response", response.data.status);
+      if (response.data.status == "401") {
         alert("You have entered wrong OTP");
+      } else {
+        const payload = {
+          user: response.data.user,
+          clientToken: response.data.token,
+        };
+        dispatch(addToken(payload));
+        navigation.navigate("loading");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
