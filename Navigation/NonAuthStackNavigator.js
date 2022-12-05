@@ -13,8 +13,19 @@ function NonAuthStackNavigator() {
   const auth = useSelector(state => state.auth);
 
   React.useEffect(() => {
+    console.log(auth.clientToken);
     if (auth.clientToken) {
-      navigation.navigate("loading");
+      // navigation.navigate("HomeScreens");
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: "HomeScreens",
+            },
+          ],
+        }),
+      );
     } else
       navigation.dispatch(
         CommonActions.reset({

@@ -41,7 +41,7 @@ const OtpScreen = ({navigation, route}) => {
           clientToken: response.data.token,
         };
         dispatch(addToken(payload));
-        navigation.navigate("loading");
+        navigation.navigate("HomeScreens");
         setLoading(false);
       }
     } catch (error) {
