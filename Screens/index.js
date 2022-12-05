@@ -30,7 +30,12 @@ import Ans from "./Settings/ans";
 import InviteFriendModal from "../Components/InviteFriendModal";
 import SnackBar from "../Components/SnackBar";
 import LoanSection from "../Screens/loanSection/Loan";
-
+import LoanDetails from "./loanSection/loanDetails";
+import AddDetails from "./loanSection/addDetails";
+import AddBankDetails from "./loanSection/addBankDetails";
+import FindIfsc from "./loanSection/findIfsc";
+import AddPicture from "./loanSection/addPicture";
+import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
 export {
   Login,
   OtpScreen,
@@ -64,4 +69,10 @@ export {
   InviteFriendModal,
   Ans,
   SnackBar,
+  LoanDetails,
+  AddDetails,
+  AddBankDetails,
+  FindIfsc,
+  AddPicture,
+  AddAdhaarDetails,
 };

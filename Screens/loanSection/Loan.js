@@ -18,7 +18,7 @@ const windowHeight = Dimensions.get("window").height;
 import metrics from "../../Constants/metrics";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-const Loan = () => {
+const Loan = ({navigation}) => {
   return (
     <>
       {/* <Header /> */}
@@ -134,7 +134,8 @@ const Loan = () => {
               flexDirection: "row",
               // marginTop: "auto",
               // marginBottom: 20,
-            }}>
+            }}
+            onPress={() => navigation.navigate("LoanDetails")}>
             <Text
               style={{
                 fontFamily: "Poppins-Regular",

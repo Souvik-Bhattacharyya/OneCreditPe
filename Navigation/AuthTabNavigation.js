@@ -31,6 +31,12 @@ import {
   Ans,
   InviteFriendModal,
   PartiesHeader,
+  LoanDetails,
+  AddDetails,
+  AddBankDetails,
+  FindIfsc,
+  AddPicture,
+  AddAdhaarDetails,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 
@@ -247,6 +253,54 @@ const LoanScreenStack = () => {
         name="EasyLoan"
         options={{
           headerTitle: "Easy Loan",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={LoanDetails}
+        name="LoanDetails"
+        options={{
+          headerTitle: "Loan Details",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddDetails}
+        name="AddDetails"
+        options={{
+          headerTitle: "Complete Your KYC",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddBankDetails}
+        name="AddBankDetails"
+        options={{
+          headerTitle: "Add Your bank account",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={FindIfsc}
+        name="FindIfsc"
+        options={{
+          headerTitle: "Add Your bank account",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddPicture}
+        name="AddPicture"
+        options={{
+          headerTitle: "Add Your Picture",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddAdhaarDetails}
+        name="AddAdhaarDetails"
+        options={{
+          headerTitle: "Add Your Aaddhar",
           headerShown: false,
         }}
       />
