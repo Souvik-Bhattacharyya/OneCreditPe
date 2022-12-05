@@ -28,6 +28,7 @@ const OtpScreen = ({navigation, route}) => {
   const onSubmitOtp = async e => {
     try {
       setLoading(true);
+      console.log("api call start");
       const response = await Api.post("/check-otp", {
         mobile: mobileNumber,
         otp: e,
@@ -40,9 +41,9 @@ const OtpScreen = ({navigation, route}) => {
           user: response.data.user,
           clientToken: response.data.token,
         };
-        dispatch(addToken(payload));
-        navigation.navigate("HomeScreens");
         setLoading(false);
+        dispatch(addToken(payload));
+        // navigation.navigate("HomeScreens");
       }
     } catch (error) {
       console.log(error);

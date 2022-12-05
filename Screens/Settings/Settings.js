@@ -40,7 +40,7 @@ const Settings = () => {
 
   return (
     <>
-      <CommonHeader color= "#0a5ac9" />
+      <CommonHeader color="#0a5ac9" />
       <ScrollView style={{backgroundColor: "#fff"}}>
         <View style={styles.container}>
           <View
@@ -149,7 +149,7 @@ const Settings = () => {
                 style={styles.items}
                 onPress={() => {
                   dispatch(logout());
-                  navigation.navigate("login");
+                  // navigation.navigate("login");
                 }}
                 left={props => (
                   <Help

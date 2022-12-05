@@ -2,11 +2,11 @@ import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
 import React, {useEffect} from "react";
 
 const Loading = ({navigation}) => {
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigation.navigate("HomeScreens");
-  //   }, 1000);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate("HomeScreens");
+    }, 100);
+  }, []);
 
   return (
     <View style={styles.container}>

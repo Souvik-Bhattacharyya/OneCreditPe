@@ -531,7 +531,7 @@ const CustomerHome = ({route}) => {
                   <Text
                     style={{color: "#0A5AC9", fontSize: 16, fontWeight: "600"}}>
                     Apply Now
-                    <Icon name="doubleright" color={"#0A5AC9"} size={16} />
+                    {/* <Icon name="doubleright" color={"#0A5AC9"} size={16} /> */}
                   </Text>
                 </TouchableOpacity>
               </View>
