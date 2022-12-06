@@ -31,9 +31,9 @@ const Settings = () => {
   const openDialScreen = () => {
     let number = "";
     if (Platform.OS === "ios") {
-      number = "telprompt:+917980222011";
+      number = "telprompt:+917001312050";
     } else {
-      number = "tel:+917980222011";
+      number = "tel:+917001312050";
     }
     Linking.openURL(number);
   };
@@ -228,7 +228,7 @@ const Settings = () => {
                 style={styles.items}
                 onPress={() =>
                   Linking.openURL(
-                    "whatsapp://send?text=Hello&phone=+917980222011",
+                    "whatsapp://send?text=Hello&phone=+917001312050",
                   )
                 }
                 left={props => (

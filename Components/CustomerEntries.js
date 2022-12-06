@@ -287,11 +287,11 @@ const CashEntries = ({navigation, route}) => {
         />
         <TextInput
           value={customerCashEntry.paymentDetails}
-          placeholder="Enter Payment Details"
+          placeholder="Enter Payment Details (optional)"
           placeholderTextColor={"#828282"}
           style={{
             backgroundColor: "#fff",
-            fontSize: 18,
+            fontSize: 17,
             paddingHorizontal: 10,
             color: "#000",
             fontWeight: "600",

@@ -157,7 +157,7 @@ const CustomerHome = ({route}) => {
             }}>
             <TextInput
               value={customer.mobile}
-              placeholder="Customer Mobile"
+              placeholder="(+91) Customer Mobile"
               placeholderTextColor={"#828282"}
               style={styles.Input}
               keyboardType={"numeric"}
