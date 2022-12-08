@@ -114,7 +114,8 @@ const CashEntries = ({navigation, route}) => {
       const formData = new FormData();
       formData.append("amount", customerCashEntry.amount);
       formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
-      formData.append("tns_type", customerCashEntry.tns_type);
+      customerCashEntry.tns_type &&
+        formData.append("tns_type", customerCashEntry.tns_type);
       formData.append("payment_details", customerCashEntry.paymentDetails);
       formData.append("customer_id", route.params?.customerId);
       file && formData.append("attachment", file);
