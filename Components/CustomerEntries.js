@@ -114,7 +114,8 @@ const CashEntries = ({navigation, route}) => {
       const formData = new FormData();
       formData.append("amount", customerCashEntry.amount);
       formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
-      formData.append("tns_type", customerCashEntry.tns_type);
+      customerCashEntry.tns_type &&
+        formData.append("tns_type", customerCashEntry.tns_type);
       formData.append("payment_details", customerCashEntry.paymentDetails);
       formData.append("customer_id", route.params?.customerId);
       file && formData.append("attachment", file);
@@ -287,11 +288,11 @@ const CashEntries = ({navigation, route}) => {
         />
         <TextInput
           value={customerCashEntry.paymentDetails}
-          placeholder="Enter Payment Details"
+          placeholder="Enter Payment Details (optional)"
           placeholderTextColor={"#828282"}
           style={{
             backgroundColor: "#fff",
-            fontSize: 18,
+            fontSize: 17,
             paddingHorizontal: 10,
             color: "#000",
             fontWeight: "600",

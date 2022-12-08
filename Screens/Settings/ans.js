@@ -1,20 +1,20 @@
-import { View, Text, TouchableOpacity, Linking, ScrollView } from "react-native";
+import {View, Text, TouchableOpacity, Linking, ScrollView} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 
-const Ans = ({ route }) => {
+const Ans = ({route}) => {
   const openDialScreen = () => {
     let number = "";
     if (Platform.OS === "ios") {
-      number = "telprompt:${+917980222011}";
+      number = "telprompt:${+917001312050}";
     } else {
-      number = "tel:${+917980222011}";
+      number = "tel:${+917001312050}";
     }
     Linking.openURL(number);
   };
   return (
     <>
-      <ScrollView style={{backgroundColor:'#EEF3FF'}}>
+      <ScrollView style={{backgroundColor: "#EEF3FF"}}>
         <View
           style={{
             backgroundColor: "white",
@@ -30,9 +30,24 @@ const Ans = ({ route }) => {
             }}>
             {route.params.qus}
           </Text>
-          <Text style={{ marginBottom: 20, color: '#333' }}>{route.params.ans}</Text>
-          <View style={{borderTopColor: '#c9c9c9', borderTopWidth: 1, paddingTop: 20, marginTop: 20}}>
-            <Text style={{ textAlign: "center", marginBottom: 20, color: '#333', fontWeight: '800', fontSize: 16}}>
+          <Text style={{marginBottom: 20, color: "#333"}}>
+            {route.params.ans}
+          </Text>
+          <View
+            style={{
+              borderTopColor: "#c9c9c9",
+              borderTopWidth: 1,
+              paddingTop: 20,
+              marginTop: 20,
+            }}>
+            <Text
+              style={{
+                textAlign: "center",
+                marginBottom: 20,
+                color: "#333",
+                fontWeight: "800",
+                fontSize: 16,
+              }}>
               Was this helpful?
             </Text>
             <View
@@ -45,7 +60,7 @@ const Ans = ({ route }) => {
                 <Icon
                   name="like1"
                   size={20}
-                  style={{ paddingHorizontal: 15 }}
+                  style={{paddingHorizontal: 15}}
                   color="black"
                 />
               </TouchableOpacity>
@@ -54,7 +69,7 @@ const Ans = ({ route }) => {
                   name="dislike1"
                   size={20}
                   color="black"
-                  style={{ paddingHorizontal: 15 }}
+                  style={{paddingHorizontal: 15}}
                 />
               </TouchableOpacity>
             </View>
@@ -68,20 +83,21 @@ const Ans = ({ route }) => {
               color: "black",
               marginVertical: 20,
               fontSize: 15,
-              fontWeight: '700'
+              fontWeight: "700",
             }}>
             Didn't find your question?
           </Text>
-          <View style={{
-            flexDirection: "row",
-            justifyContent: "space-around",
-            width: '100%'
-          }}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-around",
+              width: "100%",
+            }}>
             <TouchableOpacity
               style={{
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
                 backgroundColor: "#0A5AC9",
                 paddingHorizontal: 10,
                 paddingVertical: 10,
@@ -90,14 +106,12 @@ const Ans = ({ route }) => {
                 borderRadius: 5,
               }}
               onPress={() =>
-                Linking.openURL("whatsapp://send?text=Hello&phone=+917980222011")
+                Linking.openURL(
+                  "whatsapp://send?text=Hello&phone=+917001312050",
+                )
               }>
-              <Icon
-                name="message1"
-                size={20}
-                color="white"
-              />
-              <Text style={{ marginHorizontal: 5, color: "white", fontSize: 12 }}>
+              <Icon name="message1" size={20} color="white" />
+              <Text style={{marginHorizontal: 5, color: "white", fontSize: 12}}>
                 CHAT WITH US
               </Text>
             </TouchableOpacity>
@@ -113,7 +127,7 @@ const Ans = ({ route }) => {
               }}
               onPress={() => openDialScreen()}>
               <Icon name="phone" size={18} color="white" />
-              <Text style={{ marginHorizontal: 5, color: "white" }}>CALL US</Text>
+              <Text style={{marginHorizontal: 5, color: "white"}}>CALL US</Text>
             </TouchableOpacity>
           </View>
         </View>

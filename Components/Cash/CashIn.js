@@ -2,6 +2,7 @@ import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
 import React from "react";
 import {useDispatch} from "react-redux";
 import Icon from "react-native-vector-icons/AntDesign";
+import UpdateIcon from "react-native-vector-icons/Feather";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
@@ -35,6 +36,8 @@ const CashIn = ({
         },
       },
     ]);
+
+  const handleUpdate = () => {};
 
   const deleteEntry = async id => {
     try {
@@ -118,15 +121,24 @@ const CashIn = ({
                 <IconMat name="attachment" color={"#0a5ac9"} size={24} />
               </TouchableOpacity>
             )}
-
-            <TouchableOpacity onPress={createTwoButtonAlert}>
-              <Icon
-                name="delete"
-                color={"red"}
-                size={16}
-                style={{marginVertical: 3}}
-              />
-            </TouchableOpacity>
+            <View style={{flexDirection: "row"}}>
+              <TouchableOpacity onPress={handleUpdate}>
+                <UpdateIcon
+                  name="edit"
+                  color={"#12ce12"}
+                  size={16}
+                  style={{marginVertical: 3, marginHorizontal: 8}}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={createTwoButtonAlert}>
+                <Icon
+                  name="delete"
+                  color={"red"}
+                  size={16}
+                  style={{marginVertical: 3}}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
