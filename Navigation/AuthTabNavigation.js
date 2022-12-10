@@ -196,9 +196,9 @@ const CashBookStack = () => {
       <Stack.Screen
         component={CashEntries}
         name="CashEntries"
-        options={({route}) => ({
-          title: route.params.name,
-        })}
+        // options={({route}) => ({
+        //   title: route.params.name,
+        // })}
       />
     </Stack.Navigator>
   );
