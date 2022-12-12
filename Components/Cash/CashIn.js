@@ -32,36 +32,6 @@ const CashIn = ({entryDetails, getTodayCashEntries, viewReport, showModal}) => {
       },
     ]);
 
-  const handleUpdate = () => {};
-
-  const onSubmit = async () => {
-    try {
-      const payload = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        dob: moment(date),
-        gender: gender,
-      };
-      const response = await Api.update("/pilot/update-pilot-details", payload);
-
-      if (response.status === 1) {
-        dispatch(updateUser(response.data));
-        dispatch(
-          notify({
-            type: "success",
-            message: response.message,
-            notifyType: "success",
-          }),
-        );
-        navigation.navigate("docUpload");
-      } else {
-        throw new Error(response.message);
-      }
-    } catch (error) {
-      dispatch(notify({type: "error", message: error.message}));
-    }
-  };
   const deleteEntry = async id => {
     try {
       const response = await Api.delete(`/auth/cashbook/${id}`);
@@ -76,6 +46,7 @@ const CashIn = ({entryDetails, getTodayCashEntries, viewReport, showModal}) => {
       dispatch(notify({message: error.message}));
     }
   };
+
   return (
     <>
       <View>

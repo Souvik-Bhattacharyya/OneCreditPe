@@ -24,7 +24,9 @@ const CashEntries = ({navigation, route}) => {
   const [file, setFile] = useState(null);
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
-  const [entryDetails, setEntryDetails] = useState({});
+  // const [entryDetails, setEntryDetails] = useState({});
+  // const details = route.params;
+  console.log("detals", route.params);
   const dispatch = useDispatch();
   const [cashDetails, setCashDetails] = useState({
     amount: null,
@@ -32,10 +34,10 @@ const CashEntries = ({navigation, route}) => {
     paymentType: "online",
     paymentDetails: "",
   });
-  useEffect(() => {
-    setEntryDetails(route.params.entryDetails || {});
-  }, [route.params.entryDetails]);
-  console.log("params", entryDetails);
+  // useEffect(() => {
+  //   setEntryDetails(route.params.entryDetails || {});
+  // }, [route.params.entryDetails]);
+  // console.log("params", route.params);
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -462,35 +464,21 @@ const CashEntries = ({navigation, route}) => {
           flexDirection: "row",
           justifyContent: "space-between",
         }}>
-        {entryDetails ? (
-          <TouchableOpacity
-            disabled={isDisabled}
-            style={{
-              paddingHorizontal: metrics.horizontalScale(20),
-              paddingVertical: metrics.verticalScale(12),
-              // backgroundColor: "#0a5ac9",
-              borderRadius: 50,
-              width: "100%",
-              backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
-            }}
-            onPress={handleUpdate}>
-            <Text style={[styles.btnTxt, {color: "#fff"}]}>Update</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            disabled={isDisabled}
-            style={{
-              paddingHorizontal: metrics.horizontalScale(20),
-              paddingVertical: metrics.verticalScale(12),
-              // backgroundColor: "#0a5ac9",
-              borderRadius: 50,
-              width: "100%",
-              backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
-            }}
-            onPress={cashEntry}>
-            <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
-          </TouchableOpacity>
-        )}
+        <TouchableOpacity
+          disabled={isDisabled}
+          style={{
+            paddingHorizontal: metrics.horizontalScale(20),
+            paddingVertical: metrics.verticalScale(12),
+            // backgroundColor: "#0a5ac9",
+            borderRadius: 50,
+            width: "100%",
+            backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
+          }}
+          onPress={route.params ? handleUpdate() : cashEntry()}>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>
+            {route.params ? "Update" : "Save"}
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -12,7 +12,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import OTPTextView from "../../Constants/AppOtpInput";
 import Api from "../../Services";
-
+import {notify} from "../../Redux/Action/notificationActions";
 //Redux
 import {useDispatch, useSelector} from "react-redux";
 import {addToken} from "../../Redux/Action/authActions";
@@ -20,11 +20,11 @@ import {addToken} from "../../Redux/Action/authActions";
 const OtpScreen = ({navigation, route}) => {
   const dispatch = useDispatch();
 
-  const {mobileNumber} = route.params;
-
+  const {mobileNumber, name} = route.params;
+  console.log("name", name);
   // const [otp, setOtp] = React.useState(null);
   const [isLoading, setLoading] = React.useState(false);
-
+  const [counter, setCounter] = React.useState(10);
   const onSubmitOtp = async e => {
     try {
       setLoading(true);
@@ -37,6 +37,7 @@ const OtpScreen = ({navigation, route}) => {
       if (response.data.status == "401") {
         alert("You have entered wrong OTP");
       } else {
+        setCounter(10);
         const payload = {
           user: response.data.user,
           clientToken: response.data.token,
@@ -50,6 +51,29 @@ const OtpScreen = ({navigation, route}) => {
     }
   };
 
+  useEffect(() => {
+    const timer =
+      counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
+    return () => clearInterval(timer);
+  }, [counter]);
+  const resendOtp = async () => {
+    setLoading(true);
+    try {
+      const response = await Api.post("/send-otp", {
+        mobile: mobileNumber,
+        name: name,
+      });
+
+      if (response.status === 1) {
+        console.log("success");
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      dispatch(notify({type: "error", message: error.message}));
+    }
+    setLoading(false);
+  };
   return (
     <>
       <View style={styles.container}>
@@ -125,7 +149,30 @@ const OtpScreen = ({navigation, route}) => {
               </Text>
             </View>
           )}
-          <View style={{width: "100%"}}>
+          {counter === 0 ? (
+            <TouchableOpacity
+              style={{
+                backgroundColor: "#349EFF",
+                padding: 10,
+                borderRadius: 50,
+              }}
+              onPress={resendOtp}>
+              <Text style={{fontSize: 14, fontWeight: "bold", color: "white"}}>
+                Resend OTP
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: "bold",
+                // textAlign: "left",
+                color: "#000",
+              }}>
+              Resend OTP in {counter}s
+            </Text>
+          )}
+          {/* <View style={{width: "100%"}}>
             <Text
               style={{
                 fontSize: 14,
@@ -134,9 +181,9 @@ const OtpScreen = ({navigation, route}) => {
                 color: "#0a5ac9",
                 marginTop: 30,
               }}>
-              Resend OTP in 10s
+              Resend OTP in {counter}s
             </Text>
-          </View>
+          </View> */}
         </View>
 
         {/* <TouchableOpacity

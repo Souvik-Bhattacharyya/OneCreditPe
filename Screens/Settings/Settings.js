@@ -41,7 +41,7 @@ const Settings = () => {
   return (
     <>
       <CommonHeader color="#0a5ac9" />
-      <ScrollView style={{backgroundColor: "#fff"}}>
+      <ScrollView>
         <View style={styles.container}>
           <View
             style={{
@@ -358,6 +358,9 @@ const Settings = () => {
           hideModal={hideModal}
           setVisible={setVisible}
         />
+        <Text style={{marginTop: 140, paddingLeft: 10, fontWeight: "bold"}}>
+          Powered By Bound Parivar Technology Private Limited
+        </Text>
       </ScrollView>
     </>
   );
@@ -368,7 +371,7 @@ export default Settings;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    flex: 1,
+    // flex: 1,
   },
   text: {
     color: "#333",

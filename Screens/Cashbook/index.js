@@ -136,6 +136,7 @@ const Cashbook = ({navigation}) => {
       // dispatch()
     }
   };
+  console.log("todayEntryDetails", todayEntryDetails);
   return (
     <>
       <CommonHeader color="#0a5ac9" />
@@ -232,9 +233,7 @@ const Cashbook = ({navigation}) => {
             borderColor: "#c9c9c9",
           }}>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("CashEntries", {name: "Cash Entries"})
-            }
+            onPress={() => navigation.navigate("CashEntries")}
             style={{
               paddingHorizontal: metrics.horizontalScale(20),
               paddingVertical: metrics.verticalScale(10),

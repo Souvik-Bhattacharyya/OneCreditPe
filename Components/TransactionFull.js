@@ -52,7 +52,7 @@ const TransactionFull = ({
       backgroundColor: "#f6f6f6",
     },
   });
-  console.log("todayEntryDetails", todayEntryDetails);
+  console.log("getTodayCashEntries", getTodayCashEntries);
   return (
     <View style={styles.container}>
       <View
