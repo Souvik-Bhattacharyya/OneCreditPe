@@ -37,6 +37,7 @@ import {
   FindIfsc,
   AddPicture,
   AddAdhaarDetails,
+  Loading,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 
@@ -355,6 +356,22 @@ const SettingsStack = () => {
   );
 };
 
+const AuthLoadingStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}>
+      <Stack.Screen component={Loading} name="loading" />
+
+      <Stack.Screen
+        name="AuthNavigation"
+        component={AuthTabNavigation}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+};
 const AuthTabNavigation = ({navigation}) => {
   return (
     <Tab.Navigator
@@ -435,4 +452,4 @@ const AuthTabNavigation = ({navigation}) => {
   );
 };
 
-export default AuthTabNavigation;
+export default AuthLoadingStack;
