@@ -7,8 +7,14 @@ import moment from "moment";
 import Icon from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
+import UpdateIcon from "react-native-vector-icons/Feather";
 
-const CashOut = ({entryDetails, getTodayCashEntries, viewReport}) => {
+const CashOut = ({
+  entryDetails,
+  getTodayCashEntries,
+  viewReport,
+  handleUpdate,
+}) => {
   const dispatch = useDispatch();
   console.log("-----?", entryDetails);
   let date = moment(entryDetails?.date_time).format("Do MMM YY");
@@ -109,15 +115,24 @@ const CashOut = ({entryDetails, getTodayCashEntries, viewReport}) => {
               <IconMat name="attachment" color={"#0a5ac9"} size={24} />
             </TouchableOpacity>
           )}
-
-          <TouchableOpacity onPress={createTwoButtonAlert}>
-            <Icon
-              name="delete"
-              color={"red"}
-              size={16}
-              style={{marginVertical: 3}}
-            />
-          </TouchableOpacity>
+          <View style={{flexDirection: "row"}}>
+            <TouchableOpacity onPress={() => handleUpdate(entryDetails)}>
+              <UpdateIcon
+                name="edit"
+                color={"#12ce12"}
+                size={16}
+                style={{marginVertical: 3, marginHorizontal: 8}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={createTwoButtonAlert}>
+              <Icon
+                name="delete"
+                color={"red"}
+                size={16}
+                style={{marginVertical: 3}}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </View>

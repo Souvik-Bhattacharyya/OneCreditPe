@@ -34,10 +34,7 @@ const CashEntries = ({navigation, route}) => {
     paymentType: "online",
     paymentDetails: "",
   });
-  // useEffect(() => {
-  //   setEntryDetails(route.params.entryDetails || {});
-  // }, [route.params.entryDetails]);
-  // console.log("params", route.params);
+  const data = route.params.data;
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -71,6 +68,31 @@ const CashEntries = ({navigation, route}) => {
       maximumDate: maximumDate,
     });
   };
+
+  useEffect(() => {
+    if (data) {
+      setCashDetails({
+        amount: data.amount,
+        paymentDetails: data.payment_details,
+        cb_tns_type: data.cb_tns_type,
+        paymentType: data.payment_type,
+      });
+      setFile({name: data.attachments});
+      setDate(Date(data.date_time));
+      if (data.payment_type === "cash") {
+        setOnline(false);
+        setOffline(true);
+      } else {
+        setOnline(true);
+        setOffline(false);
+      }
+      if (data.cb_tns_type === "in") {
+        setIsActive("cash in");
+      } else {
+        setIsActive("cash out");
+      }
+    }
+  }, [data]);
 
   const handleDocumentSelection = () => {
     DocumentPicker.pick({
@@ -292,7 +314,7 @@ const CashEntries = ({navigation, route}) => {
           size={22}
         />
         <TextInput
-          value={cashDetails.amount}
+          value={cashDetails.amount?.toString()}
           placeholder="Enter Amount"
           placeholderTextColor={"#757575"}
           style={{
@@ -474,10 +496,12 @@ const CashEntries = ({navigation, route}) => {
             width: "100%",
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
-          onPress={route.params ? handleUpdate() : cashEntry()}>
-          <Text style={[styles.btnTxt, {color: "#fff"}]}>
-            {route.params ? "Update" : "Save"}
-          </Text>
+          onPress={() => (data ? handleUpdate() : cashEntry())}>
+          {data ? (
+            <Text style={[styles.btnTxt, {color: "#fff"}]}>Update</Text>
+          ) : (
+            <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          )}
         </TouchableOpacity>
       </View>
     </View>

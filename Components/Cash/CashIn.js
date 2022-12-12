@@ -10,7 +10,13 @@ import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
 import {useNavigation} from "@react-navigation/native";
 import {Modal, Portal, Provider} from "react-native-paper";
-const CashIn = ({entryDetails, getTodayCashEntries, viewReport, showModal}) => {
+const CashIn = ({
+  entryDetails,
+  getTodayCashEntries,
+  viewReport,
+  handleUpdate,
+  showModal,
+}) => {
   console.log("entryDetails", entryDetails);
 
   // const hideModal = () => setVisible(false);
@@ -116,12 +122,7 @@ const CashIn = ({entryDetails, getTodayCashEntries, viewReport, showModal}) => {
               </TouchableOpacity>
             )}
             <View style={{flexDirection: "row"}}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("CashEntries", {
-                    entryDetails: entryDetails,
-                  })
-                }>
+              <TouchableOpacity onPress={() => handleUpdate(entryDetails)}>
                 <UpdateIcon
                   name="edit"
                   color={"#12ce12"}
