@@ -1,11 +1,20 @@
-import {View, Text, StyleSheet, Image, TouchableOpacity} from "react-native";
+import {View, Text, StyleSheet, Image} from "react-native";
 import React, {useEffect} from "react";
-
+import {CommonActions} from "@react-navigation/native";
 const Loading = ({navigation}) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("HomeScreens");
-    }, 100);
+      navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [
+            {
+              name: "AuthNavigation",
+            },
+          ],
+        }),
+      );
+    }, 500);
   }, []);
 
   return (
