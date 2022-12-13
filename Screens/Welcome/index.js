@@ -41,6 +41,9 @@ const Welcome = ({navigation}) => {
           </Text>
           <Icon name="arrowright" color={"#fff"} size={20} />
         </TouchableOpacity>
+        <Text style={{position: "absolute", bottom: 40, color: "#fff"}}>
+          Powered By Bound Parivar Technology Private Limited
+        </Text>
         {/* <Button
           title="ok"
           onPress={() => {
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     height: 100,
     width: 250,
     top: "-20%",
-    resizeMode:'contain'
+    resizeMode: "contain",
   },
   btn: {
     paddingVertical: 20,
