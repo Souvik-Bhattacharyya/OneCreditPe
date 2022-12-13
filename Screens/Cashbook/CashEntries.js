@@ -34,7 +34,7 @@ const CashEntries = ({navigation, route}) => {
     paymentType: "online",
     paymentDetails: "",
   });
-  const data = route.params.data;
+  const data = route.params?.data;
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -58,9 +58,8 @@ const CashEntries = ({navigation, route}) => {
   const showMode = currentMode => {
     let maximumDate = new Date();
     maximumDate.setFullYear(maximumDate.getFullYear());
-
     DateTimePickerAndroid.open({
-      value: date,
+      value: new Date(date),
       onChange: (event, date) => onChange(event, date, currentMode),
       mode: currentMode,
       is24Hour: false,
@@ -78,7 +77,8 @@ const CashEntries = ({navigation, route}) => {
         paymentType: data.payment_type,
       });
       setFile({name: data.attachments});
-      setDate(Date(data.date_time));
+      const newDate = moment(`${data.date_time}`);
+      setDate(newDate);
       if (data.payment_type === "cash") {
         setOnline(false);
         setOffline(true);
