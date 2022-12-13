@@ -8,20 +8,15 @@ import metrics from "../../Constants/metrics";
 import moment from "moment";
 import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
+import {useNavigation} from "@react-navigation/native";
 import {Modal, Portal, Provider} from "react-native-paper";
-const CashIn = ({
-  entryDetails,
-  getTodayCashEntries,
-  viewReport,
-
-  showModal,
-}) => {
+const CashIn = ({entryDetails, getTodayCashEntries, viewReport, showModal}) => {
   console.log("entryDetails", entryDetails);
 
   // const hideModal = () => setVisible(false);
   const dispatch = useDispatch();
   const date = moment(entryDetails?.date_time).format("Do MMM YY");
-
+  const navigation = useNavigation();
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
       {
@@ -37,8 +32,6 @@ const CashIn = ({
       },
     ]);
 
-  const handleUpdate = () => {};
-
   const deleteEntry = async id => {
     try {
       const response = await Api.delete(`/auth/cashbook/${id}`);
@@ -53,6 +46,7 @@ const CashIn = ({
       dispatch(notify({message: error.message}));
     }
   };
+
   return (
     <>
       <View>
@@ -122,7 +116,12 @@ const CashIn = ({
               </TouchableOpacity>
             )}
             <View style={{flexDirection: "row"}}>
-              <TouchableOpacity onPress={handleUpdate}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("CashEntries", {
+                    entryDetails: entryDetails,
+                  })
+                }>
                 <UpdateIcon
                   name="edit"
                   color={"#12ce12"}

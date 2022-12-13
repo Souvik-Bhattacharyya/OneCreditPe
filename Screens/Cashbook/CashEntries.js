@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import metrics from "../../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -17,13 +17,16 @@ import {CheckBox, Icon} from "@rneui/themed";
 import {notify} from "../../Redux/Action/notificationActions";
 import {useDispatch} from "react-redux";
 
-const CashEntries = ({navigation}) => {
+const CashEntries = ({navigation, route}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
+  // const [entryDetails, setEntryDetails] = useState({});
+  // const details = route.params;
+  console.log("detals", route.params);
   const dispatch = useDispatch();
   const [cashDetails, setCashDetails] = useState({
     amount: null,
@@ -31,7 +34,10 @@ const CashEntries = ({navigation}) => {
     paymentType: "online",
     paymentDetails: "",
   });
-  console.log("-------", date);
+  // useEffect(() => {
+  //   setEntryDetails(route.params.entryDetails || {});
+  // }, [route.params.entryDetails]);
+  // console.log("params", route.params);
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -126,6 +132,60 @@ const CashEntries = ({navigation}) => {
       navigation.navigate("Cash Book");
     } catch (error) {
       console.log(error.message);
+      setIsDisabled(false);
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      setIsDisabled(true);
+      const updateData = new FormData();
+      updateData.append("amount", cashDetails.amount);
+      updateData.append(
+        "date_time",
+        moment(date).format("YYYY-MM-DD hh:mm:ss"),
+      );
+      updateData.append("cb_tns_type", cashDetails.cb_tns_type);
+      cashDetails.paymentDetails &&
+        updateData.append("payment_details", cashDetails.paymentDetails);
+      updateData.append("payment_type", cashDetails.paymentType);
+      file ? updateData.append("attachments", file) : "";
+      // console.log({
+      //   amount: cashDetails.amount,
+      //   date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
+      //   cb_tns_type: cashDetails.cb_tns_type,
+      //   payment_details: cashDetails.paymentDetails,
+      //   payment_type: cashDetails.paymentType,
+      // });
+      const response = await Api.update(
+        `auth/cashbook/${entryDetails.id}/?_method=put`,
+        updateData,
+      );
+      console.log("update cash", response);
+      if (response.status === 200) {
+        // dispatch(
+        //   notify({
+        //     message: "Your entry has been submitted successfully",
+        //     notifyType: "success",
+        //   }),
+        // );
+        console.log("success");
+      }
+
+      // setCashDetails({
+      //   ...cashDetails,
+      //   amount: null,
+      //   cb_tns_type: "in",
+      //   paymentType: "",
+      //   paymentDetails: "",
+      // });
+      // setDate(new Date());
+      // setFile(null);
+      // setIsDisabled(false);
+
+      // navigation.navigate("Cash Book");
+    } catch (error) {
+      console.log("error", error);
       setIsDisabled(false);
     }
   };
@@ -414,8 +474,10 @@ const CashEntries = ({navigation}) => {
             width: "100%",
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
-          onPress={cashEntry}>
-          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          onPress={route.params ? handleUpdate() : cashEntry()}>
+          <Text style={[styles.btnTxt, {color: "#fff"}]}>
+            {route.params ? "Update" : "Save"}
+          </Text>
         </TouchableOpacity>
       </View>
     </View>

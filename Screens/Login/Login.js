@@ -31,7 +31,10 @@ const Login = ({navigation}) => {
         mobile: credentials.mobileNumber,
       });
       if (response.status == 200) {
-        navigation.navigate("otp", {mobileNumber: credentials.mobileNumber});
+        navigation.navigate("otp", {
+          mobileNumber: credentials.mobileNumber,
+          name: credentials.businessName,
+        });
       }
     } catch (error) {
       console.log(error);
