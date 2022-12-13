@@ -22,6 +22,7 @@ const TransactionFull = ({
   todayEntryDetails,
   getTodayCashEntries,
   viewReport,
+  handleUpdate,
 }) => {
   const [value, setValue] = useState("");
   const [visible, setVisible] = React.useState(false);
@@ -107,6 +108,7 @@ const TransactionFull = ({
                     setVisible(true);
                     setItemSelected(entry);
                   }}
+                  handleUpdate={handleUpdate}
                 />
               ) : (
                 <CashOut
@@ -114,6 +116,7 @@ const TransactionFull = ({
                   key={index}
                   getTodayCashEntries={getTodayCashEntries}
                   viewReport={viewReport}
+                  handleUpdate={handleUpdate}
                 />
               ),
             )}

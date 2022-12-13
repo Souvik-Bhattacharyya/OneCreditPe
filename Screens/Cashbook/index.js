@@ -213,6 +213,12 @@ const Cashbook = ({navigation}) => {
               todayEntryDetails={todayEntryDetails}
               getTodayCashEntries={getTodayCashEntries}
               viewReport={viewReport}
+              handleUpdate={entryDetails =>
+                navigation.navigate("CashEntries", {
+                  name: "Cash Entries",
+                  data: entryDetails,
+                })
+              }
             />
           ) : (
             <TransactionEmpty />
