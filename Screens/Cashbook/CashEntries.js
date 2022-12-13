@@ -26,7 +26,7 @@ const CashEntries = ({navigation, route}) => {
   const [offline, setOffline] = useState(false);
   // const [entryDetails, setEntryDetails] = useState({});
   // const details = route.params;
-  console.log("detals", route.params);
+  console.log("details", route.params);
   const dispatch = useDispatch();
   const [cashDetails, setCashDetails] = useState({
     amount: null,
@@ -35,6 +35,7 @@ const CashEntries = ({navigation, route}) => {
     paymentDetails: "",
   });
   const data = route.params?.data;
+  const entryDetails = route.params?.entryDetails;
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -497,7 +498,7 @@ const CashEntries = ({navigation, route}) => {
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
           onPress={() => (data ? handleUpdate() : cashEntry())}>
-          {data ? (
+          {data || entryDetails ? (
             <Text style={[styles.btnTxt, {color: "#fff"}]}>Update</Text>
           ) : (
             <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
