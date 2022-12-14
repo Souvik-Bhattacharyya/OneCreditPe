@@ -328,7 +328,7 @@ const Settings = () => {
                   />
                 )}
               />
-              <List.Item
+              {/* <List.Item
                 title="Invite Friends"
                 theme={{colors: {text: "#464555"}}}
                 style={styles.items}
@@ -349,16 +349,50 @@ const Settings = () => {
                     style={{alignSelf: "center"}}
                   />
                 )}
-              />
+              /> */}
             </List.Accordion>
           </List.AccordionGroup>
+          <View
+            style={{
+              flexDirection: "row",
+            }}>
+            <Image
+              source={require("../../Assets/Images/inviteFriends.webp")}
+              style={{
+                height: 100,
+                width: 100,
+                resizeMode: "contain",
+                marginLeft: 10,
+              }}
+            />
+            <TouchableOpacity onPress={showModal}>
+              <Text
+                style={{
+                  marginTop: 40,
+                  marginLeft: 20,
+                  fontSize: 18,
+                  fontWeight: "bold",
+
+                  color: "#0a5ac9",
+                }}>
+                Invite Friends
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
+
         <InviteFriendModal
           visible={visible}
           hideModal={hideModal}
           setVisible={setVisible}
         />
-        <Text style={{marginTop: 140, paddingLeft: 10, fontWeight: "bold"}}>
+        <Text
+          style={{
+            marginTop: 50,
+            paddingLeft: 10,
+            fontWeight: "bold",
+            marginBottom: 20,
+          }}>
           Powered By Bound Parivar Technology Private Limited
         </Text>
       </ScrollView>

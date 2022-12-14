@@ -351,6 +351,14 @@ const SettingsStack = () => {
           title: "FAQ Listing Ans",
         }}
       />
+      <Stack.Screen
+        component={AddDetails}
+        name="AddDetails"
+        options={{
+          headerTitle: "Complete Your KYC",
+          headerShown: false,
+        }}
+      />
       <Stack.Screen component={InviteFriendModal} name="InviteFriendModal" />
     </Stack.Navigator>
   );
