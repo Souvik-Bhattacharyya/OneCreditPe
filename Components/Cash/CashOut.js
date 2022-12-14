@@ -8,7 +8,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
 import {notify} from "../../Redux/Action/notificationActions";
 import UpdateIcon from "react-native-vector-icons/Feather";
-
+import {useNavigation} from "@react-navigation/native";
 const CashOut = ({
   entryDetails,
   getTodayCashEntries,
@@ -16,7 +16,9 @@ const CashOut = ({
   handleUpdate,
 }) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   console.log("-----?", entryDetails);
+
   let date = moment(entryDetails?.date_time).format("Do MMM YY");
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
@@ -116,7 +118,12 @@ const CashOut = ({
             </TouchableOpacity>
           )}
           <View style={{flexDirection: "row"}}>
-            <TouchableOpacity onPress={() => handleUpdate(entryDetails)}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("CashEntries", {
+                  entryDetails: entryDetails,
+                })
+              }>
               <UpdateIcon
                 name="edit"
                 color={"#12ce12"}
