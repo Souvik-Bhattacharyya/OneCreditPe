@@ -70,7 +70,8 @@ const OtpScreen = ({navigation, route}) => {
         throw new Error(response.message);
       }
     } catch (error) {
-      dispatch(notify({type: "error", message: error.message}));
+      console.log(error);
+      // dispatch(notify({type: "error", message: error.message}));
     }
     setLoading(false);
   };
