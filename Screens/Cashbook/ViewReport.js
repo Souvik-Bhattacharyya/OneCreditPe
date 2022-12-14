@@ -230,6 +230,12 @@ const ViewReport = ({navigation, route}) => {
             todayEntryDetails={filteredEntry}
             getTodayCashEntries={filterEntries}
             viewReport={viewReport}
+            handleUpdate={entryDetails =>
+              navigation.navigate("CashEntries", {
+                name: "Cash Entries",
+                data: entryDetails,
+              })
+            }
           />
         ) : (
           <TransactionEmpty />
