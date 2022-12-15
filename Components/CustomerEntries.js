@@ -6,11 +6,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, {useState} from "react";
-import Icon from "react-native-vector-icons/FontAwesome";
+import {CommonActions} from "@react-navigation/native";
+import Icon2 from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import DocumentPicker, {types} from "react-native-document-picker";
+import {CheckBox, Icon} from "@rneui/themed";
 import moment from "moment";
 import Api from "../Services";
 import {useDispatch} from "react-redux";
@@ -23,12 +25,26 @@ const CashEntries = ({navigation, route}) => {
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [online, setOnline] = useState(true);
+  const [offline, setOffline] = useState(false);
   const [customerCashEntry, setCustomerCashEntry] = useState({
     amount: null,
     tns_type: route.params?.customerType === "customer" ? "got" : "advance",
     paymentDetails: "",
+    tns_mode: route.params?.customerType === "supplier" && "online",
   });
-  // console.log("------->>>", route.params);
+  console.log("------------>", customerCashEntry);
+  const radioOnline = () => {
+    setOnline(true);
+    setOffline(false);
+    setCustomerCashEntry({...customerCashEntry, tns_mode: "online"});
+  };
+
+  const radioOffline = () => {
+    setOnline(false);
+    setOffline(true);
+    setCustomerCashEntry({...customerCashEntry, tns_mode: "cash"});
+  };
   const onChange = (event, selectedDate) => {
     setDate(selectedDate);
   };
@@ -67,47 +83,6 @@ const CashEntries = ({navigation, route}) => {
       });
   };
 
-  // const payload = {
-  //   amount: customerCashEntry.amount,
-  //   date_time: customerCashEntry.entryDate,
-  //   tns_type: customerCashEntry.tns_type,
-  //   payment_details: customerCashEntry.paymentDetails,
-  //   customer_id: user.id,
-  //   attachments: customerCashEntry.attachments,
-  // };
-
-  // const newTransaction = async () => {
-  //   try {
-  //     setIsDisabled(true);
-  //     const response = await Api.post("/auth/transaction", {
-  //       amount: customerCashEntry.amount,
-  //       date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
-  //       tns_type: customerCashEntry.tns_type,
-  //       payment_details: customerCashEntry.paymentDetails,
-  //       customer_id: userData.customer_id,
-  //       // attachments: customerCashEntry.attachments,
-  //     });
-
-  //     if (response.data.status == 200) {
-  //       setCustomerCashEntry({
-  //         ...customerCashEntry,
-  //         amount: null,
-  //         entryDate: moment(date).format("YYYY-MM-DD hh:mm:ss"),
-  //         tns_type: "get",
-  //         paymentDetails: "",
-  //         attachments: null,
-  //       });
-
-  //       navigation.navigate("UserDetails", {customerId: customerId});
-  //     }
-  //     setDate(new Date());
-  //     setFile(null);
-  //     setIsDisabled(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const newTransaction = async () => {
     try {
       setIsDisabled(true);
@@ -119,8 +94,10 @@ const CashEntries = ({navigation, route}) => {
       formData.append("payment_details", customerCashEntry.paymentDetails);
       formData.append("customer_id", route.params?.customerId);
       file && formData.append("attachment", file);
+
       const response = await Api.postForm("/auth/transaction", formData);
       console.log(response);
+
       if (response.status == 200) {
         setCustomerCashEntry({
           ...customerCashEntry,
@@ -128,14 +105,35 @@ const CashEntries = ({navigation, route}) => {
           tns_type:
             route.params?.customerType === "customer" ? "got" : "advance",
           paymentDetails: "",
+          tns_mode: route.params?.customerType === "supplier" && "online",
         });
+
         setDate(new Date());
         setFile(null);
         setIsActive("cash in");
         setIsDisabled(false);
-        navigation.navigate("UserDetails", {
-          customerId: route.params?.customerId,
-        });
+        // navigation.replace("UserDetails", {
+        //   customerId: route.params?.customerId,
+        // });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "CustomerStack",
+                state: {
+                  index: 0,
+                  routes: [
+                    {
+                      name: "UserDetails",
+                      params: {customerId: route.params?.customerId},
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+        );
         dispatch(
           notify({
             message: "Your entry has been submitted successfully",
@@ -149,6 +147,88 @@ const CashEntries = ({navigation, route}) => {
       console.log(error);
     }
   };
+
+  const paymentMode = () => (
+    <View
+      style={{
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: metrics.verticalScale(5),
+        alignItems: "center",
+        width: "100%",
+        // backgroundColor: '#ddd',
+        marginBottom: 15,
+      }}>
+      <View
+        style={{
+          width: "48%",
+          borderRadius: 6,
+          paddingVertical: 0,
+          borderColor: "#c9c9c9",
+          borderWidth: 1,
+          borderRadius: 4,
+        }}>
+        <CheckBox
+          style={{paddingVertical: 0}}
+          title="Online Pay"
+          checked={online}
+          center
+          textStyle={{fontSize: 18}}
+          containerStyle={{paddingHorizontal: 0, paddingVertical: 5}}
+          onPress={radioOnline}
+          checkedIcon={
+            <Icon
+              name="radio-button-checked"
+              type="material"
+              color="#0a5ac9"
+              size={25}
+            />
+          }
+          uncheckedIcon={
+            <Icon
+              name="radio-button-unchecked"
+              type="material"
+              color="grey"
+              size={25}
+            />
+          }
+        />
+      </View>
+      <View
+        style={{
+          width: "48%",
+          borderRadius: 6,
+          borderColor: "#c9c9c9",
+          borderWidth: 1,
+          borderRadius: 4,
+        }}>
+        <CheckBox
+          title="Cash Pay"
+          checked={offline}
+          center
+          textStyle={{fontSize: 18}}
+          containerStyle={{paddingHorizontal: 0, paddingVertical: 5}}
+          onPress={radioOffline}
+          checkedIcon={
+            <Icon
+              name="radio-button-checked"
+              type="material"
+              color="#0a5ac9"
+              size={25}
+            />
+          }
+          uncheckedIcon={
+            <Icon
+              name="radio-button-unchecked"
+              type="material"
+              color="grey"
+              size={25}
+            />
+          }
+        />
+      </View>
+    </View>
+  );
   return (
     <View style={styles.container}>
       <View
@@ -162,7 +242,7 @@ const CashEntries = ({navigation, route}) => {
           paddingVertical: 2,
           paddingRight: 20,
         }}>
-        <Icon
+        <Icon2
           name="rupee"
           color={"#828282"}
           style={{marginLeft: 20}}
@@ -276,6 +356,7 @@ const CashEntries = ({navigation, route}) => {
           </Text>
         </TouchableOpacity>
       </View>
+      {route.params?.customerType === "supplier" && paymentMode()}
       <View
         style={{
           flexDirection: "row",
@@ -286,7 +367,7 @@ const CashEntries = ({navigation, route}) => {
           borderRadius: 6,
           paddingRight: 20,
         }}>
-        <Icon
+        <Icon2
           name="file-text-o"
           color={"#828282"}
           style={{marginLeft: 20}}
