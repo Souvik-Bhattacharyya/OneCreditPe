@@ -25,10 +25,10 @@ const CashEntries = ({navigation, route}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [customerCashEntry, setCustomerCashEntry] = useState({
     amount: null,
-    tns_type: "got",
+    tns_type: route.params?.customerType === "customer" ? "got" : "advance",
     paymentDetails: "",
   });
-
+  // console.log("------->>>", route.params);
   const onChange = (event, selectedDate) => {
     setDate(selectedDate);
   };
@@ -119,19 +119,19 @@ const CashEntries = ({navigation, route}) => {
       formData.append("payment_details", customerCashEntry.paymentDetails);
       formData.append("customer_id", route.params?.customerId);
       file && formData.append("attachment", file);
-
-      console.log("file-->", file);
       const response = await Api.postForm("/auth/transaction", formData);
       console.log(response);
       if (response.status == 200) {
         setCustomerCashEntry({
           ...customerCashEntry,
           amount: null,
-          tns_type: "got",
+          tns_type:
+            route.params?.customerType === "customer" ? "got" : "advance",
           paymentDetails: "",
         });
         setDate(new Date());
         setFile(null);
+        setIsActive("cash in");
         setIsDisabled(false);
         navigation.navigate("UserDetails", {
           customerId: route.params?.customerId,
@@ -186,7 +186,6 @@ const CashEntries = ({navigation, route}) => {
           }
         />
       </View>
-
       <View
         style={{
           marginVertical: 15,
@@ -236,14 +235,18 @@ const CashEntries = ({navigation, route}) => {
           }}
           onPress={() => {
             setIsActive("cash in");
-            setCustomerCashEntry({...customerCashEntry, tns_type: "advance"});
+            setCustomerCashEntry({
+              ...customerCashEntry,
+              tns_type:
+                route.params?.customerType === "customer" ? "got" : "advance",
+            });
           }}>
           <Text
             style={[
               styles.btnTxt,
               {color: isActive === "cash in" ? "#fff" : "#0a5ac9"},
             ]}>
-            Advance
+            {route.params?.customerType === "customer" ? "Got" : "Advance"}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -258,18 +261,21 @@ const CashEntries = ({navigation, route}) => {
           }}
           onPress={() => {
             setIsActive("cash out");
-            setCustomerCashEntry({...customerCashEntry, tns_type: "purchase"});
+            setCustomerCashEntry({
+              ...customerCashEntry,
+              tns_type:
+                route.params?.customerType === "customer" ? "give" : "purchase",
+            });
           }}>
           <Text
             style={[
               styles.btnTxt,
               {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
-            Purchase
+            {route.params?.customerType === "customer" ? "Give" : "Purchase"}
           </Text>
         </TouchableOpacity>
       </View>
-
       <View
         style={{
           flexDirection: "row",
@@ -303,7 +309,6 @@ const CashEntries = ({navigation, route}) => {
           }
         />
       </View>
-
       <View style={{marginTop: 20}}>
         <TouchableOpacity
           style={{
@@ -330,7 +335,6 @@ const CashEntries = ({navigation, route}) => {
           </Text>
         </TouchableOpacity>
       </View>
-
       <View
         style={{
           position: "absolute",
