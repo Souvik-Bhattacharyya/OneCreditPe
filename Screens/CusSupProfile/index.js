@@ -17,12 +17,17 @@ import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
+import {Modal, Portal, Provider} from "react-native-paper";
 
 const width = Dimensions.get("window").width;
 const CusSupProfile = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [cusData, setCusData] = useState([]);
+  const [visible, setVisible] = React.useState(false);
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+  const containerStyle = {backgroundColor: "white", padding: 20};
 
   useEffect(() => {
     setCusData(route.params.customerData.customer);
@@ -30,265 +35,488 @@ const CusSupProfile = ({route}) => {
   console.log("cus profile", cusData);
   return (
     <>
-      <ScrollView>
-        <View style={styles.container}>
-          <View
-            style={{
-              marginTop: metrics.verticalScale(20),
-              marginBottom: metrics.verticalScale(50),
-            }}>
+      <Provider>
+        <ScrollView>
+          <View style={styles.container}>
             <View
               style={{
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center",
-                marginVertical: 16,
+                marginTop: metrics.verticalScale(20),
+                marginBottom: metrics.verticalScale(50),
               }}>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("UserProfile")}
+              <View
                 style={{
-                  display: "flex",
-                  borderColor: "#464555",
-                  borderWidth: 3,
-                  borderRadius: 50,
-                  borderStyle: "dashed",
-                  width: 110,
-                  height: 110,
+                  width: "100%",
                   justifyContent: "center",
                   alignItems: "center",
-                  position: "relative",
+                  marginVertical: 16,
                 }}>
-                <Image
-                  source={require("../../Assets/blank-profile.png")}
+                <TouchableOpacity
                   style={{
-                    height: 105,
-                    width: 105,
-                    resizeMode: "contain",
-                    marginVertical: 13,
-                    alignSelf: "center",
-                  }}
-                />
-                <View
-                  style={{
-                    width: 36,
-                    height: 36,
-                    backgroundColor: "#464555",
+                    display: "flex",
+                    borderColor: "#464555",
+                    borderWidth: 3,
+                    borderRadius: 50,
+                    borderStyle: "dashed",
+                    width: 110,
+                    height: 110,
                     justifyContent: "center",
                     alignItems: "center",
-                    position: "absolute",
-                    bottom: -20,
-                    borderRadius: 50,
-                    borderColor: "#fff",
-                    borderWidth: 2,
+                    position: "relative",
                   }}>
-                  <EntypoIcon name="camera" size={18} color="#fff" />
-                </View>
+                  <Image
+                    source={require("../../Assets/blank-profile.png")}
+                    style={{
+                      height: 105,
+                      width: 105,
+                      resizeMode: "contain",
+                      marginVertical: 13,
+                      alignSelf: "center",
+                    }}
+                  />
+                  <View
+                    style={{
+                      width: 36,
+                      height: 36,
+                      backgroundColor: "#464555",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "absolute",
+                      bottom: -20,
+                      borderRadius: 50,
+                      borderColor: "#fff",
+                      borderWidth: 2,
+                    }}>
+                    <EntypoIcon name="camera" size={18} color="#fff" />
+                  </View>
+                </TouchableOpacity>
+              </View>
+
+              <Text
+                style={{
+                  color: "#0A5AC9",
+                  fontSize: 20,
+                  textAlign: "center",
+                  marginTop: 5,
+                  fontWeight: "700",
+                }}>
+                Add photo
+              </Text>
+
+              <TouchableOpacity
+                style={{
+                  paddingVertical: metrics.verticalScale(10),
+                  marginTop: 5,
+                  // backgroundColor: "red",
+                  borderRadius: 6,
+                  borderColor: "green",
+                  borderWidth: 1,
+                  width: "42%",
+                  flexDirection: "row",
+                  alignSelf: "center",
+                  justifyContent: "center",
+                }}
+                onPress={showModal}>
+                <Text
+                  style={{
+                    color: "#333",
+                    fontSize: 18,
+                    fontWeight: "900",
+                    color: "green",
+                  }}>
+                  Edit
+                </Text>
               </TouchableOpacity>
             </View>
 
-            <Text
-              style={{
-                color: "#0A5AC9",
-                fontSize: 20,
-                textAlign: "center",
-                marginTop: 5,
-                fontWeight: "700",
-              }}>
-              Add photo
-            </Text>
-          </View>
-
-          <View
-            style={{
-              flexDirection: "row",
-              paddingVertical: 10,
-              paddingHorizontal: 15,
-            }}>
-            <UserIcon
-              name="md-person-outline"
-              size={20}
-              color={"#464555"}
-              style={{marginTop: 4}}
-            />
             <View
               style={{
-                paddingHorizontal: 20,
-                marginBottom: 8,
-              }}>
-              <Text>Name</Text>
-              <Text style={{marginTop: -1, color: "black"}}>
-                {cusData.cus_name}
-              </Text>
-            </View>
-            <Icon
-              name="arrowright"
-              size={14}
-              color={"#464555"}
-              style={{position: "absolute", right: 20, top: 25}}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              backgroundColor: "#fff",
-              paddingVertical: 10,
-              paddingHorizontal: 15,
-            }}>
-            <Icon
-              name="phone"
-              size={20}
-              color={"#464555"}
-              style={{marginTop: 4}}
-            />
-            <View
-              style={{
-                paddingHorizontal: 20,
-
-                marginBottom: 8,
-              }}>
-              <Text>Mobile Number</Text>
-              <Text style={{marginTop: -1, color: "black"}}>
-                {cusData.cus_mobile}
-              </Text>
-            </View>
-            <Icon
-              name="arrowright"
-              size={14}
-              color={"#464555"}
-              style={{position: "absolute", right: 20, top: 25}}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              backgroundColor: "#fff",
-              paddingVertical: 10,
-              paddingHorizontal: 15,
-            }}>
-            <EntypoIcon
-              name="location-pin"
-              size={20}
-              color={"#464555"}
-              style={{marginTop: 4}}
-            />
-            <View
-              style={{
-                paddingHorizontal: 20,
-
-                marginBottom: 8,
-              }}>
-              <Text>Address</Text>
-              <Text style={{marginTop: -1, color: "black"}}>
-                {cusData.cus_address}
-              </Text>
-            </View>
-            <Icon
-              name="arrowright"
-              size={14}
-              color={"#464555"}
-              style={{position: "absolute", right: 20, top: 25}}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-
-              backgroundColor: "#fff",
-
-              paddingVertical: 10,
-              paddingHorizontal: 15,
-            }}>
-            <MaterialIcon
-              name="email"
-              size={20}
-              color={"#464555"}
-              style={{marginTop: 4}}
-            />
-            <View
-              style={{
-                paddingHorizontal: 20,
-
-                marginBottom: 8,
-              }}>
-              <Text>Email</Text>
-              <Text style={{marginTop: -1, color: "black"}}>
-                Ankita@gmail.com
-              </Text>
-            </View>
-            <Icon
-              name="arrowright"
-              size={14}
-              color={"#464555"}
-              style={{position: "absolute", right: 20, top: 25}}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-
-              backgroundColor: "#fff",
-
-              paddingVertical: 10,
-              paddingHorizontal: 15,
-            }}>
-            <MaterialIcon
-              name="bank-outline"
-              size={20}
-              color={"#464555"}
-              style={{marginTop: 4}}
-            />
-            <View
-              style={{
-                paddingHorizontal: 20,
-
-                marginBottom: 8,
-              }}>
-              <Text>Bank Account No</Text>
-              <Text style={{marginTop: -1, color: "black"}}>632876986</Text>
-            </View>
-            <Icon
-              name="arrowright"
-              size={14}
-              color={"#464555"}
-              style={{position: "absolute", right: 20, top: 25}}
-            />
-          </View>
-          <View
-            style={{
-              alignSelf: "center",
-              width,
-              flexDirection: "row",
-              justifyContent: "space-between",
-              backgroundColor: "#f6f6f6",
-              paddingHorizontal: 20,
-              paddingVertical: 20,
-              left: 0,
-              borderTopWidth: 1,
-              borderColor: "#c9c9c9",
-            }}>
-            <TouchableOpacity
-              style={{
-                paddingHorizontal: metrics.horizontalScale(20),
-                paddingVertical: metrics.verticalScale(10),
-                backgroundColor: "red",
-                borderRadius: 6,
-                width: "100%",
                 flexDirection: "row",
-                justifyContent: "center",
+                paddingVertical: 10,
+                paddingHorizontal: 15,
               }}>
-              <Text
+              <UserIcon
+                name="md-person-outline"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
                 style={{
-                  color: "#333",
-                  fontSize: 18,
-                  fontWeight: "900",
-                  color: "#fff",
+                  paddingHorizontal: 20,
+                  marginBottom: 8,
                 }}>
-                Delete
-              </Text>
-            </TouchableOpacity>
+                <Text>Name</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  {cusData.cus_name}
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                backgroundColor: "#fff",
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <Icon
+                name="phone"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Mobile Number</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  {cusData.cus_mobile}
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                backgroundColor: "#fff",
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <EntypoIcon
+                name="location-pin"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Address</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  {cusData.cus_address}
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+
+                backgroundColor: "#fff",
+
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <MaterialIcon
+                name="email"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Email</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  Ankita@gmail.com
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+
+                backgroundColor: "#fff",
+
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <MaterialIcon
+                name="bank-outline"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Bank Account No</Text>
+                <Text style={{marginTop: -1, color: "black"}}>632876986</Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                alignSelf: "center",
+                width,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                backgroundColor: "#f6f6f6",
+                paddingHorizontal: 20,
+                paddingVertical: 20,
+                left: 0,
+                borderTopWidth: 1,
+                borderColor: "#c9c9c9",
+              }}>
+              <TouchableOpacity
+                style={{
+                  paddingHorizontal: metrics.horizontalScale(20),
+                  paddingVertical: metrics.verticalScale(10),
+                  backgroundColor: "red",
+                  borderRadius: 6,
+                  width: "100%",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}>
+                <Text
+                  style={{
+                    color: "#333",
+                    fontSize: 18,
+                    fontWeight: "900",
+                    color: "#fff",
+                  }}>
+                  Delete
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+        <Portal>
+          <Modal
+            visible={visible}
+            onDismiss={hideModal}
+            contentContainerStyle={containerStyle}>
+            <View
+              style={{
+                flexDirection: "row",
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <UserIcon
+                name="md-person-outline"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+                  marginBottom: 8,
+                }}>
+                <Text>Name</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  {cusData.cus_name}
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                backgroundColor: "#fff",
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <Icon
+                name="phone"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Mobile Number</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  {cusData.cus_mobile}
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                backgroundColor: "#fff",
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <EntypoIcon
+                name="location-pin"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Address</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  {cusData.cus_address}
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+
+                backgroundColor: "#fff",
+
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <MaterialIcon
+                name="email"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Email</Text>
+                <Text style={{marginTop: -1, color: "black"}}>
+                  Ankita@gmail.com
+                </Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+
+                backgroundColor: "#fff",
+
+                paddingVertical: 10,
+                paddingHorizontal: 15,
+              }}>
+              <MaterialIcon
+                name="bank-outline"
+                size={20}
+                color={"#464555"}
+                style={{marginTop: 4}}
+              />
+              <View
+                style={{
+                  paddingHorizontal: 20,
+
+                  marginBottom: 8,
+                }}>
+                <Text>Bank Account No</Text>
+                <Text style={{marginTop: -1, color: "black"}}>632876986</Text>
+              </View>
+              <Icon
+                name="arrowright"
+                size={14}
+                color={"#464555"}
+                style={{position: "absolute", right: 20, top: 25}}
+              />
+            </View>
+            <View
+              style={{
+                alignSelf: "center",
+                width,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                backgroundColor: "#f6f6f6",
+                paddingHorizontal: 20,
+                paddingVertical: 20,
+                left: 0,
+                borderTopWidth: 1,
+                borderColor: "#c9c9c9",
+              }}>
+              <TouchableOpacity
+                style={{
+                  paddingHorizontal: metrics.horizontalScale(20),
+                  paddingVertical: metrics.verticalScale(10),
+                  borderWidth: 1,
+                  borderColor: "green",
+                  borderRadius: 6,
+                  width: "100%",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}>
+                <Text
+                  style={{
+                    color: "#333",
+                    fontSize: 18,
+                    fontWeight: "900",
+                    color: "green",
+                  }}>
+                  Update
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        </Portal>
+      </Provider>
     </>
   );
 };
