@@ -18,6 +18,7 @@ import Api from "../Services";
 import TransactionEmpty from "./TransactionEmpty";
 
 const CustomerHome = ({route}) => {
+  console.log("--------->", route.params);
   const navigation = useNavigation();
   const width = Dimensions.get("window").width;
   const [allTransaction, setAllTransaction] = useState([]);
@@ -126,7 +127,10 @@ const CustomerHome = ({route}) => {
           onPress={() =>
             navigation.navigate("CustomerStack", {
               screen: "CustomerEntries",
-              params: {customerId: route.params?.customerId},
+              params: {
+                customerId: route.params?.customerId,
+                customerType: customerData?.customer?.customer_type,
+              },
             })
           }
           style={{
