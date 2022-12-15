@@ -38,6 +38,7 @@ import {
   AddPicture,
   AddAdhaarDetails,
   Loading,
+  CusSupProfile,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 
@@ -100,6 +101,13 @@ const CustomerStack = () => {
           headerTitle: "Customer Entries",
         }}
       />
+      <Stack.Screen
+        component={CusSupProfile}
+        name="CusSupProfile"
+        options={{
+          headerTitle: "Customer Profile",
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -149,6 +157,13 @@ const SupplierStack = () => {
         name="CustomerEntries"
         options={{
           headerTitle: "Customer Entries",
+        }}
+      />
+      <Stack.Screen
+        component={CusSupProfile}
+        name="CusSupProfile"
+        options={{
+          headerTitle: "Supplier Profile",
         }}
       />
     </Stack.Navigator>

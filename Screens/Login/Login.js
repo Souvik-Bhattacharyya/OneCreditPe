@@ -13,7 +13,6 @@ const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
-import {TextField} from "react-native-ui-lib";
 import {notify} from "../../Redux/Action/notificationActions";
 import {useDispatch} from "react-redux";
 
@@ -85,7 +84,8 @@ const Login = ({navigation}) => {
           marginTop: 20,
           // paddingVertical: 10,
         }}>
-        {/* <TextInput
+        <SafeAreaView style={{alignItems: "center", marginTop: 0}}>
+          {/* <TextInput
             value={credentials.businessName}
             style={styles.name}
             placeholder="Your Business Name"
@@ -94,49 +94,17 @@ const Login = ({navigation}) => {
               setCredentials({...credentials, businessName: val})
             }
           /> */}
-        {/* <TextInput
+          <TextInput
             value={credentials.mobileNumber}
             style={styles.input}
             placeholder="Mobile Number"
-            validate={["required", value => value.length <= 10]}
             keyboardType="numeric"
-            maxLength={10}
             placeholderTextColor="#B4B4B4"
-            validationMessage={["Field is required", "Mobile is invalid"]}
             onChangeText={val =>
               setCredentials({...credentials, mobileNumber: val})
             }
-          /> */}
-        <Text
-          style={{
-            color: "#000",
-            fontWeight: "600",
-            marginHorizontal: 10,
-            fontSize: 16,
-          }}>
-          +91
-        </Text>
-        <TextField
-          onChangeText={val => {
-            setCredentials({...credentials, mobileNumber: val});
-          }}
-          placeholder="Enter your mobile number"
-          enableErrors
-          validate={["required", value => value.length <= 10]}
-          validationMessage={["Field is required", "Mobile is invalid"]}
-          maxLength={10}
-          fieldStyle={{borderWidth: 0, margin: 0, padding: 0}}
-          containerStyle={{
-            borderWidth: 0,
-            margin: 0,
-            padding: 0,
-            marginTop: 20,
-          }}
-          validateOnChange={true}
-          migrate
-          style={{fontSize: 16, fontWeight: "700"}}
-          keyboardType="number-pad"
-        />
+          />
+        </SafeAreaView>
       </View>
 
       <View

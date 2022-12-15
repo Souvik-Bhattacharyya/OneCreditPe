@@ -58,34 +58,40 @@ const PartiesHeader = ({customerData, ScreenNavigation}) => {
           style={{
             flexDirection: "column",
           }}>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: 3,
-            }}>
-            <Text style={{fontWeight: "600", fontSize: 17, color: "#fff"}}>
-              {customerData?.customer?.cus_name}
-            </Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("CusSupProfile", {customerData: customerData})
+            }>
             <View
               style={{
-                backgroundColor: "#fff",
-                marginLeft: 10,
-                paddingHorizontal: 5,
-                paddingVertical: 2,
-                borderRadius: 4,
-                alignItems: "center",
+                flexDirection: "row",
                 justifyContent: "center",
+                alignItems: "center",
+                marginBottom: 3,
               }}>
-              <Text style={{fontWeight: "600", fontSize: 14, color: "#0a5ac9"}}>
-                {customerData?.customer?.customer_type}
+              <Text style={{fontWeight: "600", fontSize: 17, color: "#fff"}}>
+                {customerData?.customer?.cus_name}
               </Text>
+              <View
+                style={{
+                  backgroundColor: "#fff",
+                  marginLeft: 10,
+                  paddingHorizontal: 5,
+                  paddingVertical: 2,
+                  borderRadius: 4,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}>
+                <Text
+                  style={{fontWeight: "600", fontSize: 14, color: "#0a5ac9"}}>
+                  {customerData?.customer?.customer_type}
+                </Text>
+              </View>
             </View>
-          </View>
-          <Text style={{fontSize: 14, color: "#ddd", fontWeight: "800"}}>
-            {customerData?.customer?.cus_mobile}
-          </Text>
+            <Text style={{fontSize: 14, color: "#ddd", fontWeight: "800"}}>
+              {customerData?.customer?.cus_mobile}
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
