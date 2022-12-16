@@ -8,6 +8,7 @@ import {
   Linking,
   ScrollView,
   Dimensions,
+  TextInput,
 } from "react-native";
 
 import EntypoIcon from "react-native-vector-icons/Entypo";
@@ -24,15 +25,22 @@ const CusSupProfile = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [cusData, setCusData] = useState([]);
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = useState(false);
+  const [profileDetails, setProfileDetails] = useState({
+    cus_name: "",
+    cus_mobile: "",
+    cus_address: "",
+    cus_email: "",
+    cus_accNo: "",
+  });
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: "white", padding: 20};
 
   useEffect(() => {
-    setCusData(route.params.customerData.customer);
+    setProfileDetails(route.params.customerData.customer);
   }, []);
-  console.log("cus profile", cusData);
+  console.log("profileDetails", profileDetails);
   return (
     <>
       <Provider>
@@ -143,19 +151,13 @@ const CusSupProfile = ({route}) => {
               <View
                 style={{
                   paddingHorizontal: 20,
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Name</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_name}
+                  {profileDetails.cus_name}
                 </Text>
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
@@ -174,19 +176,13 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: 20,
 
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Mobile Number</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_mobile}
+                  {profileDetails.cus_mobile}
                 </Text>
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
@@ -197,7 +193,7 @@ const CusSupProfile = ({route}) => {
               }}>
               <EntypoIcon
                 name="location-pin"
-                size={20}
+                size={22}
                 color={"#464555"}
                 style={{marginTop: 4}}
               />
@@ -205,19 +201,13 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: 20,
 
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Address</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_address}
+                  {profileDetails.cus_address}
                 </Text>
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
@@ -238,19 +228,13 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: 20,
 
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Email</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  Ankita@gmail.com
+                  {profileDetails.cus_email}
                 </Text>
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
@@ -276,12 +260,6 @@ const CusSupProfile = ({route}) => {
                 <Text>Bank Account No</Text>
                 <Text style={{marginTop: -1, color: "black"}}>632876986</Text>
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
@@ -300,7 +278,8 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: metrics.horizontalScale(20),
                   paddingVertical: metrics.verticalScale(10),
-                  backgroundColor: "red",
+                  borderColor: "#DC143C",
+                  borderWidth: 1,
                   borderRadius: 6,
                   width: "100%",
                   flexDirection: "row",
@@ -308,10 +287,9 @@ const CusSupProfile = ({route}) => {
                 }}>
                 <Text
                   style={{
-                    color: "#333",
+                    color: "#DC143C",
                     fontSize: 18,
                     fontWeight: "900",
-                    color: "#fff",
                   }}>
                   Delete
                 </Text>
@@ -327,7 +305,7 @@ const CusSupProfile = ({route}) => {
             <View
               style={{
                 flexDirection: "row",
-                paddingVertical: 10,
+                // paddingVertical: 10,
                 paddingHorizontal: 15,
               }}>
               <UserIcon
@@ -339,25 +317,25 @@ const CusSupProfile = ({route}) => {
               <View
                 style={{
                   paddingHorizontal: 20,
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Name</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_name}
-                </Text>
+                <TextInput
+                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
+                  placeholderTextColor="black"
+                  value={profileDetails.cus_name}
+                  placeholder="Your Name"
+                  onChangeText={val =>
+                    setProfileDetails({...profileDetails, cus_name: val})
+                  }
+                />
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
                 flexDirection: "row",
                 backgroundColor: "#fff",
-                paddingVertical: 10,
+                // paddingVertical: 10,
                 paddingHorizontal: 15,
               }}>
               <Icon
@@ -370,25 +348,25 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: 20,
 
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Mobile Number</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_mobile}
-                </Text>
+                <TextInput
+                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
+                  placeholderTextColor="black"
+                  value={profileDetails.cus_mobile}
+                  placeholder="Mobile No"
+                  onChangeText={val =>
+                    setProfileDetails({...profileDetails, cus_mobile: val})
+                  }
+                />
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
                 flexDirection: "row",
                 backgroundColor: "#fff",
-                paddingVertical: 10,
+                // paddingVertical: 10,
                 paddingHorizontal: 15,
               }}>
               <EntypoIcon
@@ -401,19 +379,19 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: 20,
 
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Address</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_address}
-                </Text>
+                <TextInput
+                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
+                  placeholderTextColor="black"
+                  value={profileDetails.cus_address}
+                  placeholder="Your Address"
+                  onChangeText={val =>
+                    setProfileDetails({...profileDetails, cus_address: val})
+                  }
+                />
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
@@ -421,7 +399,7 @@ const CusSupProfile = ({route}) => {
 
                 backgroundColor: "#fff",
 
-                paddingVertical: 10,
+                // paddingVertical: 10,
                 paddingHorizontal: 15,
               }}>
               <MaterialIcon
@@ -434,19 +412,23 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: 20,
 
-                  marginBottom: 8,
+                  // marginBottom: 8,
                 }}>
                 <Text>Email</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  Ankita@gmail.com
-                </Text>
+                <TextInput
+                  style={{
+                    color: "black",
+                    marginTop: -15,
+                    paddingLeft: 1,
+                  }}
+                  value={profileDetails.cus_email}
+                  placeholderTextColor="black"
+                  placeholder="Your Email"
+                  onChangeText={val =>
+                    setProfileDetails({...profileDetails, cus_email: val})
+                  }
+                />
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
@@ -454,7 +436,7 @@ const CusSupProfile = ({route}) => {
 
                 backgroundColor: "#fff",
 
-                paddingVertical: 10,
+                // paddingVertical: 10,
                 paddingHorizontal: 15,
               }}>
               <MaterialIcon
@@ -467,17 +449,15 @@ const CusSupProfile = ({route}) => {
                 style={{
                   paddingHorizontal: 20,
 
-                  marginBottom: 8,
+                  marginBottom: 10,
                 }}>
                 <Text>Bank Account No</Text>
-                <Text style={{marginTop: -1, color: "black"}}>632876986</Text>
+                <TextInput
+                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
+                  placeholderTextColor="black"
+                  placeholder="Bank Account No"
+                />
               </View>
-              <Icon
-                name="arrowright"
-                size={14}
-                color={"#464555"}
-                style={{position: "absolute", right: 20, top: 25}}
-              />
             </View>
             <View
               style={{
