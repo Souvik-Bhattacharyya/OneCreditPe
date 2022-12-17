@@ -36,7 +36,6 @@ const CusSupProfile = ({route}) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const containerStyle = {backgroundColor: "white", padding: 20};
-
   useEffect(() => {
     setProfileDetails(route.params.customerData.customer);
   }, []);

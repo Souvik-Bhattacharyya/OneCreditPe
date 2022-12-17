@@ -31,9 +31,8 @@ const CashEntries = ({navigation, route}) => {
     amount: null,
     tns_type: route.params?.customerType === "customer" ? "got" : "advance",
     paymentDetails: "",
-    tns_mode: route.params?.customerType === "supplier" && "online",
+    tns_mode: "online",
   });
-  console.log("------------>", customerCashEntry);
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -94,9 +93,10 @@ const CashEntries = ({navigation, route}) => {
       formData.append("payment_details", customerCashEntry.paymentDetails);
       formData.append("customer_id", route.params?.customerId);
       file && formData.append("attachment", file);
+      formData.append("payment_type", customerCashEntry.tns_mode);
 
       const response = await Api.postForm("/auth/transaction", formData);
-      console.log(response);
+      console.log("------------------------------->", response.data);
 
       if (response.status == 200) {
         setCustomerCashEntry({
@@ -105,35 +105,38 @@ const CashEntries = ({navigation, route}) => {
           tns_type:
             route.params?.customerType === "customer" ? "got" : "advance",
           paymentDetails: "",
-          tns_mode: route.params?.customerType === "supplier" && "online",
+          tns_mode: "online",
         });
 
         setDate(new Date());
         setFile(null);
         setIsActive("cash in");
+        setOnline(true);
+        setOffline(false);
+
         setIsDisabled(false);
-        // navigation.replace("UserDetails", {
-        //   customerId: route.params?.customerId,
-        // });
-        navigation.dispatch(
-          CommonActions.reset({
-            index: 0,
-            routes: [
-              {
-                name: "CustomerStack",
-                state: {
-                  index: 0,
-                  routes: [
-                    {
-                      name: "UserDetails",
-                      params: {customerId: route.params?.customerId},
-                    },
-                  ],
-                },
-              },
-            ],
-          }),
-        );
+        navigation.replace("UserDetails", {
+          customerId: route.params?.customerId,
+        });
+        // navigation.dispatch(
+        //   CommonActions.reset({
+        //     index: 0,
+        //     routes: [
+        //       {
+        //         name: "CustomerStack",
+        //         state: {
+        //           index: 0,
+        //           routes: [
+        //             {
+        //               name: "UserDetails",
+        //               params: {customerId: route.params?.customerId},
+        //             },
+        //           ],
+        //         },
+        //       },
+        //     ],
+        //   }),
+        // );
         dispatch(
           notify({
             message: "Your entry has been submitted successfully",
@@ -231,6 +234,7 @@ const CashEntries = ({navigation, route}) => {
   );
   return (
     <View style={styles.container}>
+      {route.params?.customerType === "supplier" && paymentMode()}
       <View
         style={{
           flexDirection: "row",
@@ -356,7 +360,7 @@ const CashEntries = ({navigation, route}) => {
           </Text>
         </TouchableOpacity>
       </View>
-      {route.params?.customerType === "supplier" && paymentMode()}
+
       <View
         style={{
           flexDirection: "row",
