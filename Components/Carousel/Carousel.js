@@ -6,31 +6,41 @@ import {
 import CaroItem from "./CaroItem";
 
 const data = [
+  // {
+  //   id: "1",
+  //   title: "Request Money",
+  //   iconName: "account-arrow-up-outline",
+  // },
+  // {
+  //   id: "2",
+  //   title: "Send Money",
+  //   iconName: "account-arrow-down-outline",
+  // },
   {
     id: "1",
-    title: "Request Money",
-    iconName: "account-arrow-up-outline",
+    title: "My QR",
+    iconImage: require('../../Assets/MyQRCode.png'),
   },
   {
     id: "2",
-    title: "Send Money",
-    iconName: "account-arrow-down-outline",
+    title: "Mobile Recharge",
+    iconName: "cellphone-check",
   },
-  // {
-  //   id: "3",
-  //   title: "My QR",
-  //   iconName: require('../../Assets/MyQR.png'),
-  // },
+  {
+    id: "3",
+    title: "Utility Bill",
+    iconName: "script-text",
+  },
   {
     id: "4",
-    title: "My Wallet",
-    iconName: 'wallet',
+    title: "My Reward",
+    iconName: 'gift',
   },
   {
     id: "5",
     title: "Rent Pay",
     iconName: "bank",
-  },
+  }
 ];
 
 const Welcome = () => {

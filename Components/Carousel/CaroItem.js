@@ -20,7 +20,8 @@ const CaroItem = ({ item }) => {
         }}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginHorizontal: 0, }}>
                 <View style={{ height: 54, width: 54, backgroundColor: '#E7EFFF', borderRadius: 100, justifyContent: 'center', alignItems: 'center' }}>
-                    <Icon name={item.iconName} color={'#0a5ac9'} size={36}/>
+                    <Icon name={item.iconName} color={'#0a5ac9'} size={36} />
+                    <Image source={item.iconImage} style={{ width: 28, height: 28, position: 'absolute', top: "28%" }} />
                 </View>
                 <Text style={{ fontSize: 14, fontWeight: '600', marginTop: 5, color: '#464555', textAlign: 'center' }}>
                     {item.title}
