@@ -7,30 +7,29 @@ const AddDetails = ({navigation}) => {
   return (
     <View
       style={{
-        paddingHorizontal: metrics.horizontalScale(15),
         backgroundColor: "#EEF3FF",
-        paddingBottom: 20,
+
+        width: "100%",
+        height: "100%",
+        flexDirection: "row",
+        flexWrap: "wrap",
       }}>
       <View
         style={{
-          flexDirection: "row",
-
-          marginVertical: metrics.verticalScale(20),
+          width: "50%",
+          height: "25%",
+          backgroundColor: "yellow",
+          padding: 5,
         }}>
         <View
           style={{
-            height: 150,
-            width: 160,
-            backgroundColor: "#fff",
-            justifyContent: "center",
+            backgroundColor: "pink",
+            flex: 1,
             alignItems: "center",
-            borderRadius: 6,
-            borderWidth: 1,
-            borderColor: "#C6C6C6",
           }}>
           <View
             style={{
-              marginTop: -50,
+              // marginTop: -50,
               alignItems: "center",
             }}>
             <Image
@@ -64,19 +63,15 @@ const AddDetails = ({navigation}) => {
         </View>
         <View
           style={{
-            height: 150,
-            width: 160,
-            backgroundColor: "#fff",
-            justifyContent: "center",
-            // alignItems: "center",
-            borderRadius: 6,
-            borderWidth: 1,
-            borderColor: "#C6C6C6",
-            marginLeft: 10,
+            width: "50%",
+            height: "25%",
+            backgroundColor: "yellow",
+            padding: 5,
           }}>
           <View
             style={{
-              marginTop: -50,
+              backgroundColor: "pink",
+              flex: 1,
               alignItems: "center",
             }}>
             <Image
@@ -117,7 +112,8 @@ const AddDetails = ({navigation}) => {
           </View>
         </View>
       </View>
-      <View
+
+      {/* <View
         style={{
           flexDirection: "row",
         }}>
@@ -211,8 +207,8 @@ const AddDetails = ({navigation}) => {
             </Text>
           </View>
         </View>
-      </View>
-      <View
+      </View> */}
+      {/* <View
         style={{
           height: 150,
           width: 160,
@@ -254,7 +250,7 @@ const AddDetails = ({navigation}) => {
             Add Now?
           </Text>
         </View>
-      </View>
+      </View> */}
       <TouchableOpacity
         style={{
           width: "100%",
@@ -265,7 +261,7 @@ const AddDetails = ({navigation}) => {
           borderRadius: 50,
           flexDirection: "row",
           position: "absolute",
-          bottom: -100,
+          bottom: -155,
           alignSelf: "center",
         }}>
         <Text
