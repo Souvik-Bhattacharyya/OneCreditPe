@@ -261,7 +261,7 @@ const LoanScreenStack = () => {
         headerStyle: {
           backgroundColor: "#0A5AC9",
         },
-        headerTitle: "Easy Loan",
+        // headerTitle: "Easy Loan",
         headerTintColor: "#fff",
         headerTitleStyle: {
           fontWeight: "bold",
@@ -287,8 +287,8 @@ const LoanScreenStack = () => {
         component={AddDetails}
         name="AddDetails"
         options={{
-          headerTitle: "Complete Your KYC",
-          headerShown: false,
+          title: "Complete Your KYC",
+          // headerShown: false,
         }}
       />
       <Stack.Screen
