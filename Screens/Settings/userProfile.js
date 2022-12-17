@@ -51,7 +51,6 @@ const UserProfile = ({navigation}) => {
       formData.append("mobile", user.mobile);
       formData.append("business_name", userInfo.business_name);
       formData.append("bank_account_no", userInfo.bank_account_no);
-      formData.append("");
       //docs
       formData.append("pan_no", userInfo.pan_no);
       formData.append("aadhar_no", userInfo.aadhar_no);

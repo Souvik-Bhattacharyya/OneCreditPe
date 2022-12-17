@@ -83,16 +83,20 @@ export default class API {
         url: url,
         data: params,
         headers: {
-          "Content-Type": "multipart/form-data",
+          // "Content-Type": "multipart/form-data",
+          "Content-Type": "application/x-www-form-urlencoded",
+          Accept: "application/json",
           Authorization: clientToken ? `Bearer ${clientToken}` : null,
         },
       };
       this.instance
         .request(options)
         .then(response => {
+          console.log("res-->", response);
           resolve(response);
         })
         .catch(error => {
+          console.log("err-->", error);
           reject(error);
         });
     });
