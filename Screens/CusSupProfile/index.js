@@ -20,7 +20,7 @@ import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {Modal, Portal, Provider} from "react-native-paper";
 import Api from "../../Services";
-
+import {notify} from "../../Redux/Action/notificationActions";
 const width = Dimensions.get("window").width;
 const CusSupProfile = ({route}) => {
   const containerStyle = {backgroundColor: "white", padding: 20};
@@ -76,7 +76,28 @@ const CusSupProfile = ({route}) => {
     try {
       const response = await Api.delete(`/auth/customer/${cusData.id}`);
       console.log("res==========>", response.data);
-      navigation.navigate("Supplier");
+      if (response.data.status == "okay") {
+        navigation.navigate("SupplierStack", {
+          screen: "Supplier",
+          initial: false,
+        });
+        // navigation.dispatch(
+        //   CommonActions.reset({
+        //     index: 0,
+        //     routes: [
+        //       {
+        //         name: "Supplier",
+        //       },
+        //     ],
+        //   }),
+        // );
+        dispatch(
+          notify({
+            message: response.data.message,
+            notifyType: "success",
+          }),
+        );
+      }
     } catch (error) {
       console.log(error);
     }

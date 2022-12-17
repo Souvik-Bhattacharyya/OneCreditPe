@@ -122,14 +122,14 @@ const ToGet = ({trnsDetails, customersAllTransaction}) => {
                 style={{marginVertical: 3, marginRight: 6}}
               />
             </TouchableOpacity>
-            {/* <TouchableOpacity onPress={createTwoButtonAlert}>
+            <TouchableOpacity onPress={createTwoButtonAlert}>
               <Icon
                 name="delete"
                 color={"red"}
                 size={16}
                 style={{marginVertical: 3}}
               />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
           </View>
         </View>
       </View>
