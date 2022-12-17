@@ -8,7 +8,7 @@ const AddDetails = ({navigation}) => {
     <View
       style={{
         backgroundColor: "#EEF3FF",
-
+        marginVertical: 15,
         width: "100%",
         height: "100%",
         flexDirection: "row",
@@ -16,14 +16,17 @@ const AddDetails = ({navigation}) => {
       }}>
       <View
         style={{
-          width: "50%",
+          width: "46%",
+          marginHorizontal: 10,
           height: "25%",
-          backgroundColor: "yellow",
+          borderWidth: 1,
+          borderColor: "#C6C6C6",
+          borderRadius: 5,
           padding: 5,
         }}>
         <View
           style={{
-            backgroundColor: "pink",
+            backgroundColor: "#EEF3FF",
             flex: 1,
             alignItems: "center",
           }}>
@@ -53,7 +56,7 @@ const AddDetails = ({navigation}) => {
             <Text
               style={{
                 position: "absolute",
-                bottom: -45,
+                bottom: -65,
                 color: "#349EFF",
                 fontSize: 12,
               }}>
@@ -61,76 +64,78 @@ const AddDetails = ({navigation}) => {
             </Text>
           </View>
         </View>
+      </View>
+      <View
+        style={{
+          width: "46%",
+          height: "25%",
+          borderWidth: 1,
+          borderColor: "#C6C6C6",
+          borderRadius: 5,
+          padding: 5,
+        }}>
         <View
           style={{
-            width: "50%",
-            height: "25%",
-            backgroundColor: "yellow",
-            padding: 5,
+            flex: 1,
+            alignItems: "center",
+          }}>
+          <Image
+            source={require("../../Assets/pan.png")}
+            style={{height: 50, width: 50}}
+          />
+          <Text
+            style={{
+              color: "#0A5AC9",
+              fontFamily: "Roboto",
+              fontWeight: "bold",
+              fontSize: 14,
+            }}>
+            Add PAN Details
+          </Text>
+          <Text style={{fontSize: 9}}>Add your bank details here to</Text>
+          <Text style={{fontSize: 9}}>transfer the money</Text>
+        </View>
+        <View
+          style={{
+            position: "absolute",
+            bottom: 10,
+            flexDirection: "row",
+            // justifyContent: "space-around",
           }}>
           <View
             style={{
-              backgroundColor: "pink",
-              flex: 1,
-              alignItems: "center",
+              paddingLeft: 30,
             }}>
-            <Image
-              source={require("../../Assets/pan.png")}
-              style={{height: 50, width: 50}}
-            />
-            <Text
-              style={{
-                color: "#0A5AC9",
-                fontFamily: "Roboto",
-                fontWeight: "bold",
-                fontSize: 14,
-              }}>
-              Add PAN Details
-            </Text>
-            <Text style={{fontSize: 9}}>Add your bank details here to</Text>
-            <Text style={{fontSize: 9}}>transfer the money</Text>
+            <CheckIcon name="checkbox-active" color="#00F100" />
           </View>
           <View
             style={{
-              position: "absolute",
-              bottom: 10,
-              flexDirection: "row",
-              // justifyContent: "space-around",
+              paddingLeft: 80,
             }}>
-            <View
-              style={{
-                paddingLeft: 30,
-              }}>
-              <CheckIcon name="checkbox-active" color="#00F100" />
-            </View>
-            <View
-              style={{
-                paddingLeft: 80,
-              }}>
-              <EditIcon name="edit" color="#349EFF" size={14} />
-            </View>
+            <EditIcon name="edit" color="#349EFF" size={14} />
           </View>
         </View>
       </View>
 
-      {/* <View
+      <View
         style={{
-          flexDirection: "row",
+          width: "46%",
+          marginHorizontal: 10,
+          marginVertical: 10,
+          borderColor: "#C6C6C6",
+          borderRadius: 5,
+          borderWidth: 1,
+          height: "25%",
+          padding: 5,
         }}>
         <View
           style={{
-            height: 150,
-            width: 160,
-            backgroundColor: "#fff",
-            justifyContent: "center",
+            flex: 1,
             alignItems: "center",
-            borderRadius: 6,
-            borderWidth: 1,
-            borderColor: "#C6C6C6",
           }}>
           <View
             style={{
-              marginTop: -50,
+              // marginTop: -50,
               alignItems: "center",
             }}>
             <Image
@@ -154,7 +159,8 @@ const AddDetails = ({navigation}) => {
             <Text
               style={{
                 position: "absolute",
-                bottom: -45,
+                // bottom: -45,
+                bottom: -65,
                 color: "#349EFF",
                 fontSize: 12,
               }}>
@@ -162,67 +168,22 @@ const AddDetails = ({navigation}) => {
             </Text>
           </View>
         </View>
-        <View
-          style={{
-            height: 150,
-            width: 160,
-            backgroundColor: "#fff",
-            justifyContent: "center",
-            alignItems: "center",
-            borderRadius: 6,
-            borderWidth: 1,
-            borderColor: "#C6C6C6",
-            marginLeft: 10,
-          }}>
-          <View
-            style={{
-              marginTop: -50,
-              alignItems: "center",
-            }}>
-            <Image
-              source={require("../../Assets/camera.png")}
-              style={{height: 50, width: 50}}
-            />
-            <TouchableOpacity onPress={() => navigation.navigate("AddPicture")}>
-              <Text
-                style={{
-                  color: "#0A5AC9",
-                  fontFamily: "Roboto",
-                  fontWeight: "bold",
-                  fontSize: 14,
-                }}>
-                Add A Picture
-              </Text>
-            </TouchableOpacity>
-            <Text style={{fontSize: 9}}>Add your bank details here to</Text>
-            <Text style={{fontSize: 9}}>transfer the money</Text>
-            <Text
-              style={{
-                position: "absolute",
-                bottom: -45,
-                color: "#349EFF",
-                fontSize: 12,
-              }}>
-              Add Now?
-            </Text>
-          </View>
-        </View>
-      </View> */}
-      {/* <View
+      </View>
+      <View
         style={{
-          height: 150,
-          width: 160,
-          backgroundColor: "#fff",
-          justifyContent: "center",
-          alignItems: "center",
-          borderRadius: 6,
-          borderWidth: 1,
+          height: "25%",
+
+          padding: 5,
+          width: "46%",
+
+          marginVertical: 10,
           borderColor: "#C6C6C6",
-          marginTop: 18,
+          borderRadius: 5,
+          borderWidth: 1,
         }}>
         <View
           style={{
-            marginTop: -50,
+            flex: 1,
             alignItems: "center",
           }}>
           <Image
@@ -243,26 +204,71 @@ const AddDetails = ({navigation}) => {
           <Text
             style={{
               position: "absolute",
-              bottom: -45,
+              bottom: 2,
               color: "#349EFF",
               fontSize: 12,
             }}>
             Add Now?
           </Text>
         </View>
-      </View> */}
+      </View>
+      <View
+        style={{
+          width: "46%",
+          height: "25%",
+          marginHorizontal: 10,
+          padding: 5,
+          borderColor: "#C6C6C6",
+          borderRadius: 5,
+          borderWidth: 1,
+        }}>
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+          }}>
+          <Image
+            source={require("../../Assets/camera.png")}
+            style={{height: 50, width: 50}}
+          />
+          <TouchableOpacity onPress={() => navigation.navigate("AddPicture")}>
+            <Text
+              style={{
+                color: "#0A5AC9",
+                fontFamily: "Roboto",
+                fontWeight: "bold",
+                fontSize: 14,
+              }}>
+              Add A Picture
+            </Text>
+          </TouchableOpacity>
+          <Text style={{fontSize: 9}}>Add your bank details here to</Text>
+          <Text style={{fontSize: 9}}>transfer the money</Text>
+          <Text
+            style={{
+              position: "absolute",
+              bottom: 2,
+              color: "#349EFF",
+              fontSize: 12,
+            }}>
+            Add Now?
+          </Text>
+        </View>
+      </View>
       <TouchableOpacity
         style={{
-          width: "100%",
+          width: "90%",
           backgroundColor: "#0A5AC9",
-          marginTop: 10,
-          marginBottom: 20,
-          justifyContent: "center",
+          // marginTop: 10,
+          // marginBottom: 20,
+          // justifyContent: "center",
           borderRadius: 50,
-          flexDirection: "row",
+          // flexDirection: "row",
           position: "absolute",
-          bottom: -155,
-          alignSelf: "center",
+          // bottom: -155,
+          alignItems: "center",
+          bottom: 25,
+          marginLeft: 19,
         }}>
         <Text
           style={{
@@ -275,6 +281,7 @@ const AddDetails = ({navigation}) => {
         </Text>
       </TouchableOpacity>
     </View>
+    // </View>
   );
 };
 
