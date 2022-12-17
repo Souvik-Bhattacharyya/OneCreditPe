@@ -8,19 +8,19 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, { useState } from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
-import {notify} from "../../Redux/Action/notificationActions";
-import {useDispatch} from "react-redux";
+import { notify } from "../../Redux/Action/notificationActions";
+import { useDispatch } from "react-redux";
 
 //Redux
 // import {useDispatch, useSelector} from "react-redux";
 // import {editName, editMobile} from "../../Redux/Action/registerActions";
 
-const Login = ({navigation}) => {
+const Login = ({ navigation }) => {
   const [credentials, setCredentials] = useState({
     businessName: "My Business",
     mobileNumber: "",
@@ -29,7 +29,7 @@ const Login = ({navigation}) => {
   const login = async () => {
     if (credentials.mobileNumber.length !== 10) {
       dispatch(
-        notify({type: "error", message: "Please enter valid mobile number"}),
+        notify({ type: "error", message: "Please enter valid mobile number" }),
       );
       return;
     }
@@ -47,11 +47,11 @@ const Login = ({navigation}) => {
     } catch (error) {
       console.log(error);
     }
-    setCredentials({businessName: "my-business", mobileNumber: ""});
+    setCredentials({ businessName: "my-business", mobileNumber: "" });
   };
   return (
     <View style={styles.container}>
-      <View style={{alignItems: "flex-start", marginTop: 20}}>
+      <View style={{ alignItems: "flex-start", marginTop: 20 }}>
         <Text
           style={{
             fontSize: 28,
@@ -71,29 +71,8 @@ const Login = ({navigation}) => {
         </Text>
       </View>
 
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          backgroundColor: "#fff",
-          width: "100%",
-          borderRadius: 5,
-          borderWidth: 1,
-          borderColor: "#C6C6C6",
-          paddingHorizontal: 15,
-          marginTop: 20,
-          // paddingVertical: 10,
-        }}>
-        <SafeAreaView style={{alignItems: "center", marginTop: 0}}>
-          {/* <TextInput
-            value={credentials.businessName}
-            style={styles.name}
-            placeholder="Your Business Name"
-            placeholderTextColor="#B4B4B4"
-            onChangeText={val =>
-              setCredentials({...credentials, businessName: val})
-            }
-          /> */}
+      <View style={{}}>
+        <SafeAreaView style={{ alignItems: "center", marginTop: 0 }}>
           <TextInput
             value={credentials.mobileNumber}
             style={styles.input}
@@ -101,7 +80,7 @@ const Login = ({navigation}) => {
             keyboardType="numeric"
             placeholderTextColor="#B4B4B4"
             onChangeText={val =>
-              setCredentials({...credentials, mobileNumber: val})
+              setCredentials({ ...credentials, mobileNumber: val })
             }
           />
         </SafeAreaView>
@@ -125,7 +104,7 @@ const Login = ({navigation}) => {
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableOpacity onPress={login} style={{width: "100%"}}>
+        <TouchableOpacity onPress={login} style={{ width: "100%" }}>
           <View
             style={{
               backgroundColor: "#349EFF",
