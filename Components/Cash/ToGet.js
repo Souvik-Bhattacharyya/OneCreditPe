@@ -7,9 +7,11 @@ import moment from "moment";
 import Api from "../../Services";
 import {useDispatch} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
-
+import UpdateIcon from "react-native-vector-icons/Feather";
+import {useNavigation} from "@react-navigation/native";
 const ToGet = ({trnsDetails, customersAllTransaction}) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const createTwoButtonAlert = () =>
     Alert.alert("Are you sure to delete this entry?", "", [
       {
@@ -106,14 +108,29 @@ const ToGet = ({trnsDetails, customersAllTransaction}) => {
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity onPress={createTwoButtonAlert}>
-            <Icon
-              name="delete"
-              color={"red"}
-              size={16}
-              style={{marginVertical: 3}}
-            />
-          </TouchableOpacity>
+          <View style={{flexDirection: "row"}}>
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("CustomerEntries", {
+                  trnsDetails: trnsDetails,
+                })
+              }>
+              <UpdateIcon
+                name="edit"
+                color={"#12ce12"}
+                size={16}
+                style={{marginVertical: 3, marginRight: 6}}
+              />
+            </TouchableOpacity>
+            {/* <TouchableOpacity onPress={createTwoButtonAlert}>
+              <Icon
+                name="delete"
+                color={"red"}
+                size={16}
+                style={{marginVertical: 3}}
+              />
+            </TouchableOpacity> */}
+          </View>
         </View>
       </View>
     </View>

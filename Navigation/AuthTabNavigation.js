@@ -39,6 +39,7 @@ import {
   AddAdhaarDetails,
   Loading,
   CusSupProfile,
+  ToGet,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 
@@ -81,9 +82,17 @@ const CustomerStack = () => {
           headerTitle: "Add New Customer",
         }}
       />
+      <Stack.Screen
+        component={CustomerEntries}
+        name="CustomerEntries"
+        options={{
+          headerTitle: "Customer Entries",
+        }}
+      />
       <Stack.Screen component={AddContact} name="AddContact" />
       <Stack.Screen component={ToPayUser} name="ToPayUser" />
       <Stack.Screen component={ToGetUser} name="ToGetUser" />
+
       <Stack.Screen
         component={UserDetails}
         name="UserDetails"
@@ -94,13 +103,7 @@ const CustomerStack = () => {
         }}
       />
       <Stack.Screen component={CommonHeader} name="CommonHeader" />
-      <Stack.Screen
-        component={CustomerEntries}
-        name="CustomerEntries"
-        options={{
-          headerTitle: "Customer Entries",
-        }}
-      />
+
       <Stack.Screen
         component={CusSupProfile}
         name="CusSupProfile"

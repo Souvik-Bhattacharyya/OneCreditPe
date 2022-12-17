@@ -5,7 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {CommonActions} from "@react-navigation/native";
 import Icon2 from "react-native-vector-icons/FontAwesome";
 import metrics from "../Constants/metrics";
@@ -27,12 +27,19 @@ const CashEntries = ({navigation, route}) => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
+  const [transDetails, setTransDetails] = useState([]);
+  console.log("trans detils", route.params.trnsDetails);
   const [customerCashEntry, setCustomerCashEntry] = useState({
     amount: null,
     tns_type: route.params?.customerType === "customer" ? "got" : "advance",
     paymentDetails: "",
     tns_mode: "online",
   });
+
+  useEffect(() => {
+    setTransDetails(route.params.trnsDetails);
+  }, []);
+
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -440,8 +447,35 @@ const CashEntries = ({navigation, route}) => {
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
           onPress={newTransaction}>
-          <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          {transDetails ? (
+            <Text style={[styles.btnTxt, {color: "#fff"}]}>Update</Text>
+          ) : (
+            <Text style={[styles.btnTxt, {color: "#fff"}]}>Save</Text>
+          )}
         </TouchableOpacity>
+        {transDetails && (
+          <View
+            style={{
+              position: "absolute",
+              bottom: metrics.verticalScale(50),
+              alignSelf: "center",
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}>
+            <TouchableOpacity
+              style={{
+                paddingHorizontal: metrics.horizontalScale(20),
+                paddingVertical: metrics.verticalScale(12),
+                // backgroundColor: "#0a5ac9",
+                borderRadius: 50,
+                width: "100%",
+                backgroundColor: isDisabled ? "#808080" : "red",
+              }}>
+              <Text style={[styles.btnTxt, {color: "#fff"}]}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );

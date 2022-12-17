@@ -8,9 +8,11 @@ import Api from "../../Services";
 import {useDispatch} from "react-redux";
 import {Modal, Portal, Provider} from "react-native-paper";
 import {notify} from "../../Redux/Action/notificationActions";
-
+import UpdateIcon from "react-native-vector-icons/Feather";
+import {useNavigation} from "@react-navigation/native";
 const CashOut = ({trnsDetails, customersAllTransaction}) => {
   const [visible, setVisible] = React.useState(false);
+  const navigation = useNavigation();
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const dispatch = useDispatch();
@@ -123,15 +125,29 @@ const CashOut = ({trnsDetails, customersAllTransaction}) => {
                 </Portal>
               </TouchableOpacity>
             )}
-
-            <TouchableOpacity onPress={createTwoButtonAlert}>
-              <Icon
-                name="delete"
-                color={"red"}
-                size={16}
-                style={{marginVertical: 3}}
-              />
-            </TouchableOpacity>
+            <View style={{flexDirection: "row"}}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("CustomerEntries", {
+                    trnsDetails: trnsDetails,
+                  })
+                }>
+                <UpdateIcon
+                  name="edit"
+                  color={"#12ce12"}
+                  size={16}
+                  style={{marginVertical: 3, marginRight: 6}}
+                />
+              </TouchableOpacity>
+              {/* <TouchableOpacity onPress={createTwoButtonAlert}>
+                <Icon
+                  name="delete"
+                  color={"red"}
+                  size={16}
+                  style={{marginVertical: 3}}
+                />
+              </TouchableOpacity> */}
+            </View>
           </View>
         </View>
       </View>
