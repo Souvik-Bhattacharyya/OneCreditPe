@@ -55,7 +55,7 @@ const CusSupProfile = ({route}) => {
       // formData.append("cus_address", profileDetails.cus_address);
       // formData.append("bank_account_no", profileDetails.bank_account_no);
       // formData.append("customer_type", profileDetails.customer_type);
-      // console.log(formData);
+      // console.log(formData);.
 
       var urlencoded = new URLSearchParams();
       urlencoded.append("cus_name", profileDetails.cus_name);
@@ -519,7 +519,7 @@ const CusSupProfile = ({route}) => {
                 borderColor: "#c9c9c9",
               }}>
               <TouchableOpacity
-                onPress={updateCustomer}
+                // onPress={updateCustomer}
                 style={{
                   paddingHorizontal: metrics.horizontalScale(20),
                   paddingVertical: metrics.verticalScale(10),

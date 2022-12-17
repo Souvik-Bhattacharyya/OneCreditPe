@@ -14,7 +14,11 @@ import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import KycIcon from "react-native-vector-icons/Entypo";
 import {useDispatch, useSelector} from "react-redux";
+import {updateUser} from "../../Redux/Action/authActions";
+import {notify} from "../../Redux/Action/notificationActions";
+import {Store} from "redux";
 import DocumentPicker, {types} from "react-native-document-picker";
+import Api from "../../Services";
 
 const UserProfile = ({navigation}) => {
   const width = Dimensions.get("window").width;
@@ -22,15 +26,15 @@ const UserProfile = ({navigation}) => {
   const user = useSelector(state => state.auth.user);
   const [Pic, SetPic] = React.useState("");
   const [userInfo, setUserInfo] = useState({
-    name: user.name,
-    email: user.email,
-    business_name: user.business_name,
-    bank_account_no: user.bank_account_no,
-    pan_no: "sdfdf3e434324",
-    aadhar_no: "sdff34234",
-    voter_id: "dfsdf345345",
+    name: user.name !== "false" && user.name,
+    email: user.email !== "false" && user.email,
+    business_name: user.business_name !== "false" && user.business_name,
+    bank_account_no: user.bank_account_no !== "false" && user.bank_account_no,
+    // pan_no: "sdfdf3e434324",
+    // aadhar_no: "sdff34234",
+    // voter_id: "dfsdf345345",
   });
-  console.log("========================>", Pic);
+
   const uploadImage = async () => {
     try {
       const response = await DocumentPicker.pick({
@@ -43,7 +47,8 @@ const UserProfile = ({navigation}) => {
       console.log(error);
     }
   };
-  const updateUser = async () => {
+  console.log("user=========>", user);
+  const updateUserDetails = async () => {
     try {
       const formData = new FormData();
       formData.append("name", userInfo.name);
@@ -52,12 +57,22 @@ const UserProfile = ({navigation}) => {
       formData.append("business_name", userInfo.business_name);
       formData.append("bank_account_no", userInfo.bank_account_no);
       //docs
-      formData.append("pan_no", userInfo.pan_no);
-      formData.append("aadhar_no", userInfo.aadhar_no);
-      formData.append("voter_id", userInfo.voter_id);
+      // formData.append("pan_no", userInfo.pan_no);
+      // formData.append("aadhar_no", userInfo.aadhar_no);
+      // formData.append("voter_id", userInfo.voter_id);
 
-      const response = await Api.postForm("/auth/transaction", formData);
-      console.log("------------------------------->", response.data);
+      const response = await Api.postForm(
+        `/auth/user/${user.id}?_method=put`,
+        formData,
+      );
+      console.log("------------------------------->", response.data.user);
+      dispatch(updateUser({user: response.data.user}));
+      dispatch(
+        notify({
+          message: response.data.message,
+          notifyType: "success",
+        }),
+      );
     } catch (error) {
       console.log(error);
     }
@@ -359,6 +374,7 @@ const UserProfile = ({navigation}) => {
         </View>
       </ScrollView>
       <TouchableOpacity
+        onPress={updateUserDetails}
         style={{
           backgroundColor: "#0a5ac9",
           paddingVertical: 15,

@@ -83,9 +83,9 @@ export default class API {
         url: url,
         data: params,
         headers: {
-          // "Content-Type": "multipart/form-data",
-          "Content-Type": "application/x-www-form-urlencoded",
-          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+          // "Content-Type": "application/x-www-form-urlencoded",
+          // Accept: "application/json",
           Authorization: clientToken ? `Bearer ${clientToken}` : null,
         },
       };

@@ -28,7 +28,6 @@ const OtpScreen = ({navigation, route}) => {
   const onSubmitOtp = async e => {
     try {
       setLoading(true);
-      console.log("api call start");
       const response = await Api.post("/check-otp", {
         mobile: mobileNumber,
         otp: e,
