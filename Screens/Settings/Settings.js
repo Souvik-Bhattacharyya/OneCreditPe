@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -7,18 +7,22 @@ import {
   Image,
   Linking,
   ScrollView,
+  Dimensions
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import IconLow from "react-native-vector-icons/FontAwesome";
 import Help from "react-native-vector-icons/Entypo";
 import Faq from "react-native-vector-icons/MaterialCommunityIcons";
-import {List} from "react-native-paper";
+import { List } from "react-native-paper";
 import metrics from "../../Constants/metrics";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
 import InviteFriendModal from "../../Components/InviteFriendModal";
-import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../Redux/Action/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Redux/Action/authActions";
+
+const Width = Dimensions.get('window').width;
+const Height = Dimensions.get('window').height;
 
 const Settings = () => {
   const navigation = useNavigation();
@@ -38,6 +42,7 @@ const Settings = () => {
     Linking.openURL(number);
   };
 
+  
   return (
     <>
       <CommonHeader color="#0a5ac9" />
@@ -107,7 +112,7 @@ const Settings = () => {
               }}>
               {user.name}
             </Text>
-            <Text style={{textAlign: "center", fontSize: 16, color: "#828282"}}>
+            <Text style={{ textAlign: "center", fontSize: 16, color: "#828282" }}>
               +91 {user.mobile}
             </Text>
           </View>
@@ -115,7 +120,7 @@ const Settings = () => {
           <List.AccordionGroup>
             <List.Accordion
               style={styles.accordion}
-              theme={{colors: {text: "#464555", primary: "#333"}}}
+              theme={{ colors: { text: "#464555", primary: "#333", background: '#F1f1f1' } }}
               title="Settings"
               id="1"
               left={props => (
@@ -123,7 +128,7 @@ const Settings = () => {
               )}>
               <List.Item
                 title="Language Options"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => alert("In Progress")}
                 left={props => (
@@ -131,7 +136,7 @@ const Settings = () => {
                     name="language"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -139,24 +144,23 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
               <List.Item
                 title="Log Out"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => {
                   dispatch(logout());
-                  // navigation.navigate("login");
                 }}
                 left={props => (
                   <Help
                     name="log-out"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -164,7 +168,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
@@ -172,7 +176,7 @@ const Settings = () => {
 
             <List.Accordion
               style={styles.accordion}
-              theme={{colors: {text: "#464555", primary: "#333"}}}
+              theme={{ colors: { text: "#464555", primary: "#333", background: '#F1f1f1' } }}
               title="Help & Support"
               id="2"
               left={props => (
@@ -180,7 +184,7 @@ const Settings = () => {
               )}>
               <List.Item
                 title="FAQ Listing"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => navigation.navigate("faq")}
                 right={props => (
@@ -188,7 +192,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 left={props => (
@@ -196,35 +200,13 @@ const Settings = () => {
                     name="comment-question"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
-              {/* <List.Item
-                title="FAQ Answer"
-                theme={{ colors: { text: "#464555" } }}
-                style={styles.items}
-                onPress={() => alert("In progress")}
-                left={props => (
-                  <Faq
-                    name="frequently-asked-questions"
-                    size={18}
-                    color={"#464555"}
-                    style={{ alignSelf: "center" }}
-                  />
-                )}
-                right={props => (
-                  <Icon
-                    name="arrow-right"
-                    size={14}
-                    color={"#464555"}
-                    style={{ alignSelf: "center" }}
-                  />
-                )}
-              /> */}
               <List.Item
                 title="Chat with us"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() =>
                   Linking.openURL(
@@ -236,7 +218,7 @@ const Settings = () => {
                     name="message"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -244,13 +226,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
               <List.Item
                 title="Call Us"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => openDialScreen()}
                 left={props => (
@@ -258,7 +240,7 @@ const Settings = () => {
                     name="phone"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -266,7 +248,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
@@ -274,7 +256,7 @@ const Settings = () => {
 
             <List.Accordion
               style={styles.accordion}
-              theme={{colors: {text: "#464555", primary: "#333"}}}
+              theme={{ colors: { text: "#464555", primary: "#333", background: '#F1f1f1' } }}
               title="About Us"
               id="3"
               left={props => (
@@ -282,8 +264,8 @@ const Settings = () => {
               )}>
               <List.Item
                 title="Privacy Policy"
-                theme={{colors: {text: "#464555"}}}
-                style={[styles.items, {paddingLeft: 35}]}
+                theme={{ colors: { text: "#464555" } }}
+                style={[styles.items, { paddingLeft: 35 }]}
                 onPress={() => {
                   navigation.navigate("Privacy And Policy");
                 }}
@@ -292,7 +274,7 @@ const Settings = () => {
                     name="file-account"
                     size={20}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -300,13 +282,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
               <List.Item
                 title="Terms And Conditions"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => {
                   navigation.navigate("Terms And Conditions");
@@ -316,7 +298,7 @@ const Settings = () => {
                     name="file-contract"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -324,77 +306,85 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
-              {/* <List.Item
-                title="Invite Friends"
-                theme={{colors: {text: "#464555"}}}
-                style={styles.items}
-                onPress={showModal}
-                left={props => (
-                  <Icon
-                    name="user-plus"
-                    size={16}
-                    color={"#464555"}
-                    style={{alignSelf: "center"}}
-                  />
-                )}
-                right={props => (
-                  <Icon
-                    name="arrow-right"
-                    size={14}
-                    color={"#464555"}
-                    style={{alignSelf: "center"}}
-                  />
-                )}
-              /> */}
             </List.Accordion>
           </List.AccordionGroup>
-          <View
+
+          <TouchableOpacity onPress={showModal}
             style={{
               flexDirection: "row",
+              backgroundColor: '#fff',
+              marginVertical: metrics.verticalScale(10),
+              borderWidth: 1,
+              borderColor: '#c9c9c9'
             }}>
             <Image
               source={require("../../Assets/Images/inviteFriends.webp")}
               style={{
-                height: 100,
-                width: 100,
+                height: 80,
+                width: 80,
                 resizeMode: "contain",
                 marginLeft: 10,
               }}
             />
-            <TouchableOpacity onPress={showModal}>
+            <View style={{
+              backgroundColor: '#fff',
+              display: 'flex',
+              justifyContent: "center",
+              // alignItems:'center',
+              marginHorizontal: 20
+            }}>
+              <Text style={{
+                fontSize: 18,
+                fontWeight: "400",
+                color: "#333",
+              }}>Invite your friends to use OneCPay</Text>
               <Text
                 style={{
-                  marginTop: 40,
-                  marginLeft: 20,
                   fontSize: 18,
                   fontWeight: "bold",
-
                   color: "#0a5ac9",
                 }}>
                 Invite Friends
               </Text>
-            </TouchableOpacity>
+            </View>
+          </TouchableOpacity>
+
+          <InviteFriendModal
+            visible={visible}
+            hideModal={hideModal}
+            setVisible={setVisible}
+          />
+          <View style={{
+            // backgroundColor: '#fff',
+            height: 140,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            marginTop: 65
+          }}>
+            <Image
+              source={require("../../Assets/Logos/darkLogo.png")}
+              style={{
+                height: 40,
+                width: 100,
+                resizeMode: "contain",
+                marginBottom: 10
+                // backgroundColor:'#ddd'
+              }} />
+            <Text
+              style={{
+                color: '#aaa',
+                fontSize: 16,
+              }}>
+              Powered By Bound Parivar Technology Private Limited
+            </Text>
           </View>
         </View>
-
-        <InviteFriendModal
-          visible={visible}
-          hideModal={hideModal}
-          setVisible={setVisible}
-        />
-        <Text
-          style={{
-            marginTop: 50,
-            paddingLeft: 10,
-            fontWeight: "bold",
-            marginBottom: 20,
-          }}>
-          Powered By Bound Parivar Technology Private Limited
-        </Text>
       </ScrollView>
     </>
   );
@@ -404,18 +394,19 @@ export default Settings;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
-    // flex: 1,
+    backgroundColor: "#F1f1f1",
+    height: '100%'
   },
   text: {
     color: "#333",
   },
   accordion: {
     backgroundColor: "#fff",
-    borderBottomColor: "#c9c9c9",
-    borderBottomWidth: 1,
+    borderColor: "#c9c9c9",
+    borderWidth: 1,
     paddingVertical: 10,
     paddingHorizontal: 15,
+    marginTop: 10
   },
   items: {
     backgroundColor: "#F1F1F1",
