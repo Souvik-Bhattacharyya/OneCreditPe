@@ -19,27 +19,68 @@ import metrics from "../../Constants/metrics";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {Modal, Portal, Provider} from "react-native-paper";
+import Api from "../../Services";
 
 const width = Dimensions.get("window").width;
 const CusSupProfile = ({route}) => {
+  const containerStyle = {backgroundColor: "white", padding: 20};
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [cusData, setCusData] = useState([]);
   const [visible, setVisible] = useState(false);
   const [profileDetails, setProfileDetails] = useState({
-    cus_name: "",
-    cus_mobile: "",
-    cus_address: "",
-    cus_email: "",
-    cus_accNo: "",
+    cus_name: route.params?.customerData?.customer.cus_name,
+    cus_mobile: route.params?.customerData?.customer.cus_mobile,
+    cus_address: route.params?.customerData?.customer.cus_address,
+    cus_email: route.params?.customerData?.customer.cus_email,
+    bank_account_no: route.params?.customerData?.customer.bank_account_no,
+    customer_type: route.params?.customerData?.customer.customer_type,
   });
+
+  useEffect(() => {
+    setCusData(route.params?.customerData.customer);
+  }, []);
+
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
-  const containerStyle = {backgroundColor: "white", padding: 20};
-  useEffect(() => {
-    setProfileDetails(route.params.customerData.customer);
-  }, []);
-  console.log("profileDetails", profileDetails);
+
+  console.log("==>", profileDetails);
+  console.log("===>", cusData.id);
+  const updateCustomer = async () => {
+    try {
+      // const formData = new FormData();
+      // formData.append("cus_name", profileDetails.cus_name);
+      // formData.append("cus_mobile", profileDetails.cus_mobile);
+      // formData.append("cus_email", profileDetails.cus_email);
+      // formData.append("cus_address", profileDetails.cus_address);
+      // formData.append("bank_account_no", profileDetails.bank_account_no);
+      // formData.append("customer_type", profileDetails.customer_type);
+      // console.log(formData);.
+
+      var urlencoded = new URLSearchParams();
+      urlencoded.append("cus_name", profileDetails.cus_name);
+      urlencoded.append("cus_address", profileDetails.cus_address);
+      urlencoded.append("cus_mobile", profileDetails.cus_mobile);
+      urlencoded.append("customer_type", profileDetails.customer_type);
+      urlencoded.append("bank_account_no", profileDetails.bank_account_no);
+      urlencoded.append("cus_email", profileDetails.cus_email);
+
+      const response = await Api.updateForm("/auth/customer/145", urlencoded);
+      console.log("res==========>", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteCustomer = async () => {
+    try {
+      const response = await Api.delete(`/auth/customer/${cusData.id}`);
+      console.log("res==========>", response.data);
+      navigation.navigate("Supplier");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Provider>
@@ -154,7 +195,7 @@ const CusSupProfile = ({route}) => {
                 }}>
                 <Text>Name</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  {profileDetails.cus_name}
+                  {cusData.cus_name}
                 </Text>
               </View>
             </View>
@@ -179,7 +220,7 @@ const CusSupProfile = ({route}) => {
                 }}>
                 <Text>Mobile Number</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  {profileDetails.cus_mobile}
+                  {cusData.cus_mobile}
                 </Text>
               </View>
             </View>
@@ -204,7 +245,7 @@ const CusSupProfile = ({route}) => {
                 }}>
                 <Text>Address</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  {profileDetails.cus_address}
+                  {cusData.cus_address}
                 </Text>
               </View>
             </View>
@@ -231,7 +272,7 @@ const CusSupProfile = ({route}) => {
                 }}>
                 <Text>Email</Text>
                 <Text style={{marginTop: -1, color: "black"}}>
-                  {profileDetails.cus_email}
+                  {cusData.cus_email}
                 </Text>
               </View>
             </View>
@@ -274,6 +315,7 @@ const CusSupProfile = ({route}) => {
                 borderColor: "#c9c9c9",
               }}>
               <TouchableOpacity
+                onPress={deleteCustomer}
                 style={{
                   paddingHorizontal: metrics.horizontalScale(20),
                   paddingVertical: metrics.verticalScale(10),
@@ -296,6 +338,7 @@ const CusSupProfile = ({route}) => {
             </View>
           </View>
         </ScrollView>
+        {/* Modal */}
         <Portal>
           <Modal
             visible={visible}
@@ -455,6 +498,10 @@ const CusSupProfile = ({route}) => {
                   style={{marginTop: -15, paddingLeft: 1, color: "black"}}
                   placeholderTextColor="black"
                   placeholder="Bank Account No"
+                  value={profileDetails.bank_account_no}
+                  onChangeText={val =>
+                    setProfileDetails({...profileDetails, bank_account_no: val})
+                  }
                 />
               </View>
             </View>
@@ -472,6 +519,7 @@ const CusSupProfile = ({route}) => {
                 borderColor: "#c9c9c9",
               }}>
               <TouchableOpacity
+                // onPress={updateCustomer}
                 style={{
                   paddingHorizontal: metrics.horizontalScale(20),
                   paddingVertical: metrics.verticalScale(10),

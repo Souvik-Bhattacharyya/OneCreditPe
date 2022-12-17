@@ -21,7 +21,7 @@ const UserTransaction = ({allTransaction, customersAllTransaction}) => {
       </View>
       <View style={styles.box}>
         <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
-          Total amount you will get
+          Total amount paid in advance
         </Text>
       </View>
       <View style={styles.box}>
