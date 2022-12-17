@@ -8,7 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import Icon from "react-native-vector-icons/Entypo";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -21,7 +21,16 @@ const UserProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   const [Pic, SetPic] = React.useState("");
-
+  const [userInfo, setUserInfo] = useState({
+    name: user.name,
+    email: user.email,
+    business_name: user.business_name,
+    bank_account_no: user.bank_account_no,
+    pan_no: "sdfdf3e434324",
+    aadhar_no: "sdff34234",
+    voter_id: "dfsdf345345",
+  });
+  console.log("========================>", Pic);
   const uploadImage = async () => {
     try {
       const response = await DocumentPicker.pick({
@@ -34,7 +43,26 @@ const UserProfile = ({navigation}) => {
       console.log(error);
     }
   };
-  console.log("user", user);
+  const updateUser = async () => {
+    try {
+      const formData = new FormData();
+      formData.append("name", userInfo.name);
+      formData.append("email", userInfo.email);
+      formData.append("mobile", user.mobile);
+      formData.append("business_name", userInfo.business_name);
+      formData.append("bank_account_no", userInfo.bank_account_no);
+      formData.append("");
+      //docs
+      formData.append("pan_no", userInfo.pan_no);
+      formData.append("aadhar_no", userInfo.aadhar_no);
+      formData.append("voter_id", userInfo.voter_id);
+
+      const response = await Api.postForm("/auth/transaction", formData);
+      console.log("------------------------------->", response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View
       style={{
@@ -167,8 +195,9 @@ const UserProfile = ({navigation}) => {
               />
               <TextInput
                 placeholder="Your Name"
-                value={user.username}
+                value={userInfo.name}
                 placeholderTextColor={"#aaa"}
+                onChangeText={e => setUserInfo({...userInfo, name: e})}
                 style={{
                   color: "#464555",
                   fontSize: 18,
@@ -225,9 +254,10 @@ const UserProfile = ({navigation}) => {
                 style={{marginRight: 10, marginRight: 20}}
               />
               <TextInput
-                value={user.email}
+                value={userInfo.email}
                 placeholder="Email Id"
                 placeholderTextColor={"#aaa"}
+                onChangeText={e => setUserInfo({...userInfo, email: e})}
                 style={{
                   color: "#464555",
                   fontSize: 18,
@@ -254,8 +284,11 @@ const UserProfile = ({navigation}) => {
               />
               <TextInput
                 placeholder="Bank Account No"
-                // value={user.name}
+                value={userInfo.bank_account_no}
                 placeholderTextColor={"#aaa"}
+                onChangeText={e =>
+                  setUserInfo({...userInfo, bank_account_no: e})
+                }
                 style={{
                   color: "#464555",
                   fontSize: 18,
@@ -284,8 +317,9 @@ const UserProfile = ({navigation}) => {
               />
               <TextInput
                 placeholder="Business Name"
-                value={user.name}
+                value={userInfo.business_name}
                 placeholderTextColor={"#aaa"}
+                onChangeText={e => setUserInfo({...userInfo, business_name: e})}
                 style={{
                   color: "#464555",
                   fontSize: 18,
