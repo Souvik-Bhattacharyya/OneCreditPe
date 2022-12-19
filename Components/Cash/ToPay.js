@@ -1,13 +1,11 @@
-import {View, Text, Image, TouchableOpacity, Alert} from "react-native";
+import {View, Text, Image, TouchableOpacity} from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/AntDesign";
 import IconMat from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
 import moment from "moment";
-import Api from "../../Services";
 import {useDispatch} from "react-redux";
 import {Modal, Portal, Provider} from "react-native-paper";
-import {notify} from "../../Redux/Action/notificationActions";
 import UpdateIcon from "react-native-vector-icons/Feather";
 import {useNavigation} from "@react-navigation/native";
 const CashOut = ({trnsDetails, customersAllTransaction}) => {
@@ -16,36 +14,7 @@ const CashOut = ({trnsDetails, customersAllTransaction}) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
   const dispatch = useDispatch();
-  const createTwoButtonAlert = () =>
-    Alert.alert("Are you sure to delete this entry?", "", [
-      {
-        text: "Cancel",
-        onPress: () => console.log("Cancel Pressed"),
-      },
-      {
-        text: "OK",
-        onPress: () => {
-          console.log("OK Pressed");
-          deleteEntry(trnsDetails?.id);
-        },
-      },
-    ]);
 
-  const deleteEntry = async id => {
-    try {
-      const response = await Api.delete(`/auth/transaction/${id}`);
-      console.log("del en", response);
-      if (response.status == 200) {
-        customersAllTransaction(trnsDetails?.customer_id);
-        dispatch(notify({message: "Transaction deleted successfully"}));
-      } else {
-        throw new Error(response.message);
-      }
-    } catch (error) {
-      console.log(error);
-      dispatch(notify({message: error.message}));
-    }
-  };
   return (
     <Provider>
       <View>
@@ -130,6 +99,7 @@ const CashOut = ({trnsDetails, customersAllTransaction}) => {
                 onPress={() =>
                   navigation.navigate("CustomerEntries", {
                     trnsDetails: trnsDetails,
+                    customersAllTransaction: customersAllTransaction,
                   })
                 }>
                 <UpdateIcon
