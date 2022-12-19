@@ -8,50 +8,39 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, {useState} from "react";
 const windowWidth = Dimensions.get("window").width;
 const windowHeight = Dimensions.get("window").height;
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Api from "../../Services";
-import { notify } from "../../Redux/Action/notificationActions";
-import { useDispatch } from "react-redux";
 
 //Redux
 // import {useDispatch, useSelector} from "react-redux";
 // import {editName, editMobile} from "../../Redux/Action/registerActions";
 
-const Login = ({ navigation }) => {
+const Login = ({navigation}) => {
   const [credentials, setCredentials] = useState({
     businessName: "My Business",
     mobileNumber: "",
   });
-  const dispatch = useDispatch();
+
   const login = async () => {
-    if (credentials.mobileNumber.length !== 10) {
-      dispatch(
-        notify({ type: "error", message: "Please enter valid mobile number" }),
-      );
-      return;
-    }
     try {
       const response = await Api.post("/send-otp", {
         name: credentials.businessName,
         mobile: credentials.mobileNumber,
       });
       if (response.status == 200) {
-        navigation.navigate("otp", {
-          mobileNumber: credentials.mobileNumber,
-          name: credentials.businessName,
-        });
+        navigation.navigate("otp", {mobileNumber: credentials.mobileNumber});
       }
     } catch (error) {
       console.log(error);
     }
-    setCredentials({ businessName: "my-business", mobileNumber: "" });
+    setCredentials({businessName: "my-business", mobileNumber: ""});
   };
   return (
     <View style={styles.container}>
-      <View style={{ alignItems: "flex-start", marginTop: 20 }}>
+      <View style={{alignItems: "flex-start", marginTop: 20}}>
         <Text
           style={{
             fontSize: 28,
@@ -71,8 +60,17 @@ const Login = ({ navigation }) => {
         </Text>
       </View>
 
-      <View style={{}}>
-        <SafeAreaView style={{ alignItems: "center", marginTop: 0 }}>
+      <View>
+        <SafeAreaView style={{alignItems: "center", marginTop: 0}}>
+          {/* <TextInput
+            value={credentials.businessName}
+            style={styles.name}
+            placeholder="Your Business Name"
+            placeholderTextColor="#B4B4B4"
+            onChangeText={val =>
+              setCredentials({...credentials, businessName: val})
+            }
+          /> */}
           <TextInput
             value={credentials.mobileNumber}
             style={styles.input}
@@ -80,7 +78,7 @@ const Login = ({ navigation }) => {
             keyboardType="numeric"
             placeholderTextColor="#B4B4B4"
             onChangeText={val =>
-              setCredentials({ ...credentials, mobileNumber: val })
+              setCredentials({...credentials, mobileNumber: val})
             }
           />
         </SafeAreaView>
@@ -104,7 +102,7 @@ const Login = ({ navigation }) => {
           flex: 1,
           justifyContent: "flex-end",
         }}>
-        <TouchableOpacity onPress={login} style={{ width: "100%" }}>
+        <TouchableOpacity onPress={login} style={{width: "100%"}}>
           <View
             style={{
               backgroundColor: "#349EFF",
