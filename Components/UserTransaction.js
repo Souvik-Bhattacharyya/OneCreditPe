@@ -1,9 +1,14 @@
 import {View, Text, StyleSheet} from "react-native";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import metrics from "../Constants/metrics";
 import {ToGet, ToPay} from "../Screens";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-const UserTransaction = ({allTransaction, customersAllTransaction}) => {
+const UserTransaction = ({
+  allTransaction,
+  customersAllTransaction,
+  customerType,
+}) => {
+  console.log("allTransaction", allTransaction);
   let totalAmount = 0;
   for (let i of allTransaction) {
     i.tns_type == "got" || i.tns_type == "advance"
@@ -11,7 +16,7 @@ const UserTransaction = ({allTransaction, customersAllTransaction}) => {
       : (totalAmount = totalAmount - i?.amount);
   }
 
-  const Get = () => (
+  const Advance = () => (
     <View
       style={[styles.card, {borderColor: "#c6c6c6", backgroundColor: "#fff"}]}>
       <View style={styles.box}>
@@ -30,7 +35,26 @@ const UserTransaction = ({allTransaction, customersAllTransaction}) => {
     </View>
   );
 
-  const Pay = () => (
+  const Give = () => (
+    <View
+      style={[styles.card, {borderColor: "#c6c6c6", backgroundColor: "#fff"}]}>
+      <View style={styles.box}>
+        <Text style={{fontSize: 20, color: "#F31B24", fontWeight: "900"}}>
+          ₹ {totalAmount}
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
+          Total amount you will give
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Icon name="account-arrow-left" color={"#12CE12"} size={32} />
+      </View>
+    </View>
+  );
+
+  const Purchase = () => (
     <View
       style={[styles.card, {borderColor: "#c6c6c6", backgroundColor: "#fff"}]}>
       <View style={styles.box}>
@@ -49,9 +73,35 @@ const UserTransaction = ({allTransaction, customersAllTransaction}) => {
     </View>
   );
 
+  const Got = () => (
+    <View
+      style={[styles.card, {borderColor: "#c6c6c6", backgroundColor: "#fff"}]}>
+      <View style={styles.box}>
+        <Text style={{fontSize: 20, color: "#12CE12", fontWeight: "900"}}>
+          ₹ {totalAmount}
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Text style={{color: "#000", fontSize: 14, fontWeight: "700"}}>
+          Total amount you will got
+        </Text>
+      </View>
+      <View style={styles.box}>
+        <Icon name="account-arrow-right" color={"#F31B24"} size={32} />
+      </View>
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      {totalAmount > 0 ? Get() : Pay()}
+      {allTransaction.find(e => e.cus_type === "supplier")
+        ? totalAmount > 0
+          ? Advance()
+          : Purchase()
+        : totalAmount > 0
+        ? Got()
+        : Give()}
+
       <View
         style={{
           width: "100%",

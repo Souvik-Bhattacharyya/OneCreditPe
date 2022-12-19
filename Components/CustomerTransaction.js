@@ -115,6 +115,7 @@ const CustomerTransaction = ({allCustomerTrnsData}) => {
               if (item.cus_name.toLowerCase().includes(value.toLowerCase())) {
                 return true;
               }
+              return false;
             })
             .map((trns, index) =>
               trns.aggsum > 0 ? (
