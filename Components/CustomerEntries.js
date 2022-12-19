@@ -4,6 +4,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import React, {useEffect, useState} from "react";
 import {CommonActions} from "@react-navigation/native";
@@ -15,12 +16,11 @@ import DocumentPicker, {types} from "react-native-document-picker";
 import {CheckBox, Icon} from "@rneui/themed";
 import moment from "moment";
 import Api from "../Services";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {notify} from "../Redux/Action/notificationActions";
 
 const CashEntries = ({navigation, route}) => {
   const dispatch = useDispatch();
-  // const {customerId} = route.params;
   const [isActive, setIsActive] = useState("cash in");
   const [date, setDate] = useState(new Date());
   const [file, setFile] = useState(null);
@@ -28,7 +28,44 @@ const CashEntries = ({navigation, route}) => {
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
   const [transDetails, setTransDetails] = useState([]);
-  console.log("trans detils", route.params.trnsDetails);
+  // const [customerCashEntry, setCustomerCashEntry] = useState({
+  //   amount: route.params.trnsDetails ? route.params.trnsDetails.amount : null,
+  //   tns_type: route.params.trnsDetails
+  //     ? route.params.trnsDetails.tns_type
+  //     : route.params?.customerType === "customer"
+  //     ? "got"
+  //     : "advance",
+  //   paymentDetails: route.params.trnsDetails
+  //     ? route.params.trnsDetails.payment_details
+  //     : "",
+  //   tns_mode: "online",
+  // });
+
+  // console.log("trans detils", route.params.trnsDetails);
+  // console.log("_________________>", customerCashEntry);
+  // console.log("date", date);
+
+  // useEffect(() => {
+  //   setTransDetails(route.params.trnsDetails);
+  //   if (route.params.trnsDetails) {
+  //     if (route.params.trnsDetails.payment_type === "online") {
+  //       radioOnline();
+  //     } else {
+  //       radioOffline();
+  //     }
+  //   }
+  //   if (route.params.trnsDetails) {
+  //     if (
+  //       route.params.trnsDetails.tns_type === "got" ||
+  //       route.params.trnsDetails.tns_type === "advance"
+  //     ) {
+  //       setIsActive("cash in");
+  //     } else {
+  //       setIsActive("cash out");
+  //     }
+  //   }
+  // }, []);
+
   const [customerCashEntry, setCustomerCashEntry] = useState({
     amount: null,
     tns_type: route.params?.customerType === "customer" ? "got" : "advance",
@@ -36,8 +73,35 @@ const CashEntries = ({navigation, route}) => {
     tns_mode: "online",
   });
 
+  console.log("trans detils", route.params.trnsDetails);
+  console.log("_________________>", customerCashEntry);
+  console.log("date", date);
+
   useEffect(() => {
     setTransDetails(route.params.trnsDetails);
+    if (route.params.trnsDetails) {
+      if (route.params.trnsDetails.payment_type === "online") {
+        radioOnline();
+      } else {
+        radioOffline();
+      }
+
+      if (
+        route.params.trnsDetails.tns_type === "got" ||
+        route.params.trnsDetails.tns_type === "advance"
+      ) {
+        setIsActive("cash in");
+      } else {
+        setIsActive("cash out");
+      }
+
+      setCustomerCashEntry({
+        ...customerCashEntry,
+        amount: route.params.trnsDetails.amount,
+        tns_type: route.params.trnsDetails.tns_type,
+        paymentDetails: route.params.trnsDetails.payment_details,
+      });
+    }
   }, []);
 
   const radioOnline = () => {
@@ -88,22 +152,21 @@ const CashEntries = ({navigation, route}) => {
         console.log("error", error);
       });
   };
-
+  // ---------------------------------------------------------------------------
   const newTransaction = async () => {
     try {
       setIsDisabled(true);
       const formData = new FormData();
       formData.append("amount", customerCashEntry.amount);
       formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
-      customerCashEntry.tns_type &&
-        formData.append("tns_type", customerCashEntry.tns_type);
+      formData.append("tns_type", customerCashEntry.tns_type);
       formData.append("payment_details", customerCashEntry.paymentDetails);
       formData.append("customer_id", route.params?.customerId);
       file && formData.append("attachment", file);
       formData.append("payment_type", customerCashEntry.tns_mode);
 
       const response = await Api.postForm("/auth/transaction", formData);
-      console.log("------------------------------->", response.data);
+      console.log("new entry---->", response.data);
 
       if (response.status == 200) {
         setCustomerCashEntry({
@@ -158,6 +221,97 @@ const CashEntries = ({navigation, route}) => {
     }
   };
 
+  const updateTransaction = async () => {
+    console.log("update");
+    try {
+      setIsDisabled(true);
+      const formData = new FormData();
+      formData.append("amount", customerCashEntry.amount);
+      formData.append("date_time", moment(date).format("YYYY-MM-DD hh:mm:ss"));
+      formData.append("tns_type", customerCashEntry.tns_type);
+      formData.append("payment_details", customerCashEntry.paymentDetails);
+      formData.append("customer_id", route.params?.trnsDetails?.customer_id);
+      file && formData.append("attachment", file);
+      formData.append("payment_type", customerCashEntry.tns_mode);
+
+      const response = await Api.postForm(
+        `/auth/transaction/${route.params?.trnsDetails?.id}?_method=put`,
+        formData,
+      );
+      console.log("updated--------------------->", response.data);
+      if (response.status == 200) {
+        setCustomerCashEntry({
+          ...customerCashEntry,
+          amount: null,
+          tns_type:
+            route.params?.trnsDetails?.cus_type === "customer"
+              ? "got"
+              : "advance",
+          paymentDetails: "",
+          tns_mode: "online",
+        });
+
+        setDate(new Date());
+        setFile(null);
+        setIsActive("cash in");
+        setOnline(true);
+        setOffline(false);
+
+        setIsDisabled(false);
+        navigation.replace("UserDetails", {
+          customerId: route.params?.trnsDetails?.customer_id,
+        });
+        dispatch(
+          notify({
+            message: response.message,
+            notifyType: "success",
+          }),
+        );
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const createTwoButtonAlert = () =>
+    Alert.alert("Are you sure to delete this entry?", "", [
+      {
+        text: "Cancel",
+        onPress: () => console.log("Cancel Pressed"),
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          console.log("OK Pressed");
+          deleteEntry(route.params?.trnsDetails?.id);
+        },
+      },
+    ]);
+
+  const deleteEntry = async id => {
+    try {
+      const response = await Api.delete(`/auth/transaction/${id}`);
+      console.log("del entry", response);
+      if (response.status == 200) {
+        route.params?.customersAllTransaction(
+          route.params?.trnsDetails?.customer_id,
+        );
+        navigation.replace("UserDetails", {
+          customerId: route.params?.trnsDetails
+            ? route.params?.trnsDetails.customer_id
+            : route.params?.customerId,
+        });
+        dispatch(notify({message: "Transaction deleted successfully"}));
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch(notify({message: error.message}));
+    }
+  };
   const paymentMode = () => (
     <View
       style={{
@@ -242,6 +396,7 @@ const CashEntries = ({navigation, route}) => {
   return (
     <View style={styles.container}>
       {route.params?.customerType === "supplier" && paymentMode()}
+      {route.params?.trnsDetails?.cus_type === "supplier" && paymentMode()}
       <View
         style={{
           flexDirection: "row",
@@ -260,7 +415,11 @@ const CashEntries = ({navigation, route}) => {
           size={22}
         />
         <TextInput
-          value={customerCashEntry.amount}
+          value={
+            customerCashEntry.amount == null
+              ? null
+              : customerCashEntry.amount.toString()
+          }
           placeholder="Enter Amount"
           placeholderTextColor={"#757575"}
           style={{
@@ -329,7 +488,10 @@ const CashEntries = ({navigation, route}) => {
             setCustomerCashEntry({
               ...customerCashEntry,
               tns_type:
-                route.params?.customerType === "customer" ? "got" : "advance",
+                route.params?.customerType === "customer" ||
+                route.params?.trnsDetails?.cus_type === "customer"
+                  ? "got"
+                  : "advance",
             });
           }}>
           <Text
@@ -337,7 +499,10 @@ const CashEntries = ({navigation, route}) => {
               styles.btnTxt,
               {color: isActive === "cash in" ? "#fff" : "#0a5ac9"},
             ]}>
-            {route.params?.customerType === "customer" ? "Got" : "Advance"}
+            {route.params?.customerType === "customer" ||
+            route.params?.trnsDetails?.cus_type === "customer"
+              ? "Got"
+              : "Advance"}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -355,7 +520,10 @@ const CashEntries = ({navigation, route}) => {
             setCustomerCashEntry({
               ...customerCashEntry,
               tns_type:
-                route.params?.customerType === "customer" ? "give" : "purchase",
+                route.params?.customerType === "customer" ||
+                route.params?.trnsDetails?.cus_type === "customer"
+                  ? "give"
+                  : "purchase",
             });
           }}>
           <Text
@@ -363,7 +531,10 @@ const CashEntries = ({navigation, route}) => {
               styles.btnTxt,
               {color: isActive === "cash out" ? "#fff" : "#20409A"},
             ]}>
-            {route.params?.customerType === "customer" ? "Give" : "Purchase"}
+            {route.params?.customerType === "customer" ||
+            route.params?.trnsDetails?.cus_type === "customer"
+              ? "Give"
+              : "Purchase"}
           </Text>
         </TouchableOpacity>
       </View>
@@ -433,7 +604,7 @@ const CashEntries = ({navigation, route}) => {
           bottom: metrics.verticalScale(10),
           alignSelf: "center",
           width: "100%",
-          flexDirection: "row",
+          flexDirection: "column",
           justifyContent: "space-between",
         }}>
         <TouchableOpacity
@@ -446,7 +617,7 @@ const CashEntries = ({navigation, route}) => {
             width: "100%",
             backgroundColor: isDisabled ? "#808080" : "#0a5ac9",
           }}
-          onPress={newTransaction}>
+          onPress={transDetails ? updateTransaction : newTransaction}>
           {transDetails ? (
             <Text style={[styles.btnTxt, {color: "#fff"}]}>Update</Text>
           ) : (
@@ -456,18 +627,17 @@ const CashEntries = ({navigation, route}) => {
         {transDetails && (
           <View
             style={{
-              position: "absolute",
-              bottom: metrics.verticalScale(50),
               alignSelf: "center",
               width: "100%",
               flexDirection: "row",
               justifyContent: "space-between",
+              marginTop: 10,
             }}>
             <TouchableOpacity
+              onPress={createTwoButtonAlert}
               style={{
                 paddingHorizontal: metrics.horizontalScale(20),
                 paddingVertical: metrics.verticalScale(12),
-                // backgroundColor: "#0a5ac9",
                 borderRadius: 50,
                 width: "100%",
                 backgroundColor: isDisabled ? "#808080" : "red",
