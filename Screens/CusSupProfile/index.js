@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -12,21 +12,27 @@ import {
 } from "react-native";
 
 import EntypoIcon from "react-native-vector-icons/Entypo";
+import DocumentPicker, { types } from "react-native-document-picker";
 import UserIcon from "react-native-vector-icons/Ionicons";
-import Icon from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/Entypo";
+import ProfileIcon from "react-native-vector-icons/FontAwesome5";
+import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
+// import Icon from "react-native-vector-icons/AntDesign";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
-import {useNavigation} from "@react-navigation/native";
-import {useDispatch, useSelector} from "react-redux";
-import {Modal, Portal, Provider} from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { useDispatch, useSelector } from "react-redux";
+import { Modal, Portal, Provider } from "react-native-paper";
 import Api from "../../Services";
-import {notify} from "../../Redux/Action/notificationActions";
+import { notify } from "../../Redux/Action/notificationActions";
 const width = Dimensions.get("window").width;
-const CusSupProfile = ({route}) => {
-  const containerStyle = {backgroundColor: "white", padding: 20};
+const CusSupProfile = ({ route }) => {
+
+  const containerStyle = { backgroundColor: "white", padding: 20 };
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [cusData, setCusData] = useState([]);
+  const [Pic, SetPic] = React.useState("");
   const [visible, setVisible] = useState(false);
   const [profileDetails, setProfileDetails] = useState({
     cus_name: route.params?.customerData?.customer.cus_name,
@@ -71,6 +77,18 @@ const CusSupProfile = ({route}) => {
       console.log(error);
     }
   };
+  const uploadImage = async () => {
+    try {
+      const response = await DocumentPicker.pick({
+        presentationStyle: "fullScreen",
+        type: [types.images],
+      });
+
+      SetPic(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const deleteCustomer = async () => {
     try {
@@ -102,24 +120,74 @@ const CusSupProfile = ({route}) => {
       console.log(error);
     }
   };
+
+
+
   return (
     <>
-      <Provider>
+      <View style={styles.container}>
         <ScrollView>
-          <View style={styles.container}>
+          <View
+            style={{
+              marginTop: metrics.verticalScale(20),
+              marginBottom: metrics.verticalScale(50),
+            }}>
             <View
               style={{
-                marginTop: metrics.verticalScale(20),
-                marginBottom: metrics.verticalScale(50),
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                height: 180,
               }}>
-              <View
-                style={{
-                  width: "100%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  marginVertical: 16,
-                }}>
-                <TouchableOpacity
+              {Pic.length > 0 ? (
+                Pic.map((Is, index) => {
+                  return (
+                    <View
+                      key={index}
+                      style={{
+                        display: "flex",
+                        borderColor: "#464555",
+                        borderWidth: 3,
+                        borderRadius: 100,
+                        borderStyle: "dashed",
+                        width: 110,
+                        height: 110,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        position: "relative",
+                      }}>
+                      <Image
+                        source={{ uri: Is.uri }}
+                        style={{
+                          height: 100,
+                          width: 100,
+                          resizeMode: "cover",
+                          marginVertical: 13,
+                          alignSelf: "center",
+                          borderRadius: 100,
+                        }}
+                      />
+                      <TouchableOpacity
+                        onPress={() => uploadImage()}
+                        style={{
+                          width: 36,
+                          height: 36,
+                          backgroundColor: "#464555",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          position: "absolute",
+                          bottom: -20,
+                          borderRadius: 50,
+                          borderColor: "#fff",
+                          borderWidth: 2,
+                        }}>
+                        <Icon name="camera" size={18} color="#fff" />
+                      </TouchableOpacity>
+                    </View>
+                  );
+                })
+              ) : (
+                <View
                   style={{
                     display: "flex",
                     borderColor: "#464555",
@@ -142,7 +210,8 @@ const CusSupProfile = ({route}) => {
                       alignSelf: "center",
                     }}
                   />
-                  <View
+                  <TouchableOpacity
+                    onPress={() => uploadImage()}
                     style={{
                       width: 36,
                       height: 36,
@@ -155,416 +224,226 @@ const CusSupProfile = ({route}) => {
                       borderColor: "#fff",
                       borderWidth: 2,
                     }}>
-                    <EntypoIcon name="camera" size={18} color="#fff" />
-                  </View>
-                </TouchableOpacity>
-              </View>
-
-              <Text
-                style={{
-                  color: "#0A5AC9",
-                  fontSize: 20,
-                  textAlign: "center",
-                  marginTop: 5,
-                  fontWeight: "700",
-                }}>
-                Add photo
-              </Text>
-
-              <TouchableOpacity
-                style={{
-                  paddingVertical: metrics.verticalScale(10),
-                  marginTop: 5,
-                  // backgroundColor: "red",
-                  borderRadius: 6,
-                  borderColor: "green",
-                  borderWidth: 1,
-                  width: "42%",
-                  flexDirection: "row",
-                  alignSelf: "center",
-                  justifyContent: "center",
-                }}
-                onPress={showModal}>
-                <Text
-                  style={{
-                    color: "#333",
-                    fontSize: 18,
-                    fontWeight: "900",
-                    color: "green",
-                  }}>
-                  Edit
-                </Text>
-              </TouchableOpacity>
-            </View>
-
-            <View
-              style={{
-                flexDirection: "row",
-                paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <UserIcon
-                name="md-person-outline"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-                  // marginBottom: 8,
-                }}>
-                <Text>Name</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_name}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "#fff",
-                paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <Icon
-                name="phone"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  // marginBottom: 8,
-                }}>
-                <Text>Mobile Number</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_mobile}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "#fff",
-                paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <EntypoIcon
-                name="location-pin"
-                size={22}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  // marginBottom: 8,
-                }}>
-                <Text>Address</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_address}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-
-                backgroundColor: "#fff",
-
-                paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <MaterialIcon
-                name="email"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  // marginBottom: 8,
-                }}>
-                <Text>Email</Text>
-                <Text style={{marginTop: -1, color: "black"}}>
-                  {cusData.cus_email}
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-
-                backgroundColor: "#fff",
-
-                paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <MaterialIcon
-                name="bank-outline"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  marginBottom: 8,
-                }}>
-                <Text>Bank Account No</Text>
-                <Text style={{marginTop: -1, color: "black"}}>632876986</Text>
-              </View>
-            </View>
-            <View
-              style={{
-                alignSelf: "center",
-                width,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                backgroundColor: "#f6f6f6",
-                paddingHorizontal: 20,
-                paddingVertical: 20,
-                left: 0,
-                borderTopWidth: 1,
-                borderColor: "#c9c9c9",
-              }}>
-              <TouchableOpacity
-                onPress={deleteCustomer}
-                style={{
-                  paddingHorizontal: metrics.horizontalScale(20),
-                  paddingVertical: metrics.verticalScale(10),
-                  borderColor: "#DC143C",
-                  borderWidth: 1,
-                  borderRadius: 6,
-                  width: "100%",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}>
-                <Text
-                  style={{
-                    color: "#DC143C",
-                    fontSize: 18,
-                    fontWeight: "900",
-                  }}>
-                  Delete
-                </Text>
-              </TouchableOpacity>
+                    <Icon name="camera" size={18} color="#fff" />
+                  </TouchableOpacity>
+                </View>
+              )}
             </View>
           </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              borderColor: "#c9c9c9",
+              borderBottomWidth: 1,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+            }}>
+            <ProfileIcon
+              name="user-alt"
+              color={"#464555"}
+              size={20}
+              style={{ marginRight: 10, marginRight: 20 }}
+            />
+            <TextInput
+              placeholder="Name"
+              value={cusData.cus_name}
+              placeholderTextColor={"#aaa"}
+              onChangeText={val =>
+                setProfileDetails({ ...profileDetails, cus_name: val })
+              }
+              style={{
+                color: "#464555",
+                fontSize: 14,
+                fontWeight: "500",
+                width: "100%",
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              borderColor: "#c9c9c9",
+              borderBottomWidth: 1,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+            }}>
+            <ProfileIcon
+              name="phone"
+              color={"#464555"}
+              size={20}
+              style={{ marginRight: 10, marginRight: 20 }}
+            />
+            <TextInput
+              value={profileDetails.cus_mobile}
+              placeholder="Mobile No"
+              onChangeText={val =>
+                setProfileDetails({ ...profileDetails, cus_mobile: val })
+              }
+              placeholderTextColor={"#aaa"}
+              style={{
+                color: "#464555",
+                fontSize: 14,
+                fontWeight: "500",
+                width: "100%",
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              borderColor: "#c9c9c9",
+              borderBottomWidth: 1,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+            }}>
+            <EntypoIcon
+              name="location-pin"
+              color={"#464555"}
+              size={24}
+              style={{ marginRight: 10, marginRight: 20 }}
+            />
+            <TextInput
+              value={cusData.cus_address}
+              placeholder="Your Address"
+              onChangeText={val =>
+                setProfileDetails({ ...profileDetails, cus_address: val })
+              }
+              placeholderTextColor={"#aaa"}
+              style={{
+                color: "#464555",
+                fontSize: 14,
+                fontWeight: "500",
+                width: "100%",
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              borderColor: "#c9c9c9",
+              borderBottomWidth: 1,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+            }}>
+            <MaterialIcon
+              name="email"
+              color={"#464555"}
+              size={24}
+              style={{ marginRight: 10, marginRight: 20 }}
+            />
+            <TextInput
+              value={cusData.cus_email}
+              placeholder="Your Email"
+              onChangeText={val =>
+                setProfileDetails({ ...profileDetails, cus_email: val })
+              }
+              placeholderTextColor={"#aaa"}
+              style={{
+                color: "#464555",
+                fontSize: 14,
+                fontWeight: "500",
+                width: "100%",
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              flexDirection: "row",
+              width: "100%",
+              alignItems: "center",
+              borderColor: "#c9c9c9",
+              borderBottomWidth: 1,
+              paddingHorizontal: 10,
+              paddingVertical: 10,
+            }}>
+            <MaterialIcon
+              name="bank-outline"
+              color={"#464555"}
+              size={24}
+              style={{ marginRight: 10, marginRight: 20 }}
+            />
+            <TextInput
+              placeholder="Bank Account No"
+              value={profileDetails.bank_account_no}
+              onChangeText={val =>
+                setProfileDetails({ ...profileDetails, bank_account_no: val })
+              }
+              placeholderTextColor={"#aaa"}
+              style={{
+                color: "#464555",
+                fontSize: 14,
+                fontWeight: "500",
+                width: "100%",
+              }}
+            />
+          </View>
+
+          <View
+            style={{
+              alignSelf: "center",
+              width,
+              flexDirection: "column",
+              paddingHorizontal: 20,
+              paddingTop: 20,
+              left: 0,
+            }}>
+            <TouchableOpacity
+              onPress={deleteCustomer}
+              style={{
+                paddingHorizontal: metrics.horizontalScale(20),
+                paddingVertical: metrics.verticalScale(10),
+                borderColor: "#DC143C",
+                borderWidth: 1,
+                borderRadius: 6,
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}>
+              <Text
+                style={{
+                  color: "#DC143C",
+                  fontSize: 14,
+                  fontWeight: "900",
+                }}>
+                Delete
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={updateCustomer}
+              style={{
+                backgroundColor: "#0a5ac9",
+                paddingVertical: 15,
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 6,
+                marginBottom: 10,
+                marginTop: 20,
+              }}>
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 14,
+                }}>
+                Save Changes
+              </Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
-        {/* Modal */}
-        <Portal>
-          <Modal
-            visible={visible}
-            onDismiss={hideModal}
-            contentContainerStyle={containerStyle}>
-            <View
-              style={{
-                flexDirection: "row",
-                // paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <UserIcon
-                name="md-person-outline"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-                  // marginBottom: 8,
-                }}>
-                <Text>Name</Text>
-                <TextInput
-                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
-                  placeholderTextColor="black"
-                  value={profileDetails.cus_name}
-                  placeholder="Your Name"
-                  onChangeText={val =>
-                    setProfileDetails({...profileDetails, cus_name: val})
-                  }
-                />
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "#fff",
-                // paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <Icon
-                name="phone"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  // marginBottom: 8,
-                }}>
-                <Text>Mobile Number</Text>
-                <TextInput
-                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
-                  placeholderTextColor="black"
-                  value={profileDetails.cus_mobile}
-                  placeholder="Mobile No"
-                  onChangeText={val =>
-                    setProfileDetails({...profileDetails, cus_mobile: val})
-                  }
-                />
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                backgroundColor: "#fff",
-                // paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <EntypoIcon
-                name="location-pin"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  // marginBottom: 8,
-                }}>
-                <Text>Address</Text>
-                <TextInput
-                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
-                  placeholderTextColor="black"
-                  value={profileDetails.cus_address}
-                  placeholder="Your Address"
-                  onChangeText={val =>
-                    setProfileDetails({...profileDetails, cus_address: val})
-                  }
-                />
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-
-                backgroundColor: "#fff",
-
-                // paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <MaterialIcon
-                name="email"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  // marginBottom: 8,
-                }}>
-                <Text>Email</Text>
-                <TextInput
-                  style={{
-                    color: "black",
-                    marginTop: -15,
-                    paddingLeft: 1,
-                  }}
-                  value={profileDetails.cus_email}
-                  placeholderTextColor="black"
-                  placeholder="Your Email"
-                  onChangeText={val =>
-                    setProfileDetails({...profileDetails, cus_email: val})
-                  }
-                />
-              </View>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-
-                backgroundColor: "#fff",
-
-                // paddingVertical: 10,
-                paddingHorizontal: 15,
-              }}>
-              <MaterialIcon
-                name="bank-outline"
-                size={20}
-                color={"#464555"}
-                style={{marginTop: 4}}
-              />
-              <View
-                style={{
-                  paddingHorizontal: 20,
-
-                  marginBottom: 10,
-                }}>
-                <Text>Bank Account No</Text>
-                <TextInput
-                  style={{marginTop: -15, paddingLeft: 1, color: "black"}}
-                  placeholderTextColor="black"
-                  placeholder="Bank Account No"
-                  value={profileDetails.bank_account_no}
-                  onChangeText={val =>
-                    setProfileDetails({...profileDetails, bank_account_no: val})
-                  }
-                />
-              </View>
-            </View>
-            <View
-              style={{
-                alignSelf: "center",
-                width,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                backgroundColor: "#f6f6f6",
-                paddingHorizontal: 20,
-                paddingVertical: 20,
-                left: 0,
-                borderTopWidth: 1,
-                borderColor: "#c9c9c9",
-              }}>
-              <TouchableOpacity
-                // onPress={updateCustomer}
-                style={{
-                  paddingHorizontal: metrics.horizontalScale(20),
-                  paddingVertical: metrics.verticalScale(10),
-                  borderWidth: 1,
-                  borderColor: "green",
-                  borderRadius: 6,
-                  width: "100%",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}>
-                <Text
-                  style={{
-                    color: "#333",
-                    fontSize: 18,
-                    fontWeight: "900",
-                    color: "green",
-                  }}>
-                  Update
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
-        </Portal>
-      </Provider>
+      </View>
     </>
   );
 };
@@ -574,7 +453,6 @@ export default CusSupProfile;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
-    // flex: 1,
   },
   text: {
     color: "#333",

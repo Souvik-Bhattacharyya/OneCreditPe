@@ -3,6 +3,7 @@ import React from "react";
 import metrics from "../../Constants/metrics";
 import CheckIcon from "react-native-vector-icons/Fontisto";
 import EditIcon from "react-native-vector-icons/Feather";
+
 const AddDetails = ({navigation}) => {
   return (
     <View
