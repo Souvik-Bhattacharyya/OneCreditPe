@@ -40,6 +40,7 @@ import {
   Loading,
   CusSupProfile,
   ToGet,
+  Picture,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 
@@ -377,6 +378,39 @@ const SettingsStack = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        component={AddBankDetails}
+        name="AddBankDetails"
+        options={{
+          headerTitle: "Add Your bank account",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddPicture}
+        name="AddPicture"
+        options={{
+          headerTitle: "Add Your Picture",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={AddAdhaarDetails}
+        name="AddAdhaarDetails"
+        options={{
+          headerTitle: "Add Your Aaddhar",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={Picture}
+        name="Picture"
+        options={{
+          headerTitle: "Add Your Picture",
+          headerShown: false,
+        }}
+      />
+
       <Stack.Screen component={InviteFriendModal} name="InviteFriendModal" />
     </Stack.Navigator>
   );
