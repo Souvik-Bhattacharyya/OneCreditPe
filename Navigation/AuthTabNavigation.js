@@ -375,7 +375,7 @@ const SettingsStack = () => {
         name="AddDetails"
         options={{
           headerTitle: "Complete Your KYC",
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
