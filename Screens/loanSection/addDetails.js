@@ -179,7 +179,7 @@ const AddDetails = ({navigation}) => {
                 fontWeight: "bold",
                 fontSize: 14,
               }}>
-              Add A Picture
+              Add Business Picture
             </Text>
           </TouchableOpacity>
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
@@ -213,7 +213,7 @@ const AddDetails = ({navigation}) => {
                 fontWeight: "bold",
                 fontSize: 14,
               }}>
-              Add A Picture
+              Add Your Picture
             </Text>
           </TouchableOpacity>
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>

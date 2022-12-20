@@ -24,6 +24,7 @@ const UserProfile = ({navigation}) => {
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
+  console.log("user", user);
   const [Pic, SetPic] = React.useState("");
   const [userInfo, setUserInfo] = useState({
     name: user.name !== "false" && user.name,
@@ -47,7 +48,7 @@ const UserProfile = ({navigation}) => {
       console.log(error);
     }
   };
-  console.log("user=========>", user);
+
   const updateUserDetails = async () => {
     try {
       const formData = new FormData();
@@ -65,7 +66,7 @@ const UserProfile = ({navigation}) => {
         `/auth/user/${user.id}?_method=put`,
         formData,
       );
-      console.log("------------------------------->", response.data.user);
+      console.log("update user", response.data.user);
       dispatch(updateUser({user: response.data.user}));
       dispatch(
         notify({
@@ -229,7 +230,7 @@ const UserProfile = ({navigation}) => {
                 borderColor: "#c9c9c9",
                 borderBottomWidth: 1,
                 paddingHorizontal: 10,
-                paddingVertical: 10,
+                paddingVertical: 20,
                 // marginTop: 10
               }}>
               <ProfileIcon
@@ -238,16 +239,16 @@ const UserProfile = ({navigation}) => {
                 size={20}
                 style={{marginRight: 10, marginRight: 20}}
               />
-              <TextInput
-                value={"+91 " + user.mobile}
-                placeholderTextColor={"#aaa"}
+              <Text
                 style={{
                   color: "#464555",
+                  opacity: 0.6,
                   fontSize: 18,
                   fontWeight: "500",
                   width: "100%",
-                }}
-              />
+                }}>
+                {"+91 " + user.mobile}
+              </Text>
             </View>
             <View
               style={{
