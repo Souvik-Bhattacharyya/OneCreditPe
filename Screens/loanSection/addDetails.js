@@ -53,15 +53,6 @@ const AddDetails = ({navigation}) => {
             </TouchableOpacity>
             <Text style={{fontSize: 9}}>Add your bank details here to</Text>
             <Text style={{fontSize: 9}}>transfer the money</Text>
-            <Text
-              style={{
-                position: "absolute",
-                bottom: -65,
-                color: "#349EFF",
-                fontSize: 12,
-              }}>
-              Add Now?
-            </Text>
           </View>
         </View>
       </View>
@@ -95,7 +86,7 @@ const AddDetails = ({navigation}) => {
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
-        <View
+        {/* <View
           style={{
             position: "absolute",
             bottom: 10,
@@ -114,7 +105,7 @@ const AddDetails = ({navigation}) => {
             }}>
             <EditIcon name="edit" color="#349EFF" size={14} />
           </View>
-        </View>
+        </View> */}
       </View>
 
       <View
@@ -156,16 +147,6 @@ const AddDetails = ({navigation}) => {
             </TouchableOpacity>
             <Text style={{fontSize: 9}}>Add your bank details here to</Text>
             <Text style={{fontSize: 9}}>transfer the money</Text>
-            <Text
-              style={{
-                position: "absolute",
-                // bottom: -45,
-                bottom: -65,
-                color: "#349EFF",
-                fontSize: 12,
-              }}>
-              Add Now?
-            </Text>
           </View>
         </View>
       </View>
@@ -203,15 +184,6 @@ const AddDetails = ({navigation}) => {
           </TouchableOpacity>
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
-          <Text
-            style={{
-              position: "absolute",
-              bottom: 2,
-              color: "#349EFF",
-              fontSize: 12,
-            }}>
-            Add Now?
-          </Text>
         </View>
       </View>
       <View
@@ -246,42 +218,8 @@ const AddDetails = ({navigation}) => {
           </TouchableOpacity>
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
-          <Text
-            style={{
-              position: "absolute",
-              bottom: 2,
-              color: "#349EFF",
-              fontSize: 12,
-            }}>
-            Add Now?
-          </Text>
         </View>
       </View>
-      <TouchableOpacity
-        style={{
-          width: "90%",
-          backgroundColor: "#0A5AC9",
-          // marginTop: 10,
-          // marginBottom: 20,
-          // justifyContent: "center",
-          borderRadius: 50,
-          // flexDirection: "row",
-          position: "absolute",
-          // bottom: -155,
-          alignItems: "center",
-          bottom: 25,
-          marginLeft: 19,
-        }}>
-        <Text
-          style={{
-            fontSize: 15,
-
-            color: "#FFFFFF",
-            margin: 10,
-          }}>
-          Next
-        </Text>
-      </TouchableOpacity>
     </View>
     // </View>
   );

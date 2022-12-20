@@ -280,7 +280,7 @@ const UserProfile = ({navigation}) => {
                 }}
               />
             </View>
-            <View
+            {/* <View
               style={{
                 flexDirection: "row",
                 width: "100%",
@@ -310,7 +310,7 @@ const UserProfile = ({navigation}) => {
                   width: "100%",
                 }}
               />
-            </View>
+            </View> */}
             <View
               style={{
                 flexDirection: "row",
