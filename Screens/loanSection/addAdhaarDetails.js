@@ -73,7 +73,7 @@ const AddAdhaarDetails = () => {
             color: "#FFFFFF",
             margin: 10,
           }}>
-          Next
+          Save
         </Text>
       </TouchableOpacity>
     </View>
