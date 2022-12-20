@@ -37,6 +37,7 @@ import FindIfsc from "./loanSection/findIfsc";
 import AddPicture from "./loanSection/addPicture";
 import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
 import CusSupProfile from "./CusSupProfile";
+import Picture from "./loanSection/picture";
 export {
   Login,
   OtpScreen,
@@ -77,4 +78,5 @@ export {
   AddPicture,
   AddAdhaarDetails,
   CusSupProfile,
+  Picture,
 };

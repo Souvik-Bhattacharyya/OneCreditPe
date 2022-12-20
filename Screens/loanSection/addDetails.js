@@ -190,15 +190,17 @@ const AddDetails = ({navigation}) => {
             source={require("../../Assets/shop.png")}
             style={{height: 50, width: 50}}
           />
-          <Text
-            style={{
-              color: "#0A5AC9",
-              fontFamily: "Roboto",
-              fontWeight: "bold",
-              fontSize: 14,
-            }}>
-            Add A Picture
-          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Picture")}>
+            <Text
+              style={{
+                color: "#0A5AC9",
+                fontFamily: "Roboto",
+                fontWeight: "bold",
+                fontSize: 14,
+              }}>
+              Add A Picture
+            </Text>
+          </TouchableOpacity>
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
           <Text

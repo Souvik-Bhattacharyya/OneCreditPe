@@ -24,7 +24,7 @@ const CashEntries = ({navigation, route}) => {
   const [file, setFile] = useState(null);
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
-  // const [entryDetails, setEntryDetails] = useState({});
+  const [entryDetails, setEntryDetails] = useState([]);
   // const details = route.params;
   console.log("details", route.params);
   const dispatch = useDispatch();
@@ -35,7 +35,8 @@ const CashEntries = ({navigation, route}) => {
     paymentDetails: "",
   });
   const data = route.params?.data;
-  const entryDetails = route.params?.entryDetails;
+  console.log("data", data);
+  // const entryDetails = route.params?.entryDetails;
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -94,6 +95,11 @@ const CashEntries = ({navigation, route}) => {
       }
     }
   }, [data]);
+
+  useEffect(() => {
+    setEntryDetails(route.params?.entryDetails);
+  }, []);
+  console.log("entryDetails", entryDetails);
 
   const handleDocumentSelection = () => {
     DocumentPicker.pick({
