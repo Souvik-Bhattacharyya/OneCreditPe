@@ -34,17 +34,28 @@ const CusSupProfile = ({route}) => {
   const [Pic, SetPic] = React.useState("");
   const [visible, setVisible] = useState(false);
   const [profileDetails, setProfileDetails] = useState({
-    cus_name: route.params?.customerData?.customer.cus_name,
-    cus_mobile: route.params?.customerData?.customer.cus_mobile,
-    cus_address: route.params?.customerData?.customer.cus_address,
-    cus_email: route.params?.customerData?.customer.cus_email,
-    bank_account_no: route.params?.customerData?.customer.bank_account_no,
-    customer_type: route.params?.customerData?.customer.customer_type,
+    cus_name: "",
+    cus_mobile: null,
+    cus_address: "",
+    cus_email: "",
+    bank_account_no: null,
+    customer_type: "customer",
   });
 
   useEffect(() => {
-    setCusData(route.params?.customerData.customer);
-  }, []);
+    if (route.params?.customerData) {
+      setCusData(route.params?.customerData.customer);
+      setProfileDetails({
+        ...profileDetails,
+        cus_name: route.params?.customerData?.customer.cus_name,
+        cus_mobile: route.params?.customerData?.customer.cus_mobile,
+        cus_address: route.params?.customerData?.customer.cus_address,
+        cus_email: route.params?.customerData?.customer.cus_email,
+        bank_account_no: route.params?.customerData?.customer.bank_account_no,
+        customer_type: route.params?.customerData?.customer.customer_type,
+      });
+    }
+  }, [route.params?.customerData]);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
@@ -68,6 +79,10 @@ const CusSupProfile = ({route}) => {
         `/auth/customer/${cusData.id}?_method=put`,
         formData,
       );
+      if (response.status == 200) {
+        // console.log("------------>", response.data.data.id);
+        navigation.replace("UserDetails", {customerId: cusData.id});
+      }
     } catch (error) {
       console.log(error);
     }
@@ -242,7 +257,7 @@ const CusSupProfile = ({route}) => {
             />
             <TextInput
               placeholder="Name"
-              value={cusData.cus_name}
+              value={profileDetails.cus_name}
               placeholderTextColor={"#aaa"}
               onChangeText={val =>
                 setProfileDetails({...profileDetails, cus_name: val})
@@ -305,7 +320,7 @@ const CusSupProfile = ({route}) => {
               style={{marginRight: 10, marginRight: 20}}
             />
             <TextInput
-              value={cusData.cus_address}
+              value={profileDetails.cus_address}
               placeholder="Your Address"
               onChangeText={val =>
                 setProfileDetails({...profileDetails, cus_address: val})
@@ -337,7 +352,7 @@ const CusSupProfile = ({route}) => {
               style={{marginRight: 10, marginRight: 20}}
             />
             <TextInput
-              value={cusData.cus_email}
+              value={profileDetails.cus_email}
               placeholder="Your Email"
               onChangeText={val =>
                 setProfileDetails({...profileDetails, cus_email: val})
