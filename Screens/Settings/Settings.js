@@ -20,7 +20,7 @@ import CommonHeader from "../../Components/CommonHeader";
 import InviteFriendModal from "../../Components/InviteFriendModal";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../Redux/Action/authActions";
-
+import KycIcon from "react-native-vector-icons/Entypo";
 const Width = Dimensions.get("window").width;
 const Height = Dimensions.get("window").height;
 
@@ -380,6 +380,33 @@ const Settings = () => {
             hideModal={hideModal}
             setVisible={setVisible}
           />
+          <View
+            style={{
+              width: "100%",
+              alignItems: "center",
+              flexDirection: "row",
+
+              paddingHorizontal: 20,
+              paddingVertical: 20,
+            }}>
+            <KycIcon
+              name="v-card"
+              color={"#464555"}
+              size={24}
+              style={{marginRight: 10, marginRight: 20}}
+            />
+            <TouchableOpacity onPress={() => navigation.navigate("AddDetails")}>
+              <Text
+                style={{
+                  color: "#464555",
+                  fontSize: 18,
+                  fontWeight: "500",
+                  width: "100%",
+                }}>
+                KYC
+              </Text>
+            </TouchableOpacity>
+          </View>
           <View
             style={{
               // backgroundColor: '#fff',
