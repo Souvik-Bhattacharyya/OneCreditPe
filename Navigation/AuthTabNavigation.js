@@ -33,6 +33,7 @@ import {
   PartiesHeader,
   LoanDetails,
   AddDetails,
+  BusinessBank,
   AddBankDetails,
   FindIfsc,
   AddPicture,
@@ -292,6 +293,7 @@ const LoanScreenStack = () => {
           // headerShown: false,
         }}
       />
+
       <Stack.Screen
         component={AddBankDetails}
         name="AddBankDetails"
@@ -375,6 +377,14 @@ const SettingsStack = () => {
         name="AddDetails"
         options={{
           headerTitle: "Complete Your KYC",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        component={BusinessBank}
+        name="BusinessBank"
+        options={{
+          headerTitle: "BusinessBank",
           headerShown: true,
         }}
       />
