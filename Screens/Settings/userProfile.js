@@ -12,7 +12,7 @@ import React, {useState} from "react";
 import Icon from "react-native-vector-icons/Entypo";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import KycIcon from "react-native-vector-icons/Entypo";
+
 import {useDispatch, useSelector} from "react-redux";
 import {updateUser} from "../../Redux/Action/authActions";
 import {notify} from "../../Redux/Action/notificationActions";
@@ -342,34 +342,6 @@ const UserProfile = ({navigation}) => {
                   width: "100%",
                 }}
               />
-            </View>
-            <View
-              style={{
-                width: "100%",
-                alignItems: "center",
-                flexDirection: "row",
-
-                paddingHorizontal: 10,
-                paddingVertical: 20,
-              }}>
-              <KycIcon
-                name="v-card"
-                color={"#464555"}
-                size={24}
-                style={{marginRight: 10, marginRight: 20}}
-              />
-              <TouchableOpacity
-                onPress={() => navigation.navigate("AddDetails")}>
-                <Text
-                  style={{
-                    color: "#464555",
-                    fontSize: 18,
-                    fontWeight: "500",
-                    width: "100%",
-                  }}>
-                  KYC
-                </Text>
-              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </View>
