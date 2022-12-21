@@ -383,7 +383,7 @@ const SettingsStack = () => {
         name="AddBankDetails"
         options={{
           headerTitle: "Add Your bank account",
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
@@ -391,7 +391,7 @@ const SettingsStack = () => {
         name="AddPicture"
         options={{
           headerTitle: "Add Your Picture",
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
@@ -399,15 +399,15 @@ const SettingsStack = () => {
         name="AddAdhaarDetails"
         options={{
           headerTitle: "Add Your Aaddhar",
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
         component={Picture}
         name="Picture"
         options={{
-          headerTitle: "Add Your Picture",
-          headerShown: false,
+          headerTitle: "Add Business Picture",
+          headerShown: true,
         }}
       />
 
