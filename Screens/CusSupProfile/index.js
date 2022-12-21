@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import EntypoIcon from "react-native-vector-icons/Entypo";
-import DocumentPicker, { types } from "react-native-document-picker";
+import DocumentPicker, {types} from "react-native-document-picker";
 import UserIcon from "react-native-vector-icons/Ionicons";
 import Icon from "react-native-vector-icons/Entypo";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";
@@ -20,15 +20,14 @@ import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
 // import Icon from "react-native-vector-icons/AntDesign";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
-import { useNavigation } from "@react-navigation/native";
-import { useDispatch, useSelector } from "react-redux";
-import { Modal, Portal, Provider } from "react-native-paper";
+import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {Modal, Portal, Provider} from "react-native-paper";
 import Api from "../../Services";
-import { notify } from "../../Redux/Action/notificationActions";
+import {notify} from "../../Redux/Action/notificationActions";
 const width = Dimensions.get("window").width;
-const CusSupProfile = ({ route }) => {
-
-  const containerStyle = { backgroundColor: "white", padding: 20 };
+const CusSupProfile = ({route}) => {
+  const containerStyle = {backgroundColor: "white", padding: 20};
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [cusData, setCusData] = useState([]);
@@ -50,29 +49,25 @@ const CusSupProfile = ({ route }) => {
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
-  console.log("==>", profileDetails);
-  console.log("===>", cusData.id);
+  console.log("customer id-->", cusData.id);
+  console.log("customer details===>", route.params?.customerData?.customer);
+  console.log("profile==>", profileDetails);
+
   const updateCustomer = async () => {
     try {
-      // const formData = new FormData();
-      // formData.append("cus_name", profileDetails.cus_name);
-      // formData.append("cus_mobile", profileDetails.cus_mobile);
-      // formData.append("cus_email", profileDetails.cus_email);
-      // formData.append("cus_address", profileDetails.cus_address);
-      // formData.append("bank_account_no", profileDetails.bank_account_no);
-      // formData.append("customer_type", profileDetails.customer_type);
-      // console.log(formData);.
+      const formData = new FormData();
+      formData.append("cus_name", profileDetails.cus_name);
+      formData.append("cus_mobile", profileDetails.cus_mobile);
+      formData.append("cus_email", profileDetails.cus_email);
+      formData.append("cus_address", profileDetails.cus_address);
+      formData.append("bank_account_no", profileDetails.bank_account_no);
+      formData.append("customer_type", profileDetails.customer_type);
+      console.log(formData);
 
-      var urlencoded = new URLSearchParams();
-      urlencoded.append("cus_name", profileDetails.cus_name);
-      urlencoded.append("cus_address", profileDetails.cus_address);
-      urlencoded.append("cus_mobile", profileDetails.cus_mobile);
-      urlencoded.append("customer_type", profileDetails.customer_type);
-      urlencoded.append("bank_account_no", profileDetails.bank_account_no);
-      urlencoded.append("cus_email", profileDetails.cus_email);
-
-      const response = await Api.updateForm("/auth/customer/145", urlencoded);
-      console.log("res==========>", response.data);
+      const response = await Api.postForm(
+        `/auth/customer/${cusData.id}?_method=put`,
+        formData,
+      );
     } catch (error) {
       console.log(error);
     }
@@ -121,8 +116,6 @@ const CusSupProfile = ({ route }) => {
     }
   };
 
-
-
   return (
     <>
       <View style={styles.container}>
@@ -157,7 +150,7 @@ const CusSupProfile = ({ route }) => {
                         position: "relative",
                       }}>
                       <Image
-                        source={{ uri: Is.uri }}
+                        source={{uri: Is.uri}}
                         style={{
                           height: 100,
                           width: 100,
@@ -245,14 +238,14 @@ const CusSupProfile = ({ route }) => {
               name="user-alt"
               color={"#464555"}
               size={20}
-              style={{ marginRight: 10, marginRight: 20 }}
+              style={{marginRight: 10, marginRight: 20}}
             />
             <TextInput
               placeholder="Name"
               value={cusData.cus_name}
               placeholderTextColor={"#aaa"}
               onChangeText={val =>
-                setProfileDetails({ ...profileDetails, cus_name: val })
+                setProfileDetails({...profileDetails, cus_name: val})
               }
               style={{
                 color: "#464555",
@@ -277,13 +270,13 @@ const CusSupProfile = ({ route }) => {
               name="phone"
               color={"#464555"}
               size={20}
-              style={{ marginRight: 10, marginRight: 20 }}
+              style={{marginRight: 10, marginRight: 20}}
             />
             <TextInput
               value={profileDetails.cus_mobile}
               placeholder="Mobile No"
               onChangeText={val =>
-                setProfileDetails({ ...profileDetails, cus_mobile: val })
+                setProfileDetails({...profileDetails, cus_mobile: val})
               }
               placeholderTextColor={"#aaa"}
               style={{
@@ -309,13 +302,13 @@ const CusSupProfile = ({ route }) => {
               name="location-pin"
               color={"#464555"}
               size={24}
-              style={{ marginRight: 10, marginRight: 20 }}
+              style={{marginRight: 10, marginRight: 20}}
             />
             <TextInput
               value={cusData.cus_address}
               placeholder="Your Address"
               onChangeText={val =>
-                setProfileDetails({ ...profileDetails, cus_address: val })
+                setProfileDetails({...profileDetails, cus_address: val})
               }
               placeholderTextColor={"#aaa"}
               style={{
@@ -341,13 +334,13 @@ const CusSupProfile = ({ route }) => {
               name="email"
               color={"#464555"}
               size={24}
-              style={{ marginRight: 10, marginRight: 20 }}
+              style={{marginRight: 10, marginRight: 20}}
             />
             <TextInput
               value={cusData.cus_email}
               placeholder="Your Email"
               onChangeText={val =>
-                setProfileDetails({ ...profileDetails, cus_email: val })
+                setProfileDetails({...profileDetails, cus_email: val})
               }
               placeholderTextColor={"#aaa"}
               style={{
@@ -373,13 +366,13 @@ const CusSupProfile = ({ route }) => {
               name="bank-outline"
               color={"#464555"}
               size={24}
-              style={{ marginRight: 10, marginRight: 20 }}
+              style={{marginRight: 10, marginRight: 20}}
             />
             <TextInput
               placeholder="Bank Account No"
               value={profileDetails.bank_account_no}
               onChangeText={val =>
-                setProfileDetails({ ...profileDetails, bank_account_no: val })
+                setProfileDetails({...profileDetails, bank_account_no: val})
               }
               placeholderTextColor={"#aaa"}
               style={{
