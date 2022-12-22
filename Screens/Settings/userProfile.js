@@ -8,7 +8,7 @@ import {
   ScrollView,
   KeyboardAvoidingView,
 } from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Icon from "react-native-vector-icons/Entypo";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -25,17 +25,26 @@ const UserProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
   console.log("user", user);
-  const [Pic, SetPic] = React.useState("");
+  const [Pic, SetPic] = React.useState(null);
+
   const [userInfo, setUserInfo] = useState({
     name: user.name !== "false" && user.name,
     email: user.email !== "false" && user.email,
     business_name: user.business_name !== "false" && user.business_name,
     bank_account_no: user.bank_account_no !== "false" && user.bank_account_no,
-    // pan_no: "sdfdf3e434324",
-    // aadhar_no: "sdff34234",
-    // voter_id: "dfsdf345345",
+    profile_image: user.profile_image !== "false" && user.profile_image,
   });
 
+  useEffect(() => {
+    if (user?.profile_image) {
+      SetPic({
+        name: user.profile_image,
+        uri:
+          "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
+          user.profile_image,
+      });
+    }
+  }, [user]);
   const uploadImage = async () => {
     try {
       const response = await DocumentPicker.pick({
@@ -43,7 +52,11 @@ const UserProfile = ({navigation}) => {
         type: [types.images],
       });
 
-      SetPic(response);
+      SetPic({
+        name: response[0].name,
+        uri: response[0].uri,
+        type: response[0].type,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -57,16 +70,12 @@ const UserProfile = ({navigation}) => {
       formData.append("mobile", user.mobile);
       formData.append("business_name", userInfo.business_name);
       formData.append("bank_account_no", userInfo.bank_account_no);
-      //docs
-      // formData.append("pan_no", userInfo.pan_no);
-      // formData.append("aadhar_no", userInfo.aadhar_no);
-      // formData.append("voter_id", userInfo.voter_id);
-
+      Pic ? formData.append("profile_image", Pic) : "";
       const response = await Api.postForm(
         `/auth/user/${user.id}?_method=put`,
         formData,
       );
-      console.log("update user", response.data.user);
+
       dispatch(updateUser({user: response.data.user}));
       dispatch(
         notify({
@@ -78,6 +87,7 @@ const UserProfile = ({navigation}) => {
       console.log(error);
     }
   };
+
   return (
     <View
       style={{
@@ -93,95 +103,48 @@ const UserProfile = ({navigation}) => {
           alignItems: "center",
           height: 180,
         }}>
-        {Pic.length > 0 ? (
-          Pic.map((Is, index) => {
-            return (
-              <View
-                key={index}
-                style={{
-                  display: "flex",
-                  borderColor: "#464555",
-                  borderWidth: 3,
-                  borderRadius: 100,
-                  borderStyle: "dashed",
-                  width: 110,
-                  height: 110,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  position: "relative",
-                }}>
-                <Image
-                  source={{uri: Is.uri}}
-                  style={{
-                    height: 100,
-                    width: 100,
-                    resizeMode: "cover",
-                    marginVertical: 13,
-                    alignSelf: "center",
-                    borderRadius: 100,
-                  }}
-                />
-                <TouchableOpacity
-                  onPress={() => uploadImage()}
-                  style={{
-                    width: 36,
-                    height: 36,
-                    backgroundColor: "#464555",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    position: "absolute",
-                    bottom: -20,
-                    borderRadius: 50,
-                    borderColor: "#fff",
-                    borderWidth: 2,
-                  }}>
-                  <Icon name="camera" size={18} color="#fff" />
-                </TouchableOpacity>
-              </View>
-            );
-          })
-        ) : (
-          <View
+        <View
+          style={{
+            display: "flex",
+            borderColor: "#464555",
+            borderWidth: 3,
+            borderRadius: 50,
+            borderStyle: "dashed",
+            width: 110,
+            height: 110,
+            justifyContent: "center",
+            alignItems: "center",
+            position: "relative",
+          }}>
+          <Image
+            source={
+              Pic ? {uri: Pic.uri} : require("../../Assets/blank-profile.png")
+            }
             style={{
-              display: "flex",
-              borderColor: "#464555",
-              borderWidth: 3,
-              borderRadius: 50,
-              borderStyle: "dashed",
-              width: 110,
-              height: 110,
+              height: 105,
+              width: 105,
+              resizeMode: "contain",
+              marginVertical: 13,
+              alignSelf: "center",
+            }}
+          />
+          <TouchableOpacity
+            onPress={() => uploadImage()}
+            style={{
+              width: 36,
+              height: 36,
+              backgroundColor: "#464555",
               justifyContent: "center",
               alignItems: "center",
-              position: "relative",
+              position: "absolute",
+              bottom: -20,
+              borderRadius: 50,
+              borderColor: "#fff",
+              borderWidth: 2,
             }}>
-            <Image
-              source={require("../../Assets/blank-profile.png")}
-              style={{
-                height: 105,
-                width: 105,
-                resizeMode: "contain",
-                marginVertical: 13,
-                alignSelf: "center",
-              }}
-            />
-            <TouchableOpacity
-              onPress={() => uploadImage()}
-              style={{
-                width: 36,
-                height: 36,
-                backgroundColor: "#464555",
-                justifyContent: "center",
-                alignItems: "center",
-                position: "absolute",
-                bottom: -20,
-                borderRadius: 50,
-                borderColor: "#fff",
-                borderWidth: 2,
-              }}>
-              <Icon name="camera" size={18} color="#fff" />
-            </TouchableOpacity>
-          </View>
-        )}
+            <Icon name="camera" size={18} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
       <ScrollView>
         <View
