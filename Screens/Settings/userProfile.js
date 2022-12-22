@@ -12,6 +12,7 @@ import React, {useState} from "react";
 import Icon from "react-native-vector-icons/Entypo";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import UpdateIcon from "react-native-vector-icons/Feather";
 
 import {useDispatch, useSelector} from "react-redux";
 import {updateUser} from "../../Redux/Action/authActions";
@@ -339,9 +340,19 @@ const UserProfile = ({navigation}) => {
                   color: "#464555",
                   fontSize: 18,
                   fontWeight: "500",
-                  width: "100%",
+                  width: "85%",
                 }}
               />
+              <TouchableOpacity
+                style={{color: "green"}}
+                onPress={() => navigation.navigate("BusinessBank")}>
+                <UpdateIcon
+                  name="edit"
+                  color={"#12ce12"}
+                  size={16}
+                  style={{marginVertical: 3, marginRight: 6}}
+                />
+              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
         </View>
