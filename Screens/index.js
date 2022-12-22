@@ -34,6 +34,7 @@ import LoanDetails from "./loanSection/loanDetails";
 import AddDetails from "./loanSection/addDetails";
 import BusinessBank from "./Settings/businessBank";
 import AddBankDetails from "./loanSection/addBankDetails";
+import AddBusinessDetails from "./loanSection/addBusinessDetails";
 import FindIfsc from "./loanSection/findIfsc";
 import AddPicture from "./loanSection/addPicture";
 import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
@@ -76,6 +77,7 @@ export {
   AddDetails,
   BusinessBank,
   AddBankDetails,
+  AddBusinessDetails,
   FindIfsc,
   AddPicture,
   AddAdhaarDetails,

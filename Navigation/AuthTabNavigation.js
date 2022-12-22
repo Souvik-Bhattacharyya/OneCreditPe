@@ -35,6 +35,7 @@ import {
   AddDetails,
   BusinessBank,
   AddBankDetails,
+  AddBusinessDetails,
   FindIfsc,
   AddPicture,
   AddAdhaarDetails,
@@ -392,7 +393,15 @@ const SettingsStack = () => {
         component={AddBankDetails}
         name="AddBankDetails"
         options={{
-          headerTitle: "Add Your bank account",
+          headerTitle: "Add Your Bank Account",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        component={AddBusinessDetails}
+        name="AddBusinessDetails"
+        options={{
+          headerTitle: "Add Your Business Account",
           headerShown: true,
         }}
       />
