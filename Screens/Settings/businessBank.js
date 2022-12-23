@@ -9,9 +9,28 @@ import {Text} from "react-native-paper";
 import Icon from "react-native-vector-icons/Entypo";
 import UpdateIcon from "react-native-vector-icons/Feather";
 import {useSelector} from "react-redux";
+import Api from "../../Services";
 const BusinessBank = ({navigation}) => {
   const UserDetails = useSelector(state => state.auth);
   console.log("===============================>", UserDetails);
+  useEffect(() => {
+    getBankDetails();
+  }, []);
+  const getBankDetails = async () => {
+    try {
+      const response = await Api.get("/auth/business-bank/${UserDetails.id}");
+      console.log("bank response", response);
+      if (response.data) {
+        // setViewResult(response.data);
+        console.log("success");
+      } else {
+        throw new Error(response.message);
+      }
+    } catch (error) {
+      console.log(error);
+      // dispatch()
+    }
+  };
   return (
     <>
       <ScrollView>
