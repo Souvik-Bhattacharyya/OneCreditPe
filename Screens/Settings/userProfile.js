@@ -25,17 +25,17 @@ const UserProfile = ({navigation}) => {
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth.user);
-  console.log("user", user);
   const [Pic, SetPic] = React.useState(null);
 
   const [userInfo, setUserInfo] = useState({
-    name: user.name !== "false" && user.name,
-    email: user.email !== "false" && user.email,
-    business_name: user.business_name !== "false" && user.business_name,
-    bank_account_no: user.bank_account_no !== "false" && user.bank_account_no,
-    profile_image: user.profile_image !== "false" && user.profile_image,
+    name: user.name == null ? null : user.name,
+    email: user.email == null ? null : user.email,
+    business_name: user.business_name == null ? null : user.business_name,
+    bank_account_no: user.bank_account_no == null ? null : user.bank_account_no,
+    // profile_image: user.profile_image == null ? null : user.profile_image,
   });
-
+  console.log("user------------------", user);
+  console.log("userInfo---------", userInfo);
   useEffect(() => {
     if (user?.profile_image) {
       SetPic({
@@ -71,12 +71,13 @@ const UserProfile = ({navigation}) => {
       formData.append("mobile", user.mobile);
       formData.append("business_name", userInfo.business_name);
       formData.append("bank_account_no", userInfo.bank_account_no);
-      Pic ? formData.append("profile_image", Pic) : "";
+      Pic ? formData.append("profile_image", Pic) : null;
+      console.log(formData);
       const response = await Api.postForm(
         `/auth/user/${user.id}?_method=put`,
         formData,
       );
-
+      console.log(response.data);
       dispatch(updateUser({user: response.data.user}));
       dispatch(
         notify({
