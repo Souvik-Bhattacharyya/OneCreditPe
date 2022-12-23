@@ -89,7 +89,7 @@ const UserProfile = ({navigation}) => {
       console.log(error);
     }
   };
-
+  console.log("userinfo", userInfo);
   return (
     <View
       style={{
@@ -125,9 +125,10 @@ const UserProfile = ({navigation}) => {
             style={{
               height: 105,
               width: 105,
-              resizeMode: "contain",
+              // resizeMode: "contain",
               marginVertical: 13,
               alignSelf: "center",
+              borderRadius: 50,
             }}
           />
           <TouchableOpacity
