@@ -25,8 +25,7 @@ const CashEntries = ({navigation, route}) => {
   const [online, setOnline] = useState(true);
   const [offline, setOffline] = useState(false);
   const [entryDetails, setEntryDetails] = useState([]);
-  // const details = route.params;
-  console.log("details", route.params);
+
   const dispatch = useDispatch();
   const [cashDetails, setCashDetails] = useState({
     amount: null,
@@ -36,7 +35,7 @@ const CashEntries = ({navigation, route}) => {
   });
   const data = route.params?.data;
   console.log("data", data);
-  // const entryDetails = route.params?.entryDetails;
+  console.log("file", file);
   const radioOnline = () => {
     setOnline(true);
     setOffline(false);
@@ -78,7 +77,7 @@ const CashEntries = ({navigation, route}) => {
         cb_tns_type: data.cb_tns_type,
         paymentType: data.payment_type,
       });
-      setFile({name: data.attachments});
+      // setFile({name: data.attachments});
       const newDate = moment(`${data.date_time}`);
       setDate(newDate);
       if (data.payment_type === "cash") {
@@ -179,42 +178,34 @@ const CashEntries = ({navigation, route}) => {
         updateData.append("payment_details", cashDetails.paymentDetails);
       updateData.append("payment_type", cashDetails.paymentType);
       file ? updateData.append("attachments", file) : "";
-      // console.log({
-      //   amount: cashDetails.amount,
-      //   date_time: moment(date).format("YYYY-MM-DD hh:mm:ss"),
-      //   cb_tns_type: cashDetails.cb_tns_type,
-      //   payment_details: cashDetails.paymentDetails,
-      //   payment_type: cashDetails.paymentType,
-      // });
-      const response = await Api.update(
-        `auth/cashbook/${entryDetails.id}/?_method=put`,
+
+      const response = await Api.postForm(
+        `/auth/cashbook/${data.id}?_method=put`,
         updateData,
       );
-      console.log("update cash", response);
+
       if (response.status === 200) {
-        // dispatch(
-        //   notify({
-        //     message: "Your entry has been submitted successfully",
-        //     notifyType: "success",
-        //   }),
-        // );
-        console.log("success");
+        dispatch(
+          notify({
+            message: "Your entry has been updated successfully",
+            notifyType: "success",
+          }),
+        );
       }
 
-      // setCashDetails({
-      //   ...cashDetails,
-      //   amount: null,
-      //   cb_tns_type: "in",
-      //   paymentType: "",
-      //   paymentDetails: "",
-      // });
-      // setDate(new Date());
-      // setFile(null);
-      // setIsDisabled(false);
+      setCashDetails({
+        ...cashDetails,
+        amount: null,
+        cb_tns_type: "in",
+        paymentType: "",
+        paymentDetails: "",
+      });
+      setDate(new Date());
+      setFile(null);
+      setIsDisabled(false);
 
-      // navigation.navigate("Cash Book");
+      navigation.navigate("Cash Book");
     } catch (error) {
-      console.log("error", error);
       setIsDisabled(false);
     }
   };

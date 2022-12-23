@@ -122,12 +122,7 @@ const CashIn = ({
               </TouchableOpacity>
             )}
             <View style={{flexDirection: "row"}}>
-              <TouchableOpacity
-                onPress={() =>
-                  navigation.navigate("CashEntries", {
-                    entryDetails: entryDetails,
-                  })
-                }>
+              <TouchableOpacity onPress={() => handleUpdate(entryDetails)}>
                 <UpdateIcon
                   name="edit"
                   color={"#12ce12"}
