@@ -41,8 +41,10 @@ import {
   CusSupProfile,
   ToGet,
   Picture,
+  PanDetails
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
+// import PanDetails from "../Screens/loanSection/PanDetails";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -402,11 +404,21 @@ const SettingsStack = () => {
           headerShown: true,
         }}
       />
+
       <Stack.Screen
         component={Picture}
         name="Picture"
         options={{
           headerTitle: "Add Business Picture",
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        component={PanDetails}
+        name="AddPanDetails"
+        options={{
+          headerTitle: "Add Your Pan",
           headerShown: true,
         }}
       />

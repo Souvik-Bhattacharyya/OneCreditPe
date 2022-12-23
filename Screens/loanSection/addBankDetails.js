@@ -1,8 +1,11 @@
 import {View, Text, TextInput, TouchableOpacity} from "react-native";
-import React from "react";
+import React, {useState} from "react";
 import CorrectIcon from "react-native-vector-icons/AntDesign";
 import metrics from "../../Constants/metrics";
 const AddBankDetails = ({navigation}) => {
+  const [readMore, setReadMore] = useState(false);
+  const info =
+    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero molestiae totam sapiente excepturi quia nulla assumenda, hic autem animi, incidunt, voluptate nihil. Fugit necessitatibus sunt quisquam est illo magnam quae quam laborum at vel ab reprehenderit delectus eum impedit, iste quo maxime architecto velit adipisci. Similique, quibusdam fugit ipsam, aspernatur porro nemo aperiam illo aliquam quae, repellat consequuntur sunt nam optio velit! Animi blanditiis quas accusantium, asperiores eligendi voluptatem omnis at dolores repellat numquam architecto beatae facilis, aut dolorum, voluptatum excepturi temporibus rem ipsa! Rerum dolores ea quos voluptatibus quasi vel quis, inventore quia deserunt nulla odio nihil reprehenderit tenetur vitae pariatur assumenda sunt quam facilis expedita dignissimos natus ipsam iure tempora commodi? Saepe dolorem praesentium ipsa aperiam iure delectus, et rerum cumque vero impedit recusandae ut doloribus sit voluptatem quia? Beatae.";
   return (
     <View
       style={{
@@ -91,6 +94,7 @@ const AddBankDetails = ({navigation}) => {
           style={{
             flexDirection: "row",
             marginTop: 15,
+            position: "relative",
           }}>
           <CorrectIcon
             name="checkcircle"
@@ -99,11 +103,20 @@ const AddBankDetails = ({navigation}) => {
             style={{marginTop: 14}}
           />
           <Text style={{fontSize: 13, paddingLeft: 9}}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam,
-            purus sit amet luctus venenatis, lectus mag {"\n"}na fringilla fdgg
-            sdjgd urna....View More?
+            {readMore ? info : info.substring(0, 200)}...
           </Text>
         </View>
+        <TouchableOpacity onPress={() => setReadMore(!readMore)}>
+          {readMore ? (
+            <View style={{position:'relative',left:90,bottom:18}}>
+              <Text>Show Less</Text>
+            </View>
+          ) : (
+            <View style={{position:'relative',left:220,bottom:17}}>
+              <Text>Read More</Text>
+            </View>
+          )}
+        </TouchableOpacity>
         <TouchableOpacity
           style={{
             width: "100%",

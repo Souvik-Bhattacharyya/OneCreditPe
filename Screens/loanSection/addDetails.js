@@ -57,6 +57,7 @@ const AddDetails = ({navigation}) => {
           </View>
         </View>
       </View>
+
       <View
         style={{
           width: "46%",
@@ -75,18 +76,22 @@ const AddDetails = ({navigation}) => {
             source={require("../../Assets/pan.png")}
             style={{height: 50, width: 50}}
           />
-          <Text
-            style={{
-              color: "#0A5AC9",
-              fontFamily: "Roboto",
-              fontWeight: "bold",
-              fontSize: 14,
-            }}>
-            Add PAN Details
-          </Text>
+          <TouchableOpacity
+              onPress={() => navigation.navigate("AddPanDetails")}>
+              <Text
+                style={{
+                  color: "#0A5AC9",
+                  fontFamily: "Roboto",
+                  fontWeight: "bold",
+                  fontSize: 14,
+                }}>
+                Add Pan Details
+              </Text>
+            </TouchableOpacity>
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
+
         {/* <View
           style={{
             position: "absolute",

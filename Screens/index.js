@@ -38,6 +38,7 @@ import AddPicture from "./loanSection/addPicture";
 import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
 import CusSupProfile from "./CusSupProfile";
 import Picture from "./loanSection/picture";
+import PanDetails from "./loanSection/PanDetails";
 export {
   Login,
   OtpScreen,
@@ -79,4 +80,5 @@ export {
   AddAdhaarDetails,
   CusSupProfile,
   Picture,
+  PanDetails
 };
