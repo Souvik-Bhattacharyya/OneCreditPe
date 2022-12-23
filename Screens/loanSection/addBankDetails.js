@@ -1,11 +1,50 @@
-import {View, Text, TextInput, TouchableOpacity} from "react-native";
+import {View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
 import React, {useState} from "react";
 import CorrectIcon from "react-native-vector-icons/AntDesign";
 import metrics from "../../Constants/metrics";
-const AddBankDetails = ({navigation}) => {
-  const [readMore, setReadMore] = useState(false);
-  const info =
-    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Libero molestiae totam sapiente excepturi quia nulla assumenda, hic autem animi, incidunt, voluptate nihil. Fugit necessitatibus sunt quisquam est illo magnam quae quam laborum at vel ab reprehenderit delectus eum impedit, iste quo maxime architecto velit adipisci. Similique, quibusdam fugit ipsam, aspernatur porro nemo aperiam illo aliquam quae, repellat consequuntur sunt nam optio velit! Animi blanditiis quas accusantium, asperiores eligendi voluptatem omnis at dolores repellat numquam architecto beatae facilis, aut dolorum, voluptatum excepturi temporibus rem ipsa! Rerum dolores ea quos voluptatibus quasi vel quis, inventore quia deserunt nulla odio nihil reprehenderit tenetur vitae pariatur assumenda sunt quam facilis expedita dignissimos natus ipsam iure tempora commodi? Saepe dolorem praesentium ipsa aperiam iure delectus, et rerum cumque vero impedit recusandae ut doloribus sit voluptatem quia? Beatae.";
+import Api from "../../Services";
+import {useDispatch} from "react-redux";
+import {notify} from "../../Redux/Action/notificationActions";
+const AddBankDetails = ({navigation, route}) => {
+  const dispatch = useDispatch();
+  const [bankDetails, setBankDetails] = useState({
+    bank_name: "",
+    ifsc: "",
+    account_no: null,
+    confirm_acc_no: null,
+  });
+  console.log("----------->", route.params?.businessId);
+  const updateBank = async () => {
+    try {
+      const formdata = new FormData();
+      formdata.append("bank_name", bankDetails.bank_name);
+      formdata.append("ifsc", bankDetails.ifsc);
+      if (bankDetails.account_no == bankDetails.confirm_acc_no) {
+        formdata.append("account_no", bankDetails.confirm_acc_no);
+        const response = await Api.postForm(
+          `/auth/business-bank/${route.params?.businessId}?_method=put`,
+          formdata,
+        );
+        console.log(response.data);
+        if (response.data.status == 200) {
+          setBankDetails({
+            ...bankDetails,
+            bank_name: "",
+            ifsc: "",
+            account_no: "",
+            confirm_acc_no: "",
+          });
+          navigation.replace("BusinessBank");
+          dispatch(notify({message: response.data.message}));
+        }
+      } else {
+        Alert.alert("Confirm the account number");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View
       style={{
@@ -25,10 +64,12 @@ const AddBankDetails = ({navigation}) => {
             fontSize: 16,
             fontWeight: "600",
           }}>
-          Enter Your Details
+          Enter Your Bank Details
         </Text>
         <TextInput
+          value={bankDetails.bank_name}
           placeholder="Bank Name"
+          onChangeText={val => setBankDetails({...bankDetails, bank_name: val})}
           style={{
             backgroundColor: "#FFFFFF",
             marginTop: 10,
@@ -41,6 +82,8 @@ const AddBankDetails = ({navigation}) => {
         />
 
         <TextInput
+          value={bankDetails.ifsc}
+          onChangeText={val => setBankDetails({...bankDetails, ifsc: val})}
           style={{
             backgroundColor: "#FFFFFF",
             marginTop: 10,
@@ -65,6 +108,10 @@ const AddBankDetails = ({navigation}) => {
           </Text>
         </TouchableOpacity>
         <TextInput
+          value={bankDetails.account_no}
+          onChangeText={val =>
+            setBankDetails({...bankDetails, account_no: val})
+          }
           style={{
             backgroundColor: "#FFFFFF",
             marginTop: 10,
@@ -78,6 +125,10 @@ const AddBankDetails = ({navigation}) => {
 "
         />
         <TextInput
+          value={bankDetails.confirm_acc_no}
+          onChangeText={val =>
+            setBankDetails({...bankDetails, confirm_acc_no: val})
+          }
           style={{
             backgroundColor: "#FFFFFF",
             marginTop: 10,
@@ -102,11 +153,11 @@ const AddBankDetails = ({navigation}) => {
             color="#0A5AC9"
             style={{marginTop: 14}}
           />
-          <Text style={{fontSize: 13, paddingLeft: 9}}>
-            {readMore ? info : info.substring(0, 200)}...
+          <Text style={{fontSize: 13, padding: 12}}>
+            Are you sure to update this all info ?
           </Text>
         </View>
-        <TouchableOpacity onPress={() => setReadMore(!readMore)}>
+        {/* <TouchableOpacity onPress={() => setReadMore(!readMore)}>
           {readMore ? (
             <View style={{position:'relative',left:90,bottom:18}}>
               <Text>Show Less</Text>
@@ -116,8 +167,9 @@ const AddBankDetails = ({navigation}) => {
               <Text>Read More</Text>
             </View>
           )}
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
+          onPress={updateBank}
           style={{
             width: "100%",
             backgroundColor: "#0A5AC9",

@@ -33,7 +33,9 @@ import {
   PartiesHeader,
   LoanDetails,
   AddDetails,
+  BusinessBank,
   AddBankDetails,
+  AddBusinessDetails,
   FindIfsc,
   AddPicture,
   AddAdhaarDetails,
@@ -294,6 +296,7 @@ const LoanScreenStack = () => {
           // headerShown: false,
         }}
       />
+
       <Stack.Screen
         component={AddBankDetails}
         name="AddBankDetails"
@@ -381,10 +384,26 @@ const SettingsStack = () => {
         }}
       />
       <Stack.Screen
+        component={BusinessBank}
+        name="BusinessBank"
+        options={{
+          headerTitle: "BusinessBank",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
         component={AddBankDetails}
         name="AddBankDetails"
         options={{
-          headerTitle: "Add Your bank account",
+          headerTitle: "Add Your Bank Account",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        component={AddBusinessDetails}
+        name="AddBusinessDetails"
+        options={{
+          headerTitle: "Add Your Business Account",
           headerShown: true,
         }}
       />

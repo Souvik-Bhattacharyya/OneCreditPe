@@ -40,6 +40,7 @@ const OtpScreen = ({navigation, route}) => {
         const payload = {
           user: response.data.user,
           clientToken: response.data.token,
+          business: response.data.business,
         };
         setLoading(false);
         dispatch(addToken(payload));

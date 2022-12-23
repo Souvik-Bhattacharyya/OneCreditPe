@@ -10,12 +10,13 @@ const AddDetails = ({navigation}) => {
       style={{
         backgroundColor: "#EEF3FF",
         marginVertical: 15,
+        marginHorizontal: 10,
         width: "100%",
         height: "100%",
         flexDirection: "row",
         flexWrap: "wrap",
       }}>
-      <View
+      {/* <View
         style={{
           width: "46%",
           marginHorizontal: 10,
@@ -56,8 +57,7 @@ const AddDetails = ({navigation}) => {
             <Text style={{fontSize: 9}}>transfer the money</Text>
           </View>
         </View>
-      </View>
-
+      </View> */}
       <View
         style={{
           width: "46%",
@@ -118,7 +118,7 @@ const AddDetails = ({navigation}) => {
         style={{
           width: "46%",
           marginHorizontal: 10,
-          marginVertical: 10,
+          // marginVertical: 5,
           borderColor: "#C6C6C6",
           borderRadius: 5,
           borderWidth: 1,
@@ -192,7 +192,7 @@ const AddDetails = ({navigation}) => {
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
       </View>
-      <View
+      {/* <View
         style={{
           width: "46%",
           height: "25%",
@@ -225,7 +225,7 @@ const AddDetails = ({navigation}) => {
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
-      </View>
+      </View> */}
     </View>
     // </View>
   );
