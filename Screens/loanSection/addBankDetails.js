@@ -145,6 +145,7 @@ const AddBankDetails = ({navigation, route}) => {
           style={{
             flexDirection: "row",
             marginTop: 15,
+            position: "relative",
           }}>
           <CorrectIcon
             name="checkcircle"
@@ -156,6 +157,17 @@ const AddBankDetails = ({navigation, route}) => {
             Are you sure to update this all info ?
           </Text>
         </View>
+        {/* <TouchableOpacity onPress={() => setReadMore(!readMore)}>
+          {readMore ? (
+            <View style={{position:'relative',left:90,bottom:18}}>
+              <Text>Show Less</Text>
+            </View>
+          ) : (
+            <View style={{position:'relative',left:220,bottom:17}}>
+              <Text>Read More</Text>
+            </View>
+          )}
+        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={updateBank}
           style={{

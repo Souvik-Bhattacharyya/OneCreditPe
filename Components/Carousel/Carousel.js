@@ -16,21 +16,21 @@ const data = [
   //   title: "Send Money",
   //   iconName: "account-arrow-down-outline",
   // },
-  {
-    id: "1",
-    title: "My QR",
-    iconImage: require('../../Assets/MyQRCode.png'),
-  },
-  {
-    id: "2",
-    title: "Mobile Recharge",
-    iconName: "cellphone-check",
-  },
-  {
-    id: "3",
-    title: "Utility Bill",
-    iconName: "script-text",
-  },
+  // {
+  //   id: "1",
+  //   title: "My QR",
+  //   iconImage: require('../../Assets/MyQRCode.png'),
+  // },
+  // {
+  //   id: "2",
+  //   title: "Mobile Recharge",
+  //   iconName: "cellphone-check",
+  // },
+  // {
+  //   id: "3",
+  //   title: "Utility Bill",
+  //   iconName: "script-text",
+  // },
   {
     id: "4",
     title: "My Reward",

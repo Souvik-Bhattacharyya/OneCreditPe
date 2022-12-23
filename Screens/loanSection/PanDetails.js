@@ -11,28 +11,28 @@ const AddAdhaarDetails = () => {
   const dispatch = useDispatch();
   const {user} = useSelector(state => state?.auth);
 
-  const [aadhar, setAadhar] = useState({
-    aadharNo: user.aadhar_no,
+  const [pan, setPan] = useState({
+    panNo: user.pan_no,
   });
   const [picture, setPicture] = useState(null);
 
   useEffect(() => {
-    if (user?.aadhar_image) {
+    if (user?.pan_image) {
       setPicture({
-        name: user.aadhar_image,
+        name: user.pan_image,
         uri:
-          "https://onepay.alsoltech.in/public/assets/user/aadhar_image/" +
-          user.aadhar_image,
+          "https://onepay.alsoltech.in/public/assets/user/pan_image/" +
+          user.pan_image,
       });
-      setAadhar({...aadhar, aadharNo: user.aadhar_no});
+      setPan({...pan, panNo: user.pan_no});
     }
   }, [user]);
 
-  const UpdateAadharDetails = async () => {
+  const UpdatePanDetails = async () => {
     const formData = new FormData();
     formData.append("mobile", user.mobile);
-    formData.append("aadhar_no", aadhar.aadharNo);
-    formData.append("aadhar_image", picture);
+    formData.append("pan_no", pan.panNo);
+    formData.append("pan_image", picture);
     try {
       const response = await Api.postForm(
         `/auth/user/${user.id}?_method=put`,
@@ -78,14 +78,14 @@ const AddAdhaarDetails = () => {
             fontSize: 16,
             fontWeight: "600",
           }}>
-          Enter Your Aadhar number
+          Enter Your Pan number
         </Text>
         <TextInput
           placeholder="Enter Your Aaddhar number"
           onChangeText={text => {
-            setAadhar({...aadhar, aadharNo: text});
+            setPan({...pan, panNo: text});
           }}
-          value={aadhar.aadharNo}
+          value={pan.panNo}
           style={{
             backgroundColor: "#FFFFFF",
             marginTop: 10,
@@ -103,7 +103,7 @@ const AddAdhaarDetails = () => {
             fontSize: 16,
             fontWeight: "600",
           }}>
-          Add Aadhar Image
+          Add Pan Image
         </Text>
 
         <TouchableOpacity
@@ -136,7 +136,7 @@ const AddAdhaarDetails = () => {
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        onPress={() => UpdateAadharDetails()}
+        onPress={() => UpdatePanDetails()}
         style={{
           width: "95%",
           backgroundColor: "#0A5AC9",
