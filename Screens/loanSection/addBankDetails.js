@@ -153,7 +153,7 @@ const AddBankDetails = ({navigation, route}) => {
             style={{marginTop: 14}}
           />
           <Text style={{fontSize: 13, padding: 12}}>
-            Are you sure to update this all details ?
+            Are you sure to update this all info ?
           </Text>
         </View>
         <TouchableOpacity
