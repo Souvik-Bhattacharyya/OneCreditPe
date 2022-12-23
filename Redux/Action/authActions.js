@@ -1,4 +1,4 @@
-import {ADD_TOKEN, LOGOUT, UPDATE_USER} from "../actionTypes";
+import {ADD_TOKEN, LOGOUT, UPDATE_USER, UPDATE_BUSINESS} from "../actionTypes";
 
 export const addToken = payload => {
   return {
@@ -15,6 +15,12 @@ export const logout = () => {
 export const updateUser = payload => {
   return {
     type: UPDATE_USER,
+    payload,
+  };
+};
+export const updateBusiness = payload => {
+  return {
+    type: UPDATE_BUSINESS,
     payload,
   };
 };

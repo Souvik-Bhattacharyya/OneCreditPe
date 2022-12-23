@@ -127,7 +127,11 @@ const BusinessBank = ({navigation}) => {
             }}>
             <Text style={{fontWeight: "bold"}}>Financial Info :</Text>
             <TouchableOpacity
-              onPress={() => navigation.navigate("AddBusinessDetails")}>
+              onPress={() =>
+                navigation.navigate("AddBusinessDetails", {
+                  businessId: UserDetails.business.id,
+                })
+              }>
               <UpdateIcon
                 name="edit"
                 color={"#12ce12"}
