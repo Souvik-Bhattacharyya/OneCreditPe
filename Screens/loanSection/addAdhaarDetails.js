@@ -24,6 +24,8 @@ const AddAdhaarDetails = ({navigation}) => {
           user.aadhar_image,
       });
       setAadhar(user.aadhar_no);
+    } else {
+      setSavedImage(null);
     }
   }, [user]);
   console.log("------>", user);
@@ -44,6 +46,7 @@ const AddAdhaarDetails = ({navigation}) => {
       if (response.status === 200) {
         navigation.replace("AddDetails");
         setPicture(null);
+        setSavedImage(null);
         setAadhar(null);
         dispatch(notify({message: response.data.message}));
         dispatch(updateUser({user: response.data.user}));
