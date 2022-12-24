@@ -18,14 +18,18 @@ const AddBankDetails = ({navigation, route}) => {
     try {
       const formdata = new FormData();
       formdata.append("bank_name", bankDetails.bank_name);
+      formdata.append("account_holder_name", "holder name");
       formdata.append("ifsc", bankDetails.ifsc);
+
       if (bankDetails.account_no == bankDetails.confirm_acc_no) {
         formdata.append("account_no", bankDetails.confirm_acc_no);
+        console.log(formdata);
         const response = await Api.postForm(
           `/auth/business-bank/${route.params?.businessId}?_method=put`,
           formdata,
         );
         console.log(response.data);
+
         if (response.data.status == 200) {
           setBankDetails({
             ...bankDetails,
@@ -145,7 +149,6 @@ const AddBankDetails = ({navigation, route}) => {
           style={{
             flexDirection: "row",
             marginTop: 15,
-            position: "relative",
           }}>
           <CorrectIcon
             name="checkcircle"
@@ -157,17 +160,6 @@ const AddBankDetails = ({navigation, route}) => {
             Are you sure to update this all info ?
           </Text>
         </View>
-        {/* <TouchableOpacity onPress={() => setReadMore(!readMore)}>
-          {readMore ? (
-            <View style={{position:'relative',left:90,bottom:18}}>
-              <Text>Show Less</Text>
-            </View>
-          ) : (
-            <View style={{position:'relative',left:220,bottom:17}}>
-              <Text>Read More</Text>
-            </View>
-          )}
-        </TouchableOpacity> */}
         <TouchableOpacity
           onPress={updateBank}
           style={{

@@ -32,7 +32,7 @@ const UserProfile = ({navigation}) => {
     email: user.email == null ? null : user.email,
     business_name: user.business_name == null ? null : user.business_name,
     bank_account_no: user.bank_account_no == null ? null : user.bank_account_no,
-    // profile_image: user.profile_image == null ? null : user.profile_image,
+    profile_image: user.profile_image == null ? null : user.profile_image,
   });
   console.log("user------------------", user);
   console.log("userInfo---------", userInfo);

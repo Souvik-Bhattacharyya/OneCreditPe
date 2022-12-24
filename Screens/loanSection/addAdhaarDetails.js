@@ -7,38 +7,44 @@ import DocumentPicker, {types} from "react-native-document-picker";
 import {useDispatch} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
 import {updateUser} from "../../Redux/Action/authActions";
-const AddAdhaarDetails = () => {
+const AddAdhaarDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const {user} = useSelector(state => state?.auth);
 
-  const [aadhar, setAadhar] = useState({
-    aadharNo: user.aadhar_no,
-  });
+  const [aadhar, setAadhar] = useState(null);
   const [picture, setPicture] = useState(null);
+  const [savedImage, setSavedImage] = useState(null);
 
   useEffect(() => {
     if (user?.aadhar_image) {
-      setPicture({
+      setSavedImage({
         name: user.aadhar_image,
         uri:
           "https://onepay.alsoltech.in/public/assets/user/aadhar_image/" +
           user.aadhar_image,
       });
-      setAadhar({...aadhar, aadharNo: user.aadhar_no});
+      setAadhar(user.aadhar_no);
     }
   }, [user]);
-
+  console.log("------>", user);
+  // console.log("--------->", aadhar);
+  console.log("----------->", picture);
   const UpdateAadharDetails = async () => {
-    const formData = new FormData();
-    formData.append("mobile", user.mobile);
-    formData.append("aadhar_no", aadhar.aadharNo);
-    formData.append("aadhar_image", picture);
     try {
+      const formData = new FormData();
+      formData.append("mobile", user.mobile);
+      aadhar && formData.append("aadhar_no", aadhar);
+      picture && formData.append("aadhar_image", picture);
+      console.log("==========>", formData);
       const response = await Api.postForm(
         `/auth/user/${user.id}?_method=put`,
         formData,
       );
+      console.log("=====================>", response);
       if (response.status === 200) {
+        navigation.replace("AddDetails");
+        setPicture(null);
+        setAadhar(null);
         dispatch(notify({message: response.data.message}));
         dispatch(updateUser({user: response.data.user}));
       }
@@ -54,6 +60,11 @@ const AddAdhaarDetails = () => {
         type: [types.images],
       });
       setPicture({name: image[0].name, uri: image[0].uri, type: image[0].type});
+      setSavedImage({
+        name: image[0].name,
+        uri: image[0].uri,
+        type: image[0].type,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -82,10 +93,8 @@ const AddAdhaarDetails = () => {
         </Text>
         <TextInput
           placeholder="Enter Your Aaddhar number"
-          onChangeText={text => {
-            setAadhar({...aadhar, aadharNo: text});
-          }}
-          value={aadhar.aadharNo}
+          onChangeText={text => setAadhar(text)}
+          value={aadhar}
           style={{
             backgroundColor: "#FFFFFF",
             marginTop: 10,
@@ -119,7 +128,7 @@ const AddAdhaarDetails = () => {
             justifyContent: "center",
             alignItems: "center",
           }}>
-          {picture ? (
+          {savedImage ? (
             <Image
               style={{
                 width: "100%",
@@ -128,7 +137,7 @@ const AddAdhaarDetails = () => {
                 zIndex: 100,
               }}
               progressiveRenderingEnabled={true}
-              source={picture && {uri: picture.uri}}
+              source={savedImage && {uri: savedImage.uri}}
             />
           ) : (
             <AddIcon name="add-circle" size={30} color="#349EFF" />
