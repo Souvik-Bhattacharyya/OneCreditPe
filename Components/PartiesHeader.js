@@ -25,7 +25,7 @@ const PartiesHeader = ({customerData, ScreenNavigation}) => {
           width: "75%",
         }}>
         {navigation.canGoBack() ? (
-          <TouchableOpacity onPress={() => navigation.pop()}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon
               name="arrowleft"
               size={24}

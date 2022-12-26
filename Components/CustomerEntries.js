@@ -185,28 +185,31 @@ const CashEntries = ({navigation, route}) => {
         setOffline(false);
 
         setIsDisabled(false);
-        navigation.replace("UserDetails", {
-          customerId: route.params?.customerId,
-        });
-        // navigation.dispatch(
-        //   CommonActions.reset({
-        //     index: 0,
-        //     routes: [
-        //       {
-        //         name: "CustomerStack",
-        //         state: {
-        //           index: 0,
-        //           routes: [
-        //             {
-        //               name: "UserDetails",
-        //               params: {customerId: route.params?.customerId},
-        //             },
-        //           ],
-        //         },
-        //       },
-        //     ],
-        //   }),
-        // );
+        // navigation.replace("UserDetails", {
+        //   customerId: route.params?.customerId,
+        // });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "CustomerStack",
+                state: {
+                  index: 0,
+                  routes: [
+                    {
+                      name: "Customer",
+                    },
+                    {
+                      name: "UserDetails",
+                      params: {customerId: route.params?.customerId},
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+        );
         dispatch(
           notify({
             message: "Your entry has been submitted successfully",
@@ -258,9 +261,31 @@ const CashEntries = ({navigation, route}) => {
         setOffline(false);
 
         setIsDisabled(false);
-        navigation.replace("UserDetails", {
-          customerId: route.params?.trnsDetails?.customer_id,
-        });
+        // navigation.replace("UserDetails", {
+        //   customerId: route.params?.trnsDetails?.customer_id,
+        // });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "CustomerStack",
+                state: {
+                  index: 0,
+                  routes: [
+                    {
+                      name: "Customer",
+                    },
+                    {
+                      name: "UserDetails",
+                      params: {customerId: route.params?.trnsDetails?.customer_id,},
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+        );
         dispatch(
           notify({
             message: response.message,
@@ -298,11 +323,35 @@ const CashEntries = ({navigation, route}) => {
         route.params?.customersAllTransaction(
           route.params?.trnsDetails?.customer_id,
         );
-        navigation.replace("UserDetails", {
-          customerId: route.params?.trnsDetails
-            ? route.params?.trnsDetails.customer_id
-            : route.params?.customerId,
-        });
+        // navigation.replace("UserDetails", {
+        //   customerId: route.params?.trnsDetails
+        //     ? route.params?.trnsDetails.customer_id
+        //     : route.params?.customerId,
+        // });
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "CustomerStack",
+                state: {
+                  index: 0,
+                  routes: [
+                    {
+                      name: "Customer",
+                    },
+                    {
+                      name: "UserDetails",
+                      params: {customerId: route.params?.trnsDetails
+                        ? route.params?.trnsDetails.customer_id
+                        : route.params?.customerId},
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+        );
         dispatch(notify({message: "Transaction deleted successfully"}));
       } else {
         throw new Error(response.message);

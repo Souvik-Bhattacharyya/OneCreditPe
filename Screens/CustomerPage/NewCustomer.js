@@ -50,7 +50,7 @@ const CustomerHome = ({route}) => {
                 text: `Go to ${response.data.data.customer_type}`,
                 onPress: () => {
                   setCustomer({...customer, name: "", mobile: null});
-                  navigation.navigate("UserDetails", {
+                  navigation.replace("UserDetails", {
                     customerId: response.data.data.id,
                   });
                 },
@@ -59,7 +59,7 @@ const CustomerHome = ({route}) => {
           );
         } else {
           setCustomer({...customer, name: "", mobile: null});
-          navigation.navigate("UserDetails", {
+          navigation.replace("UserDetails", {
             customerId: response.data.data.id,
           });
         }
@@ -97,7 +97,7 @@ const CustomerHome = ({route}) => {
               {
                 text: `Go to ${response.data.data.customer_type}`,
                 onPress: () =>
-                  navigation.navigate("UserDetails", {
+                  navigation.replace("UserDetails", {
                     customerId: response.data.data.id,
                   }),
               },
@@ -106,7 +106,7 @@ const CustomerHome = ({route}) => {
         } else {
           setCustomer({...customer, name: "", mobile: null});
 
-          navigation.navigate("UserDetails", {
+          navigation.replace("UserDetails", {
             customerId: response.data.data.id,
           });
         }

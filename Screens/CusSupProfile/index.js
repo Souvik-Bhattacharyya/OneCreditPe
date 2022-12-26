@@ -81,7 +81,29 @@ const CusSupProfile = ({route}) => {
       );
       if (response.status == 200) {
         // console.log("------------>", response.data.data.id);
-        navigation.replace("UserDetails", {customerId: cusData.id});
+        // navigation.replace("UserDetails", {customerId: cusData.id});
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 0,
+            routes: [
+              {
+                name: "CustomerStack",
+                state: {
+                  index: 0,
+                  routes: [
+                    {
+                      name: "Customer",
+                    },
+                    {
+                      name: "UserDetails",
+                      params: {customerId: cusData.id},
+                    },
+                  ],
+                },
+              },
+            ],
+          }),
+        );
       }
     } catch (error) {
       console.log(error);
