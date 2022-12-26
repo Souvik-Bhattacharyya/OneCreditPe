@@ -15,6 +15,12 @@ const AddAdhaarDetails = ({navigation}) => {
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
 
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+
   useEffect(() => {
     if (user?.aadhar_image) {
       setSavedImage({

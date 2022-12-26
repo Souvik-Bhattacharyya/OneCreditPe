@@ -39,7 +39,7 @@ const AddAdhaarDetails = () => {
         formData,
       );
       if (response.status === 200) {
-        dispatch(notify({message: response.data.message}));
+        dispatch(notify({message: "Pan Details Updated Succesfully"}));
         dispatch(updateUser({user: response.data.user}));
       }
     } catch (error) {
