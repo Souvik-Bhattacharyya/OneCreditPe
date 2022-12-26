@@ -16,6 +16,12 @@ const AddAdhaarDetails = () => {
   });
   const [picture, setPicture] = useState(null);
 
+  const config = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+
   useEffect(() => {
     if (user?.aadhar_image) {
       setPicture({
@@ -39,7 +45,7 @@ const AddAdhaarDetails = () => {
         formData,
       );
       if (response.status === 200) {
-        dispatch(notify({message: response.data.message}));
+        dispatch(notify({message: "Aadhar Details Updated Succesfully"}));
         dispatch(updateUser({user: response.data.user}));
       }
     } catch (error) {
