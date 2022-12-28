@@ -26,7 +26,7 @@ const UserProfile = ({navigation}) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth);
   const [Pic, SetPic] = React.useState(null);
-
+  const [image, setImage] = React.useState(null);
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -34,7 +34,7 @@ const UserProfile = ({navigation}) => {
     bank_account_no: "",
     profile_image: "",
   });
-
+  console.log("------------------>", user.user);
   useEffect(() => {
     if (user?.user?.mobile) {
       setUserInfo({
@@ -44,11 +44,18 @@ const UserProfile = ({navigation}) => {
           user.user.business_name == null ? null : user.user.business_name,
         bank_account_no:
           user.user.bank_account_no == null ? null : user.user.bank_account_no,
-        profile_image:
-          user.user.profile_image == null ? null : user.user.profile_image,
+        // profile_image:
+        //   user.user.profile_image == null ? null : user.user.profile_image,
       });
+      // user.user.profile_image &&
+      //   SetPic({
+      //     name: user.user.profile_image,
+      //     uri:
+      //       "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
+      //       user.user.profile_image,
+      //   });
       user.user.profile_image &&
-        SetPic({
+        setImage({
           name: user.user.profile_image,
           uri:
             "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
@@ -64,6 +71,11 @@ const UserProfile = ({navigation}) => {
       });
 
       SetPic({
+        name: response[0].name,
+        uri: response[0].uri,
+        type: response[0].type,
+      });
+      setImage({
         name: response[0].name,
         uri: response[0].uri,
         type: response[0].type,
@@ -130,7 +142,9 @@ const UserProfile = ({navigation}) => {
           }}>
           <Image
             source={
-              Pic ? {uri: Pic.uri} : require("../../Assets/blank-profile.png")
+              image
+                ? {uri: image.uri}
+                : require("../../Assets/blank-profile.png")
             }
             style={{
               height: 105,
