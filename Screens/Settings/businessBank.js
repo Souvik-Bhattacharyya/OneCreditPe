@@ -11,18 +11,19 @@ import UpdateIcon from "react-native-vector-icons/Feather";
 import {useSelector} from "react-redux";
 import Api from "../../Services";
 const BusinessBank = ({navigation}) => {
-  const UserDetails = useSelector(state => state.auth);
+  const UserDetails = useSelector(state => state.auth.user);
+  // const BankDetails = useSelector(state => state.auth.business);
+  const [bankDetails, setBankDetails] = useState();
   console.log("===============================>", UserDetails);
   useEffect(() => {
     getBankDetails();
   }, []);
   const getBankDetails = async () => {
     try {
-      const response = await Api.get("/auth/business-bank/${UserDetails.id}");
+      const response = await Api.get(`/auth/show-user/${UserDetails.id}`);
       console.log("bank response", response);
       if (response.data) {
-        // setViewResult(response.data);
-        console.log("success");
+        setBankDetails(response.data);
       } else {
         throw new Error(response.message);
       }
@@ -31,6 +32,7 @@ const BusinessBank = ({navigation}) => {
       // dispatch()
     }
   };
+  console.log("bankDetails", bankDetails);
   return (
     <>
       <ScrollView>
@@ -81,7 +83,7 @@ const BusinessBank = ({navigation}) => {
               }}>
               <Text style={{fontSize: 16, fontWeight: "bold"}}>Bank Name</Text>
               <Text style={{fontSize: 14}}>
-                xxx
+                {bankDetails.bank.bank_name}
                 {/* {route.params?.bankData?.bank_name} */}
               </Text>
             </View>
@@ -106,7 +108,7 @@ const BusinessBank = ({navigation}) => {
                 Bank IFSC code
               </Text>
               <Text style={{fontSize: 16}}>
-                xxx
+                {bankDetails.bank.ifsc}
                 {/* {route.params?.bankData?.ifsc} */}
               </Text>
             </View>
@@ -132,7 +134,7 @@ const BusinessBank = ({navigation}) => {
               </Text>
               <Text style={{fontSize: 16}}>
                 {/* {route.params?.bankData?.account_no} */}
-                xxx
+                {bankDetails.bank.account_no}
               </Text>
             </View>
           </View>
@@ -178,7 +180,7 @@ const BusinessBank = ({navigation}) => {
                 Business Address
               </Text>
               <Text style={{fontSize: 16}}>
-                {UserDetails.business.bns_address}
+                {bankDetails.business.bns_address}
               </Text>
             </View>
           </View>
@@ -201,7 +203,7 @@ const BusinessBank = ({navigation}) => {
                 Business Type
               </Text>
               <Text style={{fontSize: 16}}>
-                {UserDetails.business.bns_type}
+                {bankDetails.business.bns_type}
               </Text>
             </View>
           </View>
@@ -223,7 +225,7 @@ const BusinessBank = ({navigation}) => {
               }}>
               <Text style={{fontSize: 16, fontWeight: "bold"}}>GSTIN</Text>
               <Text style={{fontSize: 16}}>
-                {UserDetails.business.gstin_no}
+                {bankDetails.business.gstin_no}
               </Text>
             </View>
           </View>

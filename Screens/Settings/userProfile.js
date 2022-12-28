@@ -24,7 +24,8 @@ import Api from "../../Services";
 const UserProfile = ({navigation}) => {
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.auth);
+  console.log("user", user);
   const [Pic, SetPic] = React.useState(null);
 
   const [userInfo, setUserInfo] = useState({
