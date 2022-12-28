@@ -20,7 +20,7 @@ import EmailIcon from "react-native-vector-icons/MaterialCommunityIcons";
 // import Icon from "react-native-vector-icons/AntDesign";
 import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import metrics from "../../Constants/metrics";
-import {useNavigation} from "@react-navigation/native";
+import {CommonActions, useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {Modal, Portal, Provider} from "react-native-paper";
 import Api from "../../Services";

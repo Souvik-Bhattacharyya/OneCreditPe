@@ -12,17 +12,19 @@ import {useSelector} from "react-redux";
 import Api from "../../Services";
 const BusinessBank = ({navigation}) => {
   const UserDetails = useSelector(state => state.auth);
-  console.log("===============================>", UserDetails);
+
+  const [bankDetails, setBankDetails] = useState({});
+  const [businessDetails, setBusinessDetails] = useState({});
+  console.log("===============================>", UserDetails.business);
   useEffect(() => {
     getBankDetails();
   }, []);
   const getBankDetails = async () => {
     try {
-      const response = await Api.get("/auth/business-bank/${UserDetails.id}");
-      console.log("bank response", response);
-      if (response.data) {
-        // setViewResult(response.data);
-        console.log("success");
+      const response = await Api.get(`/auth/show-user/${UserDetails.user.id}`);
+      if (response.data.status == 200) {
+        setBankDetails(response.data.bank);
+        setBusinessDetails(response.data.business[0]);
       } else {
         throw new Error(response.message);
       }
@@ -31,6 +33,9 @@ const BusinessBank = ({navigation}) => {
       // dispatch()
     }
   };
+  console.log("bankDetails", bankDetails);
+  console.log("businessDetails", businessDetails);
+
   return (
     <>
       <ScrollView>
@@ -53,6 +58,8 @@ const BusinessBank = ({navigation}) => {
               onPress={() =>
                 navigation.navigate("AddBankDetails", {
                   businessId: UserDetails.business.id,
+                  bankInfo: bankDetails,
+                  getBankDetails: getBankDetails,
                 })
               }>
               <UpdateIcon
@@ -80,10 +87,7 @@ const BusinessBank = ({navigation}) => {
                 paddingVertical: 5,
               }}>
               <Text style={{fontSize: 16, fontWeight: "bold"}}>Bank Name</Text>
-              <Text style={{fontSize: 14}}>
-                xxx
-                {/* {route.params?.bankData?.bank_name} */}
-              </Text>
+              <Text style={{fontSize: 14}}>{bankDetails.bank_name}</Text>
             </View>
           </View>
 
@@ -105,10 +109,7 @@ const BusinessBank = ({navigation}) => {
               <Text style={{fontSize: 16, fontWeight: "bold"}}>
                 Bank IFSC code
               </Text>
-              <Text style={{fontSize: 16}}>
-                xxx
-                {/* {route.params?.bankData?.ifsc} */}
-              </Text>
+              <Text style={{fontSize: 16}}>{bankDetails.ifsc}</Text>
             </View>
           </View>
 
@@ -130,10 +131,7 @@ const BusinessBank = ({navigation}) => {
               <Text style={{fontSize: 16, fontWeight: "bold"}}>
                 Bank Account Number
               </Text>
-              <Text style={{fontSize: 16}}>
-                {/* {route.params?.bankData?.account_no} */}
-                xxx
-              </Text>
+              <Text style={{fontSize: 16}}>{bankDetails.account_no}</Text>
             </View>
           </View>
           <View
@@ -177,9 +175,7 @@ const BusinessBank = ({navigation}) => {
               <Text style={{fontSize: 16, fontWeight: "bold"}}>
                 Business Address
               </Text>
-              <Text style={{fontSize: 16}}>
-                {UserDetails.business.bns_address}
-              </Text>
+              <Text style={{fontSize: 16}}>{businessDetails.bns_address}</Text>
             </View>
           </View>
           <View
@@ -200,9 +196,7 @@ const BusinessBank = ({navigation}) => {
               <Text style={{fontSize: 16, fontWeight: "bold"}}>
                 Business Type
               </Text>
-              <Text style={{fontSize: 16}}>
-                {UserDetails.business.bns_type}
-              </Text>
+              <Text style={{fontSize: 16}}>{businessDetails.bns_type}</Text>
             </View>
           </View>
 
@@ -222,9 +216,7 @@ const BusinessBank = ({navigation}) => {
                 paddingVertical: 5,
               }}>
               <Text style={{fontSize: 16, fontWeight: "bold"}}>GSTIN</Text>
-              <Text style={{fontSize: 16}}>
-                {UserDetails.business.gstin_no}
-              </Text>
+              <Text style={{fontSize: 16}}>{businessDetails.gstin_no}</Text>
             </View>
           </View>
         </View>

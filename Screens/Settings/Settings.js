@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -13,13 +13,13 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import IconLow from "react-native-vector-icons/FontAwesome";
 import Help from "react-native-vector-icons/Entypo";
 import Faq from "react-native-vector-icons/MaterialCommunityIcons";
-import {List} from "react-native-paper";
+import { List } from "react-native-paper";
 import metrics from "../../Constants/metrics";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
 import InviteFriendModal from "../../Components/InviteFriendModal";
-import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../Redux/Action/authActions";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../Redux/Action/authActions";
 import KycIcon from "react-native-vector-icons/Entypo";
 const Width = Dimensions.get("window").width;
 const Height = Dimensions.get("window").height;
@@ -74,13 +74,22 @@ const Settings = () => {
                   position: "relative",
                 }}>
                 <Image
-                  source={require("../../Assets/blank-profile.png")}
+                  source={
+                    user.profile_image
+                      ? {
+                          uri:
+                            "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
+                            user?.profile_image,
+                        }
+                      : require("../../Assets/blank-profile.png")
+                  }
                   style={{
                     height: 105,
                     width: 105,
-                    resizeMode: "contain",
+                    resizeMode: "cover",
                     marginVertical: 13,
                     alignSelf: "center",
+                    borderRadius: 50,
                   }}
                 />
                 <View
@@ -111,7 +120,7 @@ const Settings = () => {
               }}>
               {user.name}
             </Text>
-            <Text style={{textAlign: "center", fontSize: 16, color: "#828282"}}>
+            <Text style={{ textAlign: "center", fontSize: 16, color: "#828282" }}>
               +91 {user.mobile}
             </Text>
           </View>
@@ -133,7 +142,7 @@ const Settings = () => {
               )}>
               <List.Item
                 title="Language Options"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => alert("In Progress")}
                 left={props => (
@@ -141,7 +150,7 @@ const Settings = () => {
                     name="language"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -149,13 +158,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
               <List.Item
                 title="Log Out"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => {
                   dispatch(logout());
@@ -165,7 +174,7 @@ const Settings = () => {
                     name="log-out"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -173,7 +182,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
@@ -195,7 +204,7 @@ const Settings = () => {
               )}>
               <List.Item
                 title="FAQ Listing"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => navigation.navigate("faq")}
                 right={props => (
@@ -203,7 +212,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 left={props => (
@@ -211,13 +220,13 @@ const Settings = () => {
                     name="comment-question"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
               <List.Item
                 title="Chat with us"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() =>
                   Linking.openURL(
@@ -229,7 +238,7 @@ const Settings = () => {
                     name="message"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -237,13 +246,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
               <List.Item
                 title="Call Us"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => openDialScreen()}
                 left={props => (
@@ -251,7 +260,7 @@ const Settings = () => {
                     name="phone"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -259,7 +268,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
@@ -281,8 +290,8 @@ const Settings = () => {
               )}>
               <List.Item
                 title="Privacy Policy"
-                theme={{colors: {text: "#464555"}}}
-                style={[styles.items, {paddingLeft: 35}]}
+                theme={{ colors: { text: "#464555" } }}
+                style={[styles.items, { paddingLeft: 35 }]}
                 onPress={() => {
                   navigation.navigate("Privacy And Policy");
                 }}
@@ -291,7 +300,7 @@ const Settings = () => {
                     name="file-account"
                     size={20}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -299,13 +308,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
               <List.Item
                 title="Terms And Conditions"
-                theme={{colors: {text: "#464555"}}}
+                theme={{ colors: { text: "#464555" } }}
                 style={styles.items}
                 onPress={() => {
                   navigation.navigate("Terms And Conditions");
@@ -315,7 +324,7 @@ const Settings = () => {
                     name="file-contract"
                     size={18}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
                 right={props => (
@@ -323,60 +332,19 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{alignSelf: "center"}}
+                    style={{ alignSelf: "center" }}
                   />
                 )}
               />
             </List.Accordion>
           </List.AccordionGroup>
 
-          <View
-            style={{
-              marginTop: 10,
-              width: "100%",
-              height: 64,
-              alignItems: "center",
-              flexDirection: "row",
-              zIndex: 100,
-              paddingHorizontal: 20,
-              paddingVertical: 20,
-              backgroundColor: "white",
-              position: "relative",
-              borderColor: "rgba(201, 201, 201, 1)",
-              borderWidth: 1,
-            }}>
-            <KycIcon
-              name="v-card"
-              color={"#464555"}
-              size={24}
-              style={{
-                marginRight: 10,
-                marginRight: 20,
-                position: "relative",
-                bottom: 8,
-              }}
-            />
-            <TouchableOpacity
-              style={{position: "relative", bottom: 8}}
-              onPress={() => navigation.navigate("AddDetails")}>
-              <Text
-                style={{
-                  color: "#464555",
-                  fontSize: 18,
-                  fontWeight: "500",
-                  width: "100%",
-                }}>
-                KYC
-              </Text>
-            </TouchableOpacity>
-          </View>
-
           <TouchableOpacity
             onPress={showModal}
             style={{
               flexDirection: "row",
               backgroundColor: "#fff",
-              marginVertical: metrics.verticalScale(10),
+              marginTop: metrics.verticalScale(10),
               borderWidth: 1,
               borderColor: "#c9c9c9",
             }}>
@@ -417,12 +385,51 @@ const Settings = () => {
             </View>
           </TouchableOpacity>
 
-          <InviteFriendModal
-            visible={visible}
-            hideModal={hideModal}
-            setVisible={setVisible}
-          />
-
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AddDetails")}
+            style={{
+              flexDirection: "row",
+              backgroundColor: "#fff",
+              marginVertical: metrics.verticalScale(10),
+              borderWidth: 1,
+              borderColor: "#c9c9c9",
+              paddingVertical: 10
+            }}>
+            <Image
+              source={require("../../Assets/Images/kyc.png")}
+              style={{
+                height: 60,
+                width: 60,
+                resizeMode: "contain",
+                marginHorizontal: 10,
+              }}
+            />
+            <View
+              style={{
+                backgroundColor: "#fff",
+                display: "flex",
+                justifyContent: "center",
+                // alignItems:'center',
+                marginHorizontal: 5,
+              }}>
+              <Text
+                style={{
+                  fontSize: 17,
+                  fontWeight: "400",
+                  color: "#333",
+                }}>
+                Submit your KYC Details
+              </Text>
+              <Text
+                style={{
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  color: "#0a5ac9",
+                }}>
+                Fillup Now
+              </Text>
+            </View>
+          </TouchableOpacity>
           <View
             style={{
               // backgroundColor: '#fff',
@@ -453,6 +460,11 @@ const Settings = () => {
           </View>
         </View>
       </ScrollView>
+      <InviteFriendModal
+        visible={visible}
+        hideModal={hideModal}
+        setVisible={setVisible}
+      />
     </>
   );
 };

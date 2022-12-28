@@ -24,26 +24,36 @@ import Api from "../../Services";
 const UserProfile = ({navigation}) => {
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
-  const user = useSelector(state => state.auth.user);
+  const user = useSelector(state => state.auth);
   const [Pic, SetPic] = React.useState(null);
 
   const [userInfo, setUserInfo] = useState({
-    name: user.name == null ? null : user.name,
-    email: user.email == null ? null : user.email,
-    business_name: user.business_name == null ? null : user.business_name,
-    bank_account_no: user.bank_account_no == null ? null : user.bank_account_no,
-    profile_image: user.profile_image == null ? null : user.profile_image,
+    name: "",
+    email: "",
+    business_name: "",
+    bank_account_no: "",
+    profile_image: "",
   });
-  console.log("user------------------", user);
-  console.log("userInfo---------", userInfo);
+
   useEffect(() => {
-    if (user?.profile_image) {
-      SetPic({
-        name: user.profile_image,
-        uri:
-          "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
-          user.profile_image,
+    if (user?.user?.mobile) {
+      setUserInfo({
+        name: user.user.name == null ? null : user.user.name,
+        email: user.user.email == null ? null : user.user.email,
+        business_name:
+          user.user.business_name == null ? null : user.user.business_name,
+        bank_account_no:
+          user.user.bank_account_no == null ? null : user.user.bank_account_no,
+        profile_image:
+          user.user.profile_image == null ? null : user.user.profile_image,
       });
+      user.user.profile_image &&
+        SetPic({
+          name: user.user.profile_image,
+          uri:
+            "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
+            user.user.profile_image,
+        });
     }
   }, [user]);
   const uploadImage = async () => {
@@ -68,13 +78,13 @@ const UserProfile = ({navigation}) => {
       const formData = new FormData();
       formData.append("name", userInfo.name);
       formData.append("email", userInfo.email);
-      formData.append("mobile", user.mobile);
+      formData.append("mobile", user.user.mobile);
       formData.append("business_name", userInfo.business_name);
       formData.append("bank_account_no", userInfo.bank_account_no);
       Pic ? formData.append("profile_image", Pic) : null;
       console.log(formData);
       const response = await Api.postForm(
-        `/auth/user/${user.id}?_method=put`,
+        `/auth/user/${user.user.id}?_method=put`,
         formData,
       );
       console.log(response.data);
@@ -89,7 +99,7 @@ const UserProfile = ({navigation}) => {
       console.log(error);
     }
   };
-  console.log("userinfo", userInfo);
+
   return (
     <View
       style={{
@@ -213,7 +223,7 @@ const UserProfile = ({navigation}) => {
                   fontWeight: "500",
                   width: "100%",
                 }}>
-                {"+91 " + user.mobile}
+                {"+91 " + user.user.mobile}
               </Text>
             </View>
             <View

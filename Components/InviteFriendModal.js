@@ -9,7 +9,7 @@ const InviteFriendModal = ({ visible, hideModal, setVisible }) => {
     backgroundColor: "white",
     borderRadius: 5,
     position: "absolute",
-    bottom: '20%',
+    bottom: 50,
     alignSelf: "center",
     paddingVertical: 45,
     paddingHorizontal: 30,
