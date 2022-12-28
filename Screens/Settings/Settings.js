@@ -74,13 +74,22 @@ const Settings = () => {
                   position: "relative",
                 }}>
                 <Image
-                  source={require("../../Assets/blank-profile.png")}
+                  source={
+                    user.profile_image
+                      ? {
+                          uri:
+                            "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
+                            user?.profile_image,
+                        }
+                      : require("../../Assets/blank-profile.png")
+                  }
                   style={{
                     height: 105,
                     width: 105,
-                    resizeMode: "contain",
+                    resizeMode: "cover",
                     marginVertical: 13,
                     alignSelf: "center",
+                    borderRadius: 50,
                   }}
                 />
                 <View
