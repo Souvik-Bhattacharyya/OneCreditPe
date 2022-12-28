@@ -156,7 +156,7 @@ const AddDetails = ({navigation}) => {
           </View>
         </View>
       </View>
-      <View
+      {/* <View
         style={{
           height: "25%",
 
@@ -191,7 +191,8 @@ const AddDetails = ({navigation}) => {
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
-      </View>
+      </View> */}
+      
       {/* <View
         style={{
           width: "46%",

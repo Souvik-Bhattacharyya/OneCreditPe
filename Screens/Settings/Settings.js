@@ -330,6 +330,47 @@ const Settings = () => {
             </List.Accordion>
           </List.AccordionGroup>
 
+          <View
+            style={{
+              marginTop: 10,
+              width: "100%",
+              height: 64,
+              alignItems: "center",
+              flexDirection: "row",
+              zIndex: 100,
+              paddingHorizontal: 20,
+              paddingVertical: 20,
+              backgroundColor: "white",
+              position: "relative",
+              borderColor: "rgba(201, 201, 201, 1)",
+              borderWidth: 1,
+            }}>
+            <KycIcon
+              name="v-card"
+              color={"#464555"}
+              size={24}
+              style={{
+                marginRight: 10,
+                marginRight: 20,
+                position: "relative",
+                bottom: 8,
+              }}
+            />
+            <TouchableOpacity
+              style={{position: "relative", bottom: 8}}
+              onPress={() => navigation.navigate("AddDetails")}>
+              <Text
+                style={{
+                  color: "#464555",
+                  fontSize: 18,
+                  fontWeight: "500",
+                  width: "100%",
+                }}>
+                KYC
+              </Text>
+            </TouchableOpacity>
+          </View>
+
           <TouchableOpacity
             onPress={showModal}
             style={{
@@ -348,6 +389,7 @@ const Settings = () => {
                 marginLeft: 10,
               }}
             />
+
             <View
               style={{
                 backgroundColor: "#fff",
@@ -380,33 +422,7 @@ const Settings = () => {
             hideModal={hideModal}
             setVisible={setVisible}
           />
-          <View
-            style={{
-              width: "100%",
-              alignItems: "center",
-              flexDirection: "row",
 
-              paddingHorizontal: 20,
-              paddingVertical: 20,
-            }}>
-            <KycIcon
-              name="v-card"
-              color={"#464555"}
-              size={24}
-              style={{marginRight: 10, marginRight: 20}}
-            />
-            <TouchableOpacity onPress={() => navigation.navigate("AddDetails")}>
-              <Text
-                style={{
-                  color: "#464555",
-                  fontSize: 18,
-                  fontWeight: "500",
-                  width: "100%",
-                }}>
-                KYC
-              </Text>
-            </TouchableOpacity>
-          </View>
           <View
             style={{
               // backgroundColor: '#fff',
