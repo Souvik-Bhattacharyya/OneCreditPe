@@ -1,5 +1,5 @@
 import {View, Text, TextInput, TouchableOpacity, Alert} from "react-native";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import CorrectIcon from "react-native-vector-icons/AntDesign";
 import metrics from "../../Constants/metrics";
 import Api from "../../Services";
@@ -14,6 +14,20 @@ const AddBankDetails = ({navigation, route}) => {
     confirm_acc_no: null,
   });
   console.log("----------->", route.params?.businessId);
+
+  useEffect(() => {
+    setBankDetails({
+      ...bankDetails,
+      bank_name: route.params.bankInfo.bank_name,
+      ifsc: route.params.bankInfo.ifsc,
+      account_no: route.params.bankInfo.account_no,
+      confirm_acc_no: route.params.bankInfo.account_no,
+    });
+  }, [route.params?.bankInfo]);
+  console.log(
+    "------------------------------------------------------>",
+    bankDetails,
+  );
   const updateBank = async () => {
     try {
       const formdata = new FormData();
@@ -39,6 +53,7 @@ const AddBankDetails = ({navigation, route}) => {
             confirm_acc_no: "",
           });
           navigation.replace("BusinessBank");
+          route.params?.getBankDetails();
           dispatch(notify({message: response.data.message}));
         }
       } else {

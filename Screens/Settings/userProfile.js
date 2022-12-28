@@ -25,7 +25,6 @@ const UserProfile = ({navigation}) => {
   const width = Dimensions.get("window").width;
   const dispatch = useDispatch();
   const user = useSelector(state => state.auth);
-  console.log("user", user);
   const [Pic, SetPic] = React.useState(null);
 
   const [userInfo, setUserInfo] = useState({
@@ -35,7 +34,7 @@ const UserProfile = ({navigation}) => {
     bank_account_no: user.bank_account_no == null ? null : user.bank_account_no,
     profile_image: user.profile_image == null ? null : user.profile_image,
   });
-  console.log("user------------------", user);
+  console.log("user------------------", user.user);
   console.log("userInfo---------", userInfo);
   useEffect(() => {
     if (user?.profile_image) {
@@ -90,7 +89,7 @@ const UserProfile = ({navigation}) => {
       console.log(error);
     }
   };
-  console.log("userinfo", userInfo);
+
   return (
     <View
       style={{
