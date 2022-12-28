@@ -7,39 +7,44 @@ import DocumentPicker, {types} from "react-native-document-picker";
 import {useDispatch} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
 import {updateUser} from "../../Redux/Action/authActions";
-const AddAdhaarDetails = () => {
+const PanDetails = ({navigation}) => {
   const dispatch = useDispatch();
   const {user} = useSelector(state => state?.auth);
 
-  const [pan, setPan] = useState({
-    panNo: user.pan_no,
-  });
+  const [pan, setPan] = useState(null);
   const [picture, setPicture] = useState(null);
+  const [savedImage, setSavedImage] = useState(null);
 
   useEffect(() => {
     if (user?.pan_image) {
-      setPicture({
+      setSavedImage({
         name: user.pan_image,
         uri:
           "https://onepay.alsoltech.in/public/assets/user/pan_image/" +
           user.pan_image,
       });
-      setPan({...pan, panNo: user.pan_no});
+      setPan(user.pan_no);
+    } else {
+      setSavedImage(null);
     }
   }, [user]);
 
   const UpdatePanDetails = async () => {
     const formData = new FormData();
     formData.append("mobile", user.mobile);
-    formData.append("pan_no", pan.panNo);
-    formData.append("pan_image", picture);
+    pan && formData.append("pan_no", pan);
+    picture && formData.append("pan_image", picture);
     try {
       const response = await Api.postForm(
         `/auth/user/${user.id}?_method=put`,
         formData,
       );
       if (response.status === 200) {
-        dispatch(notify({message: "Pan Details Updated Succesfully"}));
+        navigation.replace("AddDetails");
+        setPicture(null);
+        setSavedImage(null);
+        setPan(null);
+        dispatch(notify({message: response.data.message}));
         dispatch(updateUser({user: response.data.user}));
       }
     } catch (error) {
@@ -54,6 +59,11 @@ const AddAdhaarDetails = () => {
         type: [types.images],
       });
       setPicture({name: image[0].name, uri: image[0].uri, type: image[0].type});
+      setSavedImage({
+        name: image[0].name,
+        uri: image[0].uri,
+        type: image[0].type,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -83,9 +93,9 @@ const AddAdhaarDetails = () => {
         <TextInput
           placeholder="Enter Your Aaddhar number"
           onChangeText={text => {
-            setPan({...pan, panNo: text});
+            setPan(text);
           }}
-          value={pan.panNo}
+          value={pan}
           style={{
             backgroundColor: "#FFFFFF",
             marginTop: 10,
@@ -119,7 +129,7 @@ const AddAdhaarDetails = () => {
             justifyContent: "center",
             alignItems: "center",
           }}>
-          {picture ? (
+          {savedImage ? (
             <Image
               style={{
                 width: "100%",
@@ -128,7 +138,7 @@ const AddAdhaarDetails = () => {
                 zIndex: 100,
               }}
               progressiveRenderingEnabled={true}
-              source={picture && {uri: picture.uri}}
+              source={savedImage && {uri: savedImage.uri}}
             />
           ) : (
             <AddIcon name="add-circle" size={30} color="#349EFF" />
@@ -160,4 +170,4 @@ const AddAdhaarDetails = () => {
   );
 };
 
-export default AddAdhaarDetails;
+export default PanDetails;

@@ -15,11 +15,6 @@ const AddAdhaarDetails = ({navigation}) => {
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
 
-  const config = {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  };
 
   useEffect(() => {
     if (user?.aadhar_image) {
@@ -34,9 +29,7 @@ const AddAdhaarDetails = ({navigation}) => {
       setSavedImage(null);
     }
   }, [user]);
-  console.log("------>", user);
-  // console.log("--------->", aadhar);
-  console.log("----------->", picture);
+  
   const UpdateAadharDetails = async () => {
     try {
       const formData = new FormData();

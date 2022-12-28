@@ -357,6 +357,7 @@ const Settings = () => {
                 marginLeft: 10,
               }}
             />
+
             <View
               style={{
                 backgroundColor: "#fff",
