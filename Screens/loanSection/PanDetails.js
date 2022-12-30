@@ -14,7 +14,8 @@ const PanDetails = ({navigation}) => {
   const [pan, setPan] = useState(null);
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
-
+  // console.log("pic==========>", picture);
+  // console.log("img==========>", savedImage);
   useEffect(() => {
     if (user?.pan_image) {
       setSavedImage({
@@ -39,6 +40,7 @@ const PanDetails = ({navigation}) => {
         `/auth/user/${user.id}?_method=put`,
         formData,
       );
+      console.log("===================================>", response.data);
       if (response.status === 200) {
         navigation.replace("AddDetails");
         setPicture(null);
@@ -91,7 +93,7 @@ const PanDetails = ({navigation}) => {
           Enter Your Pan number
         </Text>
         <TextInput
-          placeholder="Enter Your Aaddhar number"
+          placeholder="Enter Your Pan number"
           onChangeText={text => {
             setPan(text);
           }}
