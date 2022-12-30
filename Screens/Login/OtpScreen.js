@@ -35,6 +35,7 @@ const OtpScreen = ({navigation, route}) => {
       console.log("response", response.data.status);
       if (response.data.status == "401") {
         alert("You have entered wrong OTP");
+        setLoading(false);
       } else {
         setCounter(10);
         const payload = {
