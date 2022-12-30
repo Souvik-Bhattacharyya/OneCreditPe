@@ -43,7 +43,11 @@ import {
   CusSupProfile,
   ToGet,
   Picture,
-  PanDetails
+  PanDetails,
+  RentHome,
+  AddRentDetails,
+  RentAgreement,
+  RentPanUpload,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 // import PanDetails from "../Screens/loanSection/PanDetails";
@@ -217,13 +221,7 @@ const CashBookStack = () => {
         name="Cash Book"
       />
       <Stack.Screen component={ViewReport} name="View Report" />
-      <Stack.Screen
-        component={CashEntries}
-        name="CashEntries"
-        // options={({route}) => ({
-        //   title: route.params.name,
-        // })}
-      />
+      <Stack.Screen component={CashEntries} name="CashEntries" />
     </Stack.Navigator>
   );
 };
@@ -254,9 +252,77 @@ const HomeScreenStack = () => {
         name="LoanScreenStack"
         options={{headerTitle: "Easy Loan"}}
       />
+
+      {/* <Stack.Screen
+        component={RentPeScreenStack}
+        name="RentPeScreenStack"
+        options={{headerTitle: "Easy Loan"}}
+      /> */}
+
+      <Stack.Screen
+        component={RentHome}
+        name="RentHome"
+        options={{
+          headerTitle: "RentPe Home",
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        component={AddRentDetails}
+        name="AddRentDetails"
+        options={{
+          headerTitle: "Owener Info",
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        component={RentAgreement}
+        name="RentAgreement"
+        options={{
+          headerTitle: "Owener Info",
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        component={RentPanUpload}
+        name="RentPanUpload"
+        options={{
+          headerTitle: "Owener Info",
+          headerShown: true,
+        }}
+      />
     </Stack.Navigator>
   );
 };
+// const RentPeScreenStack = () => {
+//   return (
+//     <Stack.Navigator
+//       cardShadowEnabled
+//       screenOptions={{
+//         headerTitleAlign: "center",
+//         headerStyle: {
+//           backgroundColor: "#0A5AC9",
+//         },
+//         // headerTitle: "Easy Loan",
+//         headerTintColor: "#fff",
+//         headerTitleStyle: {
+//           fontWeight: "bold",
+//         },
+//       }}>
+//       <Stack.Screen
+//         component={RentHome}
+//         name="RentHome"
+//         options={{
+//           headerTitle: "RentPe Home",
+//           headerShown: false,
+//         }}
+//       />
+//     </Stack.Navigator>
+//   );
+// };
 const LoanScreenStack = () => {
   return (
     <Stack.Navigator
