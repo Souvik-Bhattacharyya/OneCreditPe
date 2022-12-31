@@ -41,6 +41,13 @@ import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
 import CusSupProfile from "./CusSupProfile";
 import Picture from "./loanSection/picture";
 import PanDetails from "./loanSection/PanDetails";
+
+//rentPe
+
+import RentHome from "./RentPe/rentHome";
+import AddRentDetails from "./RentPe/addRentDetails";
+import RentAgreement from "./RentPe/rentAgreement";
+import RentPanUpload from "./RentPe/rentPanUpload";
 export {
   Login,
   OtpScreen,
@@ -84,5 +91,9 @@ export {
   AddAdhaarDetails,
   CusSupProfile,
   Picture,
-  PanDetails
+  PanDetails,
+  RentHome,
+  AddRentDetails,
+  RentAgreement,
+  RentPanUpload,
 };
