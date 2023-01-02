@@ -1,9 +1,30 @@
 import React, {useState} from "react";
-import {View, Text, TouchableOpacity} from "react-native";
+import {View, Text, TouchableOpacity, Image} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
+import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
 const rentAgreement = () => {
   const navigation = useNavigation();
+  const [picture, setPicture] = useState(null);
+  const [savedImage, setSavedImage] = useState(null);
+
+  const uploadImage = async () => {
+    try {
+      const image = await DocumentPicker.pick({
+        presentationStyle: "fullScreen",
+        type: [types.images],
+      });
+      setPicture({name: image[0].name, uri: image[0].uri, type: image[0].type});
+      setSavedImage({
+        name: image[0].name,
+        uri: image[0].uri,
+        type: image[0].type,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <View
@@ -15,20 +36,37 @@ const rentAgreement = () => {
           justifyContent: "center",
         }}>
         <TouchableOpacity
+          onPress={() => uploadImage()}
           style={{
             width: "90%",
             height: "60%",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: 20,
+            // borderRadius: 20,
             borderWidth: 1,
+            borderColor: "#c6c6c6",
             backgroundColor: "#fff",
           }}>
-          <Icon name="file-plus" color={"#0A5AC9"} size={40} />
-          <Text style={{fontSize: 20, fontWeight: "bold", padding: 10}}>
-            Upload Agreement
-          </Text>
+          {savedImage ? (
+            <Image
+              style={{
+                width: "100%",
+                height: "100%",
+                resizeMode: "cover",
+                zIndex: 100,
+              }}
+              progressiveRenderingEnabled={true}
+              source={savedImage && {uri: savedImage.uri}}
+            />
+          ) : (
+            <>
+              <Icon name="file-plus" color={"#0A5AC9"} size={40} />
+              <Text style={{fontSize: 20, fontWeight: "bold", padding: 10}}>
+                Upload Agreement
+              </Text>
+            </>
+          )}
         </TouchableOpacity>
         <View
           style={{
@@ -63,7 +101,7 @@ const rentAgreement = () => {
             style={{
               width: "40%",
               borderRadius: 20,
-              backgroundColor: "#0A5AC9",
+              backgroundColor: "#737171",
               padding: 10,
               marginTop: 100,
             }}>

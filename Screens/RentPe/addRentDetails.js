@@ -38,7 +38,7 @@ const addRentDetails = () => {
       <SafeAreaView>
         <ScrollView>
           <View style={{margin: 12}}>
-            <Text>Name</Text>
+            <Text>Name </Text>
             <View
               style={{
                 height: 40,
@@ -46,6 +46,7 @@ const addRentDetails = () => {
                 flexDirection: "row",
                 alignItems: "center",
                 borderWidth: 1,
+                borderColor: "#7C7C7D",
                 marginTop: 10,
               }}>
               <TextInput
@@ -74,7 +75,8 @@ const addRentDetails = () => {
               style={{
                 height: 40,
                 borderWidth: 1,
-                padding: 10,
+                borderColor: "#7C7C7D",
+                paddingHorizontal: 10,
                 marginTop: 10,
               }}
               placeholder="Enter Owener Address"
@@ -92,12 +94,14 @@ const addRentDetails = () => {
                 flexDirection: "row",
                 alignItems: "center",
                 borderWidth: 1,
+                borderColor: "#7C7C7D",
                 marginTop: 10,
               }}>
               <Text
                 style={{
                   width: "90%",
                   paddingHorizontal: 10,
+                  color: "#7C7C7D",
                 }}>
                 00-00-0000
               </Text>
@@ -125,12 +129,14 @@ const addRentDetails = () => {
                 flexDirection: "row",
                 alignItems: "center",
                 borderWidth: 1,
+                borderColor: "#7C7C7D",
                 marginTop: 10,
               }}>
               <Text
                 style={{
                   width: "90%",
                   paddingHorizontal: 10,
+                  color: "#7C7C7D",
                 }}>
                 00-00-0000
               </Text>
@@ -155,10 +161,11 @@ const addRentDetails = () => {
               style={{
                 height: 40,
                 borderWidth: 1,
+                borderColor: "#7C7C7D",
                 padding: 10,
                 marginTop: 10,
               }}
-              placeholder="Enter Amount"
+              placeholder="₹ Enter Amount"
               // value={number}
               // onChangeText={onChangeNumber}
               keyboardType="numeric"
@@ -171,12 +178,13 @@ const addRentDetails = () => {
               style={{
                 height: 40,
                 borderWidth: 1,
+                borderColor: "#7C7C7D",
                 padding: 10,
                 marginTop: 10,
               }}
               // value={number}
               // onChangeText={onChangeNumber}
-              placeholder="Enter Amount"
+              placeholder="₹ Enter Amount"
               keyboardType="numeric"
             />
           </View>

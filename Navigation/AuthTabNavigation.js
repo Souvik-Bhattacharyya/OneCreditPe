@@ -48,6 +48,10 @@ import {
   AddRentDetails,
   RentAgreement,
   RentPanUpload,
+  MonthPeDetails,
+  RentPeMode,
+  RentPeSuccess,
+  ShowRentDetails,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 // import PanDetails from "../Screens/loanSection/PanDetails";
@@ -291,6 +295,41 @@ const HomeScreenStack = () => {
         name="RentPanUpload"
         options={{
           headerTitle: "Owener Info",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        component={MonthPeDetails}
+        name="MonthPeDetails"
+        options={{
+          headerTitle: "Month's Payment Details",
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        component={RentPeMode}
+        name="RentPeMode"
+        options={{
+          headerTitle: "RentPe",
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        component={RentPeSuccess}
+        name="RentPeSuccess"
+        options={{
+          headerTitle: "RentPe",
+          headerShown: true,
+        }}
+      />
+
+      <Stack.Screen
+        component={ShowRentDetails}
+        name="ShowRentDetails"
+        options={{
+          headerTitle: "RentPe",
           headerShown: true,
         }}
       />

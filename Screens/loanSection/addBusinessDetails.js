@@ -18,15 +18,11 @@ const AddBusinessDetails = ({navigation, route}) => {
   useEffect(() => {
     setBusinessDetails({
       ...businessDetails,
-      // bns_name: userData.bns_name,
       bns_address: userData.bns_address,
       bns_type: userData.bns_type,
       gstin_no: userData.gstin_no,
     });
   }, [userData]);
-  // console.log("----------->", route.params?.businessId);
-  console.log("-------->", userData);
-  console.log("----------->", businessDetails);
 
   const updateBusinessDetails = async () => {
     try {
