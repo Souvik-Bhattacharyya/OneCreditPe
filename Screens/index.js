@@ -48,6 +48,10 @@ import RentHome from "./RentPe/rentHome";
 import AddRentDetails from "./RentPe/addRentDetails";
 import RentAgreement from "./RentPe/rentAgreement";
 import RentPanUpload from "./RentPe/rentPanUpload";
+import MonthPeDetails from "./RentPe/monthPeDetails";
+import RentPeMode from "./RentPe/rentPeMode";
+import RentPeSuccess from "./RentPe/rentPeSuccess";
+import ShowRentDetails from "./RentPe/showRentDetails";
 export {
   Login,
   OtpScreen,
@@ -96,4 +100,8 @@ export {
   AddRentDetails,
   RentAgreement,
   RentPanUpload,
+  MonthPeDetails,
+  RentPeMode,
+  RentPeSuccess,
+  ShowRentDetails,
 };

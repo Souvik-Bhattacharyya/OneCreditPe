@@ -15,7 +15,7 @@ const BusinessBank = ({navigation}) => {
 
   const [bankDetails, setBankDetails] = useState({});
   const [businessDetails, setBusinessDetails] = useState({});
-  console.log("===============================>", UserDetails.business);
+  // console.log("===============================>", UserDetails.business);
   useEffect(() => {
     getBankDetails();
   }, []);
@@ -57,9 +57,9 @@ const BusinessBank = ({navigation}) => {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("AddBankDetails", {
-                  businessId: UserDetails.business.id,
+                  businessId: bankDetails.id,
                   bankInfo: bankDetails,
-                  getBankDetails: getBankDetails,
+                  // getBankDetails: getBankDetails,
                 })
               }>
               <UpdateIcon
@@ -146,7 +146,7 @@ const BusinessBank = ({navigation}) => {
             <TouchableOpacity
               onPress={() =>
                 navigation.navigate("AddBusinessDetails", {
-                  businessId: UserDetails.business.id,
+                  businessId: businessDetails.id,
                 })
               }>
               <UpdateIcon
