@@ -68,9 +68,14 @@ const rentHome = () => {
           paddingVertical: 5,
           alignItems: "center",
           borderRadius: 50,
-        }}
-        onPress={showDatepicker}>
-        <DatePickerIcon name="calendar" color={"#828282"} size={24} />
+        }}>
+        {/* <DatePickerIcon name="calendar" color={"#828282"} size={24} /> */}
+        <Icon
+          name="calendar"
+          color="#0A5AC9"
+          size={16}
+          style={{marginVertical: 8}}
+        />
       </TouchableOpacity>
       <TouchableOpacity>
         <Icon
@@ -118,9 +123,15 @@ const rentHome = () => {
           paddingVertical: 5,
           alignItems: "center",
           borderRadius: 50,
-        }}
-        onPress={showDatepicker}>
-        <DatePickerIcon name="calendar" color={"#828282"} size={24} />
+        }}>
+        {/* <DatePickerIcon name="calendar" color={"#828282"} size={24} /> */}
+
+        <Icon
+          name="calendar"
+          color="#0A5AC9"
+          size={16}
+          style={{marginVertical: 8}}
+        />
       </TouchableOpacity>
       <TouchableOpacity>
         <Icon
