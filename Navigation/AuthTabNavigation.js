@@ -52,6 +52,9 @@ import {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
+  SelectLoanAmountAndInterest,
+  Success,
+  NotWorking,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 // import PanDetails from "../Screens/loanSection/PanDetails";
@@ -254,7 +257,7 @@ const HomeScreenStack = () => {
       <Stack.Screen
         component={LoanScreenStack}
         name="LoanScreenStack"
-        options={{headerTitle: "Easy Loan"}}
+        options={{headerTitle: "Easy Loan", headerShown: false}}
       />
 
       {/* <Stack.Screen
@@ -381,16 +384,16 @@ const LoanScreenStack = () => {
         component={Loan}
         name="EasyLoan"
         options={{
-          headerTitle: "Easy Loan",
-          headerShown: false,
+          headerTitle: "Loan Section",
+          headerShown: true,
         }}
       />
       <Stack.Screen
         component={LoanDetails}
         name="LoanDetails"
         options={{
-          headerTitle: "Loan Details",
-          headerShown: false,
+          headerTitle: "Loan Section",
+          headerShown: true,
         }}
       />
       <Stack.Screen
@@ -423,7 +426,7 @@ const LoanScreenStack = () => {
         name="AddPicture"
         options={{
           headerTitle: "Add Your Picture",
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen
@@ -431,11 +434,35 @@ const LoanScreenStack = () => {
         name="AddAdhaarDetails"
         options={{
           headerTitle: "Add Your Aaddhar",
-          headerShown: false,
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        component={SelectLoanAmountAndInterest}
+        name="SelectLoanAmountAndInterest"
+        options={{
+          headerTitle: "Select Loan Amount and Interest",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        component={Success}
+        name="Success"
+        options={{
+          headerTitle: "Documents Submitted",
+          headerShown: true,
+        }}
+      />
+      <Stack.Screen
+        component={NotWorking}
+        name="NotWorking"
+        options={{
+          headerTitle: "Documents Not Submitted",
+          headerShown: true,
         }}
       />
       {/* <Stack.Screen component={SetCollectionDate} name="Set Collection Date" /> */}
-      <Stack.Screen component={CommonHeader} name="CommonHeader" />
+      {/* <Stack.Screen component={CommonHeader} name="CommonHeader" /> */}
     </Stack.Navigator>
   );
 };

@@ -15,7 +15,6 @@ const AddAdhaarDetails = ({navigation}) => {
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
 
-
   useEffect(() => {
     if (user?.aadhar_image) {
       setSavedImage({
@@ -29,7 +28,7 @@ const AddAdhaarDetails = ({navigation}) => {
       setSavedImage(null);
     }
   }, [user]);
-  
+
   const UpdateAadharDetails = async () => {
     try {
       const formData = new FormData();
@@ -76,11 +75,10 @@ const AddAdhaarDetails = ({navigation}) => {
     <View
       style={{
         width: "100%",
-        backgroundColor: "#D2D2D2",
+        backgroundColor: "#F7FBFF",
       }}>
       <View
         style={{
-          backgroundColor: "#FFFFFF",
           paddingHorizontal: 10,
           height: "100%",
         }}>
@@ -123,12 +121,12 @@ const AddAdhaarDetails = ({navigation}) => {
             marginTop: 10,
             borderRadius: 5,
             borderColor: "#c6c6c6",
-            borderWidth: 0.8,
+            borderWidth: 1,
             alignItems: "center",
             height: 200,
-            // width: 400,
             justifyContent: "center",
             alignItems: "center",
+            borderStyle: "dotted",
           }}>
           {savedImage ? (
             <Image
@@ -147,7 +145,10 @@ const AddAdhaarDetails = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        onPress={() => UpdateAadharDetails()}
+        onPress={() => {
+          UpdateAadharDetails(),
+            navigation.navigate("SelectLoanAmountAndInterest");
+        }}
         style={{
           width: "95%",
           backgroundColor: "#0A5AC9",

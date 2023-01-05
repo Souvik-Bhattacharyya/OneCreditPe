@@ -29,6 +29,8 @@ import Faq from "./Settings/faq";
 import Ans from "./Settings/ans";
 import InviteFriendModal from "../Components/InviteFriendModal";
 import SnackBar from "../Components/SnackBar";
+
+//loan
 import LoanSection from "../Screens/loanSection/Loan";
 import LoanDetails from "./loanSection/loanDetails";
 import AddDetails from "./loanSection/addDetails";
@@ -41,9 +43,10 @@ import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
 import CusSupProfile from "./CusSupProfile";
 import Picture from "./loanSection/picture";
 import PanDetails from "./loanSection/PanDetails";
-
+import SelectLoanAmountAndInterest from "./loanSection/SelectLoanAmountAndInterest";
+import Success from "./loanSection/Success";
+import NotWorking from "./loanSection/NotWorking";
 //rentPe
-
 import RentHome from "./RentPe/rentHome";
 import AddRentDetails from "./RentPe/addRentDetails";
 import RentAgreement from "./RentPe/rentAgreement";
@@ -104,4 +107,7 @@ export {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
+  SelectLoanAmountAndInterest,
+  Success,
+  NotWorking,
 };
