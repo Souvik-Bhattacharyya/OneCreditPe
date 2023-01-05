@@ -20,8 +20,12 @@ const LoanDetails = ({navigation}) => {
         <View
           style={{
             marginTop: 10,
+            alignSelf: "center",
           }}>
-          <Image source={require("../../Assets/loanDetails.png")} />
+          <Image
+            source={require("../../Assets/loanDetails.png")}
+            style={{height: 170, width: 350, borderRadius: 10}}
+          />
         </View>
         <View
           style={{
@@ -30,6 +34,7 @@ const LoanDetails = ({navigation}) => {
             height: "100%",
             borderTopEndRadius: 20,
             borderTopStartRadius: 20,
+            marginTop: 20,
           }}>
           <Text style={{marginTop: 10, color: "#0A5AC9", fontSize: 16}}>
             Enter Business Details

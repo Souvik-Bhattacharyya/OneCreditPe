@@ -493,7 +493,7 @@ const CustomerHome = ({route}) => {
               </View>
             </View>
             {/* Loan */}
-            {/* <View
+            <View
               style={[
                 styles.shadow,
                 {
@@ -535,7 +535,7 @@ const CustomerHome = ({route}) => {
                   </Text>
                 </TouchableOpacity>
               </View>
-            </View> */}
+            </View>
           </ScrollView>
         </View>
       </ImageBackground>
