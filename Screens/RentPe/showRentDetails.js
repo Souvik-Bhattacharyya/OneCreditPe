@@ -10,7 +10,7 @@ import {
 import {Divider} from "react-native-paper";
 import Icon from "react-native-vector-icons/AntDesign";
 
-const showRentDetails = () => {
+const ShowRentDetails = () => {
   return (
     <>
       <Text
@@ -24,7 +24,7 @@ const showRentDetails = () => {
         }}>
         Owener Info
       </Text>
-      <SafeAreaView style={{paddingVertical: 35, paddingHorizontal: 15}}>
+      <SafeAreaView style={{paddingVertical: 20, paddingHorizontal: 15}}>
         <ScrollView>
           <Text style={styles.text}>Name</Text>
           <Text style={{paddingVertical: 5}}>Ankita Santra</Text>
@@ -164,7 +164,7 @@ const showRentDetails = () => {
             style={{
               textAlign: "justify",
               //   paddingHorizontal: 20,
-              paddingVertical: 5,
+              paddingBottom: 40,
             }}>
             01234567809
           </Text>
@@ -176,7 +176,7 @@ const showRentDetails = () => {
   );
 };
 
-export default showRentDetails;
+export default ShowRentDetails;
 
 const styles = StyleSheet.create({
   text: {

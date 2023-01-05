@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity, Image} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
-const rentAgreement = () => {
+const RentAgreement = () => {
   const navigation = useNavigation();
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
@@ -121,4 +121,4 @@ const rentAgreement = () => {
   );
 };
 
-export default rentAgreement;
+export default RentAgreement;

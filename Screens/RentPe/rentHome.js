@@ -12,7 +12,7 @@ import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
 
-const rentHome = () => {
+const RentHome = () => {
   const navigation = useNavigation();
   const [date, setDate] = useState(new Date());
   const showDatepicker = () => {
@@ -33,7 +33,7 @@ const rentHome = () => {
     });
   };
 
-  const homeRent = () => (
+  const HomeRent = () => (
     <View
       style={{
         width: "95%",
@@ -61,19 +61,19 @@ const rentHome = () => {
       </View>
 
       <TouchableOpacity
-        style={{
-          height: 40,
-          width: 40,
-          // backgroundColor: "#fff",
-          paddingVertical: 5,
-          alignItems: "center",
-          borderRadius: 50,
-        }}>
-        {/* <DatePickerIcon name="calendar" color={"#828282"} size={24} /> */}
+      // style={{
+      //   height: 40,
+      //   width: 40,
+      //   // backgroundColor: "#fff",
+      //   paddingVertical: 5,
+      //   alignItems: "center",
+      //   borderRadius: 50,
+      // }}
+      >
         <Icon
           name="calendar"
           color="#0A5AC9"
-          size={16}
+          size={15}
           style={{marginVertical: 8}}
         />
       </TouchableOpacity>
@@ -88,7 +88,7 @@ const rentHome = () => {
     </View>
   );
 
-  const carRent = () => (
+  const CarRent = () => (
     <View
       style={{
         width: "95%",
@@ -116,20 +116,19 @@ const rentHome = () => {
       </View>
 
       <TouchableOpacity
-        style={{
-          height: 40,
-          width: 40,
-          // backgroundColor: "#fff",
-          paddingVertical: 5,
-          alignItems: "center",
-          borderRadius: 50,
-        }}>
-        {/* <DatePickerIcon name="calendar" color={"#828282"} size={24} /> */}
-
+      // style={{
+      //   height: 40,
+      //   width: 40,
+      //   // backgroundColor: "#fff",
+      //   paddingVertical: 5,
+      //   alignItems: "center",
+      //   borderRadius: 50,
+      // }}
+      >
         <Icon
           name="calendar"
           color="#0A5AC9"
-          size={16}
+          size={15}
           style={{marginVertical: 8}}
         />
       </TouchableOpacity>
@@ -171,17 +170,17 @@ const rentHome = () => {
       </Text>
       <SafeAreaView style={{height: "50%"}}>
         <ScrollView>
-          {homeRent()}
-          {homeRent()}
-          {homeRent()}
-          {carRent()}
-          {carRent()}
-          {carRent()}
+          <HomeRent />
+          <HomeRent />
+          <CarRent />
+          <CarRent />
+          <HomeRent />
         </ScrollView>
       </SafeAreaView>
 
       <TouchableOpacity
         onPress={() => navigation.navigate("AddRentDetails")}
+        // onPress={() => navigation.navigate("MonthlyRent")}
         style={{
           width: "40%",
           display: "flex",
@@ -206,4 +205,4 @@ const rentHome = () => {
   );
 };
 
-export default rentHome;
+export default RentHome;
