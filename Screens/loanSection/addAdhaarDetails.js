@@ -145,10 +145,7 @@ const AddAdhaarDetails = ({navigation}) => {
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        onPress={() => {
-          UpdateAadharDetails(),
-            navigation.navigate("SelectLoanAmountAndInterest");
-        }}
+        onPress={() => UpdateAadharDetails()}
         style={{
           width: "95%",
           backgroundColor: "#0A5AC9",

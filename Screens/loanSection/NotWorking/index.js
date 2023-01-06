@@ -1,7 +1,7 @@
 import {View, Text, Image, TouchableOpacity} from "react-native";
 import React from "react";
 
-const NotWorking = () => {
+const NotWorking = ({navigation}) => {
   return (
     <View>
       <Text
@@ -29,7 +29,7 @@ const NotWorking = () => {
       />
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate("NotWorking");
+          navigation.navigate("EasyLoan");
         }}
         style={{
           width: "95%",

@@ -77,17 +77,17 @@ const AddDetails = ({navigation}) => {
             style={{height: 50, width: 50}}
           />
           <TouchableOpacity
-              onPress={() => navigation.navigate("AddPanDetails")}>
-              <Text
-                style={{
-                  color: "#0A5AC9",
-                  fontFamily: "Roboto",
-                  fontWeight: "bold",
-                  fontSize: 14,
-                }}>
-                Add Pan Details
-              </Text>
-            </TouchableOpacity>
+            onPress={() => navigation.navigate("AddPanDetails")}>
+            <Text
+              style={{
+                color: "#0A5AC9",
+                fontFamily: "Roboto",
+                fontWeight: "bold",
+                fontSize: 14,
+              }}>
+              Add Pan Details
+            </Text>
+          </TouchableOpacity>
           <Text style={{fontSize: 9}}>Add your bank details here to</Text>
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
@@ -192,7 +192,7 @@ const AddDetails = ({navigation}) => {
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
       </View> */}
-      
+
       {/* <View
         style={{
           width: "46%",
@@ -227,6 +227,29 @@ const AddDetails = ({navigation}) => {
           <Text style={{fontSize: 9}}>transfer the money</Text>
         </View>
       </View> */}
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate("SelectLoanAmountAndInterest");
+        }}
+        style={{
+          width: "95%",
+          backgroundColor: "#0A5AC9",
+          justifyContent: "center",
+          borderRadius: 20,
+          flexDirection: "row",
+          position: "absolute",
+          bottom: 40,
+          alignSelf: "center",
+        }}>
+        <Text
+          style={{
+            fontSize: 15,
+            color: "#FFFFFF",
+            margin: 10,
+          }}>
+          Next
+        </Text>
+      </TouchableOpacity>
     </View>
     // </View>
   );
