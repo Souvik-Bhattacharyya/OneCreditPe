@@ -112,11 +112,8 @@ export {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
-<<<<<<< HEAD
   SelectLoanAmountAndInterest,
   Success,
   NotWorking,
-=======
   MonthlyRent,
->>>>>>> 940dae4e579b5b2d7fa577e4b244437f7ba2e0e9
 };
