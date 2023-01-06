@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -13,13 +13,13 @@ import Icon from "react-native-vector-icons/FontAwesome5";
 import IconLow from "react-native-vector-icons/FontAwesome";
 import Help from "react-native-vector-icons/Entypo";
 import Faq from "react-native-vector-icons/MaterialCommunityIcons";
-import { List } from "react-native-paper";
+import {List} from "react-native-paper";
 import metrics from "../../Constants/metrics";
-import { useNavigation } from "@react-navigation/native";
+import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
 import InviteFriendModal from "../../Components/InviteFriendModal";
-import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../../Redux/Action/authActions";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../../Redux/Action/authActions";
 import KycIcon from "react-native-vector-icons/Entypo";
 const Width = Dimensions.get("window").width;
 const Height = Dimensions.get("window").height;
@@ -120,7 +120,7 @@ const Settings = () => {
               }}>
               {user.name}
             </Text>
-            <Text style={{ textAlign: "center", fontSize: 16, color: "#828282" }}>
+            <Text style={{textAlign: "center", fontSize: 16, color: "#828282"}}>
               +91 {user.mobile}
             </Text>
           </View>
@@ -142,7 +142,7 @@ const Settings = () => {
               )}>
               <List.Item
                 title="Language Options"
-                theme={{ colors: { text: "#464555" } }}
+                theme={{colors: {text: "#464555"}}}
                 style={styles.items}
                 onPress={() => alert("In Progress")}
                 left={props => (
@@ -150,7 +150,7 @@ const Settings = () => {
                     name="language"
                     size={18}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
                 right={props => (
@@ -158,13 +158,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
               />
               <List.Item
                 title="Log Out"
-                theme={{ colors: { text: "#464555" } }}
+                theme={{colors: {text: "#464555"}}}
                 style={styles.items}
                 onPress={() => {
                   dispatch(logout());
@@ -174,7 +174,7 @@ const Settings = () => {
                     name="log-out"
                     size={18}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
                 right={props => (
@@ -182,7 +182,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
               />
@@ -204,7 +204,7 @@ const Settings = () => {
               )}>
               <List.Item
                 title="FAQ Listing"
-                theme={{ colors: { text: "#464555" } }}
+                theme={{colors: {text: "#464555"}}}
                 style={styles.items}
                 onPress={() => navigation.navigate("faq")}
                 right={props => (
@@ -212,7 +212,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
                 left={props => (
@@ -220,13 +220,13 @@ const Settings = () => {
                     name="comment-question"
                     size={18}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
               />
               <List.Item
                 title="Chat with us"
-                theme={{ colors: { text: "#464555" } }}
+                theme={{colors: {text: "#464555"}}}
                 style={styles.items}
                 onPress={() =>
                   Linking.openURL(
@@ -238,7 +238,7 @@ const Settings = () => {
                     name="message"
                     size={18}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
                 right={props => (
@@ -246,13 +246,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
               />
               <List.Item
                 title="Call Us"
-                theme={{ colors: { text: "#464555" } }}
+                theme={{colors: {text: "#464555"}}}
                 style={styles.items}
                 onPress={() => openDialScreen()}
                 left={props => (
@@ -260,7 +260,7 @@ const Settings = () => {
                     name="phone"
                     size={18}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
                 right={props => (
@@ -268,7 +268,29 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
+                  />
+                )}
+              />
+              <List.Item
+                title="Raise a ticket"
+                theme={{colors: {text: "#464555"}}}
+                style={styles.items}
+                onPress={() => navigation.navigate("RaiseTicket")}
+                // left={props => (
+                //   <Icon
+                //     name="phone"
+                //     size={18}
+                //     color={"#464555"}
+                //     style={{alignSelf: "center"}}
+                //   />
+                // )}
+                right={props => (
+                  <Icon
+                    name="arrow-right"
+                    size={14}
+                    color={"#464555"}
+                    style={{alignSelf: "center"}}
                   />
                 )}
               />
@@ -290,8 +312,8 @@ const Settings = () => {
               )}>
               <List.Item
                 title="Privacy Policy"
-                theme={{ colors: { text: "#464555" } }}
-                style={[styles.items, { paddingLeft: 35 }]}
+                theme={{colors: {text: "#464555"}}}
+                style={[styles.items, {paddingLeft: 35}]}
                 onPress={() => {
                   navigation.navigate("Privacy And Policy");
                 }}
@@ -300,7 +322,7 @@ const Settings = () => {
                     name="file-account"
                     size={20}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
                 right={props => (
@@ -308,13 +330,13 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
               />
               <List.Item
                 title="Terms And Conditions"
-                theme={{ colors: { text: "#464555" } }}
+                theme={{colors: {text: "#464555"}}}
                 style={styles.items}
                 onPress={() => {
                   navigation.navigate("Terms And Conditions");
@@ -324,7 +346,7 @@ const Settings = () => {
                     name="file-contract"
                     size={18}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
                 right={props => (
@@ -332,7 +354,7 @@ const Settings = () => {
                     name="arrow-right"
                     size={14}
                     color={"#464555"}
-                    style={{ alignSelf: "center" }}
+                    style={{alignSelf: "center"}}
                   />
                 )}
               />
@@ -393,7 +415,7 @@ const Settings = () => {
               marginVertical: metrics.verticalScale(10),
               borderWidth: 1,
               borderColor: "#c9c9c9",
-              paddingVertical: 10
+              paddingVertical: 10,
             }}>
             <Image
               source={require("../../Assets/Images/kyc.png")}

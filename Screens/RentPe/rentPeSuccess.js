@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
 
-const rentPeSuccess = () => {
+const RentPeSuccess = () => {
   const navigation = useNavigation();
   return (
     <>
@@ -30,7 +30,7 @@ const rentPeSuccess = () => {
             fontWeight: "600",
             padding: 10,
           }}>
-          Payment Completed Successfully
+          Rent Details Successfully Added
         </Text>
       </View>
       <TouchableOpacity
@@ -50,4 +50,4 @@ const rentPeSuccess = () => {
   );
 };
 
-export default rentPeSuccess;
+export default RentPeSuccess;

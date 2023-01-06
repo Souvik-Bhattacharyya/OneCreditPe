@@ -12,7 +12,7 @@ import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
 
-const addRentDetails = () => {
+const AddRentDetails = () => {
   const navigation = useNavigation();
   const [date, setDate] = useState(new Date());
   const showDatepicker = () => {
@@ -67,6 +67,23 @@ const addRentDetails = () => {
                 <Icon name="contacts" color={"#0A5AC9"} size={16} />
               </TouchableOpacity>
             </View>
+          </View>
+
+          <View style={{margin: 12}}>
+            <Text>Mobile </Text>
+
+            <TextInput
+              style={{
+                height: 40,
+                borderWidth: 1,
+                borderColor: "#7C7C7D",
+                paddingHorizontal: 12,
+                marginTop: 10,
+              }}
+              placeholder="Enter Owener Name"
+              // value={number}
+              // onChangeText={onChangeNumber}
+            />
           </View>
 
           <View style={{margin: 12}}>
@@ -214,4 +231,4 @@ const addRentDetails = () => {
   );
 };
 
-export default addRentDetails;
+export default AddRentDetails;

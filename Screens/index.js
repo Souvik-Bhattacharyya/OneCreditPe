@@ -27,6 +27,8 @@ import UserProfile from "./Settings/userProfile";
 import LanguageScreen from "./Settings/LanguageScreen";
 import Faq from "./Settings/faq";
 import Ans from "./Settings/ans";
+import RaiseTicket from "./Settings/raiseTicket";
+import ViewAllTickets from "./Settings/viewAllTickets";
 import InviteFriendModal from "../Components/InviteFriendModal";
 import SnackBar from "../Components/SnackBar";
 
@@ -55,6 +57,7 @@ import MonthPeDetails from "./RentPe/monthPeDetails";
 import RentPeMode from "./RentPe/rentPeMode";
 import RentPeSuccess from "./RentPe/rentPeSuccess";
 import ShowRentDetails from "./RentPe/showRentDetails";
+import MonthlyRent from "./RentPe/monthlyRent";
 export {
   Login,
   OtpScreen,
@@ -87,6 +90,8 @@ export {
   Faq,
   InviteFriendModal,
   Ans,
+  RaiseTicket,
+  ViewAllTickets,
   SnackBar,
   LoanDetails,
   AddDetails,
@@ -107,7 +112,11 @@ export {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
+<<<<<<< HEAD
   SelectLoanAmountAndInterest,
   Success,
   NotWorking,
+=======
+  MonthlyRent,
+>>>>>>> 940dae4e579b5b2d7fa577e4b244437f7ba2e0e9
 };

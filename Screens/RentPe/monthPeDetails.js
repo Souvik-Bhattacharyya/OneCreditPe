@@ -14,12 +14,13 @@ import Icon2 from "react-native-vector-icons/AntDesign";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
 
-const monthPeDetails = () => {
+const MonthPeDetails = () => {
   const navigation = useNavigation();
   const [addMore, setAddMore] = useState(0);
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
-  console.log("==========>", addMore);
+  const [billInfo, setBillInfo] = useState([{amount: 0, description: ""}]);
+  console.log("==========>", billInfo);
   const uploadImage = async () => {
     try {
       const image = await DocumentPicker.pick({
@@ -37,7 +38,7 @@ const monthPeDetails = () => {
     }
   };
 
-  const moreInfo = () => (
+  const MoreInfo = ({amount, description, id}) => (
     <>
       <Divider
         style={{
@@ -49,7 +50,16 @@ const monthPeDetails = () => {
       />
       <View style={{marginHorizontal: 20, backgroundColor: "#fff"}}>
         <TextInput
+          value={amount}
           placeholder="Amount (₹)"
+          // onChangeText={val => {
+          //   billInfo.forEach((bill, index) => {
+          //     if (index === id) {
+          //       bill.amount = val;
+          //     }
+          //   });
+          //   setBillInfo(billInfo);
+          // }}
           style={{
             borderWidth: 1,
             borderColor: "#c6c6c6",
@@ -58,7 +68,17 @@ const monthPeDetails = () => {
           }}
         />
         <TextInput
+          value={description}
           placeholder="Description"
+          // onChangeText={val => {
+          //   const temp = billInfo.map((bill, index) => {
+          //     if (index === id) {
+          //       bill.description = val;
+          //     }
+          //     return bill;
+          //   });
+          //   setBillInfo(temp);
+          // }}
           style={{
             borderWidth: 1,
             borderColor: "#c6c6c6",
@@ -115,10 +135,14 @@ const monthPeDetails = () => {
               )}
             </TouchableOpacity>
           </View>
-          {moreInfo()}
-          {/* {moreInfo()}
-          {moreInfo()}
-          {moreInfo()} */}
+          {billInfo.map((val, index) => (
+            <MoreInfo
+              amount={val.amount}
+              description={val.description}
+              id={index}
+              key={index}
+            />
+          ))}
         </ScrollView>
       </SafeAreaView>
       <TouchableOpacity
@@ -166,4 +190,4 @@ const monthPeDetails = () => {
   );
 };
 
-export default monthPeDetails;
+export default MonthPeDetails;

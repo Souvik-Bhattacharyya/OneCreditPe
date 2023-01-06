@@ -52,9 +52,15 @@ import {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
+<<<<<<< HEAD
   SelectLoanAmountAndInterest,
   Success,
   NotWorking,
+=======
+  MonthlyRent,
+  RaiseTicket,
+  ViewAllTickets,
+>>>>>>> 940dae4e579b5b2d7fa577e4b244437f7ba2e0e9
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 // import PanDetails from "../Screens/loanSection/PanDetails";
@@ -336,6 +342,14 @@ const HomeScreenStack = () => {
           headerShown: true,
         }}
       />
+      <Stack.Screen
+        component={MonthlyRent}
+        name="MonthlyRent"
+        options={{
+          headerTitle: "Month's Payment Details",
+          headerShown: true,
+        }}
+      />
     </Stack.Navigator>
   );
 };
@@ -505,6 +519,20 @@ const SettingsStack = () => {
         name="Ans"
         options={{
           title: "FAQ Listing Ans",
+        }}
+      />
+      <Stack.Screen
+        component={RaiseTicket}
+        name="RaiseTicket"
+        options={{
+          title: "Raise Ticket",
+        }}
+      />
+      <Stack.Screen
+        component={ViewAllTickets}
+        name="ViewAllTickets"
+        options={{
+          title: "All Tickets",
         }}
       />
       <Stack.Screen
