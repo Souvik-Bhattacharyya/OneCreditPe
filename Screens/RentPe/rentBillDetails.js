@@ -14,7 +14,7 @@ import Icon2 from "react-native-vector-icons/AntDesign";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
 
-const MonthPeDetails = () => {
+const RentBillDetails = () => {
   const navigation = useNavigation();
   const [addMore, setAddMore] = useState(0);
   const [picture, setPicture] = useState(null);
@@ -190,4 +190,4 @@ const MonthPeDetails = () => {
   );
 };
 
-export default MonthPeDetails;
+export default RentBillDetails;

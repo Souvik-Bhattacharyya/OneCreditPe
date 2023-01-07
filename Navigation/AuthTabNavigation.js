@@ -48,7 +48,7 @@ import {
   AddRentDetails,
   RentAgreement,
   RentPanUpload,
-  MonthPeDetails,
+  RentBillDetails,
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
@@ -305,8 +305,8 @@ const HomeScreenStack = () => {
         }}
       />
       <Stack.Screen
-        component={MonthPeDetails}
-        name="MonthPeDetails"
+        component={RentBillDetails}
+        name="RentBillDetails"
         options={{
           headerTitle: "Month's Payment Details",
           headerShown: true,

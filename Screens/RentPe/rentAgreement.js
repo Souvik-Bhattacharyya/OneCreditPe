@@ -1,12 +1,19 @@
-import React, {useState} from "react";
-import {View, Text, TouchableOpacity, Image} from "react-native";
+import React, {useEffect, useState} from "react";
+import {View, Text, TouchableOpacity, Image, Alert} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {updateAgreement} from "../../Redux/Action/rentActions";
+
 const RentAgreement = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const rent = useSelector(state => state.rentDetails);
+
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
+  console.log("==========>", rent);
 
   const uploadImage = async () => {
     try {
@@ -25,6 +32,14 @@ const RentAgreement = () => {
     }
   };
 
+  const uploadAgreement = () => {
+    if (picture) {
+      dispatch(updateAgreement({agreement: picture}));
+      navigation.navigate("RentPanUpload");
+    } else {
+      Alert.alert("Please Upload Agreement Or Skip");
+    }
+  };
   return (
     <>
       <View
@@ -76,7 +91,7 @@ const RentAgreement = () => {
             justifyContent: "space-around",
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate("RentPanUpload")}
+            onPress={uploadAgreement}
             style={{
               width: "40%",
               borderRadius: 20,
