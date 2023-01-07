@@ -89,7 +89,7 @@ const Loan = ({navigation}) => {
             flexDirection: "row",
           }}>
           <View>
-            <Text style={styles.cost}>Ammount</Text>
+            <Text style={styles.cost}>Amount</Text>
             <Text style={styles.subCost}>10,000-10,00,000</Text>
           </View>
           <View style={{alignItems: "flex-end"}}>

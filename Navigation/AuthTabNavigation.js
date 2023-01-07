@@ -453,6 +453,7 @@ const LoanScreenStack = () => {
         name="SelectLoanAmountAndInterest"
         options={{
           headerTitle: "Select Loan Amount and Interest",
+          headerTitleStyle: {fontSize: 18},
           headerShown: true,
         }}
       />
