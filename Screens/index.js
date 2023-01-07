@@ -45,9 +45,14 @@ import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
 import CusSupProfile from "./CusSupProfile";
 import Picture from "./loanSection/picture";
 import PanDetails from "./loanSection/PanDetails";
+<<<<<<< HEAD
 import SelectLoanAmountAndInterest from "./loanSection/SelectLoanAmountAndInterest";
 import Success from "./loanSection/Success";
 import NotWorking from "./loanSection/NotWorking";
+=======
+import AddMoney from "./AddMoney";
+
+>>>>>>> 1ef1ffbdeeb186bbfcf720748af73929d58d60a9
 //rentPe
 import RentHome from "./RentPe/rentHome";
 import AddRentDetails from "./RentPe/addRentDetails";
@@ -112,8 +117,12 @@ export {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
+<<<<<<< HEAD
   SelectLoanAmountAndInterest,
   Success,
   NotWorking,
   MonthlyRent,
+=======
+  AddMoney,
+>>>>>>> 1ef1ffbdeeb186bbfcf720748af73929d58d60a9
 };

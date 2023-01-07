@@ -500,6 +500,9 @@ const CustomerHome = () => {
                 </View>
               </View>
             </View>
+
+
+            
             {/* Loan */}
             <View
               style={[

@@ -58,6 +58,7 @@ import {
   MonthlyRent,
   RaiseTicket,
   ViewAllTickets,
+  AddMoney,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 // import PanDetails from "../Screens/loanSection/PanDetails";
@@ -344,6 +345,14 @@ const HomeScreenStack = () => {
         name="MonthlyRent"
         options={{
           headerTitle: "Month's Payment Details",
+        }}
+      />
+      {/* Wallet */}
+      <Stack.Screen
+        component={AddMoney}
+        name="AddMoney"
+        options={{
+          headerTitle: "My Wallet",
           headerShown: true,
         }}
       />
