@@ -13,7 +13,6 @@ const RentAgreement = () => {
 
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
-  console.log("==========>", rent);
 
   const uploadImage = async () => {
     try {

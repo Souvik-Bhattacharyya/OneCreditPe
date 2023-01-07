@@ -13,9 +13,12 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 import CorrectIcon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
+import {addRentDetails} from "../../Requests/rent";
+//Redux
 import {useDispatch, useSelector} from "react-redux";
-import {updateBankDetails} from "../../Redux/Action/rentActions";
-import Api from "../../Services";
+import {notify} from "../../Redux/Action/notificationActions";
+import {removeRentDetails} from "../../Redux/Action/rentActions";
+
 const RentPeMode = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -28,7 +31,7 @@ const RentPeMode = () => {
   });
   const rent = useSelector(state => state.rentDetails);
   console.log("--->", rent);
-  console.log("==================>", bankDetails);
+  // console.log("==================>", bankDetails);
 
   const uploadBankDetails = () => {
     if (bankDetails.account_holder_name === "") {
@@ -45,8 +48,6 @@ const RentPeMode = () => {
     ) {
       Alert.alert("Please Enter Account Number");
     } else {
-      // dispatch(updateBankDetails(bankDetails));
-      // navigation.navigate("RentPeSuccess");
       makePayment();
     }
   };
@@ -69,11 +70,19 @@ const RentPeMode = () => {
       formData.append("branch_name", bankDetails.branch_name);
       formData.append("ifsc_code", bankDetails.ifsc_code);
       formData.append("account_no", bankDetails.account_no);
-      console.log("------->formData", formData);
-      const response = await Api.postForm("/auth/rent-owner", formData);
-      console.log("-------------------->", response);
+
+      const responseOfAddRent = await addRentDetails(formData);
+      if (responseOfAddRent && Array.isArray(responseOfAddRent)) {
+        navigation.navigate("RentPeSuccess");
+        dispatch(removeRentDetails());
+        dispatch(notify({message: responseOfAddRent.message, type: "success"}));
+      }
+
+      if (typeof responseOfAddRent === "string") {
+        dispatch(notify({message: responseOfAddRent, type: "error"}));
+      }
     } catch (error) {
-      console.log(error);
+      dispatch(notify({message: error.message, type: "error"}));
     }
   };
   return (

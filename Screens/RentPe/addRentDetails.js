@@ -29,10 +29,7 @@ const AddRentDetails = () => {
     deposit_amount: null,
     advanced_amount: null,
   });
-  console.log("date", date);
 
-  console.log("=========================>", rentalDetails);
-  console.log("===========>", rent);
   const uploadRentalDetails = () => {
     if (rentalDetails.name === "") {
       Alert.alert("Please Enter your name");

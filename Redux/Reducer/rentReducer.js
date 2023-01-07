@@ -3,6 +3,7 @@ import {
   UPDATE_AGREEMENT,
   UPDATE_PAN_DETAILS,
   UPDATE_BILLS,
+  REMOVE_RENT_DETAILS,
   // UPDATE_BANK_DETAILS,
 } from "../actionTypes";
 
@@ -23,6 +24,14 @@ const rentReducer = (state = INITIAL_STATE, action) => {
       return {...state, pan_details: action.payload.panDetails};
     case UPDATE_BILLS:
       return {...state, bills: action.payload.bills};
+    case REMOVE_RENT_DETAILS:
+      return {
+        ...state,
+        rental_details: {},
+        agreement: {},
+        pan_details: {},
+        bills: {},
+      };
     // case UPDATE_BANK_DETAILS:
     //   return {...state, bank_details: action.payload.bankDetails};
     default:

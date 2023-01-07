@@ -58,10 +58,10 @@ const CustomerHome = () => {
     try {
       const responseCustomer = await UserToCustomerTransactions();
       const responseSupplier = await UserToSupplierTransactions();
-      if (responseCustomer && responseCustomer.length > 0) {
+      if (responseCustomer && Array.isArray(responseCustomer)) {
         dispatch(getCustomersTransactions({customer: responseCustomer}));
       }
-      if (responseSupplier && responseSupplier.length > 0) {
+      if (responseSupplier && Array.isArray(responseSupplier)) {
         dispatch(getSuppliersTransactions({supplier: responseSupplier}));
       }
       if (
