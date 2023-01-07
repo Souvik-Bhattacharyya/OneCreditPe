@@ -72,7 +72,7 @@ const RentPeMode = () => {
       formData.append("account_no", bankDetails.account_no);
 
       const responseOfAddRent = await addRentDetails(formData);
-      if (responseOfAddRent && Array.isArray(responseOfAddRent)) {
+      if (typeof responseOfAddRent !== "string") {
         navigation.navigate("RentPeSuccess");
         dispatch(removeRentDetails());
         dispatch(notify({message: responseOfAddRent.message, type: "success"}));
