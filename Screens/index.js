@@ -41,6 +41,7 @@ import AddAdhaarDetails from "./loanSection/addAdhaarDetails";
 import CusSupProfile from "./CusSupProfile";
 import Picture from "./loanSection/picture";
 import PanDetails from "./loanSection/PanDetails";
+import AddMoney from "./AddMoney";
 
 //rentPe
 
@@ -104,4 +105,5 @@ export {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
+  AddMoney,
 };

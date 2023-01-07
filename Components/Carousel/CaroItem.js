@@ -1,9 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import {View, Text, Image, TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import {useNavigation} from "@react-navigation/native";
 
 const CaroItem = ({item}) => {
+  console.log(item)
   const navigation = useNavigation();
   return (
     <TouchableOpacity
@@ -15,7 +16,7 @@ const CaroItem = ({item}) => {
         marginBottom: 2,
       }}
       onPress={() =>
-        item.title === "Rent Pay" && navigation.navigate("RentHome")
+        navigation.navigate(item.navigate)
       }>
       <View
         style={{

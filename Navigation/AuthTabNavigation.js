@@ -52,6 +52,7 @@ import {
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,
+  AddMoney,
 } from "../Screens";
 import Loan from "../Screens/loanSection/Loan";
 // import PanDetails from "../Screens/loanSection/PanDetails";
@@ -330,6 +331,15 @@ const HomeScreenStack = () => {
         name="ShowRentDetails"
         options={{
           headerTitle: "RentPe",
+          headerShown: true,
+        }}
+      />
+      {/* Wallet */}
+      <Stack.Screen
+        component={AddMoney}
+        name="AddMoney"
+        options={{
+          headerTitle: "My Wallet",
           headerShown: true,
         }}
       />

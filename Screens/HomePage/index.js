@@ -492,6 +492,9 @@ const CustomerHome = ({route}) => {
                 </View>
               </View>
             </View>
+
+
+            
             {/* Loan */}
             {/* <View
               style={[

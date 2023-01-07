@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  View,
-  FlatList,
-} from "react-native";
+import {View, FlatList} from "react-native";
 import CaroItem from "./CaroItem";
 
 const data = [
@@ -34,34 +31,41 @@ const data = [
   {
     id: "4",
     title: "My Reward",
-    iconName: 'gift',
+    iconName: "gift",
+    navigate: "",
   },
   {
     id: "5",
     title: "Rent Pay",
     iconName: "bank",
-  }
+    navigate: "RentHome",
+  },
+  {
+    id: "5",
+    title: "My Wallet",
+    iconName: "wallet",
+    navigate: "AddMoney",
+  },
 ];
 
 const Welcome = () => {
   return (
-    <View style={{
-      flexDirection: 'row',
-      width: '100%',
-
-    }}>
+    <View
+      style={{
+        flexDirection: "row",
+        width: "100%",
+      }}>
       <FlatList
         data={data}
-        renderItem={({ item }) => <CaroItem item={item} />}
+        renderItem={({item}) => <CaroItem item={item} />}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
         bounces={false}
-        keyExtractor={(_ , i) => String(i)}
+        keyExtractor={(_, i) => String(i)}
         numColumns={3}
       />
     </View>
   );
 };
-
 
 export default Welcome;
