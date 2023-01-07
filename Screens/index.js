@@ -53,7 +53,7 @@ import RentHome from "./RentPe/rentHome";
 import AddRentDetails from "./RentPe/addRentDetails";
 import RentAgreement from "./RentPe/rentAgreement";
 import RentPanUpload from "./RentPe/rentPanUpload";
-import MonthPeDetails from "./RentPe/monthPeDetails";
+import RentBillDetails from "./RentPe/rentBillDetails";
 import RentPeMode from "./RentPe/rentPeMode";
 import RentPeSuccess from "./RentPe/rentPeSuccess";
 import ShowRentDetails from "./RentPe/showRentDetails";
@@ -108,7 +108,7 @@ export {
   AddRentDetails,
   RentAgreement,
   RentPanUpload,
-  MonthPeDetails,
+  RentBillDetails,
   RentPeMode,
   RentPeSuccess,
   ShowRentDetails,

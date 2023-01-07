@@ -5,16 +5,52 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import {Text} from "react-native-paper";
 import DatePickerIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import {DateTimePickerAndroid} from "@react-native-community/datetimepicker";
 import Icon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
-
+import {useDispatch, useSelector} from "react-redux";
+import {updateRentalDetails} from "../../Redux/Action/rentActions";
 const AddRentDetails = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const rent = useSelector(state => state.rentDetails);
+
   const [date, setDate] = useState(new Date());
+  const [rentalDetails, setRentalDetails] = useState({
+    name: "",
+    mobile: null,
+    address: "",
+    rent_date: "2023-01-1",
+    rent_since: "2023-01-1",
+    deposit_amount: null,
+    advanced_amount: null,
+  });
+
+  const uploadRentalDetails = () => {
+    if (rentalDetails.name === "") {
+      Alert.alert("Please Enter your name");
+    } else if (rentalDetails.mobile === null) {
+      Alert.alert("Please Enter your mobile number");
+    } else if (rentalDetails.address === "") {
+      Alert.alert("Please Enter your address");
+    } else if (rentalDetails.rent_date === "") {
+      Alert.alert("Please Enter rent date");
+    } else if (rentalDetails.rent_since === "") {
+      Alert.alert("Please Enter rent since");
+    } else if (rentalDetails.deposit_amount === null) {
+      Alert.alert("Please Enter Deposit amount");
+    } else if (rentalDetails.advanced_amount === null) {
+      Alert.alert("Please Enter Advanced amount");
+    } else {
+      dispatch(updateRentalDetails({rentalDetails}));
+      navigation.navigate("RentAgreement");
+    }
+  };
+  //Date picker-------------------------------------------------------------
   const showDatepicker = () => {
     showMode("date");
   };
@@ -32,6 +68,10 @@ const AddRentDetails = () => {
       maximumDate: maximumDate,
     });
   };
+  const onChange = (event, selectedDate) => {
+    setDate(selectedDate);
+  };
+  //---------------------------------------------------------------
 
   return (
     <>
@@ -55,8 +95,10 @@ const AddRentDetails = () => {
                   paddingHorizontal: 10,
                 }}
                 placeholder="Enter Owener Name"
-                // value={number}
-                // onChangeText={onChangeNumber}
+                value={rentalDetails.name}
+                onChangeText={val =>
+                  setRentalDetails({...rentalDetails, name: val})
+                }
               />
               <TouchableOpacity
                 style={{
@@ -81,8 +123,10 @@ const AddRentDetails = () => {
                 marginTop: 10,
               }}
               placeholder="Enter Owener Name"
-              // value={number}
-              // onChangeText={onChangeNumber}
+              value={rentalDetails.mobile}
+              onChangeText={val =>
+                setRentalDetails({...rentalDetails, mobile: val})
+              }
             />
           </View>
 
@@ -97,8 +141,10 @@ const AddRentDetails = () => {
                 marginTop: 10,
               }}
               placeholder="Enter Owener Address"
-              // value={number}
-              // onChangeText={onChangeNumber}
+              value={rentalDetails.address}
+              onChangeText={val =>
+                setRentalDetails({...rentalDetails, address: val})
+              }
             />
           </View>
 
@@ -120,7 +166,9 @@ const AddRentDetails = () => {
                   paddingHorizontal: 10,
                   color: "#7C7C7D",
                 }}>
-                00-00-0000
+                {rentalDetails.rent_date
+                  ? rentalDetails.rent_date
+                  : "00-00-0000"}
               </Text>
               <TouchableOpacity
                 style={{
@@ -155,7 +203,9 @@ const AddRentDetails = () => {
                   paddingHorizontal: 10,
                   color: "#7C7C7D",
                 }}>
-                00-00-0000
+                {rentalDetails.rent_since
+                  ? rentalDetails.rent_since
+                  : "00-00-0000"}
               </Text>
               <TouchableOpacity
                 style={{
@@ -183,9 +233,11 @@ const AddRentDetails = () => {
                 marginTop: 10,
               }}
               placeholder="₹ Enter Amount"
-              // value={number}
-              // onChangeText={onChangeNumber}
               keyboardType="numeric"
+              value={rentalDetails.deposit_amount}
+              onChangeText={val =>
+                setRentalDetails({...rentalDetails, deposit_amount: val})
+              }
             />
           </View>
 
@@ -199,15 +251,17 @@ const AddRentDetails = () => {
                 padding: 10,
                 marginTop: 10,
               }}
-              // value={number}
-              // onChangeText={onChangeNumber}
               placeholder="₹ Enter Amount"
               keyboardType="numeric"
+              value={rentalDetails.advanced_amount}
+              onChangeText={val =>
+                setRentalDetails({...rentalDetails, advanced_amount: val})
+              }
             />
           </View>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("RentAgreement")}
+            onPress={uploadRentalDetails}
             style={{
               borderRadius: 20,
               backgroundColor: "#0A5AC9",

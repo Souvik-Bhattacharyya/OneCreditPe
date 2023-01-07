@@ -1,12 +1,17 @@
-import {View, Text, TextInput, TouchableOpacity, Image} from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Image,
+  Alert,
+} from "react-native";
 import React, {useEffect, useState} from "react";
 import AddIcon from "react-native-vector-icons/Ionicons";
-import {useSelector} from "react-redux";
 import Api from "../../Services";
 import DocumentPicker, {types} from "react-native-document-picker";
-import {useDispatch} from "react-redux";
-import {notify} from "../../Redux/Action/notificationActions";
-import {updateUser} from "../../Redux/Action/authActions";
+import {useDispatch, useSelector} from "react-redux";
+import {updatePanDetails} from "../../Redux/Action/rentActions";
 import {useNavigation} from "@react-navigation/native";
 
 const RentPanUpload = () => {
@@ -16,6 +21,15 @@ const RentPanUpload = () => {
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
 
+  const panDetails = {pan_no: pan, pan_img: picture};
+  const uploadPanDetails = () => {
+    if (pan != null && picture != null) {
+      dispatch(updatePanDetails({panDetails}));
+      navigation.navigate("RentBillDetails");
+    } else {
+      Alert.alert("Please Complete Your PAN Details");
+    }
+  };
   const uploadImage = async () => {
     try {
       const image = await DocumentPicker.pick({
@@ -113,7 +127,7 @@ const RentPanUpload = () => {
           marginTop: 40,
         }}>
         <TouchableOpacity
-          onPress={() => navigation.navigate("MonthPeDetails")}
+          onPress={uploadPanDetails}
           style={{
             width: "40%",
             borderRadius: 20,
@@ -134,7 +148,7 @@ const RentPanUpload = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("MonthPeDetails")}
+          onPress={() => navigation.navigate("RentBillDetails")}
           style={{
             width: "40%",
             borderRadius: 20,
