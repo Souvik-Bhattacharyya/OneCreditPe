@@ -5,7 +5,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
-  Dimensions,
   Image,
 } from "react-native";
 import React, {useEffect, useState} from "react";
@@ -14,78 +13,87 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import Carousel from "../../Components/Carousel/Carousel";
 import {useNavigation} from "@react-navigation/native";
 import CommonHeader from "../../Components/CommonHeader";
-import Api from "../../Services";
+import {
+  getTransactionsReport,
+  UserToCustomerTransactions,
+  UserToSupplierTransactions,
+} from "../../Requests/transactions";
+import {useDispatch, useSelector} from "react-redux";
+import {
+  getCustomersTransactions,
+  getSuppliersTransactions,
+} from "../../Redux/Action/transactionActions";
+import {notify} from "../../Redux/Action/notificationActions";
+import {SOMETHING_WENT_WRONG} from "../../Utility/constants";
 
-const CustomerHome = ({route}) => {
+const CustomerHome = () => {
   const navigation = useNavigation();
-  // const dispatch = useDispatch();
-  const width = Dimensions.get("window").width;
+  const dispatch = useDispatch();
 
   const [viewResult, setViewResult] = useState({});
-  const [cusTransaction, setCusTransaction] = useState([]);
-  const [suppTransaction, setSuppTransaction] = useState([]);
-  const [cusGive, setCusGive] = useState("");
+  const {customer, supplier} = useSelector(state => state.transaction);
   useEffect(() => {
     navigation.addListener("focus", () => {
       viewReport();
-      customerTransaction();
-      supplierTransaction();
+      getTransactions();
     });
   }, [navigation]);
 
   const viewReport = async () => {
     try {
-      const response = await Api.get("/auth/view_reports");
-      if (response.data) {
-        setViewResult(response.data);
+      const response = await getTransactionsReport();
+      if (response && typeof response === "object") {
+        setViewResult(response);
+      } else {
+        dispatch(
+          notify({message: response || SOMETHING_WENT_WRONG, type: "error"}),
+        );
       }
     } catch (error) {
-      console.log(error);
+      dispatch(notify({message: error.message, type: "error"}));
     }
   };
 
-  const customerTransaction = async () => {
+  const getTransactions = async () => {
     try {
-      const response = await Api.get("/auth/user-all-customers-transactions");
-
-      if (response.data) {
-        setCusTransaction(response.data);
+      const responseCustomer = await UserToCustomerTransactions();
+      const responseSupplier = await UserToSupplierTransactions();
+      if (responseCustomer && responseCustomer.length > 0) {
+        dispatch(getCustomersTransactions({customer: responseCustomer}));
+      }
+      if (responseSupplier && responseSupplier.length > 0) {
+        dispatch(getSuppliersTransactions({supplier: responseSupplier}));
+      }
+      if (
+        typeof responseSupplier === "string" ||
+        typeof responseCustomer === "string"
+      ) {
+        dispatch(notify({message: responseSupplier, type: "error"}));
       }
     } catch (error) {
-      console.log(error);
-    }
-  };
-  const supplierTransaction = async () => {
-    try {
-      const response = await Api.get("/auth/user-all-suppliers-transactions");
-
-      if (response.data) {
-        setSuppTransaction(response.data);
-      }
-    } catch (error) {
-      console.log(error);
+      dispatch(notify({message: error.message, type: "error"}));
     }
   };
 
-  const cusGot = cusTransaction
+  const cusGot = customer
     .filter(item => item.aggsum > 0)
     .reduce((accumulator, object) => {
       return accumulator + object.aggsum;
     }, 0);
 
-  const cusGave = cusTransaction
+  const cusGave = customer
     .filter(item => item.aggsum < 0)
     .reduce((accumulator, object) => {
       return accumulator + object.aggsum;
     }, 0);
 
-  const advance = suppTransaction
+  const advance = supplier
     .filter(item => item.aggsum > 0)
     .reduce((accumulator, object) => {
       return accumulator + object.aggsum;
     }, 0);
 
-  const purchase = suppTransaction
+  const purchase = supplier
     .filter(item => item.aggsum < 0)
     .reduce((accumulator, object) => {
       return accumulator + object.aggsum;
