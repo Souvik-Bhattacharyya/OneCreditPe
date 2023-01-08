@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
   View,
   Text,
@@ -9,8 +9,32 @@ import {
 } from "react-native";
 import {Divider} from "react-native-paper";
 import Icon from "react-native-vector-icons/AntDesign";
+import {useDispatch} from "react-redux";
+import {notify} from "../../Redux/Action/notificationActions";
+import {showRentDetails} from "../../Requests/rent";
 
-const ShowRentDetails = () => {
+const ShowRentDetails = ({route}) => {
+  const dispatch = useDispatch();
+  const [rentalDetails, setRentalDetails] = useState({});
+
+  useEffect(() => {
+    showDetailsOfRental(route.params.rentalId);
+  }, [route.params?.rentalId]);
+
+  const showDetailsOfRental = async rentalId => {
+    try {
+      const response = await showRentDetails(rentalId);
+
+      if (response && typeof response !== "string") {
+        setRentalDetails(response.data);
+      } else {
+        dispatch(notify({message: response, type: "error"}));
+      }
+    } catch (error) {
+      dispatch(notify({message: error.message, ype: "error"}));
+    }
+  };
+
   return (
     <>
       <Text
@@ -27,21 +51,11 @@ const ShowRentDetails = () => {
       <SafeAreaView style={{paddingVertical: 20, paddingHorizontal: 15}}>
         <ScrollView>
           <Text style={styles.text}>Name</Text>
-          <Text style={{paddingVertical: 5}}>Ankita Santra</Text>
+          <Text style={{paddingVertical: 5}}>{rentalDetails.name}</Text>
           <Divider style={styles.divider} />
 
           <Text style={styles.text}>Address</Text>
-          <Text style={{paddingVertical: 5}}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum
-          </Text>
+          <Text style={{paddingVertical: 5}}>{rentalDetails.address}</Text>
           <Divider style={styles.divider} />
 
           <Text style={styles.text}>Bank Details</Text>
@@ -53,7 +67,7 @@ const ShowRentDetails = () => {
             }}>
             <Text style={{fontWeight: "600"}}>Bank Name :</Text>
             <Text style={{textAlign: "justify", paddingHorizontal: 5}}>
-              SBI
+              {rentalDetails.bank_name}
             </Text>
           </View>
           <View
@@ -64,7 +78,7 @@ const ShowRentDetails = () => {
             }}>
             <Text style={{fontWeight: "600"}}>Branch :</Text>
             <Text style={{textAlign: "justify", paddingHorizontal: 5}}>
-              Kolkata
+              {rentalDetails.branch_name}
             </Text>
           </View>
 
@@ -76,7 +90,7 @@ const ShowRentDetails = () => {
             }}>
             <Text style={{fontWeight: "600"}}>IFSC No :</Text>
             <Text style={{textAlign: "justify", paddingHorizontal: 5}}>
-              00123456789
+              {rentalDetails.ifsc_code}
             </Text>
           </View>
 
@@ -88,7 +102,7 @@ const ShowRentDetails = () => {
             }}>
             <Text style={{fontWeight: "600"}}>Acc No :</Text>
             <Text style={{textAlign: "justify", paddingHorizontal: 5}}>
-              00123456789
+              {rentalDetails.account_no}
             </Text>
           </View>
 
@@ -100,7 +114,7 @@ const ShowRentDetails = () => {
             }}>
             <Text style={{fontWeight: "600"}}>Mobile No :</Text>
             <Text style={{textAlign: "justify", paddingHorizontal: 5}}>
-              00123456789
+              {rentalDetails.mobile}
             </Text>
           </View>
           <Divider style={styles.divider} />
@@ -114,13 +128,13 @@ const ShowRentDetails = () => {
             <View style={{width: "50%"}}>
               <Text style={styles.text}>Deposit Amount</Text>
               <Text style={{textAlign: "justify", paddingVertical: 5}}>
-                ₹ 1000
+                ₹ {rentalDetails.deposit_amount}
               </Text>
             </View>
             <View style={{width: "50%"}}>
               <Text style={styles.text}>* Advance Amount</Text>
               <Text style={{textAlign: "justify", paddingVertical: 5}}>
-                ₹ 1000000
+                ₹ {rentalDetails.advanced_amount}
               </Text>
             </View>
           </View>
@@ -135,13 +149,13 @@ const ShowRentDetails = () => {
             <View style={{width: "50%"}}>
               <Text style={styles.text}>* Rent date</Text>
               <Text style={{textAlign: "justify", paddingVertical: 5}}>
-                01-01-2023
+                {rentalDetails.rent_date}
               </Text>
             </View>
             <View style={{width: "50%"}}>
               <Text style={styles.text}>* Rented since</Text>
               <Text style={{textAlign: "justify", paddingVertical: 5}}>
-                01-01-2023
+                {rentalDetails.rent_since}
               </Text>
             </View>
           </View>
@@ -154,7 +168,9 @@ const ShowRentDetails = () => {
               //   paddingHorizontal: 20,
               paddingVertical: 5,
             }}>
-            No files are submitted
+            {rentalDetails.agreement
+              ? rentalDetails.agreement
+              : "No files are submitted"}
           </Text>
 
           <Divider style={styles.divider} />
@@ -166,7 +182,7 @@ const ShowRentDetails = () => {
               //   paddingHorizontal: 20,
               paddingBottom: 40,
             }}>
-            01234567809
+            {rentalDetails.pan_no}
           </Text>
 
           <Divider style={styles.divider} />

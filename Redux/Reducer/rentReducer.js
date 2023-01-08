@@ -4,7 +4,7 @@ import {
   UPDATE_PAN_DETAILS,
   UPDATE_BILLS,
   REMOVE_RENT_DETAILS,
-  // UPDATE_BANK_DETAILS,
+  SHOW_ALL_RENTALS,
 } from "../actionTypes";
 
 const INITIAL_STATE = {
@@ -12,9 +12,11 @@ const INITIAL_STATE = {
   agreement: {},
   pan_details: {},
   bills: {},
-  // bank_details: {},
 };
-const rentReducer = (state = INITIAL_STATE, action) => {
+
+const INITIAL_ALL_RENTALS = [];
+
+const addRentReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE_RENTAL_DETAILS:
       return {...state, rental_details: action.payload.rentalDetails};
@@ -32,14 +34,20 @@ const rentReducer = (state = INITIAL_STATE, action) => {
         pan_details: {},
         bills: {},
       };
-    // case UPDATE_BANK_DETAILS:
-    //   return {...state, bank_details: action.payload.bankDetails};
     default:
       return state;
   }
 };
 
-export default rentReducer;
+const showAllRentalsReducer = (state = INITIAL_ALL_RENTALS, action) => {
+  switch (action.type) {
+    case SHOW_ALL_RENTALS:
+      return (state = action.payload);
+    default:
+      return state;
+  }
+};
+export {addRentReducer, showAllRentalsReducer};
 
 // name: "",
 //   address: "",
