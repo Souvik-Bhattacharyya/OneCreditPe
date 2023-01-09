@@ -5,6 +5,7 @@ import {
   UPDATE_BILLS,
   REMOVE_RENT_DETAILS,
   // UPDATE_BANK_DETAILS,
+  SHOW_ALL_RENTALS,
 } from "../actionTypes";
 
 export const updateRentalDetails = payload => {
@@ -46,3 +47,10 @@ export const removeRentDetails = payload => {
 //     payload: payload,
 //   };
 // };
+
+export const allRentals = payload => {
+  return {
+    type: SHOW_ALL_RENTALS,
+    payload,
+  };
+};
