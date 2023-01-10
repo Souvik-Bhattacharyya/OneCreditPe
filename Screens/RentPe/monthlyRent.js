@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -11,8 +11,14 @@ import {Button, Divider, List} from "react-native-paper";
 import Icon from "react-native-vector-icons/Octicons";
 import EditIcon from "react-native-vector-icons/FontAwesome5";
 import DeleteIcon from "react-native-vector-icons/AntDesign";
-
+import DropDownPicker from "react-native-dropdown-picker";
 const MonthlyRent = () => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    {label: "Apple", value: "apple"},
+    {label: "Banana", value: "banana"},
+  ]);
   const ListOfBill = () => (
     <>
       <View
@@ -152,7 +158,21 @@ const MonthlyRent = () => {
             /> */}
                 <Text style={{color: "#fff"}}>Sorted-by</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.button}>
+
+              <TouchableOpacity
+                style={styles.button}
+                // onPress={() => (
+                //   <DropDownPicker
+                //     open={open}
+                //     value={value}
+                //     items={items}
+                //     setOpen={setOpen}
+                //     setValue={setValue}
+                //     setItems={setItems}
+                //     style={{width: "30%", backgroundColor: "red"}}
+                //   />
+                // )}
+              >
                 <Icon
                   name="filter"
                   size={15}
@@ -162,6 +182,7 @@ const MonthlyRent = () => {
                     color: "#fff",
                   }}
                 />
+
                 <Text style={{color: "#fff"}}>Filter</Text>
               </TouchableOpacity>
             </View>

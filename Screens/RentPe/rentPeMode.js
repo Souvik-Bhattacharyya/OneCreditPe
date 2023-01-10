@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -13,7 +13,7 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 import CorrectIcon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
-import {addRentDetails} from "../../Requests/rent";
+import {addRentDetails, updateRentDetails} from "../../Requests/rent";
 //Redux
 import {useDispatch, useSelector} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
@@ -22,6 +22,9 @@ import {removeRentDetails} from "../../Redux/Action/rentActions";
 const RentPeMode = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const rent = useSelector(state => state.addRent);
+  const rentalAllDetails = useSelector(state => state.allDetailsOfRental);
+
   const [bankDetails, setBankDetails] = useState({
     bank_name: "",
     branch_name: "",
@@ -29,9 +32,19 @@ const RentPeMode = () => {
     account_holder_name: "",
     account_no: null,
   });
-  const rent = useSelector(state => state.rentDetails);
-  console.log("--->", rent);
-  // console.log("==================>", bankDetails);
+
+  useEffect(() => {
+    setBankDetails({
+      ...bankDetails,
+      bank_name: rentalAllDetails.bank_name,
+      branch_name: rentalAllDetails.branch_name,
+      ifsc_code: rentalAllDetails.ifsc_code,
+      account_holder_name: rentalAllDetails.account_holder_name,
+      account_no: rentalAllDetails.account_no,
+    });
+  }, [rentalAllDetails]);
+  console.log("rent===>", rent);
+  console.log("rentalAllDetails==================>", rentalAllDetails);
 
   const uploadBankDetails = () => {
     if (bankDetails.account_holder_name === "") {
@@ -55,31 +68,56 @@ const RentPeMode = () => {
   const makePayment = async () => {
     try {
       const formData = new FormData();
-      formData.append("name", rent.rental_details.name);
-      formData.append("address", rent.rental_details.address);
-      formData.append("mobile", rent.rental_details.mobile);
-      formData.append("rent_date", rent.rental_details.rent_date);
-      formData.append("rent_since", rent.rental_details.rent_since);
-      formData.append("deposit_amount", rent.rental_details.deposit_amount);
-      formData.append("advanced_amount", rent.rental_details.advanced_amount);
-      formData.append("agreement_image", rent.agreement);
-      formData.append("pan_no", rent.pan_details.pan_no);
-      formData.append("pan_image", rent.pan_details.pan_img);
+      formData.append("name", rent.rent_details.name);
+      formData.append("address", rent.rent_details.address);
+      formData.append("mobile", rent.rent_details.mobile);
+      formData.append("rent_date", rent.rent_details.rent_date);
+      formData.append("rent_since", rent.rent_details.rent_since);
+      formData.append("deposit_amount", rent.rent_details.deposit_amount);
+      formData.append("advanced_amount", rent.rent_details.advanced_amount);
+      rent.agreement !== {} &&
+        formData.append("agreement_image", rent.agreement);
+      rent.pan_details !== {} &&
+        formData.append("pan_no", rent.pan_details.pan_no);
+      rent.pan_details !== {} &&
+        formData.append("pan_image", rent.pan_details.pan_img);
       formData.append("account_holder_name", bankDetails.account_holder_name);
       formData.append("bank_name", bankDetails.bank_name);
       formData.append("branch_name", bankDetails.branch_name);
       formData.append("ifsc_code", bankDetails.ifsc_code);
       formData.append("account_no", bankDetails.account_no);
+      console.log("formdata---->", formData);
 
-      const responseOfAddRent = await addRentDetails(formData);
-      if (typeof responseOfAddRent !== "string") {
-        navigation.navigate("RentPeSuccess");
-        dispatch(removeRentDetails());
-        dispatch(notify({message: responseOfAddRent.message, type: "success"}));
-      }
+      if (rentalAllDetails.id) {
+        // console.log("-->", rentalAllDetails);
+        const responseOfUpdateRent = await updateRentDetails(
+          formData,
+          rentalAllDetails.id,
+        );
+        if (typeof responseOfUpdateRent !== "string") {
+          navigation.navigate("RentPeSuccess", {rentalId: rentalAllDetails.id});
+          dispatch(removeRentDetails());
+          dispatch(
+            notify({message: responseOfUpdateRent.message, type: "success"}),
+          );
+        }
 
-      if (typeof responseOfAddRent === "string") {
-        dispatch(notify({message: responseOfAddRent, type: "error"}));
+        if (typeof responseOfUpdateRent === "string") {
+          dispatch(notify({message: responseOfUpdateRent, type: "error"}));
+        }
+      } else {
+        const responseOfAddRent = await addRentDetails(formData);
+        if (typeof responseOfAddRent !== "string") {
+          navigation.navigate("RentPeSuccess", {rentalId: responseOfAddRent});
+          dispatch(removeRentDetails());
+          dispatch(
+            notify({message: responseOfAddRent.message, type: "success"}),
+          );
+        }
+
+        if (typeof responseOfAddRent === "string") {
+          dispatch(notify({message: responseOfAddRent, type: "error"}));
+        }
       }
     } catch (error) {
       dispatch(notify({message: error.message, type: "error"}));

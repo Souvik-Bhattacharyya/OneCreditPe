@@ -9,11 +9,35 @@ import {updateAgreement} from "../../Redux/Action/rentActions";
 const RentAgreement = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const rent = useSelector(state => state.rentDetails);
-
+  const rent = useSelector(state => state.allDetailsOfRental);
+  console.log(useSelector(state => state.addRent));
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
 
+  useEffect(() => {
+    if (rent.agreement_image) {
+      setSavedImage({
+        name: rent.agreement_image,
+        uri:
+          "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
+          rent.agreement_image,
+      });
+    } else {
+      setSavedImage(null);
+    }
+  }, [rent]);
+
+  const uploadAgreement = () => {
+    if (picture && savedImage) {
+      dispatch(updateAgreement({agreement: picture}));
+      navigation.navigate("RentPanUpload");
+    } else if (!picture && savedImage) {
+      navigation.navigate("RentPanUpload");
+    } else {
+      Alert.alert("Please Upload Agreement Or Skip");
+    }
+  };
+  // -----------------------------------------------
   const uploadImage = async () => {
     try {
       const image = await DocumentPicker.pick({
@@ -31,14 +55,6 @@ const RentAgreement = () => {
     }
   };
 
-  const uploadAgreement = () => {
-    if (picture) {
-      dispatch(updateAgreement({agreement: picture}));
-      navigation.navigate("RentPanUpload");
-    } else {
-      Alert.alert("Please Upload Agreement Or Skip");
-    }
-  };
   return (
     <>
       <View

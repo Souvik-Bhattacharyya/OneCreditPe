@@ -17,11 +17,27 @@ import {useNavigation} from "@react-navigation/native";
 const RentPanUpload = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const rent = useSelector(state => state.allDetailsOfRental);
+
   const [pan, setPan] = useState(null);
   const [picture, setPicture] = useState(null);
   const [savedImage, setSavedImage] = useState(null);
-
+  console.log("------->", savedImage);
+  useEffect(() => {
+    if (rent.pan_image) {
+      setSavedImage({
+        name: rent.pan_image,
+        uri:
+          "https://onepay.alsoltech.in/public/assets/user/pan_image/" +
+          rent.pan_image,
+      });
+    } else {
+      setSavedImage(null);
+    }
+    setPan(rent.pan_no);
+  }, [rent]);
   const panDetails = {pan_no: pan, pan_img: picture};
+
   const uploadPanDetails = () => {
     if (pan != null && picture != null) {
       dispatch(updatePanDetails({panDetails}));

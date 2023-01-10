@@ -8,13 +8,15 @@ import {
   StyleSheet,
 } from "react-native";
 import {Divider} from "react-native-paper";
-import Icon from "react-native-vector-icons/AntDesign";
+import Icon from "react-native-vector-icons/FontAwesome";
 import {useDispatch} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
 import {showRentDetails} from "../../Requests/rent";
-
+import {useNavigation} from "@react-navigation/native";
+import {updateAllDetailsOfRental} from "../../Redux/Action/rentActions";
 const ShowRentDetails = ({route}) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [rentalDetails, setRentalDetails] = useState({});
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const ShowRentDetails = ({route}) => {
 
       if (response && typeof response !== "string") {
         setRentalDetails(response.data);
+        dispatch(updateAllDetailsOfRental(response.data));
       } else {
         dispatch(notify({message: response, type: "error"}));
       }
@@ -48,7 +51,8 @@ const ShowRentDetails = ({route}) => {
         }}>
         Owener Info
       </Text>
-      <SafeAreaView style={{paddingVertical: 20, paddingHorizontal: 15}}>
+      <SafeAreaView
+        style={{height: "80%", paddingVertical: 10, paddingHorizontal: 15}}>
         <ScrollView>
           <Text style={styles.text}>Name</Text>
           <Text style={{paddingVertical: 5}}>{rentalDetails.name}</Text>
@@ -185,9 +189,29 @@ const ShowRentDetails = ({route}) => {
             {rentalDetails.pan_no}
           </Text>
 
-          <Divider style={styles.divider} />
+          {/* <Divider style={styles.divider} /> */}
         </ScrollView>
       </SafeAreaView>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("AddRentDetails", {rentalId: rentalDetails.id})
+        }
+        style={{
+          backgroundColor: "#0A5AC9",
+          width: "10%",
+          display: "flex",
+          alignItems: "center",
+          marginHorizontal: "85%",
+          marginBottom: 30,
+          borderRadius: 10,
+        }}>
+        <Icon
+          name="edit"
+          color="#0A5AC9"
+          size={20}
+          style={{marginVertical: 8, color: "#fff"}}
+        />
+      </TouchableOpacity>
     </>
   );
 };

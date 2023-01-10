@@ -17,17 +17,12 @@ const PanDetails = ({navigation}) => {
   // console.log("pic==========>", picture);
   // console.log("img==========>", savedImage);
   useEffect(() => {
-    if (user?.pan_image) {
-      setSavedImage({
-        name: user.pan_image,
-        uri:
-          "https://onepay.alsoltech.in/public/assets/user/pan_image/" +
-          user.pan_image,
-      });
-      setPan(user.pan_no);
-    } else {
-      setSavedImage(null);
-    }
+    setSavedImage({
+      name: user.pan_image,
+      uri:
+        "https://onepay.alsoltech.in/public/assets/user/pan_image/" +
+        user.pan_image,
+    });
   }, [user]);
 
   const UpdatePanDetails = async () => {
