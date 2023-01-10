@@ -4,6 +4,7 @@ import {
   ADD_OR_UPDATE_BILLS,
   REMOVE_RENT_DETAILS,
   ADD_OR_UPDATE_AGREEMENT,
+  ADD_OR_UPDATE_BANK,
 } from "../actionTypes";
 
 const INITIAL_STATE = {
@@ -38,6 +39,13 @@ const INITIAL_STATE = {
       },
     ],
   },
+  bank: {
+    bank_name: "",
+    branch_name: "",
+    ifsc_code: "",
+    account_holder_name: "",
+    account_no: null,
+  },
 };
 
 const rentReducer = (state = INITIAL_STATE, action) => {
@@ -50,6 +58,8 @@ const rentReducer = (state = INITIAL_STATE, action) => {
       return {...state, pan_details: action.payload};
     case ADD_OR_UPDATE_BILLS:
       return {...state, bills: action.payload};
+    case ADD_OR_UPDATE_BANK:
+      return {...state, bank: action.payload};
     case REMOVE_RENT_DETAILS:
       return {...state, ...INITIAL_STATE};
 

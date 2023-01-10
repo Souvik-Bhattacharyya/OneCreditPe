@@ -2,6 +2,7 @@ import {
   ADD_OR_UPDATE_OWNER_DETAILS,
   ADD_OR_UPDATE_PAN_DETAILS,
   ADD_OR_UPDATE_BILLS,
+  ADD_OR_UPDATE_BANK,
   REMOVE_RENT_DETAILS,
   ADD_OR_UPDATE_AGREEMENT,
 } from "../actionTypes";
@@ -50,6 +51,18 @@ export const addOrUpdatePanDetails = payload => {
 export const addOrUpdateBills = payload => {
   return {
     type: ADD_OR_UPDATE_BILLS,
+    payload,
+  };
+};
+
+// /**
+//  *
+//  * @param {object} {bankName:"",}
+//  * @returns
+//  */
+export const addOrUpdateBank = payload => {
+  return {
+    type: ADD_OR_UPDATE_BANK,
     payload,
   };
 };

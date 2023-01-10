@@ -17,7 +17,7 @@ import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {addOrUpdateBills} from "../../Redux/Action/rentActions";
 
-const RentBillDetails = () => {
+const RentBillDetails = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const rent = useSelector(state => state.rent);
@@ -59,7 +59,7 @@ const RentBillDetails = () => {
     //     billsList: billInfo,
     //   }),
     // );
-    navigation.navigate("RentPeMode");
+    navigation.navigate("RentPeMode", {rentId: route.params?.rentId});
     // }
   };
 

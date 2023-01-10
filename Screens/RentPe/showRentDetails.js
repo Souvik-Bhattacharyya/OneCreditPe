@@ -13,28 +13,72 @@ import {useDispatch} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
 import {showRentDetails} from "../../Requests/rent";
 import {useNavigation} from "@react-navigation/native";
-import {updateAllDetailsOfRental} from "../../Redux/Action/rentActions";
+import {
+  addOrUpdateAgreement,
+  addOrUpdateBank,
+  addOrUpdateOwnerInfo,
+  addOrUpdatePanDetails,
+} from "../../Redux/Action/rentActions";
 const ShowRentDetails = ({route}) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const [rentalDetails, setRentalDetails] = useState({});
 
   useEffect(() => {
-    showDetailsOfRental(route.params.rentalId);
-  }, [route.params?.rentalId]);
+    showDetailsOfRental(route.params.rentId);
+  }, [route.params?.rentId]);
 
-  const showDetailsOfRental = async rentalId => {
+  const showDetailsOfRental = async rentId => {
     try {
-      const response = await showRentDetails(rentalId);
+      const response = await showRentDetails(rentId);
 
       if (response && typeof response !== "string") {
         setRentalDetails(response.data);
-        dispatch(updateAllDetailsOfRental(response.data));
+        dispatch(
+          addOrUpdateOwnerInfo({
+            name: response.data.name,
+            address: response.data.address,
+            mobile: response.data.mobile,
+            rent_date: response.data.rent_date,
+            rent_since: response.data.rent_since,
+            deposit_amount: response.data.deposit_amount,
+            advanced_amount: response.data.advanced_amount,
+          }),
+        );
+        // if (response.data.agreement)
+        //   dispatch(
+        //     addOrUpdateAgreement({
+        //       mimeType: response.data.agreement.type,
+        //       uri: response.data.agreement.uri,
+        //       name: response.data.agreement.name,
+        //     }),
+        //   );
+
+        // if (response.data.pan_image) {
+        //   dispatch(
+        //     addOrUpdatePanDetails({
+        //       pan_no: response.data.pan_no,
+        //       mimeType: response.data.pan_image.type,
+        //       uri: response.data.pan_image.uri,
+        //       name: response.data.pan_image.name,
+        //     }),
+        //   );
+        // }
+
+        dispatch(
+          addOrUpdateBank({
+            bank_name: response.data.bank_name,
+            branch_name: response.data.branch_name,
+            ifsc_code: response.data.ifsc_code,
+            account_holder_name: response.data.account_holder_name,
+            account_no: response.data.account_no,
+          }),
+        );
       } else {
         dispatch(notify({message: response, type: "error"}));
       }
     } catch (error) {
-      dispatch(notify({message: error.message, ype: "error"}));
+      dispatch(notify({message: error.message, type: "error"}));
     }
   };
 
@@ -194,7 +238,7 @@ const ShowRentDetails = ({route}) => {
       </SafeAreaView>
       <TouchableOpacity
         onPress={() =>
-          navigation.navigate("AddRentDetails", {rentalId: rentalDetails.id})
+          navigation.navigate("AddRentDetails", {rentId: rentalDetails.id})
         }
         style={{
           backgroundColor: "#0A5AC9",

@@ -17,7 +17,7 @@ import {
 } from "../../Redux/Action/rentActions";
 import {useNavigation} from "@react-navigation/native";
 
-const RentPanUpload = () => {
+const RentPanUpload = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const rent = useSelector(state => state.rent);
@@ -38,7 +38,7 @@ const RentPanUpload = () => {
   const onSubmit = () => {
     if (pan != null && picture != null) {
       dispatch(addOrUpdatePanDetails({pan_no: pan, ...picture}));
-      navigation.navigate("RentBillDetails");
+      navigation.navigate("RentBillDetails", {rentId: route.params?.rentId});
     } else {
       Alert.alert("Please Complete Your PAN Details");
     }
@@ -160,7 +160,11 @@ const RentPanUpload = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("RentBillDetails")}
+          onPress={() =>
+            navigation.navigate("RentBillDetails", {
+              rentId: route.params?.rentId,
+            })
+          }
           style={{
             width: "40%",
             borderRadius: 20,

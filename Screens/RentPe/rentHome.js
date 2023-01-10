@@ -81,7 +81,7 @@ const RentHome = () => {
   const HomeRent = ({rental}) => (
     <TouchableOpacity
       onPress={() =>
-        navigation.navigate("ShowRentDetails", {rentalId: rental.id})
+        navigation.navigate("ShowRentDetails", {rentId: rental.id})
       }
       style={{
         width: "95%",
@@ -127,7 +127,7 @@ const RentHome = () => {
         <View style={{display: "flex", flexDirection: "row"}}>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate("MonthlyRent", {rentalId: rental.id})
+              navigation.navigate("MonthlyRent", {rentId: rental.id})
             }>
             <Icon
               name="calendar"

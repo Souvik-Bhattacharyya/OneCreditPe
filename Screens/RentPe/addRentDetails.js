@@ -23,11 +23,10 @@ const dateType = {
   RENT_SINCE: "RENT_SINCE",
 };
 
-const AddRentDetails = () => {
+const AddRentDetails = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const rent = useSelector(state => state.rent);
-
   const [date, setDate] = useState(new Date());
   const [ownerDetails, setOwnerDetails] = useState({
     name: "",
@@ -40,27 +39,38 @@ const AddRentDetails = () => {
   });
 
   useEffect(() => {
-    const temp = {
-      name: "",
-      mobile: null,
-      address: "",
-      rent_date: null,
-      rent_since: null,
-      deposit_amount: null,
-      advanced_amount: null,
-    };
-    if (rent.name) temp.name = rent.name;
-    if (rent.mobile) temp.mobile = rent.mobile;
-    if (rent.address) temp.address = rent.address;
-    if (rent.rent_date) temp.rent_date = rent.rent_date;
-    if (rent.rent_since) temp.rent_since = rent.since;
-    if (rent.deposit_amount) temp.deposit_amount = rent.deposit_amount;
-    if (rent.advanced_amount) temp.advanced_amount = rent.advanced_amount;
+    // const temp = {
+    //   name: "",
+    //   mobile: null,
+    //   address: "",
+    //   rent_date: null,
+    //   rent_since: null,
+    //   deposit_amount: null,
+    //   advanced_amount: null,
+    // };
+    // if (rent.name) temp.name = rent.name;
+    // if (rent.mobile) temp.mobile = rent.mobile;
+    // if (rent.address) temp.address = rent.address;
+    // if (rent.rent_date) temp.rent_date = rent.rent_date;
+    // if (rent.rent_since) temp.rent_since = rent.since;
+    // if (rent.deposit_amount) temp.deposit_amount = rent.deposit_amount;
+    // if (rent.advanced_amount) temp.advanced_amount = rent.advanced_amount;
+    // setOwnerDetails({
+    //   ...ownerDetails,
+    //   ...temp,
+    // });
+
     setOwnerDetails({
       ...ownerDetails,
-      ...temp,
+      name: rent.owner.name,
+      mobile: rent.owner.mobile,
+      address: rent.owner.address,
+      rent_date: rent.owner.rent_date,
+      rent_since: rent.owner.rent_since,
+      deposit_amount: rent.owner.deposit_amount,
+      advanced_amount: rent.owner.advanced_amount,
     });
-  }, [rent]);
+  }, [route.params?.rentId]);
 
   const uploadRentDetails = () => {
     if (!ownerDetails.name) {
@@ -79,7 +89,7 @@ const AddRentDetails = () => {
       Alert.alert("Please Enter Advanced amount");
     } else {
       dispatch(addOrUpdateOwnerInfo(ownerDetails));
-      navigation.navigate("RentAgreement");
+      navigation.navigate("RentAgreement", {rentId: route.params?.rentId});
     }
   };
 

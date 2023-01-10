@@ -6,14 +6,14 @@ import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
 import {addOrUpdateAgreement} from "../../Redux/Action/rentActions";
 
-const RentAgreement = () => {
+const RentAgreement = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const rent = useSelector(state => state.rent);
 
   const onSubmit = () => {
     if (rent.agreement.uri) {
-      navigation.navigate("RentPanUpload");
+      navigation.navigate("RentPanUpload", {rentId: route.params?.rentId});
     } else {
       Alert.alert("Please Upload Agreement Or Skip");
     }
@@ -110,7 +110,11 @@ const RentAgreement = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("RentPanUpload")}
+            onPress={() =>
+              navigation.navigate("RentPanUpload", {
+                rentId: route.params?.rentId,
+              })
+            }
             style={{
               width: "40%",
               borderRadius: 20,
