@@ -1,37 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {View, Text, TouchableOpacity, Image, Alert} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
-import {updateAgreement} from "../../Redux/Action/rentActions";
+import {addOrUpdateAgreement} from "../../Redux/Action/rentActions";
 
 const RentAgreement = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const rent = useSelector(state => state.allDetailsOfRental);
-  console.log(useSelector(state => state.addRent));
-  const [picture, setPicture] = useState(null);
-  const [savedImage, setSavedImage] = useState(null);
+  const rent = useSelector(state => state.rent);
 
-  useEffect(() => {
-    if (rent.agreement_image) {
-      setSavedImage({
-        name: rent.agreement_image,
-        uri:
-          "https://onepay.alsoltech.in/public/assets/user/profile_image/" +
-          rent.agreement_image,
-      });
-    } else {
-      setSavedImage(null);
-    }
-  }, [rent]);
-
-  const uploadAgreement = () => {
-    if (picture && savedImage) {
-      dispatch(updateAgreement({agreement: picture}));
-      navigation.navigate("RentPanUpload");
-    } else if (!picture && savedImage) {
+  const onSubmit = () => {
+    if (rent.agreement.uri) {
       navigation.navigate("RentPanUpload");
     } else {
       Alert.alert("Please Upload Agreement Or Skip");
@@ -44,12 +25,14 @@ const RentAgreement = () => {
         presentationStyle: "fullScreen",
         type: [types.images],
       });
-      setPicture({name: image[0].name, uri: image[0].uri, type: image[0].type});
-      setSavedImage({
-        name: image[0].name,
-        uri: image[0].uri,
-        type: image[0].type,
-      });
+
+      dispatch(
+        addOrUpdateAgreement({
+          name: image[0].name,
+          uri: image[0].uri,
+          mimeType: image[0].type,
+        }),
+      );
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +49,7 @@ const RentAgreement = () => {
           justifyContent: "center",
         }}>
         <TouchableOpacity
-          onPress={() => uploadImage()}
+          onPress={uploadImage}
           style={{
             width: "90%",
             height: "60%",
@@ -78,7 +61,7 @@ const RentAgreement = () => {
             borderColor: "#c6c6c6",
             backgroundColor: "#fff",
           }}>
-          {savedImage ? (
+          {rent.agreement.uri ? (
             <Image
               style={{
                 width: "100%",
@@ -87,7 +70,7 @@ const RentAgreement = () => {
                 zIndex: 100,
               }}
               progressiveRenderingEnabled={true}
-              source={savedImage && {uri: savedImage.uri}}
+              source={rent.agreement.uri && {uri: rent.agreement.uri}}
             />
           ) : (
             <>
@@ -106,7 +89,7 @@ const RentAgreement = () => {
             justifyContent: "space-around",
           }}>
           <TouchableOpacity
-            onPress={uploadAgreement}
+            onPress={onSubmit}
             style={{
               width: "40%",
               borderRadius: 20,

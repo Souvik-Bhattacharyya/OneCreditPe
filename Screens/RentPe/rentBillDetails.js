@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -7,20 +7,33 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  Alert,
 } from "react-native";
 import {Divider} from "react-native-paper";
 import Icon from "react-native-vector-icons/Ionicons";
 import Icon2 from "react-native-vector-icons/AntDesign";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {addOrUpdateBills} from "../../Redux/Action/rentActions";
 
 const RentBillDetails = () => {
   const navigation = useNavigation();
-  const [addMore, setAddMore] = useState(0);
+  const dispatch = useDispatch();
+  const rent = useSelector(state => state.rent);
   const [picture, setPicture] = useState(null);
-  const [savedImage, setSavedImage] = useState(null);
   const [billInfo, setBillInfo] = useState([{amount: 0, description: ""}]);
-  console.log("==========>", billInfo);
+
+  useEffect(() => {
+    if (rent.bills.uri)
+      setPicture({
+        name: rent.bills?.name,
+        uri: rent.bills?.uri,
+        type: rent.bills?.mimeType,
+      });
+    if (rent.bills.billsList.length) setBillInfo(rent.bills.billsList);
+  }, [rent]);
+
   const uploadImage = async () => {
     try {
       const image = await DocumentPicker.pick({
@@ -28,17 +41,29 @@ const RentBillDetails = () => {
         type: [types.images],
       });
       setPicture({name: image[0].name, uri: image[0].uri, type: image[0].type});
-      setSavedImage({
-        name: image[0].name,
-        uri: image[0].uri,
-        type: image[0].type,
-      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  const MoreInfo = ({amount, description, id}) => (
+  const onSubmit = () => {
+    // if (!picture?.uri) Alert.alert("Please upload a bill image");
+    // else if (!billInfo.filter(bill => bill.amount).length) {
+    //   Alert.alert("Please enter atleast one bill amount");
+    // } else {
+    // dispatch(
+    //   addOrUpdateBills({
+    //     uri: picture?.uri || "",
+    //     name: picture?.name || "",
+    //     mimeType: picture?.type || "",
+    //     billsList: billInfo,
+    //   }),
+    // );
+    navigation.navigate("RentPeMode");
+    // }
+  };
+
+  const Bills = ({amount, description, id}) => (
     <>
       <Divider
         style={{
@@ -98,7 +123,7 @@ const RentBillDetails = () => {
               alignItems: "center",
             }}>
             <TouchableOpacity
-              onPress={() => uploadImage()}
+              onPress={uploadImage}
               style={{
                 width: "90%",
                 paddingVertical: 45,
@@ -110,7 +135,7 @@ const RentBillDetails = () => {
                 borderColor: "#c6c6c6",
                 backgroundColor: "#fff",
               }}>
-              {savedImage ? (
+              {picture ? (
                 <Image
                   style={{
                     width: "100%",
@@ -119,7 +144,7 @@ const RentBillDetails = () => {
                     zIndex: 100,
                   }}
                   progressiveRenderingEnabled={true}
-                  source={savedImage && {uri: savedImage.uri}}
+                  source={picture && {uri: picture.uri}}
                 />
               ) : (
                 <>
@@ -136,7 +161,7 @@ const RentBillDetails = () => {
             </TouchableOpacity>
           </View>
           {billInfo.map((val, index) => (
-            <MoreInfo
+            <Bills
               amount={val.amount}
               description={val.description}
               id={index}
@@ -146,7 +171,7 @@ const RentBillDetails = () => {
         </ScrollView>
       </SafeAreaView>
       <TouchableOpacity
-        onPress={() => setAddMore(addMore + 1)}
+        onPress={() => setBillInfo([...billInfo, {amount: 0, description: ""}])}
         style={{
           width: "30%",
           display: "flex",
@@ -168,7 +193,7 @@ const RentBillDetails = () => {
         <Text style={{color: "#fff"}}>Add More</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate("RentPeMode")}
+        onPress={onSubmit}
         style={{
           borderRadius: 20,
           backgroundColor: "#0A5AC9",

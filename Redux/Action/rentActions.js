@@ -1,57 +1,65 @@
 import {
-  UPDATE_RENT_DETAILS,
-  UPDATE_AGREEMENT,
-  UPDATE_PAN_DETAILS,
-  UPDATE_BILLS,
+  ADD_OR_UPDATE_OWNER_DETAILS,
+  ADD_OR_UPDATE_PAN_DETAILS,
+  ADD_OR_UPDATE_BILLS,
   REMOVE_RENT_DETAILS,
-  UPDATE_All_DETAILS_OF_RENTAL,
-  // UPDATE_BANK_DETAILS,
-  SHOW_ALL_RENTALS,
+  ADD_OR_UPDATE_AGREEMENT,
 } from "../actionTypes";
 
-export const updateRentDetails = payload => {
+/**
+ *
+ * @param {object} {name, address, mobile, rent_date, rent_since, deposit_amount, advanced_amount}
+ * @returns
+ */
+export const addOrUpdateOwnerInfo = payload => {
   return {
-    type: UPDATE_RENT_DETAILS,
-    payload: payload,
+    type: ADD_OR_UPDATE_OWNER_DETAILS,
+    payload,
   };
 };
 
-export const updateAgreement = payload => {
+/**
+ *
+ * @param {object} {mimeType,uri,name}
+ * @returns
+ */
+export const addOrUpdateAgreement = payload => {
   return {
-    type: UPDATE_AGREEMENT,
-    payload: payload,
+    type: ADD_OR_UPDATE_AGREEMENT,
+    payload,
   };
 };
 
-export const updatePanDetails = payload => {
+/**
+ *
+ * @param {object} { pan_no: null,mimeType: "",uri: "",name: ""}
+ * @returns
+ */
+export const addOrUpdatePanDetails = payload => {
   return {
-    type: UPDATE_PAN_DETAILS,
-    payload: payload,
-  };
-};
-export const updateBills = payload => {
-  return {
-    type: UPDATE_BILLS,
-    payload: payload,
+    type: ADD_OR_UPDATE_PAN_DETAILS,
+    payload,
   };
 };
 
-export const removeRentDetails = payload => {
+/**
+ *
+ * @param {object} {  mimeType: "",uri: "",name: "",billsList: [{amount: null,description: "", }]}
+ * @returns
+ */
+export const addOrUpdateBills = payload => {
+  return {
+    type: ADD_OR_UPDATE_BILLS,
+    payload,
+  };
+};
+
+/**
+ *
+ * @returns
+ */
+export const removeRentDetails = () => {
   return {
     type: REMOVE_RENT_DETAILS,
-  };
-};
-
-export const updateAllDetailsOfRental = payload => {
-  return {
-    type: UPDATE_All_DETAILS_OF_RENTAL,
-    payload,
-  };
-};
-
-export const allRentals = payload => {
-  return {
-    type: SHOW_ALL_RENTALS,
-    payload,
   };
 };
