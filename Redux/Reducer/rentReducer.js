@@ -1,53 +1,74 @@
 import {
-  UPDATE_RENTAL_DETAILS,
-  UPDATE_AGREEMENT,
-  UPDATE_PAN_DETAILS,
-  UPDATE_BILLS,
+  ADD_OR_UPDATE_OWNER_DETAILS,
+  ADD_OR_UPDATE_PAN_DETAILS,
+  ADD_OR_UPDATE_BILLS,
   REMOVE_RENT_DETAILS,
-  SHOW_ALL_RENTALS,
+  ADD_OR_UPDATE_AGREEMENT,
+  ADD_OR_UPDATE_BANK,
 } from "../actionTypes";
 
 const INITIAL_STATE = {
-  rental_details: {},
-  agreement: {},
-  pan_details: {},
-  bills: {},
+  owner: {
+    name: "",
+    address: "",
+    mobile: null,
+    rent_date: new Date(),
+    rent_since: new Date(),
+    deposit_amount: null,
+    advanced_amount: null,
+  },
+  agreement: {
+    mimeType: "",
+    uri: "",
+    name: "",
+  },
+  pan_details: {
+    pan_no: null,
+    mimeType: "",
+    uri: "",
+    name: "",
+  },
+  bills: {
+    mimeType: "",
+    uri: "",
+    name: "",
+    billsList: [
+      {
+        amount: null,
+        description: "",
+      },
+    ],
+  },
+  bank: {
+    bank_name: "",
+    branch_name: "",
+    ifsc_code: "",
+    account_holder_name: "",
+    account_no: null,
+  },
 };
 
-const INITIAL_ALL_RENTALS = [];
-
-const addRentReducer = (state = INITIAL_STATE, action) => {
+const rentReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_RENTAL_DETAILS:
-      return {...state, rental_details: action.payload.rentalDetails};
-    case UPDATE_AGREEMENT:
-      return {...state, agreement: action.payload.agreement};
-    case UPDATE_PAN_DETAILS:
-      return {...state, pan_details: action.payload.panDetails};
-    case UPDATE_BILLS:
-      return {...state, bills: action.payload.bills};
+    case ADD_OR_UPDATE_OWNER_DETAILS:
+      return {...state, owner: action.payload};
+    case ADD_OR_UPDATE_AGREEMENT:
+      return {...state, agreement: action.payload};
+    case ADD_OR_UPDATE_PAN_DETAILS:
+      return {...state, pan_details: action.payload};
+    case ADD_OR_UPDATE_BILLS:
+      return {...state, bills: action.payload};
+    case ADD_OR_UPDATE_BANK:
+      return {...state, bank: action.payload};
     case REMOVE_RENT_DETAILS:
-      return {
-        ...state,
-        rental_details: {},
-        agreement: {},
-        pan_details: {},
-        bills: {},
-      };
+      return {...state, ...INITIAL_STATE};
+
     default:
       return state;
   }
 };
 
-const showAllRentalsReducer = (state = INITIAL_ALL_RENTALS, action) => {
-  switch (action.type) {
-    case SHOW_ALL_RENTALS:
-      return (state = action.payload);
-    default:
-      return state;
-  }
-};
-export {addRentReducer, showAllRentalsReducer};
+export default rentReducer;
 
 // name: "",
 //   address: "",

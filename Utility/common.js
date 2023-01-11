@@ -3,3 +3,5 @@ export const Ips = {
 };
 
 export const API_BASE_URL = Ips.dev;
+
+export const SERVER_BASE_URL = "https://onepay.alsoltech.in/public";

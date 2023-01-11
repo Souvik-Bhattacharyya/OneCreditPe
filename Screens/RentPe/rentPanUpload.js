@@ -11,21 +11,34 @@ import AddIcon from "react-native-vector-icons/Ionicons";
 import Api from "../../Services";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useDispatch, useSelector} from "react-redux";
-import {updatePanDetails} from "../../Redux/Action/rentActions";
+import {
+  addOrUpdatePanDetails,
+  updatePanDetails,
+} from "../../Redux/Action/rentActions";
 import {useNavigation} from "@react-navigation/native";
 
-const RentPanUpload = () => {
+const RentPanUpload = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const rent = useSelector(state => state.rent);
+
   const [pan, setPan] = useState(null);
   const [picture, setPicture] = useState(null);
-  const [savedImage, setSavedImage] = useState(null);
 
-  const panDetails = {pan_no: pan, pan_img: picture};
-  const uploadPanDetails = () => {
+  useEffect(() => {
+    if (rent.pan_details.pan_no) setPan(rent.pan_details.pan_no);
+    if (rent.pan_details.uri)
+      setPicture({
+        name: rent.pan_details.name,
+        uri: rent.pan_details.uri,
+        mimeType: rent.pan_details.mimeType,
+      });
+  }, [rent]);
+
+  const onSubmit = () => {
     if (pan != null && picture != null) {
-      dispatch(updatePanDetails({panDetails}));
-      navigation.navigate("RentBillDetails");
+      dispatch(addOrUpdatePanDetails({pan_no: pan, ...picture}));
+      navigation.navigate("RentBillDetails", {rentId: route.params?.rentId});
     } else {
       Alert.alert("Please Complete Your PAN Details");
     }
@@ -36,11 +49,10 @@ const RentPanUpload = () => {
         presentationStyle: "fullScreen",
         type: [types.images],
       });
-      setPicture({name: image[0].name, uri: image[0].uri, type: image[0].type});
-      setSavedImage({
+      setPicture({
         name: image[0].name,
         uri: image[0].uri,
-        type: image[0].type,
+        mimeType: image[0].type,
       });
     } catch (error) {
       console.log(error);
@@ -90,7 +102,7 @@ const RentPanUpload = () => {
         </Text>
 
         <TouchableOpacity
-          onPress={() => uploadImage()}
+          onPress={uploadImage}
           style={{
             marginTop: 10,
             borderRadius: 5,
@@ -102,7 +114,7 @@ const RentPanUpload = () => {
             justifyContent: "center",
             alignItems: "center",
           }}>
-          {savedImage ? (
+          {picture ? (
             <Image
               style={{
                 width: "100%",
@@ -111,7 +123,7 @@ const RentPanUpload = () => {
                 zIndex: 100,
               }}
               progressiveRenderingEnabled={true}
-              source={savedImage && {uri: savedImage.uri}}
+              source={picture && {uri: picture.uri}}
             />
           ) : (
             <AddIcon name="add-circle" size={30} color="#349EFF" />
@@ -127,7 +139,7 @@ const RentPanUpload = () => {
           marginTop: 40,
         }}>
         <TouchableOpacity
-          onPress={uploadPanDetails}
+          onPress={onSubmit}
           style={{
             width: "40%",
             borderRadius: 20,
@@ -148,7 +160,11 @@ const RentPanUpload = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("RentBillDetails")}
+          onPress={() =>
+            navigation.navigate("RentBillDetails", {
+              rentId: route.params?.rentId,
+            })
+          }
           style={{
             width: "40%",
             borderRadius: 20,

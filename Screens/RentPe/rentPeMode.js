@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   View,
   Text,
@@ -13,15 +13,18 @@ import {
 import Icon from "react-native-vector-icons/AntDesign";
 import CorrectIcon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
-import {addRentDetails} from "../../Requests/rent";
+import {addRentDetails, updateRentDetails} from "../../Requests/rent";
 //Redux
 import {useDispatch, useSelector} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
 import {removeRentDetails} from "../../Redux/Action/rentActions";
 
-const RentPeMode = () => {
+const RentPeMode = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const rent = useSelector(state => state.rent);
+  console.log("------------>", rent);
+  const [addRent, setAddRent] = useState(true);
   const [bankDetails, setBankDetails] = useState({
     bank_name: "",
     branch_name: "",
@@ -29,9 +32,20 @@ const RentPeMode = () => {
     account_holder_name: "",
     account_no: null,
   });
-  const rent = useSelector(state => state.rentDetails);
-  console.log("--->", rent);
-  // console.log("==================>", bankDetails);
+
+  useEffect(() => {
+    if (rent.bank != {}) {
+      setBankDetails({
+        ...bankDetails,
+        bank_name: rent.bank.bank_name,
+        branch_name: rent.bank.branch_name,
+        ifsc_code: rent.bank.ifsc_code,
+        account_holder_name: rent.bank.account_holder_name,
+        account_no: rent.bank.account_no,
+      });
+      setAddRent(false);
+    }
+  }, [rent]);
 
   const uploadBankDetails = () => {
     if (bankDetails.account_holder_name === "") {
@@ -53,33 +67,83 @@ const RentPeMode = () => {
   };
 
   const makePayment = async () => {
+    console.log(route.params?.rentId);
     try {
       const formData = new FormData();
-      formData.append("name", rent.rental_details.name);
-      formData.append("address", rent.rental_details.address);
-      formData.append("mobile", rent.rental_details.mobile);
-      formData.append("rent_date", rent.rental_details.rent_date);
-      formData.append("rent_since", rent.rental_details.rent_since);
-      formData.append("deposit_amount", rent.rental_details.deposit_amount);
-      formData.append("advanced_amount", rent.rental_details.advanced_amount);
-      formData.append("agreement_image", rent.agreement);
-      formData.append("pan_no", rent.pan_details.pan_no);
-      formData.append("pan_image", rent.pan_details.pan_img);
+      formData.append("name", rent.owner.name);
+      formData.append("address", rent.owner.address);
+      formData.append("mobile", rent.owner.mobile);
+      formData.append("rent_date", rent.owner.rent_date);
+      formData.append("rent_since", rent.owner.rent_since);
+      formData.append("deposit_amount", rent.owner.deposit_amount);
+      formData.append("advanced_amount", rent.owner.advanced_amount);
+      if (rent.agreement.uri)
+        formData.append("agreement_image", {
+          type: rent.agreement.mimeType,
+          name: rent.agreement.name,
+          uri: rent.agreement.uri,
+        });
+
+      if (rent.pan_details.pan_no)
+        formData.append("pan_no", rent.pan_details.pan_no);
+
+      if (rent.pan_details.uri)
+        formData.append("pan_image", {
+          name: rent.pan_details.name,
+          type: rent.pan_details.mimeType,
+          uri: rent.pan_details.uri,
+        });
+
+      if (rent.bills.uri) {
+        formData.append("bill_pdf", {
+          name: rent.bills.name,
+          type: rent.bills.type,
+          uri: rent.bills.uri,
+        });
+      }
+      if (rent.bills.billsList) {
+        formData.append("month_bifurcation", rent.bills.billsList);
+      }
+
       formData.append("account_holder_name", bankDetails.account_holder_name);
       formData.append("bank_name", bankDetails.bank_name);
       formData.append("branch_name", bankDetails.branch_name);
       formData.append("ifsc_code", bankDetails.ifsc_code);
       formData.append("account_no", bankDetails.account_no);
 
-      const responseOfAddRent = await addRentDetails(formData);
-      if (typeof responseOfAddRent !== "string") {
-        navigation.navigate("RentPeSuccess");
-        dispatch(removeRentDetails());
-        dispatch(notify({message: responseOfAddRent.message, type: "success"}));
-      }
+      if (!addRent) {
+        console.log(addRent);
+        const responseOfUpdateRent = await updateRentDetails(
+          formData,
+          route.params?.rentId,
+        );
+        if (typeof responseOfUpdateRent !== "string") {
+          navigation.navigate("RentPeSuccess", {rentId: route.params?.rentId});
+          dispatch(removeRentDetails());
+          dispatch(
+            notify({message: responseOfUpdateRent.message, type: "success"}),
+          );
+        }
 
-      if (typeof responseOfAddRent === "string") {
-        dispatch(notify({message: responseOfAddRent, type: "error"}));
+        if (typeof responseOfUpdateRent === "string") {
+          dispatch(notify({message: responseOfUpdateRent, type: "error"}));
+        }
+      } else {
+        const responseOfAddRent = await addRentDetails(formData);
+
+        if (typeof responseOfAddRent !== "string") {
+          navigation.navigate("RentPeSuccess", {
+            rentId: responseOfAddRent.data.id,
+          });
+          dispatch(removeRentDetails());
+          dispatch(
+            notify({message: responseOfAddRent.message, type: "success"}),
+          );
+        }
+
+        if (typeof responseOfAddRent === "string") {
+          dispatch(notify({message: responseOfAddRent, type: "error"}));
+        }
       }
     } catch (error) {
       dispatch(notify({message: error.message, type: "error"}));
@@ -155,7 +219,7 @@ const RentPeMode = () => {
 "
             />
 
-            <View
+            {/* <View
               style={{
                 flexDirection: "row",
                 marginTop: 15,
@@ -169,7 +233,7 @@ const RentPeMode = () => {
               <Text style={{fontSize: 13, padding: 12}}>
                 Are you sure to update this all info ?
               </Text>
-            </View>
+            </View> */}
           </View>
 
           <TouchableOpacity

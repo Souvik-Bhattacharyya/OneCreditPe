@@ -1,44 +1,43 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {View, Text, TouchableOpacity, Image, Alert} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import DocumentPicker, {types} from "react-native-document-picker";
 import {useNavigation} from "@react-navigation/native";
 import {useDispatch, useSelector} from "react-redux";
-import {updateAgreement} from "../../Redux/Action/rentActions";
+import {addOrUpdateAgreement} from "../../Redux/Action/rentActions";
 
-const RentAgreement = () => {
+const RentAgreement = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const rent = useSelector(state => state.rentDetails);
-
-  const [picture, setPicture] = useState(null);
-  const [savedImage, setSavedImage] = useState(null);
-
+  const rent = useSelector(state => state.rent);
+  console.log("-------->", rent);
+  const onSubmit = () => {
+    if (rent.agreement.uri) {
+      navigation.navigate("RentPanUpload", {rentId: route.params?.rentId});
+    } else {
+      Alert.alert("Please Upload Agreement Or Skip");
+    }
+  };
+  // -----------------------------------------------
   const uploadImage = async () => {
     try {
       const image = await DocumentPicker.pick({
         presentationStyle: "fullScreen",
         type: [types.images],
       });
-      setPicture({name: image[0].name, uri: image[0].uri, type: image[0].type});
-      setSavedImage({
-        name: image[0].name,
-        uri: image[0].uri,
-        type: image[0].type,
-      });
+
+      dispatch(
+        addOrUpdateAgreement({
+          name: image[0].name,
+          uri: image[0].uri,
+          mimeType: image[0].type,
+        }),
+      );
     } catch (error) {
       console.log(error);
     }
   };
 
-  const uploadAgreement = () => {
-    if (picture) {
-      dispatch(updateAgreement({agreement: picture}));
-      navigation.navigate("RentPanUpload");
-    } else {
-      Alert.alert("Please Upload Agreement Or Skip");
-    }
-  };
   return (
     <>
       <View
@@ -50,7 +49,7 @@ const RentAgreement = () => {
           justifyContent: "center",
         }}>
         <TouchableOpacity
-          onPress={() => uploadImage()}
+          onPress={uploadImage}
           style={{
             width: "90%",
             height: "60%",
@@ -62,7 +61,7 @@ const RentAgreement = () => {
             borderColor: "#c6c6c6",
             backgroundColor: "#fff",
           }}>
-          {savedImage ? (
+          {rent.agreement.uri ? (
             <Image
               style={{
                 width: "100%",
@@ -71,7 +70,7 @@ const RentAgreement = () => {
                 zIndex: 100,
               }}
               progressiveRenderingEnabled={true}
-              source={savedImage && {uri: savedImage.uri}}
+              source={rent.agreement.uri && {uri: rent.agreement.uri}}
             />
           ) : (
             <>
@@ -90,7 +89,7 @@ const RentAgreement = () => {
             justifyContent: "space-around",
           }}>
           <TouchableOpacity
-            onPress={uploadAgreement}
+            onPress={onSubmit}
             style={{
               width: "40%",
               borderRadius: 20,
@@ -111,7 +110,11 @@ const RentAgreement = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => navigation.navigate("RentPanUpload")}
+            onPress={() =>
+              navigation.navigate("RentPanUpload", {
+                rentId: route.params?.rentId,
+              })
+            }
             style={{
               width: "40%",
               borderRadius: 20,

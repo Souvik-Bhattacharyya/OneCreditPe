@@ -1,37 +1,100 @@
 import React, {useState, useEffect} from "react";
 import {
   View,
-  Text,
+  // Text,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
   StyleSheet,
 } from "react-native";
-import {Divider} from "react-native-paper";
-import Icon from "react-native-vector-icons/AntDesign";
+import {Divider, Text} from "react-native-paper";
+import Icon from "react-native-vector-icons/FontAwesome";
 import {useDispatch} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
 import {showRentDetails} from "../../Requests/rent";
-
+import {useNavigation} from "@react-navigation/native";
+import {
+  addOrUpdateAgreement,
+  addOrUpdateBank,
+  addOrUpdateBills,
+  addOrUpdateOwnerInfo,
+  addOrUpdatePanDetails,
+} from "../../Redux/Action/rentActions";
+import {SERVER_BASE_URL} from "../../Utility/common";
+{
+  SERVER_BASE_URL;
+}
 const ShowRentDetails = ({route}) => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
   const [rentalDetails, setRentalDetails] = useState({});
 
   useEffect(() => {
-    showDetailsOfRental(route.params.rentalId);
-  }, [route.params?.rentalId]);
+    showDetailsOfRental(route.params.rentId);
+  }, [route.params?.rentId]);
 
-  const showDetailsOfRental = async rentalId => {
+  const showDetailsOfRental = async rentId => {
     try {
-      const response = await showRentDetails(rentalId);
-
+      const response = await showRentDetails(rentId);
+      console.log("response---", response);
       if (response && typeof response !== "string") {
         setRentalDetails(response.data);
+        dispatch(
+          addOrUpdateOwnerInfo({
+            name: response.data.name,
+            address: response.data.address,
+            mobile: response.data.mobile,
+            rent_date: response.data.rent_date,
+            rent_since: response.data.rent_since,
+            deposit_amount: response.data.deposit_amount,
+            advanced_amount: response.data.advanced_amount,
+          }),
+        );
+        if (response.data.agreement_image)
+          dispatch(
+            addOrUpdateAgreement({
+              name: response.data.agreement_image,
+              mimeType: "image/jpeg",
+              uri: `${SERVER_BASE_URL}/assets/rent/agreement/${response.data.agreement_image}`,
+            }),
+          );
+
+        if (response.data.pan_image) {
+          dispatch(
+            addOrUpdatePanDetails({
+              pan_no: response.data.pan_no,
+              mimeType: "image/jpeg",
+              uri: `${SERVER_BASE_URL}/assets/rent/pan/${response.data.pan_image}`,
+              name: response.data.pan_image,
+            }),
+          );
+        }
+
+        if (response.data.bill_pdf) {
+          dispatch(
+            addOrUpdateBills({
+              name: response.data.bill_pdf,
+              mimeType: "image/jpeg",
+              uri: `${SERVER_BASE_URL}/assets/rent/bill/${response.data.bill_pdf}`,
+              // billsList:response.data.monthly
+            }),
+          );
+        }
+
+        dispatch(
+          addOrUpdateBank({
+            bank_name: response.data.bank_name,
+            branch_name: response.data.branch_name,
+            ifsc_code: response.data.ifsc_code,
+            account_holder_name: response.data.account_holder_name,
+            account_no: response.data.account_no,
+          }),
+        );
       } else {
         dispatch(notify({message: response, type: "error"}));
       }
     } catch (error) {
-      dispatch(notify({message: error.message, ype: "error"}));
+      dispatch(notify({message: error.message, type: "error"}));
     }
   };
 
@@ -48,7 +111,8 @@ const ShowRentDetails = ({route}) => {
         }}>
         Owener Info
       </Text>
-      <SafeAreaView style={{paddingVertical: 20, paddingHorizontal: 15}}>
+      <SafeAreaView
+        style={{height: "80%", paddingVertical: 10, paddingHorizontal: 15}}>
         <ScrollView>
           <Text style={styles.text}>Name</Text>
           <Text style={{paddingVertical: 5}}>{rentalDetails.name}</Text>
@@ -168,8 +232,8 @@ const ShowRentDetails = ({route}) => {
               //   paddingHorizontal: 20,
               paddingVertical: 5,
             }}>
-            {rentalDetails.agreement
-              ? rentalDetails.agreement
+            {rentalDetails.agreement_image
+              ? rentalDetails.agreement_image
               : "No files are submitted"}
           </Text>
 
@@ -185,9 +249,29 @@ const ShowRentDetails = ({route}) => {
             {rentalDetails.pan_no}
           </Text>
 
-          <Divider style={styles.divider} />
+          {/* <Divider style={styles.divider} /> */}
         </ScrollView>
       </SafeAreaView>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate("AddRentDetails", {rentId: rentalDetails.id})
+        }
+        style={{
+          backgroundColor: "#0A5AC9",
+          width: "10%",
+          display: "flex",
+          alignItems: "center",
+          marginHorizontal: "85%",
+          marginBottom: 30,
+          borderRadius: 10,
+        }}>
+        <Icon
+          name="edit"
+          color="#0A5AC9"
+          size={20}
+          style={{marginVertical: 8, color: "#fff"}}
+        />
+      </TouchableOpacity>
     </>
   );
 };

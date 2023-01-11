@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 import {useNavigation} from "@react-navigation/native";
 
-const RentPeSuccess = () => {
+const RentPeSuccess = ({route}) => {
   const navigation = useNavigation();
   return (
     <>
@@ -34,10 +34,11 @@ const RentPeSuccess = () => {
         </Text>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("ShowRentDetails")}
+        onPress={() =>
+          navigation.navigate("ShowRentDetails", {rentId: route.params.rentId})
+        }
         style={{
           marginHorizontal: 15,
-
           padding: 10,
           borderRadius: 20,
           backgroundColor: "#0A5AC9",

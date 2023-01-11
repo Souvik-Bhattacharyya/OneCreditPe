@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import {persistCombineReducers} from "redux-persist";
 import AuthReducer from "./authReducer";
 import notificationReducer from "./notificationReducer";
-import {addRentReducer, showAllRentalsReducer} from "./rentReducer";
+import rentReducer from "./rentReducer";
 
 import transactionReducer from "./transactionReducer";
 const persistConfig = {
@@ -14,8 +14,7 @@ const persistConfig = {
 const Reducer = {
   auth: AuthReducer,
   notification: notificationReducer,
-  addRent: addRentReducer,
-  allRentals: showAllRentalsReducer,
+  rent: rentReducer,
   transaction: transactionReducer,
 };
 const rootReducer = persistCombineReducers(persistConfig, Reducer);
