@@ -24,7 +24,7 @@ const RentPeMode = ({route}) => {
   const dispatch = useDispatch();
   const rent = useSelector(state => state.rent);
   console.log("------------>", rent);
-  const [add, setAdd] = useState(true);
+  const [addRent, setAddRent] = useState(true);
   const [bankDetails, setBankDetails] = useState({
     bank_name: "",
     branch_name: "",
@@ -43,7 +43,7 @@ const RentPeMode = ({route}) => {
         account_holder_name: rent.bank.account_holder_name,
         account_no: rent.bank.account_no,
       });
-      setAdd(false);
+      setAddRent(false);
     }
   }, [rent]);
 
@@ -77,7 +77,6 @@ const RentPeMode = ({route}) => {
       formData.append("rent_since", rent.owner.rent_since);
       formData.append("deposit_amount", rent.owner.deposit_amount);
       formData.append("advanced_amount", rent.owner.advanced_amount);
-
       if (rent.agreement.uri)
         formData.append("agreement_image", {
           type: rent.agreement.mimeType,
@@ -95,45 +94,57 @@ const RentPeMode = ({route}) => {
           uri: rent.pan_details.uri,
         });
 
+      if (rent.bills.uri) {
+        formData.append("bill_pdf", {
+          name: rent.bills.name,
+          type: rent.bills.type,
+          uri: rent.bills.uri,
+        });
+      }
+      if (rent.bills.billsList) {
+        formData.append("month_bifurcation", rent.bills.billsList);
+      }
+
       formData.append("account_holder_name", bankDetails.account_holder_name);
       formData.append("bank_name", bankDetails.bank_name);
       formData.append("branch_name", bankDetails.branch_name);
       formData.append("ifsc_code", bankDetails.ifsc_code);
       formData.append("account_no", bankDetails.account_no);
 
-      // if (!add) {
-
-      const responseOfUpdateRent = await updateRentDetails(
-        formData,
-        route.params?.rentId,
-      );
-      if (typeof responseOfUpdateRent !== "string") {
-        navigation.navigate("RentPeSuccess", {rentId: route.params?.rentId});
-        dispatch(removeRentDetails());
-        dispatch(
-          notify({message: responseOfUpdateRent.message, type: "success"}),
+      if (!addRent) {
+        console.log(addRent);
+        const responseOfUpdateRent = await updateRentDetails(
+          formData,
+          route.params?.rentId,
         );
+        if (typeof responseOfUpdateRent !== "string") {
+          navigation.navigate("RentPeSuccess", {rentId: route.params?.rentId});
+          dispatch(removeRentDetails());
+          dispatch(
+            notify({message: responseOfUpdateRent.message, type: "success"}),
+          );
+        }
+
+        if (typeof responseOfUpdateRent === "string") {
+          dispatch(notify({message: responseOfUpdateRent, type: "error"}));
+        }
+      } else {
+        const responseOfAddRent = await addRentDetails(formData);
+
+        if (typeof responseOfAddRent !== "string") {
+          navigation.navigate("RentPeSuccess", {
+            rentId: responseOfAddRent.data.id,
+          });
+          dispatch(removeRentDetails());
+          dispatch(
+            notify({message: responseOfAddRent.message, type: "success"}),
+          );
+        }
+
+        if (typeof responseOfAddRent === "string") {
+          dispatch(notify({message: responseOfAddRent, type: "error"}));
+        }
       }
-
-      if (typeof responseOfUpdateRent === "string") {
-        dispatch(notify({message: responseOfUpdateRent, type: "error"}));
-      }
-      // }
-      // else {
-      // const responseOfAddRent = await addRentDetails(formData);
-
-      // if (typeof responseOfAddRent !== "string") {
-      //   navigation.navigate("RentPeSuccess", {
-      //     rentId: responseOfAddRent.data.id,
-      //   });
-      //   dispatch(removeRentDetails());
-      //   dispatch(notify({message: responseOfAddRent.message, type: "success"}));
-      // }
-
-      // if (typeof responseOfAddRent === "string") {
-      //   dispatch(notify({message: responseOfAddRent, type: "error"}));
-      // }
-      // }
     } catch (error) {
       dispatch(notify({message: error.message, type: "error"}));
     }

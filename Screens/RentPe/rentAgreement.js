@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {View, Text, TouchableOpacity, Image, Alert} from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import DocumentPicker, {types} from "react-native-document-picker";
@@ -10,7 +10,7 @@ const RentAgreement = ({route}) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const rent = useSelector(state => state.rent);
-
+  console.log("-------->", rent);
   const onSubmit = () => {
     if (rent.agreement.uri) {
       navigation.navigate("RentPanUpload", {rentId: route.params?.rentId});

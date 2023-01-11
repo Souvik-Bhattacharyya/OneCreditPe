@@ -39,27 +39,6 @@ const AddRentDetails = ({route}) => {
   });
 
   useEffect(() => {
-    // const temp = {
-    //   name: "",
-    //   mobile: null,
-    //   address: "",
-    //   rent_date: null,
-    //   rent_since: null,
-    //   deposit_amount: null,
-    //   advanced_amount: null,
-    // };
-    // if (rent.name) temp.name = rent.name;
-    // if (rent.mobile) temp.mobile = rent.mobile;
-    // if (rent.address) temp.address = rent.address;
-    // if (rent.rent_date) temp.rent_date = rent.rent_date;
-    // if (rent.rent_since) temp.rent_since = rent.since;
-    // if (rent.deposit_amount) temp.deposit_amount = rent.deposit_amount;
-    // if (rent.advanced_amount) temp.advanced_amount = rent.advanced_amount;
-    // setOwnerDetails({
-    //   ...ownerDetails,
-    //   ...temp,
-    // });
-
     setOwnerDetails({
       ...ownerDetails,
       name: rent.owner.name,
@@ -70,27 +49,28 @@ const AddRentDetails = ({route}) => {
       deposit_amount: rent.owner.deposit_amount,
       advanced_amount: rent.owner.advanced_amount,
     });
-  }, [route.params?.rentId]);
+  }, [rent]);
 
   const uploadRentDetails = () => {
     if (!ownerDetails.name) {
       Alert.alert("Please Enter your name");
     } else if (!ownerDetails.mobile) {
       Alert.alert("Please Enter your mobile number");
-    } else if (!ownerDetails.address) {
-      Alert.alert("Please Enter your address");
-    } else if (!ownerDetails.rent_date) {
-      Alert.alert("Please Enter rent date");
-    } else if (!ownerDetails.rent_since) {
-      Alert.alert("Please Enter rent since");
-    } else if (!ownerDetails.deposit_amount) {
-      Alert.alert("Please Enter Deposit amount");
-    } else if (!ownerDetails.advanced_amount) {
-      Alert.alert("Please Enter Advanced amount");
-    } else {
-      dispatch(addOrUpdateOwnerInfo(ownerDetails));
-      navigation.navigate("RentAgreement", {rentId: route.params?.rentId});
     }
+    //  else if (!ownerDetails.address) {
+    //   Alert.alert("Please Enter your address");
+    // } else if (!ownerDetails.rent_date) {
+    //   Alert.alert("Please Enter rent date");
+    // } else if (!ownerDetails.rent_since) {
+    //   Alert.alert("Please Enter rent since");
+    // } else if (!ownerDetails.deposit_amount) {
+    //   Alert.alert("Please Enter Deposit amount");
+    // } else if (!ownerDetails.advanced_amount) {
+    //   Alert.alert("Please Enter Advanced amount");
+    // } else {
+    dispatch(addOrUpdateOwnerInfo(ownerDetails));
+    navigation.navigate("RentAgreement", {rentId: route.params?.rentId});
+    // }
   };
 
   const showDatepicker = dateType => {

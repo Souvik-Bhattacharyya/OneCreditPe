@@ -31,7 +31,7 @@ const RentPanUpload = ({route}) => {
       setPicture({
         name: rent.pan_details.name,
         uri: rent.pan_details.uri,
-        mimeType: rent.pan_details.mimeType || "image/jpeg",
+        mimeType: rent.pan_details.mimeType,
       });
   }, [rent]);
 

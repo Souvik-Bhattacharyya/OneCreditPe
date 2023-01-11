@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
 import {
   View,
-  Text,
+  // Text,
   TouchableOpacity,
   SafeAreaView,
   ScrollView,
   StyleSheet,
 } from "react-native";
-import {Divider} from "react-native-paper";
+import {Divider, Text} from "react-native-paper";
 import Icon from "react-native-vector-icons/FontAwesome";
 import {useDispatch} from "react-redux";
 import {notify} from "../../Redux/Action/notificationActions";
@@ -16,9 +16,14 @@ import {useNavigation} from "@react-navigation/native";
 import {
   addOrUpdateAgreement,
   addOrUpdateBank,
+  addOrUpdateBills,
   addOrUpdateOwnerInfo,
   addOrUpdatePanDetails,
 } from "../../Redux/Action/rentActions";
+import {SERVER_BASE_URL} from "../../Utility/common";
+{
+  SERVER_BASE_URL;
+}
 const ShowRentDetails = ({route}) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -31,7 +36,7 @@ const ShowRentDetails = ({route}) => {
   const showDetailsOfRental = async rentId => {
     try {
       const response = await showRentDetails(rentId);
-
+      console.log("response---", response);
       if (response && typeof response !== "string") {
         setRentalDetails(response.data);
         dispatch(
@@ -45,25 +50,36 @@ const ShowRentDetails = ({route}) => {
             advanced_amount: response.data.advanced_amount,
           }),
         );
-        // if (response.data.agreement)
-        //   dispatch(
-        //     addOrUpdateAgreement({
-        //       mimeType: response.data.agreement.type,
-        //       uri: response.data.agreement.uri,
-        //       name: response.data.agreement.name,
-        //     }),
-        //   );
+        if (response.data.agreement_image)
+          dispatch(
+            addOrUpdateAgreement({
+              name: response.data.agreement_image,
+              mimeType: "image/jpeg",
+              uri: `${SERVER_BASE_URL}/assets/rent/agreement/${response.data.agreement_image}`,
+            }),
+          );
 
-        // if (response.data.pan_image) {
-        //   dispatch(
-        //     addOrUpdatePanDetails({
-        //       pan_no: response.data.pan_no,
-        //       mimeType: response.data.pan_image.type,
-        //       uri: response.data.pan_image.uri,
-        //       name: response.data.pan_image.name,
-        //     }),
-        //   );
-        // }
+        if (response.data.pan_image) {
+          dispatch(
+            addOrUpdatePanDetails({
+              pan_no: response.data.pan_no,
+              mimeType: "image/jpeg",
+              uri: `${SERVER_BASE_URL}/assets/rent/pan/${response.data.pan_image}`,
+              name: response.data.pan_image,
+            }),
+          );
+        }
+
+        if (response.data.bill_pdf) {
+          dispatch(
+            addOrUpdateBills({
+              name: response.data.bill_pdf,
+              mimeType: "image/jpeg",
+              uri: `${SERVER_BASE_URL}/assets/rent/bill/${response.data.bill_pdf}`,
+              // billsList:response.data.monthly
+            }),
+          );
+        }
 
         dispatch(
           addOrUpdateBank({
@@ -216,8 +232,8 @@ const ShowRentDetails = ({route}) => {
               //   paddingHorizontal: 20,
               paddingVertical: 5,
             }}>
-            {rentalDetails.agreement
-              ? rentalDetails.agreement
+            {rentalDetails.agreement_image
+              ? rentalDetails.agreement_image
               : "No files are submitted"}
           </Text>
 

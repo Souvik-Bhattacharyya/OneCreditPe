@@ -23,15 +23,16 @@ const RentBillDetails = ({route}) => {
   const rent = useSelector(state => state.rent);
   const [picture, setPicture] = useState(null);
   const [billInfo, setBillInfo] = useState([{amount: 0, description: ""}]);
-
+  console.log("billInfo", billInfo);
   useEffect(() => {
+    console.log("-----------rent", rent);
     if (rent.bills.uri)
       setPicture({
         name: rent.bills?.name,
         uri: rent.bills?.uri,
         type: rent.bills?.mimeType,
       });
-    if (rent.bills.billsList.length) setBillInfo(rent.bills.billsList);
+    // if (rent.bills.billsList.length) setBillInfo(rent.bills.billsList);
   }, [rent]);
 
   const uploadImage = async () => {
@@ -115,10 +116,16 @@ const RentBillDetails = ({route}) => {
   );
   return (
     <>
-      <SafeAreaView style={{height: "78%", paddingVertical: 30}}>
+      <SafeAreaView
+        style={{
+          height: "78%",
+          paddingTop: 30,
+          backgroundColor: "#B6B3B3",
+        }}>
         <ScrollView>
           <View
             style={{
+              height: "50%",
               display: "flex",
               alignItems: "center",
             }}>
